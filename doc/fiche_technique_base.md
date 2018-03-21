@@ -1,12 +1,12 @@
 # Fiche technique de la base de données #
 
-1. Principe
+* Principe
 
-2. Classe d'objets
+* Classe d'objets
 
-  - an_ :
+  * an_ :
   
 
-3. Liste de valeurs
+* Liste de valeurs
 
-4. Schéma fonctionnel
+* Schéma fonctionnel
