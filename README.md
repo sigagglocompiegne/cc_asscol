@@ -5,3 +5,4 @@ Ensemble des éléments constituant la mise en ouvre d'une application WebSIG de
 - [schéma fonctionnel de la donnée](test.md) 
 - conception de l'applicatif métier
 - documentation utilisateur
+- test
