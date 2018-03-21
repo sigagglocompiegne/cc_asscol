@@ -1,6 +1,6 @@
 # Fiche technique de la base de données #
 
-* Principes
+## Principes
   * **généralité** :
  les contrôles de conformité pour l'assainissement collectif sont gérés par le service Assainissement de l'Agglomération de la   
  Région de Compiègne et délégués à 8 prestataires agréés en 2018. A chaque réalisation d'une nouvelle construction ou d'une vente 
@@ -8,15 +8,15 @@
  ans pour un appartement.
  
  
- * *résumé fonctionnel* :
+ * **résumé fonctionnel** :
 
  
 
-* Classe d'objets
+## Classe d'objets
 
   * an_ :
   
 
-* Liste de valeurs
+## Liste de valeurs
 
-* Schéma fonctionnel
+## Schéma fonctionnel
