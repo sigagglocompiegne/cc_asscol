@@ -13,6 +13,7 @@
 L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_reseau_humide et celles applicatives dans le schéma x_apps.
 
  ### gestion :
+  
    `an_euep_cc` : table des attributs métiers permettant de gérer l'ensemble des éléments d'un contrôle de conformité.
    
 |Nom attribut | Définition | Type | Valeurs par défaut |
@@ -95,7 +96,7 @@ Particularité(s) à noter :
 * Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_idcc_seq``
 * 35 clés étrangères existent et correspondent aux classes de listes de valeurs
 * le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
-* 2 triggers existent sur cette classe :
+* 2 triggers :
   * ``t_t1_an_euep_cc_insert`` : gère après une insertion la transformation des '' en valeur null
   * ``t_t2_log_an_euep_cc_insert_update`` : gère après une insertion ou une mise à jour l'écriture de la transaction dans la classe des logs
 
@@ -118,10 +119,18 @@ Particularité(s) à noter :
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique ``log_an_euep_cc_gid_seq``
 
+---
+
 `an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
 
  ### applicative :
 `xapps_an_euep_cc_n` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
+
+Particularité(s) à noter :
+* 1 trigger :
+  * `t_t1_an_v_euep_cc_update_insert` : gère pour l'instance d'insertion ou de mise à jour l'intégration des données dans la classe d'objet `an_v_euep_cc`
+
+---
 
 `xapps_geo_v_euep_cc` : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
 
