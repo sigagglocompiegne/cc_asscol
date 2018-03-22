@@ -146,6 +146,13 @@ Particularité(s) à noter :
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code 
 
+Valeurs possibles :
+|Code | Valeur |
+|:---|:---|
+|00|Non renseigné|
+|10|Neuf|
+|20|Ancien|
+
 ---
 
 `lt_euep_cc_certificateur` : Liste des certificateurs agrées pour les contrôles de conformité assainissement
