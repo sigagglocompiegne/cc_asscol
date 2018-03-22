@@ -17,7 +17,10 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
    
    |Nom attribut | Définition | Type | Valeurs | Contraintes |
    |:------------|:-----------|:-----|:--------|:------------|
-   |idcc         |Identifiant interne unique du contrôle|integer||pkey|
+   |idcc|Identifiant interne unique du contrôle|integer||pkey (avec regclass)|
+   |id_adresse|Identifiant unique de l'objet point adresse|bigint|||
+   
+   
    * **log_an_euep_cc** : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
  
    * **an_v_euep_cc** : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
