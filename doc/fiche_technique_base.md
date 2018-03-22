@@ -101,6 +101,7 @@ Particularité(s) à noter :
  
  ### applicative :
 `xapps_an_euep_cc_n` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
+
 `xapps_geo_v_euep_cc` : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
 
 ## Liste de valeurs
