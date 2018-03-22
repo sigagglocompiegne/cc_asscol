@@ -143,8 +143,10 @@ Particularité(s) à noter :
 |code|Code interne des types de bien|character(2)| |
 |valeur|Libellé des types de bien|character varying(80)| |
 
----
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code 
 
+---
 
 `lt_euep_cc_certificateur` : Liste des certificateurs agrées pour les contrôles de conformité assainissement
 
@@ -163,5 +165,22 @@ Particularité(s) à noter :
 |num_assur|N° de la police d'assurance ou du contrat|character varying(150)| |
 |date_assur|Date de fin validé du contrat d'assurance|timestamp without time zone| |
 
+---
+
+`lt_euep_cc_eval` : Liste des types de réponse aux questions pour les contrôles de conformité assainissement
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de réponse|character(2)| |
+|valeur|Libellé des types de réponse|character varying(80)| |
+
+---
+
+`lt_euep_cc_ordre` : Liste des donneurs d'ordre pour les contrôles de conformité assainissement
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de donneurs d'ordre|character(2)| |
+|valeur|Libellé des types de donneurs d'ordre|character varying(80)| |
 
 ## Schéma fonctionnel
