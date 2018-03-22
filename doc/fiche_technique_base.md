@@ -143,5 +143,25 @@ Particularité(s) à noter :
 |code|Code interne des types de bien|character(2)| |
 |valeur|Libellé des types de bien|character varying(80)| |
 
+---
+
+
+`lt_euep_cc_certificateur` : Liste des certificateurs agrées pour les contrôles de conformité assainissement
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|    
+|code|Code interne du donneur d'ordre|integer| |
+|valeur|Libellé du donneur d'ordre|character varying(80)| |
+|exist|Information sur le prestataire agréé qui excerce toujours ou non (filtre dans GEO (par rapport à la connexion du prestataire) pour afficher la fiche et l'éditer)|boolean|true|
+|adresse|Adresse du certificateur agréé|character varying(150)| |
+|tel|Téléphone fixe du certificateur agréé|character varying(10)| |
+|tel_port|Téléphone portable du certificateur agréé|character varying(10)| |
+|email|Email de contact du prestataire|character varying(80)| |
+|etat|Etat de la certification (true : agréé, false : plus agréé)|boolean|true|
+|siret|N° de SIRET|character varying(14)| |
+|nom_assur|Libellé de la compagnie d'assurance|character varying(150)| |
+|num_assur|N° de la police d'assurance ou du contrat|character varying(150)| |
+|date_assur|Date de fin validé du contrat d'assurance|timestamp without time zone| |
+
 
 ## Schéma fonctionnel
