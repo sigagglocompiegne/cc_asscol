@@ -17,8 +17,79 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
    
    |Nom attribut | Définition | Type | Valeurs | Contraintes |
    |:------------|:-----------|:-----|:--------|:------------|
-   |idcc|Identifiant interne unique du contrôle|integer||pkey (avec regclass)|
-   |id_adresse|Identifiant unique de l'objet point adresse|bigint|||
+   |idcc||integer||nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
+|id_adresse||bigint|||
+|ccvalid||boolean||false|
+|ccinit||boolean||false|
+|adapt||character varying(20)|||
+|adeta||integer|||
+|tnidcc||character varying(2)|||
+|nidcc||character varying(20)|||
+|rcc||character varying(3)|||
+|ccdate||timestamp without time zone|||
+|ccdated||timestamp without time zone|||
+|ccbien||character varying(2)||'00'::character varying|
+|certtype||integer|||
+|certnom||character varying(80)|||
+|certpre||character varying(80)|||
+|propriopat||character varying(2)||'00'::character varying|
+|propriopatp||character varying(50)|||
+|proprionom||character varying(80)|||
+|propriopre||character varying(80)|||
+|proprioad||character varying(254)|||
+|dotype||character varying(2)||'00'::character varying|
+|doaut||character varying(80)|||
+|donom||character varying(80)|||
+|dopre||character varying(80)|||
+|doad||character varying(80)|||
+|achetpat||character varying(2)||'00'::character varying|
+|achetpatp||character varying(50)|||
+|achetnom||character varying(80)|||
+|achetpre||character varying(80)|||
+|achetad||character varying(80)|||
+|batitype||character varying(2)||'00'::character varying|
+|batiaut||character varying(80)|||
+|eppublic||character varying(2)||'ZZ'::character varying|
+|epaut||character varying(80)|||
+|rredptype||character varying(2)||'ZZ'::character varying|
+|rrebrtype||character varying(2)||'ZZ'::character varying|
+|rrechype||character varying(2)||'ZZ'::character varying|
+|eupc||character varying(2)||'ZZ'::character varying|
+|euevent||character varying(2)||'ZZ'::character varying|
+|euregar||character varying(2)||'ZZ'::character varying|
+|euregardp||character varying(2)||'ZZ'::character varying|
+|eusup||character varying(2)||'ZZ'::character varying|
+|eusuptype||character varying(2)||'ZZ'::character varying|
+|eusupdoc||character varying(2)||'ZZ'::character varying|
+|euecoul||character varying(2)||'ZZ'::character varying|
+|eufluo||character varying(2)||'ZZ'::character varying|
+|eubrsch||character varying(2)||'ZZ'::character varying|
+|eurefl||character varying(2)||'ZZ'::character varying|
+|euepsep||character varying(2)||'ZZ'::character varying|
+|eudivers||character varying(500)|||
+|euanomal||character varying(2)||'ZZ'::character varying|
+|euobserv||character varying(500)|||
+|eusiphon||character varying(2)||'ZZ'::character varying|
+|epdiagpc||character varying(2)||'ZZ'::character varying|
+|epracpc||character varying(2)||'ZZ'::character varying|
+|epregarcol||character varying(2)||'ZZ'::character varying|
+|epregarext||character varying(2)||'ZZ'::character varying|
+|epracdp||character varying(2)||'ZZ'::character varying|
+|eppar||character varying(2)||'ZZ'::character varying|
+|epparpre||character varying(200)|||
+|epfum||character varying(2)||'ZZ'::character varying|
+|epecoul||character varying(2)||'ZZ'::character varying|
+|epecoulobs||character varying(500)|||
+|eprecup||character varying(2)||'ZZ'::character varying|
+|eprecupcpt||character varying(2)||'ZZ'::character varying|
+|epautre||character varying(200)|||
+|epobserv||character varying(200)|||
+|euepanomal||character varying(1000)|||
+|euepdivers||character varying(1000)|||
+|date_sai||timestamp without time zone|||
+|date_maj||timestamp without time zone|||
+|op_sai||character varying(80)|||
+|scr_geom||character varying(2)|||
    
    
    * **log_an_euep_cc** : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
