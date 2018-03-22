@@ -147,7 +147,8 @@ Particularité(s) à noter :
 * Une clé primaire existe sur le champ code 
 
 Valeurs possibles :
-|Code | Valeur |
+
+|Code|Valeur|
 |:---|:---|
 |00|Non renseigné|
 |10|Neuf|
