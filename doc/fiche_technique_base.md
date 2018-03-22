@@ -93,7 +93,11 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique.
+* 35 clés étrangères existent et correspondent aux classes de listes de valeurs
 * le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
+* 2 triggers existent sur cette classe :
+*  ``t_t1_an_euep_cc_insert`` : gère après une insertion la transformation des '' en valeur null
+*  ``t_t2_log_an_euep_cc_insert_update`` : gère après une insertion ou une mise à jour l'écriture de la transaction dans la classe des logs
 
 `log_an_euep_cc` : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
 
