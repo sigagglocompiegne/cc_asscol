@@ -15,9 +15,9 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
  * gestion :
    * **an_euep_cc** : table des attributs métiers permettant de gérer l'ensemble des éléments d'un contrôle de conformité.
    
-   |Nom attribut | Définition | Type | Valeurs | Contraintes |
-   |:------------|:-----------|:-----|:--------|:------------|
-   |idcc| |integer| |nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
+|Nom attribut | Définition | Type | Valeurs | Contraintes |
+|:------------|:-----------|:-----|:--------|:------------|
+|idcc| |integer| |nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
 |id_adresse| |bigint| | |
 |ccvalid| |boolean| |false|
 |ccinit| |boolean| |false|
