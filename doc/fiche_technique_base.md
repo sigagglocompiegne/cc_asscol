@@ -8,11 +8,11 @@
  les données des contrôles de conformité sont localisées à l'adresse postale du bien contrôlé. La classe d'objets des points d'adresse de la BAL de l'Agglomération est donc utilisée pour la primitive géographique. Seuls les données métiers des contrôles font l'objet d'un stockage dans des classes d'objets non géographiques. Cette donnée métier est donc urbanisée avec la donnée adresse. Une des particularités de cette donnée, est qu'il faut en assurer un suivi chronologique. On doit pouvoir à une adresse donnée, visualiser et consulter l'ensemble des contrôles déjà réalisés et ceux en cours.
  
 
-## Classe d'objets
+## Classes d'objets
 
 L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_reseau_humide et celles applicatives dans le schéma x_apps.
 
- ### gestion :
+ ### classes d'objets de gestion :
   
    `an_euep_cc` : table des attributs métiers permettant de gérer l'ensemble des éléments d'un contrôle de conformité.
    
@@ -123,7 +123,7 @@ Particularité(s) à noter :
 
 `an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
 
- ### applicative :
+ ### classes d'objets applicatives :
 `xapps_an_euep_cc_n` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
 
 Particularité(s) à noter :
