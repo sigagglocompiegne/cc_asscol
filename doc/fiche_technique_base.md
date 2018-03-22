@@ -99,7 +99,7 @@ Particularité(s) à noter :
  
    * **an_v_euep_cc** : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
  
- * applicative :
+ ### applicative :
    * **xapps_an_euep_cc_nc** : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
    * **xapps_geo_v_euep_cc** : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
 
