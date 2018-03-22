@@ -17,79 +17,80 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
    
 |Nom attribut | Définition | Type | Contraintes |
 |:---|:---|:---|:---|
-|idcc|Identifiant interne unique du contrôle|integernextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
-|id_adresse|Identifiant unique de l'objet point adresse (issu de la BAL)|bigint |
-|ccvalid|validation par l'ARC du contrôle (la valeur true empêche la modification des données|booleanfalse|
-|ccinit|information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité|booleanfalse|
-|adapt|Complément de l'adresse avec le n° d'appartement dans le cadre d'un immeuble collectif|character varying(20) |
-|adeta|Etage|integer |
-|tnidcc|Type de dossier pour lacréation d'un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)|character varying(2) |
-|nidcc|N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)|character varying(20) |
-|rcc|Résultat du contrôle (true : conforme, false : non conforme)|character varying(3) |
-|ccdate|Date du contrôle|timestamp without time zone |
-|ccdated|Date de délivrance du contrôle|timestamp without time zone |
-|ccbien|Code du type de bien contrôlé (neuf ou ancien) (clé étrangère sur la liste de valeur lt_euep_cc_bien)|character varying(2)'00'::character varying|
-|certtype|Code de l'organisme certificateur agréé (clé étrangère sur la liste de valeur lt_euep_cc_certificateur)|integer |
-|certnom|Nom de la personne appartenant à l'organisme certificateur agréé qui a fait le contrôle|character varying(80) |
-|certpre|Prénom de la personne appartenant à l'organisme certificateur agréé qui a fait le contrôle|character varying(80) |
-|propriopat|Patronyme du propriétaire (clé étrangère sur la liste de valeur lt_euep_cc_pat)|character varying(2)'00'::character varying|
-|propriopatp|Patronyme du propriétaire (précision si autre renseigné dans propriopat)|character varying(50) |
-|proprionom|Nom de la personne désignant le propriétaire|character varying(80) |
-|propriopre|Prénom de la personne désignant le propriétaire|character varying(80) |
-|proprioad|Adresse de la personne désignant le propriétaire|character varying(254) |
-|dotype|Code de la qualité du donneur d'ordre (clé étrangère sur la liste de valeur lt_euep_cc_ordre)|character varying(2)'00'::character varying|
-|doaut|Autre donneur d'ordre si pas présent dans dotype|character varying(80) |
-|donom|Nom de la personne désignant le donneur d'ordre|character varying(80) |
-|dopre|Prénom de la personne désignant le donneur d'ordre|character varying(80) |
-|doad|Adresse de la personne désignant le donneur d'ordre|character varying(80) |
-|achetpat|Patronyme de l'acheteur (clé étrangère sur la liste de valeur lt_euep_cc_pat)|character varying(2)'00'::character varying|
-|achetpatp|Patronyme de l'acheteur (précision si autre renseigné dans achetpat)|character varying(50) |
-|achetnom|Nom de la personne désignant l'acheteur|character varying(80) |
-|achetpre|Prénom de la personne désignant l'acheteur|character varying(80) |
-|achetad|Adresse de la personne désignant l'acheteur|character varying(80) |
-|batitype|Code du type de bâtiment concerné par le contrôle (clé étrangère sur la liste de valeur lt_euep_cc_typebati)|character varying(2)'00'::character varying|
-|batiaut|Autre type de bâtiment si pas présent dans batitype|character varying(80) |
-|eppublic|Desservie par un réseau public d'eau potable (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epaut|Autre alimentation que le réseau d'eau potable public|character varying(80) |
-|rredptype|Code du type de réseau de raccordement au domaine publique (clé étrangère sur la liste de valeur lt_euep_cc_typeres)|character varying(2)'ZZ'::character varying|
-|rrebrtype|Information sur l'existence d'une boîte de raccordement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|rrechype|Information sur l'existence d'un regard sous chaussée si pas de boîte de raccordement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eupc|Information sur l'existence d'un raccordement sur les parties communes (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|euevent|Information sur l'existence d'un évent (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|euregar|Information sur l'existence d'un regard (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|euregardp|Information sur l'existence d'un regard accessible dans le domaine privé (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eusup|Information sur l'existence d'une servitude avec une autre propriété pour les EU ou les EP (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eusuptype|Précision du réseau en cas de servitude avec une autre propriété (clé étrangère sur la liste de valeur lt_euep_sup)|character varying(2)'ZZ'::character varying|
-|eusupdoc|Information sur l'existence de documents attestant la servitude avec une autre propriété pour les EU ou les EP (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|euecoul|Information le bon déroulé de l'écoulement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eufluo|Information l'existence d'un test à la fluorescéine (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eubrsch|Information sur l'existence d'un branchement sous chaussée (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eurefl|Information sur la protection du branchement par un système d'anti reflux (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|euepsep|Information sur la séparation de la collecte des EP et EU (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eudivers|Autres informations sur la collecte des eaux usées|character varying(500) |
-|euanomal|Information sur la présence d'anomalies constatées (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|euobserv|Précisions sur les anomalies constatées sur la collecte des eaux usées|character varying(500) |
-|eusiphon|Présence de syphons sur chaque évacuation contrôlée (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epdiagpc|Diagnostic réalisé sur les parties communes (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epracpc|Raccordement sur les parties communes (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epregarcol|Existence d'une regard de collecte (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epregarext|Regard de collecte à l'extérieur de l'habitation (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epracdp|Raccordement au réseau public d'évacuation des eaux pluviales (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eppar|Eaux pluviales traitées à la parcelle (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epparpre|Précision sur le traitement des eaux pluviales à la parcelle si existe|character varying(200) |
-|epfum|Test à la fummée réalisée (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epecoul|Ecoulement correct (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epecoulobs|Observation sur l'écoulement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(500) |
-|eprecup|Système de récupération des eaux pluviales (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|eprecupcpt|Compteur présent en cas de récupération des eaux pluviales à usage domestique (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)'ZZ'::character varying|
-|epautre|Autre|character varying(200) |
-|epobserv|Observations diverses sur la collecte des eaux usées|character varying(200) |
-|euepanomal|Anomalies identifiées entrainant la non conformité|character varying(1000) |
-|euepdivers|Constatations diverses|character varying(1000) |
-|date_sai|Date de saisie|timestamp without time zone |
-|date_maj|Datede mise à jour|timestamp without time zone |
-|op_sai|Opérateur de saisie|character varying(80) |
-|scr_geom|Source du référentiel géographique de saisie|character varying(2) |
+|idcc|Identifiant interne unique du contrôle|integer|nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
+|id_adresse|Identifiant unique de l'objet point adresse (issu de la BAL)|bigint| |
+|ccvalid|validation par l'ARC du contrôle (la valeur true empêche la modification des données|boolean|false|
+|ccinit|information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité|boolean|false|
+|adapt|Complément de l'adresse avec le n° d'appartement dans le cadre d'un immeuble collectif|character varying(20)| |
+|adeta|Etage|integer| |
+|tnidcc|Type de dossier pour lacréation d'un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)|character varying(2)| |
+|nidcc|N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)|character varying(20)| |
+|rcc|Résultat du contrôle (true : conforme, false : non conforme)|character varying(3)| |
+|ccdate|Date du contrôle|timestamp without time zone| |
+|ccdated|Date de délivrance du contrôle|timestamp without time zone| |
+|ccbien|Code du type de bien contrôlé (neuf ou ancien) (clé étrangère sur la liste de valeur lt_euep_cc_bien)|character varying(2)|'00'::character varying|
+|certtype|Code de l'organisme certificateur agréé (clé étrangère sur la liste de valeur lt_euep_cc_certificateur)|integer| |
+|certnom|Nom de la personne appartenant à l'organisme certificateur agréé qui a fait le contrôle|character varying(80)| |
+|certpre|Prénom de la personne appartenant à l'organisme certificateur agréé qui a fait le contrôle|character varying(80)| |
+|propriopat|Patronyme du propriétaire (clé étrangère sur la liste de valeur lt_euep_cc_pat)|character varying(2)|'00'::character varying|
+|propriopatp|Patronyme du propriétaire (précision si autre renseigné dans propriopat)|character varying(50)| |
+|proprionom|Nom de la personne désignant le propriétaire|character varying(80)| |
+|propriopre|Prénom de la personne désignant le propriétaire|character varying(80)| |
+|proprioad|Adresse de la personne désignant le propriétaire|character varying(254)| |
+|dotype|Code de la qualité du donneur d'ordre (clé étrangère sur la liste de valeur lt_euep_cc_ordre)|character varying(2)|'00'::character varying|
+|doaut|Autre donneur d'ordre si pas présent dans dotype|character varying(80)| |
+|donom|Nom de la personne désignant le donneur d'ordre|character varying(80)| |
+|dopre|Prénom de la personne désignant le donneur d'ordre|character varying(80)| |
+|doad|Adresse de la personne désignant le donneur d'ordre|character varying(80)| |
+|achetpat|Patronyme de l'acheteur (clé étrangère sur la liste de valeur lt_euep_cc_pat)|character varying(2)|'00'::character varying|
+|achetpatp|Patronyme de l'acheteur (précision si autre renseigné dans achetpat)|character varying(50)| |
+|achetnom|Nom de la personne désignant l'acheteur|character varying(80)| |
+|achetpre|Prénom de la personne désignant l'acheteur|character varying(80)| |
+|achetad|Adresse de la personne désignant l'acheteur|character varying(80)| |
+|batitype|Code du type de bâtiment concerné par le contrôle (clé étrangère sur la liste de valeur lt_euep_cc_typebati)|character varying(2)|'00'::character varying|
+|batiaut|Autre type de bâtiment si pas présent dans batitype|character varying(80)| |
+|eppublic|Desservie par un réseau public d'eau potable (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epaut|Autre alimentation que le réseau d'eau potable public|character varying(80)| |
+|rredptype|Code du type de réseau de raccordement au domaine publique (clé étrangère sur la liste de valeur lt_euep_cc_typeres)|character varying(2)|'ZZ'::character varying|
+|rrebrtype|Information sur l'existence d'une boîte de raccordement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|rrechype|Information sur l'existence d'un regard sous chaussée si pas de boîte de raccordement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eupc|Information sur l'existence d'un raccordement sur les parties communes (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|euevent|Information sur l'existence d'un évent (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|euregar|Information sur l'existence d'un regard (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|euregardp|Information sur l'existence d'un regard accessible dans le domaine privé (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eusup|Information sur l'existence d'une servitude avec une autre propriété pour les EU ou les EP (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eusuptype|Précision du réseau en cas de servitude avec une autre propriété (clé étrangère sur la liste de valeur lt_euep_sup)|character varying(2)|'ZZ'::character varying|
+|eusupdoc|Information sur l'existence de documents attestant la servitude avec une autre propriété pour les EU ou les EP (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|euecoul|Information le bon déroulé de l'écoulement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eufluo|Information l'existence d'un test à la fluorescéine (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eubrsch|Information sur l'existence d'un branchement sous chaussée (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eurefl|Information sur la protection du branchement par un système d'anti reflux (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|euepsep|Information sur la séparation de la collecte des EP et EU (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eudivers|Autres informations sur la collecte des eaux usées|character varying(500)| |
+|euanomal|Information sur la présence d'anomalies constatées (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|euobserv|Précisions sur les anomalies constatées sur la collecte des eaux usées|character varying(500)| |
+|eusiphon|Présence de syphons sur chaque évacuation contrôlée (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epdiagpc|Diagnostic réalisé sur les parties communes (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epracpc|Raccordement sur les parties communes (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epregarcol|Existence d'une regard de collecte (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epregarext|Regard de collecte à l'extérieur de l'habitation (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epracdp|Raccordement au réseau public d'évacuation des eaux pluviales (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eppar|Eaux pluviales traitées à la parcelle (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epparpre|Précision sur le traitement des eaux pluviales à la parcelle si existe|character varying(200)| |
+|epfum|Test à la fummée réalisée (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epecoul|Ecoulement correct (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epecoulobs|Observation sur l'écoulement (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(500)| |
+|eprecup|Système de récupération des eaux pluviales (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|eprecupcpt|Compteur présent en cas de récupération des eaux pluviales à usage domestique (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
+|epautre|Autre|character varying(200)| |
+|epobserv|Observations diverses sur la collecte des eaux usées|character varying(200)| |
+|euepanomal|Anomalies identifiées entrainant la non conformité|character varying(1000)| |
+|euepdivers|Constatations diverses|character varying(1000)| |
+|date_sai|Date de saisie|timestamp without time zone| |
+|date_maj|Datede mise à jour|timestamp without time zone| |
+|op_sai|Opérateur de saisie|character varying(80)| |
+|scr_geom|Source du référentiel géographique de saisie|character varying(2)| |
+
 
    
    
