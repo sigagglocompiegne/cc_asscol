@@ -91,7 +91,7 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |op_sai|Opérateur de saisie|character varying(80)| |
 |scr_geom|Source du référentiel géographique de saisie|character varying(2)| |
 
-- Particularité(s) à noter :
+Particularité(s) à noter :
  . Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique.
  . le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
 
