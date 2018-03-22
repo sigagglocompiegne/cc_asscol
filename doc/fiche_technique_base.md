@@ -176,7 +176,7 @@ Valeurs possibles :
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code 
 
-Valeurs possibles : données non diffusables pour cette lmiste pour des raisons de confidentialités des données
+Valeurs possibles : données non diffusables pour cette liste pour des raisons de confidentialités des données
 
 
 ---
