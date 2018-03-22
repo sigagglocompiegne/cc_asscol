@@ -92,8 +92,8 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |scr_geom|Source du référentiel géographique de saisie|character varying(2)| |
 
 Particularité(s) à noter :
- . Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique.
- . le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
+*  Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique.
+*  le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
 
    * **log_an_euep_cc** : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
  
