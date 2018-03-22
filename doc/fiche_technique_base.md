@@ -12,10 +12,19 @@
 
 L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_reseau_humide et celles applicatives dans le schéma x_apps.
 
- * de gestion :
-   * an_an_euep_cc :
-  
+ * gestion :
+   * an_euep_cc : table des attributs métiers permettant de gérer l'ensemble des éléments d'un contrôle de conformité.
+   
+   * log_an_euep_cc : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
+ 
+   * an_v_euep_cc : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
+ 
+ * applicative :
+   * xapps_an_euep_cc_nc : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
+   * xapps_geo_v_euep_cc : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
 
 ## Liste de valeurs
+
+ * 
 
 ## Schéma fonctionnel
