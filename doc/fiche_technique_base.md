@@ -99,7 +99,7 @@ Particularité(s) à noter :
   * ``t_t1_an_euep_cc_insert`` : gère après une insertion la transformation des '' en valeur null
   * ``t_t2_log_an_euep_cc_insert_update`` : gère après une insertion ou une mise à jour l'écriture de la transaction dans la classe des logs
 
-
+&nbsp;
 `log_an_euep_cc` : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
