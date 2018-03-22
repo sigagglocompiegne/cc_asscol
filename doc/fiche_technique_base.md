@@ -176,6 +176,9 @@ Valeurs possibles :
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code 
 
+Valeurs possibles : données non diffusables pour cette lmiste pour des raisons de confidentialités des données
+
+
 ---
 
 `lt_euep_cc_eval` : Liste des types de réponse aux questions pour les contrôles de conformité assainissement
