@@ -2,6 +2,7 @@
 
 -- 2018/02/01 : GB / initialisation du squelette de la structure dans la base de données pour gérer le suivi des contrôles de conformité
 --		GB / la donnée métier s'appuie sur le référentiel de voies et adresses locales (BAL) de l'ARC pour la localisation des contrôles
+-- 2018/03/22 : GB / ajout d'une table de log
 -- #################################################################################################################################################
 
 
@@ -685,7 +686,58 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc_media.date_sai IS 'Date d''intégra
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc_media.l_type IS 'Code du type de document de cessions ou d''acquisitions';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc_media.l_prec IS 'Précision sur le document';
 
+-- ########################################################################## table log_an_euep_cc #######################################################
 
+-- Table: m_reseau_humide.log_an_euep_cc
+
+DROP TABLE IF EXISTS m_reseau_humide.log_an_euep_cc;
+
+CREATE TABLE m_reseau_humide.log_an_euep_cc
+(
+  gid integer NOT NULL, -- identifiant unique
+  objet character varying(10), -- Type de modification (update, delete, insert)
+  d_maj timestamp without time zone, -- Date de l'exécution de la modification
+  "user" character varying(50), -- Utilisateur ayant exécuté l'exécution
+  relid character varying(255), -- ID d'objet de la table qui a causé le déclenchement.
+  l_schema character varying(30), -- Libellé du schéma contenant la table ou la vue exécutée ou mlodifiée
+  l_table character varying(30), -- Libellé de la table exécutée
+  idgeo character varying(100), -- Identifiant unique de l'objet de la table correspondante
+  modif character varying(10000),
+  geom geometry(Point,2154), -- Champ contenant la géométrie des objets polygones modifiés ou supprimés
+  CONSTRAINT log_an_euep_cc_pkey PRIMARY KEY (gid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_reseau_humide.log_an_euep_cc
+  OWNER TO postgres;
+GRANT ALL ON TABLE m_reseau_humide.log_an_euep_cc TO postgres;
+GRANT ALL ON TABLE m_reseau_humide.log_an_euep_cc TO groupe_sig;
+COMMENT ON TABLE m_reseau_humide.log_an_euep_cc
+  IS 'Table permettant de suivre les modifications intervenues sur les données des contrôles de conformité. Cette table est mise à jour via des triggers intégrés au niveau des vues de gestion.';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.gid IS 'identifiant unique';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.objet IS 'Type de modification (update, delete, insert)';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.d_maj IS 'Date de l''exécution de la modification';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc."user" IS 'Utilisateur ayant exécuté l''exécution';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.relid IS 'ID d''objet de la table qui a causé le déclenchement.';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.l_schema IS 'Libellé du schéma contenant la table ou la vue exécutée ou mlodifiée';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.l_table IS 'Libellé de la table exécutée';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.idgeo IS 'Identifiant unique de l''objet de la table correspondante';
+COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.geom IS 'Champ contenant la géométrie des objets polygones modifiés ou supprimés';
+
+
+-- Sequence: m_reseau_humide.log_an_euep_cc_gid_seq
+
+-- DROP SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq;
+
+CREATE SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE m_reseau_humide.log_an_euep_cc_gid_seq
+  OWNER TO postgres;
 
 
 -- ####################################################################################################################################################
@@ -1239,5 +1291,110 @@ CREATE TRIGGER t_t2_an_euep_cc_insert
   ON m_reseau_humide.an_euep_cc
   FOR EACH ROW
   EXECUTE PROCEDURE m_reseau_humide.t2_an_euep_cc_insert();
+
+-- Function: m_reseau_humide.ft_log_an_euep_cc()
+
+-- DROP FUNCTION m_reseau_humide.ft_log_an_euep_cc();
+
+CREATE OR REPLACE FUNCTION m_reseau_humide.ft_log_an_euep_cc()
+  RETURNS trigger AS
+$BODY$
+begin
+		--ajoute une ligne dans la table suivi des modifications pour refléter l'operation réalisée sur les tables
+		--utilise la variable spéciale TG_OP pour cette opération
+		--
+		      
+		IF (TG_OP='INSERT') then			
+
+		insert into m_reseau_humide.log_an_euep_cc select nextval('m_reseau_humide.log_an_euep_cc_gid_seq'::regclass), 'INSERT',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,new.idcc;
+
+                END IF;
+                IF (TG_OP='UPDATE') then
+			insert into m_reseau_humide.log_an_euep_cc select nextval('m_reseau_humide.log_an_euep_cc_gid_seq'::regclass), 'UPDATE',now(),user,TG_Relid,TG_TABLE_SCHEMA,TG_TABLE_NAME,old.idcc, 
+			CASE WHEN old.ccvalid <> new.ccvalid then 'ccvalid:' || old.ccvalid || ',' || new.ccvalid || ';' ELSE '' end ||
+			CASE WHEN old.adapt <> new.adapt then 'adapt:' || old.adapt || ',' || new.adapt || ';' ELSE '' end ||
+			CASE WHEN old.adeta <> new.adeta then 'adeta:' || old.adeta || ',' || new.adeta || ';' ELSE '' end ||
+			CASE WHEN old.nidcc <> new.nidcc then 'nidcc:' || old.nidcc || ',' || new.nidcc || ';' ELSE '' end ||
+			CASE WHEN old.rcc <> new.rcc then 'rcc:' || old.rcc || ',' || new.rcc || ';' ELSE '' end ||
+			CASE WHEN old.ccdate <> new.ccdate then 'ccdate:' || old.ccdate || ',' || new.ccdate || ';' ELSE '' end ||
+			CASE WHEN old.ccdate <> new.ccdate then 'ccdate:' || old.ccdate || ',' || new.ccdate || ';' ELSE '' end ||
+			CASE WHEN old.ccdated <> new.ccdated then 'ccdated:' || old.ccdated || ',' || new.ccdated || ';' ELSE '' end ||
+			CASE WHEN old.ccbien <> new.ccbien then 'ccbien:' || old.ccbien || ',' || new.ccbien || ';' ELSE '' end ||
+			CASE WHEN old.certtype <> new.certtype then 'certtype:' || old.certtype || ',' || new.certtype || ';' ELSE '' end ||
+			CASE WHEN old.certnom <> new.certnom then 'certnom:' || old.certnom || ',' || new.certnom || ';' ELSE '' end ||
+			CASE WHEN old.certpre <> new.certpre then 'certpre:' || old.certpre || ',' || new.certpre || ';' ELSE '' end ||
+			CASE WHEN old.propriopat <> new.propriopat then 'propriopat:' || old.propriopat || ',' || new.propriopat || ';' ELSE '' end ||
+			CASE WHEN old.propriopatp <> new.propriopatp then 'propriopatp:' || old.propriopatp || ',' || new.propriopatp || ';' ELSE '' end ||
+			CASE WHEN old.proprionom <> new.proprionom then 'proprionom:' || old.proprionom || ',' || new.proprionom || ';' ELSE '' end ||
+			CASE WHEN old.propriopre <> new.propriopre then 'propriopre:' || old.propriopre || ',' || new.propriopre || ';' ELSE '' end ||
+			CASE WHEN old.proprioad <> new.proprioad then 'proprioad:' || old.proprioad || ',' || new.proprioad || ';' ELSE '' end ||
+			CASE WHEN old.dotype <> new.dotype then 'dotype:' || old.dotype || ',' || new.dotype || ';' ELSE '' end ||
+			CASE WHEN old.doaut <> new.doaut then 'doaut:' || old.doaut || ',' || new.doaut || ';' ELSE '' end ||
+			CASE WHEN old.donom <> new.donom then 'donom:' || old.donom || ',' || new.donom || ';' ELSE '' end ||
+			CASE WHEN old.dopre <> new.dopre then 'dopre:' || old.dopre || ',' || new.dopre || ';' ELSE '' end ||
+			CASE WHEN old.doad <> new.doad then 'doad:' || old.doad || ',' || new.doad || ';' ELSE '' end ||
+			CASE WHEN old.achetpat <> new.achetpat then 'achetpat:' || old.achetpat || ',' || new.achetpat || ';' ELSE '' end ||
+			CASE WHEN old.achetpatp <> new.achetpatp then 'achetpatp:' || old.achetpatp || ',' || new.achetpatp || ';' ELSE '' end ||
+			CASE WHEN old.achetnom <> new.achetnom then 'achetnom:' || old.achetnom || ',' || new.achetnom || ';' ELSE '' end ||
+			CASE WHEN old.achetpre <> new.achetpre then 'achetpre:' || old.achetpre || ',' || new.achetpre || ';' ELSE '' end ||
+			CASE WHEN old.achetad <> new.achetad then 'achetad:' || old.achetad || ',' || new.achetad || ';' ELSE '' end ||
+			CASE WHEN old.batitype <> new.batitype then 'batitype:' || old.batitype || ',' || new.batitype || ';' ELSE '' end ||
+			CASE WHEN old.batiaut <> new.batiaut then 'batiaut:' || old.batiaut || ',' || new.batiaut || ';' ELSE '' end ||
+			CASE WHEN old.eppublic <> new.eppublic then 'eppublic:' || old.eppublic || ',' || new.eppublic || ';' ELSE '' end ||
+			CASE WHEN old.epaut <> new.epaut then 'epaut:' || old.epaut || ',' || new.epaut || ';' ELSE '' end ||
+			CASE WHEN old.rredptype <> new.rredptype then 'rredptype:' || old.rredptype || ',' || new.rredptype || ';' ELSE '' end ||
+			CASE WHEN old.rrebrtype <> new.rrebrtype then 'rrebrtype:' || old.rrebrtype || ',' || new.rrebrtype || ';' ELSE '' end ||
+			CASE WHEN old.rrechype <> new.rrechype then 'rrechype:' || old.rrechype || ',' || new.rrechype || ';' ELSE '' end ||
+			CASE WHEN old.eupc <> new.eupc then 'eupc:' || old.eupc || ',' || new.eupc || ';' ELSE '' end ||
+			CASE WHEN old.euevent <> new.euevent then 'euevent:' || old.euevent || ',' || new.euevent || ';' ELSE '' end ||
+			CASE WHEN old.euregar <> new.euregar then 'eppublic:' || old.euregar || ',' || new.euregar || ';' ELSE '' end ||
+			CASE WHEN old.euregardp <> new.euregardp then 'euregardp:' || old.euregardp || ',' || new.euregardp || ';' ELSE '' end ||
+			CASE WHEN old.eusup <> new.eusup then 'eusup:' || old.eusup || ',' || new.eusup || ';' ELSE '' end ||
+			CASE WHEN old.eusuptype <> new.eusuptype then 'eusuptype:' || old.eusuptype || ',' || new.eusuptype || ';' ELSE '' end ||
+			CASE WHEN old.eusupdoc <> new.eusupdoc then 'eusupdoc:' || old.eusupdoc || ',' || new.eusupdoc || ';' ELSE '' end ||
+			CASE WHEN old.euecoul <> new.euecoul then 'euecoul:' || old.euecoul || ',' || new.euecoul || ';' ELSE '' end ||
+			CASE WHEN old.eufluo <> new.eufluo then 'eufluo:' || old.eufluo || ',' || new.eufluo || ';' ELSE '' end ||
+			CASE WHEN old.eubrsch <> new.eubrsch then 'eubrsch:' || old.eubrsch || ',' || new.eubrsch || ';' ELSE '' end ||
+			CASE WHEN old.eurefl <> new.eurefl then 'eurefl:' || old.eurefl || ',' || new.eurefl || ';' ELSE '' end ||
+			CASE WHEN old.euepsep <> new.euepsep then 'euepsep:' || old.euepsep || ',' || new.euepsep || ';' ELSE '' end ||
+			CASE WHEN old.eudivers <> new.eudivers then 'eudivers:' || old.eudivers || ',' || new.eudivers || ';' ELSE '' end ||
+			CASE WHEN old.euanomal <> new.euanomal then 'euanomal:' || old.euanomal || ',' || new.euanomal || ';' ELSE '' end ||
+			CASE WHEN old.euobserv <> new.euobserv then 'euobserv:' || old.euobserv || ',' || new.euobserv || ';' ELSE '' end ||
+			CASE WHEN old.eusiphon <> new.eusiphon then 'eusiphon:' || old.eusiphon || ',' || new.eusiphon || ';' ELSE '' end ||
+			CASE WHEN old.epdiagpc <> new.epdiagpc then 'epdiagpc:' || old.epdiagpc || ',' || new.epdiagpc || ';' ELSE '' end ||
+			CASE WHEN old.epracpc <> new.epracpc then 'epracpc:' || old.epracpc || ',' || new.epracpc || ';' ELSE '' end ||	
+			CASE WHEN old.epregarcol <> new.epregarcol then 'epregarcol:' || old.epregarcol || ',' || new.epregarcol || ';' ELSE '' end ||
+			CASE WHEN old.epregarext <> new.epregarext then 'epregarext:' || old.epregarext || ',' || new.epregarext || ';' ELSE '' end ||
+			CASE WHEN old.epracdp <> new.epracdp then 'epracdp:' || old.epracdp || ',' || new.epracdp || ';' ELSE '' end ||
+			CASE WHEN old.eppar <> new.eppar then 'eppar:' || old.eppar || ',' || new.eppar || ';' ELSE '' end ||
+			CASE WHEN old.epparpre <> new.epparpre then 'epparpre:' || old.epparpre || ',' || new.epparpre || ';' ELSE '' end ||
+			CASE WHEN old.epfum <> new.epfum then 'epfum:' || old.epfum || ',' || new.epfum || ';' ELSE '' end ||
+			CASE WHEN old.epecoul <> new.epecoul then 'epecoul:' || old.epecoul || ',' || new.epecoul || ';' ELSE '' end ||	
+			CASE WHEN old.epecoulobs <> new.epecoulobs then 'epecoulobs:' || old.epecoulobs || ',' || new.epecoulobs || ';' ELSE '' end ||
+			CASE WHEN old.eprecup <> new.eprecup then 'eprecup:' || old.eprecup || ',' || new.eprecup || ';' ELSE '' end ||
+			CASE WHEN old.eprecupcpt <> new.eprecupcpt then 'eprecupcpt:' || old.eprecupcpt || ',' || new.eprecupcpt || ';' ELSE '' end ||
+			CASE WHEN old.epautre <> new.epautre then 'epautre:' || old.epautre || ',' || new.epautre || ';' ELSE '' end ||
+			CASE WHEN old.epobserv <> new.epobserv then 'epobserv:' || old.epobserv || ',' || new.epobserv || ';' ELSE '' end ||
+			CASE WHEN old.euepanomal <> new.euepanomal then 'euepanomal:' || old.euepanomal || ',' || new.euepanomal || ';' ELSE '' end ||
+			CASE WHEN old.euepdivers <> new.euepdivers then 'euepdivers:' || old.euepdivers || ',' || new.euepdivers || ';' ELSE '' end ||	
+			CASE WHEN old.op_sai <> new.op_sai then 'op_sai:' || old.op_sai || ',' || new.op_sai || ';' ELSE '' end; 
+                        DELETE FROM m_reseau_humide.log_an_euep_cc WHERE modif is null or modif ='';
+	
+		end if;
+
+		return null; -- le résultat est ignoré car il s'agit d'un déclencheur AFTER
+	end;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION m_reseau_humide.ft_log_an_euep_cc()
+  OWNER TO postgres;
+
+
+CREATE TRIGGER t_t2_log_an_euep_cc_insert_update
+  AFTER INSERT OR UPDATE
+  ON m_reseau_humide.an_euep_cc
+  FOR EACH ROW
+  EXECUTE PROCEDURE m_reseau_humide.ft_log_an_euep_cc();
 
 COMMIT;
