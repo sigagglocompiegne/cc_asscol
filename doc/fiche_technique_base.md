@@ -191,6 +191,16 @@ Valeurs possibles : données non diffusables pour cette liste pour des raisons d
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code 
 
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|00|Non renseigné (cf formulaire PDF)|
+|10|Oui|
+|20|Non|
+|30|Non visible|
+|ZZ|Sans objet|
+
 ---
 
 `lt_euep_cc_ordre` : Liste des donneurs d'ordre pour les contrôles de conformité assainissement
@@ -202,6 +212,14 @@ Particularité(s) à noter :
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code 
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|00|Non renseigné (cf formulaire PDF)|
+|10|Propriétaire|
+|99|Autre|
 
 ---
 
@@ -215,9 +233,19 @@ Particularité(s) à noter :
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code 
 
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|00|Non renseigné|
+|10|M|
+|20|Mme|
+|30|M et Mme|
+|40|Autre (précisez)|
+
 ---
 
-`lt_euep_cc_tnidcc` : Liste des types de suivi des n° dossier pour un nouveau contrôle
+`lt_euep_cc_tnidcc` : Liste des types de suivi des n° dossier pour un nouveau contrôle. Cette table est utilisée pour gérer la constitution d'un nouveau n° de dossier à l'enregistrement
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|
@@ -226,6 +254,13 @@ Particularité(s) à noter :
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|10|Nouveau dossier|
+|20|Suivi du dossier n°|
 
 ---
 
@@ -239,6 +274,17 @@ Particularité(s) à noter :
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code
 
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|00|Non renseigné (cf formulaire PDF)|
+|10|Maison individuelle|
+|20|Appartement|
+|30|Local commercial|
+|40|Local agricole|
+|99|Autre|
+
 ---
 
 `lt_euep_cc_typeres` : Liste des types de réseau raccordé au domaine public pour les contrôles de conformité assainissement
@@ -250,6 +296,15 @@ Particularité(s) à noter :
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|10|Séparatif|
+|20|Unitaire|
+|30|Sous vide|
+|ZZ|Sans objet|
 
 ---
 
@@ -263,6 +318,19 @@ Particularité(s) à noter :
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code
 
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|00|Non renseigné|
+|10|Contrôle de conformité|
+|20|Photographies ou planche de photos|
+|30|Schéma de l'installation|
+|40|Demande de raccordement|
+|50|Diagniostic parties communes|
+|51|Diagniostic parties privatives|
+|99|Autres documents (à préciser ci-dessous)|
+
 ---
 
 `lt_euep_sup` : Liste des types de servitude avec une autre propriété
@@ -274,5 +342,14 @@ Particularité(s) à noter :
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|00|Non renseigné (cf formulaire PDF)|
+|10|Eaux usées|
+|20|Eaux pluviales|
+|ZZ|Sans objet|
 
 ## Schéma fonctionnel
