@@ -136,6 +136,12 @@ Particularité(s) à noter :
 
 ## Liste de valeurs
 
-`lt_euep_cc_bien` :
+`lt_euep_cc_bien` : Liste des types de bien contrôlé
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|    
+|code|Code interne des types de bien|character(2)| |
+|valeur|Libellé des types de bien|character varying(80)| |
+
 
 ## Schéma fonctionnel
