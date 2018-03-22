@@ -96,7 +96,22 @@ Particularité(s) à noter :
 * le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
 
 `log_an_euep_cc` : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
- 
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|  
+|gid|identifiant unique|integer| |
+|objet|Type de modification (update, delete, insert)|character varying(10)| |
+|d_maj|Date de l'exécution de la modification|timestamp without time zone| |
+|user|Utilisateur ayant exécuté l'exécution|character varying(50)| |
+|relid|ID d'objet de la table qui a causé le déclenchement.|character varying(255)| |
+|l_schema|Libellé du schéma contenant la table ou la vue exécutée ou mlodifiée|character varying(30)| |
+|l_table|Libellé de la table exécutée|character varying(30)| |
+|idgeo|Identifiant unique de l'objet de la table correspondante|character varying(100)| |
+|geom|Champ contenant la géométrie des objets polygones modifiés ou supprimés|USER-DEFINED| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique.
+
 `an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
  
  ### applicative :
