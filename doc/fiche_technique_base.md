@@ -165,6 +165,9 @@ Particularité(s) à noter :
 |num_assur|N° de la police d'assurance ou du contrat|character varying(150)| |
 |date_assur|Date de fin validé du contrat d'assurance|timestamp without time zone| |
 
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code 
+
 ---
 
 `lt_euep_cc_eval` : Liste des types de réponse aux questions pour les contrôles de conformité assainissement
@@ -174,6 +177,9 @@ Particularité(s) à noter :
 |code|Code interne des types de réponse|character(2)| |
 |valeur|Libellé des types de réponse|character varying(80)| |
 
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code 
+
 ---
 
 `lt_euep_cc_ordre` : Liste des donneurs d'ordre pour les contrôles de conformité assainissement
@@ -182,5 +188,80 @@ Particularité(s) à noter :
 |:---|:---|:---|:---|
 |code|Code interne des types de donneurs d'ordre|character(2)| |
 |valeur|Libellé des types de donneurs d'ordre|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code 
+
+---
+
+`lt_euep_cc_pat` : Liste des types de patronyme
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de patronyme|character(2)| |
+|valeur|Libellé des types de patronyme|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code 
+
+---
+
+`lt_euep_cc_tnidcc` : Liste des types de suivi des n° dossier pour un nouveau contrôle
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de suivi des n° dossier pour un nouveau contrôle|character(2)| |
+|valeur|Libellé des types de suivi des n° dossier pour un nouveau contrôle|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
+
+---
+
+`lt_euep_cc_typebati` : Liste des types de bâtiments pour les contrôles de conformité assainissement
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de bâtiments|character(2)| |
+|valeur|Libellé des types de bâtiments|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
+
+---
+
+`lt_euep_cc_typeres` : Liste des types de réseau raccordé au domaine public pour les contrôles de conformité assainissement
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de réseau|character(2)| |
+|valeur|Libellé des types de réseau|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
+
+---
+
+`lt_euep_doc` : Liste des types documents joints au dossier de contrôle de conformité assainissement
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de documents|character(2)| |
+|valeur|Libellé des types de documents|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
+
+---
+
+`lt_euep_sup` : Liste des types de servitude avec une autre propriété
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de sevitudes|character(2)| |
+|valeur|Libellé des types de servitudes|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
 
 ## Schéma fonctionnel
