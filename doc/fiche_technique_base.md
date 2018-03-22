@@ -92,12 +92,13 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |scr_geom|Source du référentiel géographique de saisie|character varying(2)| |
 
 Particularité(s) à noter :
-* Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique.
+* Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_idcc_seq``
 * 35 clés étrangères existent et correspondent aux classes de listes de valeurs
 * le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
 * 2 triggers existent sur cette classe :
   * ``t_t1_an_euep_cc_insert`` : gère après une insertion la transformation des '' en valeur null
   * ``t_t2_log_an_euep_cc_insert_update`` : gère après une insertion ou une mise à jour l'écriture de la transaction dans la classe des logs
+
 
 `log_an_euep_cc` : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
 
@@ -114,10 +115,10 @@ Particularité(s) à noter :
 |geom|Champ contenant la géométrie des objets polygones modifiés ou supprimés|USER-DEFINED| |
 
 Particularité(s) à noter :
-* Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique.
+* Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique ``log_an_euep_cc_gid_seq``
 
 `an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
- 
+
  ### applicative :
 `xapps_an_euep_cc_n` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
 
@@ -125,6 +126,6 @@ Particularité(s) à noter :
 
 ## Liste de valeurs
 
- * 
+`lt_euep_cc_bien` :
 
 ## Schéma fonctionnel
