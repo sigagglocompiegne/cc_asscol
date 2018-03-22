@@ -129,6 +129,8 @@ Particularité(s) à noter :
 Particularité(s) à noter :
 * 1 trigger :
   * `t_t1_an_v_euep_cc_update_insert` : gère pour l'instance d'insertion ou de mise à jour l'intégration des données dans la classe d'objet `an_v_euep_cc`
+    * fonctionnement :
+      * à compléter
 
 ---
 
@@ -351,5 +353,7 @@ Valeurs possibles :
 |10|Eaux usées|
 |20|Eaux pluviales|
 |ZZ|Sans objet|
+
+---
 
 ## Schéma fonctionnel
