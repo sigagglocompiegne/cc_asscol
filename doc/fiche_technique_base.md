@@ -15,7 +15,7 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
  * gestion :
    * **an_euep_cc** : table des attributs métiers permettant de gérer l'ensemble des éléments d'un contrôle de conformité.
    
-|Nom attribut | Définition | Type | Contraintes |
+|Nom attribut | Définition | Type | Valeurs par défaut |
 |:---|:---|:---|:---|
 |idcc|Identifiant interne unique du contrôle|integer|nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
 |id_adresse|Identifiant unique de l'objet point adresse (issu de la BAL)|bigint| |
@@ -91,9 +91,10 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |op_sai|Opérateur de saisie|character varying(80)| |
 |scr_geom|Source du référentiel géographique de saisie|character varying(2)| |
 
+- Particularité(s) à noter :
+ . Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique.
+ . le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
 
-   
-   
    * **log_an_euep_cc** : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
  
    * **an_v_euep_cc** : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
