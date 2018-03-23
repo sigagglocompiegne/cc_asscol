@@ -388,4 +388,4 @@ Valeurs possibles :
 
 ### Modèle conceptuel simplifié
 
-![mcd](cc_asscol/img/mcd.jpg)
+![mcd](../img/mcd.jpg)
