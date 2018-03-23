@@ -27,7 +27,7 @@
 |Fiches d'informations des contrôles|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable|
 |Fiches d'informations du prestataire|x|x|La connexion filtre l'affichage des informations sur le profil du prestataire|
 
-* **Personnes du service Assainissement**
+* **Personnes du service métier**
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
