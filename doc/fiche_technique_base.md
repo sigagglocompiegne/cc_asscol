@@ -204,7 +204,7 @@ Valeurs possibles :
 |date_assur|Date de fin validé du contrat d'assurance|timestamp without time zone| |
 
 Particularité(s) à noter :
-* Une clé primaire existe sur le champ code 
+* Une clé primaire existe sur le champ code avec une séquence d'incrémentation d'un numéro automatique ``lt_euep_cc_certificateur_code_seq``
 
 Valeurs possibles : données non diffusables pour cette liste pour des raisons de confidentialités des données
 
