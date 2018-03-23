@@ -9,5 +9,5 @@
 ## Accès
 
 |Public|Métier |Accès restreint|
-|---|---|:---|
+|:-:|:-:|:---|
 ||X|Accès réservé au prestataire agréé et aux personnes du service assainissement|
