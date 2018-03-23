@@ -37,4 +37,4 @@
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|aucune|||pas d'accès autorisé|
+|aucune|||Pas d'accès autorisé. Les informations des contrôles devraient être consultables également dans l'application Réseau Humide en simple lecture pour les autres personnes du pôle|
