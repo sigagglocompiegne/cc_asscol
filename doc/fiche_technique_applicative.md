@@ -16,18 +16,20 @@
 
 * **Prestataires**
 
-|Fonctionnalité|Lecture|Ecriture|Précisions|
+|Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-||x|x||
+|Recherches|x|||
+|Cartographie|x|||
+|Fiches d'informations des contrôles|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable|
 
 * **Personnes du service Assainissement**
 
-|Fonctionnalité|Lecture|Ecriture|Précisions|
+|Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 |Toutes|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés|
 
 * **Autres profils**
 
-|Fonctionnalité|Lecture|Ecriture|Précisions|
+|Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 |aucune|||pas d'accès autorisé|
