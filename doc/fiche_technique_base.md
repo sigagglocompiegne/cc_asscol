@@ -102,6 +102,27 @@ Particularité(s) à noter :
 
 ---
 
+   `an_euep_cc_media` : table des médias structurée selon les recommandations de l'éditeur des applications métiers. Elle permet de stocker des documents joints (ici documents en lien avec le contrôle, formulaire, schémas ,photos , ...)
+   
+|Nom attribut | Définition | Type | Valeurs par défaut |
+|:---|:---|:---|:---|
+|gid|Identifiant unique|integer|nextval('m_reseau_humide.an_euep_cc_media_gid_seq'::regclass)|
+|id|Identifiant du contrôle de conformité Assainissement collectif|integer| |
+|media|Champ Média de GEO|text| |
+|miniature|Champ miniature de GEO|bytea| |
+|n_fichier|Nom du fichier|text| |
+|t_fichier|Type de média dans GEO|text| |
+|op_sai|Libellé de l'opérateur ayant intégrer le document|character varying(100)| |
+|date_sai|Date d'intégration du document|timestamp without time zone| |
+|l_type|Code du type de document de cessions ou d'acquisitions|character varying(2)| |
+|l_prec|Précision sur le document|character varying(50)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_media_gid_seq``
+* Une clé étrangère exsiste sur la table de valeur `lt_euep_doc`
+
+---
+
 `log_an_euep_cc` : table de logs permettant de suivre l'ensemble des transactions sur la table an_euep_cc (insert, update). Un contrôle ne peut pas être supprimé, la transaction delele n'est donc pas gérée dans ce cas.
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
