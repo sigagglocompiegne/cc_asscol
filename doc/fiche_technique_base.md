@@ -385,3 +385,7 @@ Valeurs possibles :
 ---
 
 ## Schéma fonctionnel
+
+### Modèle conceptuel simplifié
+
+![mcd](img/mcd.jpg)
