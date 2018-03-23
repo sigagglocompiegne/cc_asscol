@@ -170,8 +170,8 @@ GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_ordre TO postgres;
 GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_ordre TO groupe_sig;
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_ordre
   IS 'Liste des donneurs d''ordre pour les contrôles de conformité assainissement';
-COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_certificateur.code IS 'Code interne du donneur d''ordre';
-COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_certificateur.valeur IS 'Libellé du donneur d''ordre';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_ordre.code IS 'Code interne du donneur d''ordre';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_ordre.valeur IS 'Libellé du donneur d''ordre';
 
 INSERT INTO m_reseau_humide.lt_euep_cc_ordre(
             code, valeur)
