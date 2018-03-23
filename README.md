@@ -6,4 +6,4 @@ Ensemble des éléments constituant la mise en ouvre d'une application WebSIG de
 - [Fiche technique de l'application](doc/fiche_technique_applicative.md)
 - [Documentation utilisateur](doc/fiche_aide_util.md)
 
-[test](test.pdf)
+[test](img/test.jpg)
