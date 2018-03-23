@@ -18,9 +18,14 @@
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|Recherches|x|||
+|Recherche par adresse|x|||
+|Recherche par n° de dossier|x|||
+|Liste des contrôles non conforme|||Accès réservé au service assainissement|
+|Recherche des contrôles depuis le|||Accès réservé au service assainissement|
+|Information sur le prestataire|x||La connexion filtre l'affichage des informations sur le profil du prestataire|
 |Cartographie|x|||
 |Fiches d'informations des contrôles|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable|
+|Fiches d'informations du prestataire|x|x|La connexion filtre l'affichage des informations sur le profil du prestataire|
 
 * **Personnes du service Assainissement**
 
