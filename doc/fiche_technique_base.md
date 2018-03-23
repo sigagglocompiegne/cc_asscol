@@ -130,7 +130,10 @@ Particularité(s) à noter :
 * 1 trigger :
   * `t_t1_an_v_euep_cc_update_insert` : gère pour l'instance d'insertion ou de mise à jour l'intégration des données dans la classe d'objet `an_v_euep_cc`
     * fonctionnement :
-      * à compléter
+      * à l'entrée : 
+        * une variable est calculée pour définir si il existe déjà au moins un contrôle à l'adresse qui permet d'en déduire si il s'agit d'un contrôle initial
+        * une variable est calculée pour la génération du n° de dossier lorsque l'utilisateur choisit nouveau dossier dans l'applicatif métier
+        
 
 ---
 
