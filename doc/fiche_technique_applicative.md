@@ -39,6 +39,10 @@
 |:---|:-:|:-:|:---|
 |aucune|||Pas d'accès autorisé. Les informations des contrôles devraient être consultables également dans l'application Réseau Humide en simple lecture pour les autres personnes du pôle|
 
-## Composition de la cartographie
+## Les données utilisées
 
 ## Détails des fonctionnalités
+
+## Composition de la cartographie
+
+## Particularités
