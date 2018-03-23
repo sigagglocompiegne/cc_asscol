@@ -116,6 +116,7 @@ Particularité(s) à noter :
 |date_sai|Date d'intégration du document|timestamp without time zone| |
 |l_type|Code du type de document de cessions ou d'acquisitions|character varying(2)| |
 |l_prec|Précision sur le document|character varying(50)| |
+|l_test|Champ test pour stockage image et l'imprimer dans la fiche info|character varying(254)| |
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_media_gid_seq``
