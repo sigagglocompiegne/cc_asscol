@@ -15,16 +15,19 @@
 ## Droit par profil de connexion
 
 * **Prestataires**
+
 |Fonctionnalité|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 ||x|x||
 
 * **Personnes du service Assainissement**
+
 |Fonctionnalité|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 |Toutes|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés|
 
 * **Autres profils**
+
 |Fonctionnalité|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 |aucune|||pas d'accès autorisé|
