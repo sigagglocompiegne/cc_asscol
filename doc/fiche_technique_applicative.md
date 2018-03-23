@@ -1,4 +1,4 @@
-# Fiche technique de la base de données #
+# Fiche technique de l'application #
 
 |Représentation| Nom de l'application |Résumé|
 |:---|:---|:---|
