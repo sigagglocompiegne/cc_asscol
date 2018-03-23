@@ -10,4 +10,4 @@
 
 |Public|Métier |Accès restreint|
 |:-:|:-:|:---|
-||X|Accès réservé au prestataire agréé et aux personnes du service assainissement|
+||X|Accès réservé aux prestataires agréés et aux personnes du service assainissement. Des profils de connexions spécifiques ont été créés pour les prestataires dans le LDAP externe|
