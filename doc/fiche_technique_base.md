@@ -143,7 +143,7 @@ Particularité(s) à noter :
 
 ---
 
-`an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier
+`an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier ainsi que l'identifiant et les informations de l'adresse issue de la BAL
 
  ### classes d'objets applicatives :
 `xapps_an_euep_cc_n` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
@@ -389,3 +389,8 @@ Valeurs possibles :
 ### Modèle conceptuel simplifié
 
 ![mcd](../img/MCD.jpg)
+
+### Schéma fonctionnel
+
+![schema_fonctionnel](../img/schema_fonctionnel.jpg)
+
