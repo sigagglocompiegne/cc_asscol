@@ -79,6 +79,8 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_cc_valid   |x||Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_cv.png)|
 |affiche_conclusion    |x||Formate en html l'en-tête de la partie A/conclusion du rapport de conformité | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_controle  |x||Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/img/affiche_picto_fi.png)|
+|affiche_date_dernier_controle  |x|x|Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
+|affiche_dossier  |x||Formate l'affichage du résultat dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_result_rech_cc_dos.png)|
 
    * filtres : aucun
    * relations :
