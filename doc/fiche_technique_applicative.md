@@ -189,9 +189,10 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
    * filtres : 
 
-|Nom| Au chargement | Type | Condition |Valeur|Description|
-|:---|:-:|:---:|:---:|:---|:---|
-|SECU|x|Alphanumérique|est égale à une valeur de contexte|ass_cc_ac|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:-:|:---:|:---:|:---|:---|
+|SECU|code (Code interne du donneur d'ordre)|x|Alphanumérique|est égale à une valeur de contexte|ass_cc_ac|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
+|Prestataire|valeur(Nom de l'entreprise)||Prédéfinis|filtre à liste de choix||Liste déroulante permettant de sélectionner le prestataire dans la recherche *Informations sur le prestataire*|
 
    * relations : aucune
 
