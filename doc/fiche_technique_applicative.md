@@ -98,11 +98,38 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |date_maj||x|Formatage de la date en dd-mm-yyyy|||
 |date_sai||x|Formatage de la date en dd-mm-yyyy|||
 |dotype||x|Formatage par une liste de domaine (lt_euep_cc_ordre)|||
-|epdiagpc||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
-|epecoul||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
-|epfum||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
-|eppar||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
-|eppublic||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
+|epdiagpc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epecoul||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epfum||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eppar||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eppublic||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epracdp||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epracpc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eprecup||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eprecupcpt||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epregarcol||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epregarext||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euanomal||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eubrsch||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euecoul||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euepsep||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euevent||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eufluo||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eupc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eurefl||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euregar||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euregardp||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusiphon||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusup||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusupdoc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusuptype||x|Formatage par une liste de domaine (lt_euep_sup)|||
+|propriopat||x|Formatage par une liste de domaine (lt_euep_cc_pat)|||
+|rcc||x|Formatage par une liste de domaine (Conforme - Non conforme)|||
+|rrebrtype||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|rrechype||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|rredptype||x|Formatage par une liste de domaine (lt_euep_cc_typeres)|||
+|titre_fiche_affiche|x||Formate en html le titre du dossier de conformité (1er onglet non nommé du dossier) |*Fiche d'information* : Dossier de conformité AC||
+|tnidcc||x|Formatage par une liste de domaine (lt_euep_cc_tnidcc)|||
    * filtres : aucun
    * relations :
 
