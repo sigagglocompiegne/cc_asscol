@@ -68,6 +68,21 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |xapps_an_euep_cc| id_adresse | 0 à n (égal) |
 | xapps_v_adresse| id_adresse | 1 (égal) |
 
+* Table : `an_v_euep_cc`
+
+|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|
+|achetpat ||x|Formatage par une liste de domaine ( lt_euep_cc_pat)|||
+|affiche_gras |x||Affiche le champ `adresse` en gras dans le résultat d'une recherche | *Recherche* : Recherche des contrôles depuis le,  Recherche par N° de dossier (AC) ||
+   * filtres : aucun
+   * relations :
+
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+| xapps_an_euep_cc_nc| id_adresse | 0 à n (égal) |
+|xapps_an_euep_cc| id_adresse | 0 à n (égal) |
+| xapps_v_adresse| id_adresse | 1 (égal) |
+
 ## Les fonctionnalités
 
 ## La cartothèque
