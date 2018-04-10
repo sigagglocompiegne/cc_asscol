@@ -302,7 +302,7 @@ Source : `xapps_geo_v_euep_cc`
 
  * Fiches d'information active :
 
-- Dossier de conformité AC
+-Dossier de conformité AC
 
 * **Recherche** : `Recherche par N° de dossier (AC)`
 
@@ -334,7 +334,7 @@ Source : `an_v_euep_cc`
 
  * Fiches d'information active :
 
-- Dossier de conformité AC
+-Dossier de conformité AC
 
 * **Recherche** : `Liste des contrôles NON CONFORME`
 
@@ -366,7 +366,7 @@ Source : `xapps_an_euep_cc_nc`
 
  * Fiches d'information active :
 
-- Conformité NON CONFORME - Courrier
+-Conformité NON CONFORME - Courrier
 
 ## La cartothèque
 
