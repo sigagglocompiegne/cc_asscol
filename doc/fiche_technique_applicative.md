@@ -62,10 +62,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 
 * Géotable : `xapps_geo_v_euep_cc`
-  * filtres :
-Aucun
-
-* Géotable : `xapps_geo_v_euep_cc`
+  * filtres : aucun
   * relations :
 
 
