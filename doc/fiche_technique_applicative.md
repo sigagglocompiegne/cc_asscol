@@ -86,7 +86,23 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_nidcc |x||Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_reg |x||Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_tri |x||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_tri.png)|
-
+|affiche_validite |x||Formate la partie sur la durée du contrôle dans l'onglet A/Conclusion du contrôle du dossier de conformité | *Fiche d'information* : Dossier de conformité AC ||
+|batitype||x|Formatage par une liste de domaine (lt_euep_cc_typebati)|||
+|ccbien||x|Formatage par une liste de domaine (lt_euep_cc_bien)|||
+|ccdate||x|Formatage de la date en dd-mm-yyyy|||
+|ccdated||x|Formatage de la date en dd-mm-yyyy|||
+|ccinit||x|Formatage du booléen Vrai = oui et Faux = non|||
+|ccvalid||x|Formatage du booléen Vrai = Contrôle validé et Faux = Contrôle non validé|||
+|certi_dassur ||x|Formatage de la date en dd-mm-yyyy|||
+|certtype||x|Formatage par une liste de domaine (lt_euep_cc_certificateur)|||
+|date_maj||x|Formatage de la date en dd-mm-yyyy|||
+|date_sai||x|Formatage de la date en dd-mm-yyyy|||
+|dotype||x|Formatage par une liste de domaine (lt_euep_cc_ordre)|||
+|epdiagpc||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
+|epecoul||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
+|epfum||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
+|eppar||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
+|eppublic||x|Formatage par une liste de domaine ( lt_euep_cc_eval)|||
    * filtres : aucun
    * relations :
 
