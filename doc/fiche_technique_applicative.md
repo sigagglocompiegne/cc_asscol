@@ -300,9 +300,7 @@ Source : `xapps_geo_v_euep_cc`
 
 (1) si liste de domaine
 
- * Fiches d'information active :
-
--Dossier de conformité AC
+ * Fiches d'information active : Dossier de conformité AC
 
 * **Recherche** : `Recherche par N° de dossier (AC)`
 
@@ -332,9 +330,7 @@ Source : `an_v_euep_cc`
 
 (1) si liste de domaine
 
- * Fiches d'information active :
-
--Dossier de conformité AC
+ * Fiches d'information active : Dossier de conformité AC
 
 * **Recherche** : `Liste des contrôles NON CONFORME`
 
@@ -364,9 +360,37 @@ Source : `xapps_an_euep_cc_nc`
 
 (1) si liste de domaine
 
- * Fiches d'information active :
+ * Fiches d'information active : Conformité NON CONFORME - Courrier
+ 
+ * **Recherche** : `Recherche des contrôles depuis le`
 
--Conformité NON CONFORME - Courrier
+Cette recherche permet à l'utilisateur de faire une recherche sur les contrôles de conformité à partir d'une certaine date.
+
+  * Configuration :
+  
+Source : `an_v_euep_cc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_tri|x|||||
+|affiche_adresse_gras|x|||||
+|affiche_dossier|x|||||
+|geom||||x||
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|sans objet|||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Date du contrôle|x|ccdate|est supérieure ou égale à une valeur saisie|||||Ce champ étant un  champ date, l'utilisateur dispose d'un calendrier pour la saisie de la date|
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Dossier de conformité AC
 
 ## La cartothèque
 
