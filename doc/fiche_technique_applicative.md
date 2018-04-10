@@ -273,7 +273,7 @@ Sont présentées ici uniquement les fonctionnalités spécifiques à l'applicat
 
 Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée par sélection de la commune, de la voie puis du n° sur la voie.
 
-  * Configuration :
+  ** Configuration :
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
