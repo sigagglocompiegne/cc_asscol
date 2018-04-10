@@ -1,3 +1,5 @@
+![picto](/img/Logo_web-GeoCompiegnois.png)
+
 # Fiche technique de la base de données #
 
 ## Principes
@@ -6,7 +8,28 @@
  
  * **résumé fonctionnel** :
  les données des contrôles de conformité sont localisées à l'adresse postale du bien contrôlé. La classe d'objets des points d'adresse de la BAL de l'Agglomération est donc utilisée pour la primitive géographique. Seuls les données métiers des contrôles font l'objet d'un stockage dans des classes d'objets non géographiques. Cette donnée métier est donc urbanisée avec la donnée adresse. Une des particularités de cette donnée, est qu'il faut en assurer un suivi chronologique. On doit pouvoir à une adresse donnée, visualiser et consulter l'ensemble des contrôles déjà réalisés et ceux en cours.
- 
+
+## Dépendances
+
+La base de données des contrôles de conformité s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentatation de cette base.
+
+|Schéma | Table/Vue | Description | Usage |
+|:---|:---|:---|:---|
+|x_apps | xapps_geo_v_adresse | vue de la base de données urbanisées des adresses | géométrie de positionnement des contrôles + adresse |
+|r_objet | geo_objet_pt_adresse | donnée des points d'adresse (géométrie) | géométrie de positionnement des contrôles |
+|r_adresse | an_adresse | donnée alphanumérique des adresses | n° de voirie, jointure avec r_objet.geo_objet_pt_adresse sur id_adresse |
+|r_voie | an_voie | donnée alphanumérique des voies | libellé de la voie, jointure avec r_objet.geo_objet_pt_adresse sur id_voie |
+|r_administratif | lk_insee_codepostal | donnée des codes postaux des communes | code postal de la commune, jointure avec r_objet.geo_objet_pt_adresse sur insee |
+|r_osm | geo_osm_commune | donnée de référence géographique du découpage communal OSM | nom de la commune, jointure avec r_objet.geo_objet_pt_adresse sur insee |
+|r_objet | lt_position | domaine de valeur générique d'une table géographique | positionnement du point adresse, jointure avec r_objet.geo_objet_pt_adresse code = position |
+|r_adresse | lt_dest_adr | domaine de valeur générique d'une table géographique | destination de l'adresse, jointure avec r_objet.geo_objet_pt_adresse code = dest_adr |
+|r_adresse | lt_etat_adr | domaine de valeur générique d'une table géographique | état de l'adresse, jointure avec r_objet.geo_objet_pt_adresse code = etat_adr |
+|r_adresse | lt_groupee | domaine de valeur générique d'une table géographique | groupage de l'adresse, jointure avec r_objet.geo_objet_pt_adresse code = groupee |
+|r_adresse | lt_secondaire | domaine de valeur générique d'une table géographique | adresse secondaire, jointure avec r_objet.geo_objet_pt_adresse code = secondaire |
+|r_adresse | lt_src_adr | domaine de valeur générique d'une table géographique | source de l'adresse, jointure avec r_objet.geo_objet_pt_adresse code = src_adr |
+|r_objet | lt_src_geom | domaine de valeur générique d'une table géographique | source du positionnement du point adresse, jointure avec r_objet.geo_objet_pt_adresse code = src_geom |
+|r_adresse | lt_diag_adr | domaine de valeur générique d'une table géographique | diagnostic de l'adresse, jointure avec r_objet.geo_objet_pt_adresse code = diag_adr |
+|r_adresse | lt_qual_adr | domaine de valeur générique d'une table géographique | qualité de l'adresse, jointure avec r_objet.geo_objet_pt_adresse code = qual_adr |
 
 ## Classes d'objets
 
