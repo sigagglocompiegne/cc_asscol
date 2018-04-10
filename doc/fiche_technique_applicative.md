@@ -77,15 +77,17 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_attestation_logo  |x||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_cc_init   |x||Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_ci.png)|
 |affiche_cc_valid   |x||Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_cv.png)|
+|affiche_conclusion    |x||Formate en html l'en-tête de la partie A/conclusion du rapport de conformité | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_controle  |x||Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/img/affiche_picto_fi.png)|
 
    * filtres : aucun
    * relations :
 
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
-| xapps_an_euep_cc_nc| id_adresse | 0 à n (égal) |
-|xapps_an_euep_cc| id_adresse | 0 à n (égal) |
-| xapps_v_adresse| id_adresse | 1 (égal) |
+|  lt_euep_cc_certificateur| certtype - code | 1 (égal) |
+|xapps_geo_v_euep_cc| id_adresse | 0 à n (égal) |
+| an_euep_cc_media| idcc - id | 0 à n (égal) |
 
 ## Les fonctionnalités
 
