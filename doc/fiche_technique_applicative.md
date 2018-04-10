@@ -54,7 +54,9 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_controle |x||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC |![picto](/img/affiche_menu_result_rech_cc.png)|
 |affiche_result  |x||Formate l'affichage d'un texte précisant à l'utilisateur de cliquer pour zoomer sur l'adresse au résultat d'une recherche d'un contrôle par l'adresse|*Recherche :* Recherche par adresse (AC) |![picto](/img/affiche_menu_result_rech_cc_ad.png)|
 |ccdate  ||x|Formate la date du dernier en contrôle en dd/mm/yyyy|||
-|etiquette_nbcc  |x||Formate l'affichage du nombre de contrôle à l'adresse `si nb_cc > 0 affichage le nombre sinon rien`|*Cartothèque :* champ d'étiquette (avec Visibilité : 0 au 1/10000è) ||
+|etiquette_nbcc  |x||Formate l'affichage du nombre de contrôle à l'adresse `si nb_cc > 0 affichage le nombre sinon rien`|*Cartothèque :* champ d'étiquette (avec Visibilité : 0 au 1/10000è et décalage : 5,8,0,50,50) ||
+|numero_complet  |x||Formate l'affichage du nombre complet de l'adresse `numero + repet` pour le filtre de recherche des contrôles par adresse (partie numéro)|*Recherche :* Recherche par adresse (AC) (filtre EUEP - C de C - Numéro voirie) ||
+|titre_html  |x||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_cc.png)|
 
 ## Détails des fonctionnalités
 
