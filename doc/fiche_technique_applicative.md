@@ -51,7 +51,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |:---|:-:|:-:|:---|:---|:---|
 |affiche_blanc|x||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche d'un contrôle pour gérer le fait que GEO affiche dans cette info-bulle les 2 premiers champs intégrés dans le résultat d'une recherche|*Recherche :* Recherche par adresse (AC) |![picto](/img/info_bulle_result_rech_cc.png)|
 |affiche_cc |x||Formate l'affichage de la conformité au lieu de oui/non |*Cartothèque :* champ de catégorisation pour l'affichage du libellé de la conformité ||
-|affiche_controle |x||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC ||
+|affiche_controle |x||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC |![picto](/img/affiche_menu_result_rech_cc.png)|
 
 ## Détails des fonctionnalités
 
