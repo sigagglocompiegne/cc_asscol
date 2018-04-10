@@ -1,3 +1,5 @@
+![picto](/img/Logo_web-GeoCompiegnois.png)
+
 # Fiche technique de l'application #
 
 ## Généralité
