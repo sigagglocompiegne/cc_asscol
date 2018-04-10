@@ -271,9 +271,11 @@ Sont présentées ici uniquement les fonctionnalités spécifiques à l'applicat
 
 * **Recherche** : `Recherche par adresse (AC)`
 
-Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée par sélection de la commune, de la voie puis du n° sur la voie.
+Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée par sélection de la commune, de la voie puis du n° sur la voie. L'utilisateur accède à la fiche de synthèse des contrôles à cette adresse et peut ensuite accéder au dossier de conformité.
 
   * Configuration :
+
+Source : `xapps_geo_v_euep_cc`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
@@ -297,6 +299,74 @@ Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée
 |EUEP - C de C - Numéro voirie|x|numero_complet|est égale à une valeur de liste de choix|Liste de domaine (EUEP - C de C - Numéro de voirie|numero_complet|numero_complet|numero|||
 
 (1) si liste de domaine
+
+ * Fiches d'information active :
+
+- Dossier de conformité AC
+
+* **Recherche** : `Recherche par N° de dossier (AC)`
+
+Cette recherche permet à l'utilisateur de faire une recherche de contrôle par son n° de dossier. Il accède ensuite à la fiche d'information contenant le dossier de conformité.
+
+  * Configuration :
+  
+Source : `an_v_euep_cc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_tri|x|||||
+|affiche_adresse_gras|x|||||
+|affiche_dossier|x|||||
+|geom||||x||
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|sans objet|||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|EUEP - C de C - Dossier|x|nidcc|est égale à une valeur suggérée d'une liste de domaine (Dossier AC)|nidcc|nidcc|nidcc|||
+
+(1) si liste de domaine
+
+ * Fiches d'information active :
+
+- Dossier de conformité AC
+
+* **Recherche** : `Liste des contrôles NON CONFORME`
+
+Cette recherche permet à l'utilisateur de faire une recherche sur les contrôles de conformité non conforme et d'éditer les courriers.
+
+  * Configuration :
+  
+Source : `xapps_an_euep_cc_nc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_conformite|x|||||
+|Adresse|x|||||
+|geom||||x||
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Edition par période|`ET`|x|
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Contrôle Non Conformet par date||affiche_annee_cc|est égale à une valeur de liste de choix (Année du contrôle de Conformité AC non conforme)|affiche_annee_cc|affiche_annee_cc|affiche_annee_cc|||
+|Mois du contrôle de conformité AC||affiche_mois_cc|est égale à une valeur de liste de choix (Mois du contrôle AC)|affiche_mois_cc|affiche_mois_cc|affiche_mois_cc|||
+
+(1) si liste de domaine
+
+ * Fiches d'information active :
+
+- Conformité NON CONFORME - Courrier
 
 ## La cartothèque
 
