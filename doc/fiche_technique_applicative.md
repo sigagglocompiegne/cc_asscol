@@ -442,6 +442,20 @@ Source : `xapps_geo_v_euep_cc`
 
 ### Fiche d'information : `Conformité AC à l'adresse`
 
+Source : `xapps_geo_v_euep_cc`
+
+ * Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|750x650|Vertical|
+
+|Nom de la section|Attribut|Position label|Agencement attribut|
+|:---|:---|:---|:---|:---|
+|(vide)|titre_html|
+
 ## La cartothèque
 
 ## L'application
