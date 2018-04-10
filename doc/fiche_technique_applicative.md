@@ -45,7 +45,7 @@
 
 Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les besoins de l'application. Les autres données servant d'habillage (pour la cartographie ou les recherches) sont listées dans les autres parties ci-après. Le tableau ci-dessous présente uniquement les changements (type de champ, formatage du résultat, ...) ou les ajouts (champs calculés, filtre, ...) non présents dans la donnée source. 
 
-* Géotable : `xapps_geo_v_euep_cc`
+* **Géotable** : `xapps_geo_v_euep_cc`
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -68,7 +68,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |xapps_an_euep_cc| id_adresse | 0 à n (égal) |
 | xapps_v_adresse| id_adresse | 1 (égal) |
 
-* Table : `an_v_euep_cc`
+* **Table** : `an_v_euep_cc`
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -130,14 +130,28 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |rredptype||x|Formatage par une liste de domaine (lt_euep_cc_typeres)|||
 |titre_fiche_affiche|x||Formate en html le titre du dossier de conformité (1er onglet non nommé du dossier) |*Fiche d'information* : Dossier de conformité AC||
 |tnidcc||x|Formatage par une liste de domaine (lt_euep_cc_tnidcc)|||
+  
    * filtres : aucun
    * relations :
 
 |Géotables ou Tables| Champs de jointure | Type |
 |:---|:---|:---|
-|  lt_euep_cc_certificateur| certtype - code | 1 (égal) |
+|lt_euep_cc_certificateur| certtype - code | 1 (égal) |
 |xapps_geo_v_euep_cc| id_adresse | 0 à n (égal) |
-| an_euep_cc_media| idcc - id | 0 à n (égal) |
+|an_euep_cc_media| idcc - id | 0 à n (égal) |
+
+* **Table** : `an_euep_cc_media`
+
+|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|
+|affiche_lien |x||Formate le lien de téléchargement des documents joints |*Fiche d'information* : Dossier de conformité AC||
+|date_sai||x|Formatage de la date en dd-mm-yyyy|||
+|l_type||x|Formatage par une liste de domaine (lt_euep_doc)|||
+|media||x|Formatage du document joint en type image|||
+|miniature||x|Formatage de l'aperçu du document joint en type image|||
+   
+   * filtres : aucun
+   * relations : aucune
 
 ## Les fonctionnalités
 
