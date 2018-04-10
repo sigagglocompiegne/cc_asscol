@@ -57,7 +57,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |etiquette_nbcc  |x||Formate l'affichage du nombre de contrôle à l'adresse `si nb_cc > 0 affichage le nombre sinon rien`|*Cartothèque :* champ d'étiquette (avec Visibilité : 0 au 1/10000è et décalage : 5,8,0,50,50) ||
 |numero_complet  |x||Formate l'affichage du nombre complet de l'adresse `numero + repet` pour le filtre de recherche des contrôles par adresse (partie numéro)|*Recherche :* Recherche par adresse (AC) (filtre EUEP - C de C - Numéro voirie) ||
 |titre_html  |x||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_cc.png)|
-|titre_html  |x||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_liste_cc.png)|
+|titre_liste_html  |x||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_liste_cc.png)|
 
 ## Détails des fonctionnalités
 
