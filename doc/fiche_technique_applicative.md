@@ -273,7 +273,7 @@ Sont présentées ici uniquement les fonctionnalités spécifiques à l'applicat
 
 Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée par sélection de la commune, de la voie puis du n° sur la voie.
 
-  ** Configuration :
+  * Configuration :
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
@@ -284,7 +284,19 @@ Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée
 |geom||||x||
 (la détection des doublons n'est pas activée ici)
 
+ * Filtres :
 
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|EUEP - C de C - Commune|x|commune|est égale à une valeur de liste de choix|Liste de domaine (EUEP - C de C - Commune)|commune|commune|commune|||
+|EUEP - C de C - Libellé voie|x|libvoie_c|est égale à une valeur de liste de choix|Liste de domaine (EUEP - C de C - Libellé de la voie)|affiche_result_adresse|libvoie_c|mot_dir|||
+|EUEP - C de C - Numéro voirie|x|numero_complet|est égale à une valeur de liste de choix|Liste de domaine (EUEP - C de C - Numéro de voirie|numero_complet|numero_complet|numero|||
+
+(1) si liste de domaine
 
 ## La cartothèque
 
