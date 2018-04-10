@@ -178,6 +178,12 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |xapps_geo_v_euep_cc| id_adresse | 1 (égal) |
 |xapps_an_euep_cc| idcc | 1 (égal) |
 
+* **Table** : `lt_euep_cc_certificateur`
+
+|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|
+|affiche_resultat|x||Formate le titre de résultat pour la recherche des informations d'un prestataire |*Recherche* : Informations sur le prestataire|![picto](/img/affiche_menu_rech_presta.png)|
+
 ## Les fonctionnalités
 
 ## La cartothèque
