@@ -41,11 +41,12 @@
 |:---|:-:|:-:|:---|
 |aucune|||Pas d'accès autorisé. Les informations des contrôles devraient être consultables également dans l'application Réseau Humide en simple lecture pour les autres personnes du pôle|
 
-## Les données utilisées
+## Les données
 
 Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les besoins de l'application. Les autres données servant d'habillage (pour la cartographie ou les recherches) sont listées dans les autres parties ci-après. Le tableau ci-dessous présente uniquement les changements (type de champ, formatage du résultat, ...) ou les ajouts (champs calculés, filtre, ...) non présents dans la donnée source. 
 
 * Géotable : `xapps_geo_v_euep_cc`
+** structure :
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -59,10 +60,19 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |titre_html  |x||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_cc.png)|
 |titre_liste_html  |x||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_liste_cc.png)|
 
-## Détails des fonctionnalités
+** filtres :
 
-## Composition de la cartographie
+Aucun
 
-## Composition de l'application
+** relations :
+
+
+## Les fonctionnalités
+
+## La cartothèque
+
+## L'application
 
 ## Particularités
+
+Sans objet
