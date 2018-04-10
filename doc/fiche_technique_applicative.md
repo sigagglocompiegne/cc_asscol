@@ -192,7 +192,6 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
 |:---|:---|:-:|:---:|:---:|:---|:---|
 |SECU|code (Code interne du donneur d'ordre)|x|Alphanumérique|est égale à une valeur de contexte|ass_cc_ac|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
-|Prestataire|valeur(Nom de l'entreprise)||Prédéfinis|filtre à liste de choix||Liste déroulante permettant de sélectionner le prestataire dans la recherche *Informations sur le prestataire*|
 
    * relations : aucune
 
@@ -414,7 +413,7 @@ Source : `lt_euep_cc_certificateur`
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|SECU||code|est supérieure ou égale à une valeur de contexte|ass_cc_ac||||Filtre activé au chargement, l'utilisateur n'y a pas accès|
+|SECU||||||||Filtre activé au chargement (détaillé au niveau de la table plus haut)|
 |Prestataire|x|valeur (Nom de l'entreprise)|Prédéfinis à une liste de choix||||||
 
 (1) si liste de domaine
