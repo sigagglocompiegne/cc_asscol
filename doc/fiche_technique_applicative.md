@@ -167,6 +167,8 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_proprio|x||Formate en html la partie coordonnée (ici propriétaire) du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_signature|x||Formate en html la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_texte_courrier|x||Formate en html le corps du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|ccdate||x|Formatage de la date en dd-mm-yyyy|||
+|ccdated||x|Formatage de la date en dd-mm-yyyy|||
 
    * filtres : aucun
    * relations : 
