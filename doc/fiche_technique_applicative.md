@@ -152,6 +152,21 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
    
    * filtres : aucun
    * relations : aucune
+   
+* **Table** : `xapps_an_euep_cc_nc`
+
+|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|
+|affiche_annee_cc|x||Formatage de la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conformet par date, Contrôle Non Conformet par année (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_conformite|x||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/img/affiche_menu_result_rech_ccnc.png)|
+   
+   * filtres : aucun
+   * relations : 
+   
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|xapps_geo_v_euep_cc| id_adresse | 1 (égal) |
+|xapps_an_euep_cc| idcc | 1 (égal) |
 
 ## Les fonctionnalités
 
