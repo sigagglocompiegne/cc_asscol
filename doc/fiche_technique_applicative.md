@@ -68,7 +68,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |xapps_an_euep_cc| id_adresse | 0 à n (égal) |
 | xapps_v_adresse| id_adresse | 1 (égal) |
 
-* **Table** : `an_v_euep_cc`
+### Table : `an_v_euep_cc`
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -140,7 +140,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |xapps_geo_v_euep_cc| id_adresse | 0 à n (égal) |
 |an_euep_cc_media| idcc - id | 0 à n (égal) |
 
-* **Table** : `an_euep_cc_media`
+### Table : `an_euep_cc_media`
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -153,7 +153,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
    * filtres : aucun
    * relations : aucune
    
-* **Table** : `xapps_an_euep_cc_nc`
+### Table : `xapps_an_euep_cc_nc`
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -178,7 +178,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |xapps_geo_v_euep_cc| id_adresse | 1 (égal) |
 |xapps_an_euep_cc| idcc | 1 (égal) |
 
-* **Table** : `lt_euep_cc_certificateur`
+### Table : `lt_euep_cc_certificateur`
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -196,70 +196,70 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
    * relations : aucune
 
-* **Table** : `lt_euep_cc_tnidcc`
+### Table : `lt_euep_cc_tnidcc`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
    
-* **Table** : `lt_euep_cc_typeres`
+### Table : `lt_euep_cc_typeres`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
    
-* **Table** : `lt_euep_cc_bien`
+### Table : `lt_euep_cc_bien`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
    
-* **Table** : `lt_euep_cc_pat`
+### Table : `lt_euep_cc_pat`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
 
-* **Table** : `lt_euep_doc`
-
-Sans objet
-
-   * filtres : aucun
-   * relations : aucune
-   
-* **Table** : `lt_euep_sup`
+### Table : `lt_euep_doc`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
    
-* **Table** : `lt_euep_cc_eval`
+### Table : `lt_euep_sup`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
    
-* **Table** : `lt_euep_cc_typebati`
+### Table : `lt_euep_cc_eval`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
    
-* **Table** : `lt_euep_cc_ordre`
+### Table : `lt_euep_cc_typebati`
 
 Sans objet
 
    * filtres : aucun
    * relations : aucune
    
-* **Médias** : `Assainissement - Contrôle de conformité`
+### Table : `lt_euep_cc_ordre`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+### Médias : `Assainissement - Contrôle de conformité`
 
 |Source| Taille | Connexion |Lien de connexion|Média|Miniature|Type de media|Nom du média|Fichier origine|
 |:---|:---:|:---:|:---|:---|:---|:---|:---|:---|
@@ -269,7 +269,7 @@ Sans objet
 
 Sont présentées ici uniquement les fonctionnalités spécifiques à l'application.
 
-* **Recherche** : `Recherche par adresse (AC)`
+### Recherche : `Recherche par adresse (AC)`
 
 Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée par sélection de la commune, de la voie puis du n° sur la voie. L'utilisateur accède à la fiche de synthèse des contrôles à cette adresse et peut ensuite accéder au dossier de conformité.
 
@@ -302,7 +302,7 @@ Source : `xapps_geo_v_euep_cc`
 
  * Fiches d'information active : Dossier de conformité AC
 
-* **Recherche** : `Recherche par N° de dossier (AC)`
+### Recherche : `Recherche par N° de dossier (AC)`
 
 Cette recherche permet à l'utilisateur de faire une recherche de contrôle par son n° de dossier. Il accède ensuite à la fiche d'information contenant le dossier de conformité.
 
@@ -332,7 +332,7 @@ Source : `an_v_euep_cc`
 
  * Fiches d'information active : Dossier de conformité AC
 
-* **Recherche** : `Liste des contrôles NON CONFORME`
+### Recherche : `Liste des contrôles NON CONFORME`
 
 Cette recherche permet à l'utilisateur de faire une recherche sur les contrôles de conformité non conforme et d'éditer les courriers.
 
@@ -362,7 +362,7 @@ Source : `xapps_an_euep_cc_nc`
 
  * Fiches d'information active : Conformité NON CONFORME - Courrier
  
- * **Recherche** : `Recherche des contrôles depuis le`
+### Recherche : `Recherche des contrôles depuis le`
 
 Cette recherche permet à l'utilisateur de faire une recherche sur les contrôles de conformité à partir d'une certaine date.
 
@@ -392,7 +392,7 @@ Source : `an_v_euep_cc`
 
  * Fiches d'information active : Dossier de conformité AC
  
-* **Recherche** : `Informations sur le prestataire`
+### Recherche : `Informations sur le prestataire`
 
 Cette recherche permet à l'utilisateur de faire une recherche sur un prestataire et d'accéder à ces informations de contact.
 
@@ -420,6 +420,27 @@ Source : `lt_euep_cc_certificateur`
 (1) si liste de domaine
 
  * Fiches d'information active : Informations des prestataires (AC)
+ 
+ ### Recherche : `Contrôle de conformité AC`
+
+Cette recherche permet à l'utilisateur d'accéder à la synthèse des contrôles de conformité directement en cliquant sur la carte. Cette recherche est placée dans la partie configuration de la carte.
+
+  * Configuration :
+  
+Source : `xapps_geo_v_euep_cc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_adresse|x|||||
+|affiche_controle|x|||||
+|geom||||x||
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres : aucun
+
+ * Fiches d'information active : Informations des prestataires (AC)
+
+### Fiche d'information : `Conformité AC à l'adresse`
 
 ## La cartothèque
 
