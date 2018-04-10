@@ -391,6 +391,35 @@ Source : `an_v_euep_cc`
 (1) si liste de domaine
 
  * Fiches d'information active : Dossier de conformité AC
+ 
+* **Recherche** : `Informations sur le prestataire`
+
+Cette recherche permet à l'utilisateur de faire une recherche sur un prestataire et d'accéder à ces informations de contact.
+
+  * Configuration :
+  
+Source : `lt_euep_cc_certificateur`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_resultat|x|||||
+|Nom de l'entreprise|x|||||
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|Groupe de filtres par défaut|`ET`|x|
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|SECU||code|est supérieure ou égale à une valeur de contexte|ass_cc_ac||||Filtre activé au chargement, l'utilisateur n'y a pas accès|
+|Prestataire|x|valeur (Nom de l'entreprise)|Prédéfinis à une liste de choix||||||
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Informations des prestataires (AC)
 
 ## La cartothèque
 
