@@ -269,15 +269,22 @@ Sans objet
 
 Sont présentées ici uniquement les fonctionnalités spécifiques à l'application.
 
-* **Recherche**
+* **Recherche** : `Recherche par adresse (AC)`
 
-|Nom|Filtre|
-|:---|:---|
-|Recherche par adresse (AC)|
-|Nom|Filtre|
-|:---|:---|
-|gg|gg|
-|
+Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée par sélection de la commune, de la voie puis du n° sur la voie.
+
+  * Configuration :
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Adresse|x|||||
+|affiche_controle|x|||||
+|affiche_blanc|x|||||
+|affiche_result|x|||||
+|geom||||x||
+(la détection des doublons n'est pas activée ici)
+
+
 
 ## La cartothèque
 
