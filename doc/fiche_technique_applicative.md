@@ -413,8 +413,8 @@ Source : `lt_euep_cc_certificateur`
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|SECU||||||||Filtre activé au chargement (détaillé au niveau de la table plus haut)|
-|Prestataire|x|valeur (Nom de l'entreprise)|Prédéfinis à une liste de choix||||||
+|SECU|||||||||Filtre activé au chargement (détaillé au niveau de la table plus haut)|
+|Prestataire|x|valeur (Nom de l'entreprise)|Prédéfinis à une liste de choix|||||||
 
 (1) si liste de domaine
 
