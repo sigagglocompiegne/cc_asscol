@@ -196,6 +196,75 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
    * relations : aucune
 
+* **Table** : `lt_euep_cc_tnidcc`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Table** : `lt_euep_cc_typeres`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Table** : `lt_euep_cc_bien`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Table** : `lt_euep_cc_pat`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+
+* **Table** : `lt_euep_doc`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Table** : `lt_euep_sup`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Table** : `lt_euep_cc_eval`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Table** : `lt_euep_cc_typebati`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Table** : `lt_euep_cc_ordre`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+* **Médias** : `Assainissement - Contrôle de conformité`
+
+|Source| Taille | Connexion |Lien de connexion|Média|Miniature|Type de media|Nom du média|Fichier origine|
+|:---|:---:|:---:|:---|:---|:---|:---|:---|:---|
+|an_euep_cc_media|900x900 et 60x60|Assainissement - Contrôle de conformité|/home/DOC_SIG_FIC/metiers/ress/ac/doc/|media|miniature|t_fichier|n_fichier||
+   
 ## Les fonctionnalités
 
 ## La cartothèque
