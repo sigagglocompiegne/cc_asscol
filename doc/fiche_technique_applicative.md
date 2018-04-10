@@ -183,6 +183,17 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
 |affiche_resultat|x||Formate le titre de résultat pour la recherche des informations d'un prestataire |*Recherche* : Informations sur le prestataire|![picto](/img/affiche_menu_rech_presta.png)|
+|date_assur||x|Formatage de la date en dd-mm-yyyy|||
+|etat||x|Formate l'affichage du booléen en Oui ou Non|||
+|exist||x|Formate l'affichage du booléen en Oui ou Non|||
+
+   * filtres : 
+
+|Nom| Au chargement | Type | Condition |Valeur|Description|
+|:---|:-:|:---:|:---:|:---|:---|
+|SECU|x|Alphanumérique|est égale à une valeur de contexte|ass_cc_ac|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
+
+   * relations : aucune
 
 ## Les fonctionnalités
 
