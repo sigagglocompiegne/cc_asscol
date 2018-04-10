@@ -47,7 +47,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 * Géotable : `xapps_geo_v_euep_cc`
   
-  * structure :
+    * structure :
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
@@ -61,9 +61,9 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |titre_html  |x||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_cc.png)|
 |titre_liste_html  |x||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_liste_cc.png)|
 
-  * filtres : aucun
+    * filtres : aucun
   
-  * relations :
+    * relations :
 
 
 ## Les fonctionnalités
