@@ -47,9 +47,9 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 * Géotable : `xapps_geo_v_euep_cc`
 
-|Attributs| Champ calculé | Formatage |Particularité/Usage|
-|:---|:-:|:-:|:---|
-|affiche_blanc|x||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche|
+|Attributs| Champ calculé | Formatage |Particularité/Usage|Exemple|
+|:---|:-:|:-:|:---|:---|
+|affiche_blanc|x||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche d'un contrôle pour gérer le fait que GEO affiche dans cette info-bulle les 2 premiers champs intégrés dans le résultat d'une recherche||
 
 ## Détails des fonctionnalités
 
