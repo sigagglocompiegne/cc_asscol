@@ -267,6 +267,18 @@ Sans objet
    
 ## Les fonctionnalités
 
+Sont présentées ici uniquement les fonctionnalités spécifiques à l'application.
+
+* **Recherche**
+
+|Nom|Filtre|
+|:---|:---|
+|Recherche par adresse (AC)|
+|Nom|Filtre|
+|:---|:---|
+|gg|gg|
+|
+
 ## La cartothèque
 
 ## L'application
