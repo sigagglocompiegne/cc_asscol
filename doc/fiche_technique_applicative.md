@@ -157,9 +157,17 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
-|affiche_annee_cc|x||Formatage de la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conformet par date, Contrôle Non Conformet par année (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_annee_cc|x||Formate la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conformet par date, Contrôle Non Conformet par année (*Recherche* : Liste des contrôles NON CONFORME)||
 |affiche_conformite|x||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/img/affiche_menu_result_rech_ccnc.png)|
-   
+|affiche_espace_objet|x||Formatage en html d'un espace avant l'objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_espace_signature|x||Formatage en html d'un espace avant la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_espace_tete|x||Formatage en html d'un espace avant l'en-tête du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_espace_tete|x||Formate le mois du contrôle en français pour sélection du mois dans les recherches des contrôles non conforme|*Filtre* : Mois du contrôle de conformité AC (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_objet|x||Formate en html la partie écrite Objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_proprio|x||Formate en html la partie coordonnée (ici propriétaire) du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_signature|x||Formate en html la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_texte_courrier|x||Formate en html le corps du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+
    * filtres : aucun
    * relations : 
    
