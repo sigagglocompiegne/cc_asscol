@@ -73,7 +73,11 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|
 |achetpat ||x|Formatage par une liste de domaine ( lt_euep_cc_pat)|||
-|affiche_gras |x||Affiche le champ `adresse` en gras dans le résultat d'une recherche | *Recherche* : Recherche des contrôles depuis le,  Recherche par N° de dossier (AC) ||
+|affiche_adresse_gras |x||Affiche le champ `adresse` en gras dans le résultat d'une recherche | *Recherche* : Recherche des contrôles depuis le,  Recherche par N° de dossier (AC) ||
+|affiche_attestation_logo  |x||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_cc_init   |x||Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_ci.png)|
+|affiche_cc_valid   |x||Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_cv.png)|
+
    * filtres : aucun
    * relations :
 
