@@ -1,6 +1,6 @@
 ![picto](/img/Logo_web-GeoCompiegnois.png)
 
-# Documentation d'adminsitration de la base #
+# Documentation d'administration de la base #
 
 ## Principes
   * **généralité** :
