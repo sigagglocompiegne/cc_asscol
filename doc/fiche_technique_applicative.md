@@ -734,6 +734,8 @@ Aucune
 |:---|:---|:-:|:-:|:-:|:-:|:---|:---|:-:|:-:|:-:|:-:|:-:|:---|:---|:---|:---|:---|
 |Limite administrative||x|x|x||geo_v_osm_commune_arcba|Limite communale|x|x|x||||||Contour noir 1.5||
 |Contrôle de conformité AC||x|x|x|x|xapps_geo_v_euep_cc|Conformité|x|x|x|x|||affiche_cc|0 à 1/10000é|picto de taille 45 (cc_picto_conforme.svg, cc_picto_non_conforme.svg),pas de picto pour aucun contrôle réalisé|Cf partie Données pour les paramètres d'étiquettage (champ etiquette_nbcc)|
+|Le réseau d'assainissement||x|x|x||||||||||||||
+|Le réseau d'assainissement|Base de données SIG (DSP)|x|x|||||x||||||||||
 
 # L'application
 
