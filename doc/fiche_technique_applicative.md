@@ -457,6 +457,18 @@ Source : `xapps_geo_v_euep_cc`
 |(vide)|titre_liste_html|Masqué|Vertical||||
 |(vide)|il y a, N° de dossier, Date du contrôle, Appart n°, Etage,affiche_cc_valid, affiche_cc_init, Conformité|Masqué|Vertical||Dossier de conformité AC|x|
 
+ * Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|id_adresse|||||
+
+**IMPORTANT** : L'édition des données jointes est activée ainsi que le champ de relation Adresse pour récupérer l'identifiant Adresse au niveau des dossiers qui sont saisies.
+ 
+ * Modèle d'impression : aucun
+
 # La cartothèque
 
 # L'application
