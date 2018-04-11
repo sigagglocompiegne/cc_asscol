@@ -180,7 +180,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 ## Table : `an_euep_cc_media`
 
 |Attributs| Champ calculé | Formatage|Renommage |Particularité/Usage|Utilisation|Exemple|
-|:---|:-:|:-:|:---:---|:---|:---|
+|:---|:-:|:-:|:---|:---|:---|:---|
 |affiche_lien |x|||Formate le lien de téléchargement des documents joints |*Fiche d'information* : Dossier de conformité AC||
 |date_sai||x||Formatage de la date en dd-mm-yyyy|||
 |l_type||x||Formatage par une liste de domaine (lt_euep_doc)|||
