@@ -4,6 +4,8 @@
 
 # Schéma fonctionnel
 
+(schéma à venir)
+
 # Généralité
 
 |Représentation| Nom de l'application |Résumé|
