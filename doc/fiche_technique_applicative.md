@@ -714,6 +714,18 @@ Note : seuls les attributs obligatoires sont visibles par l'utilisateur. Les aut
  
  * Modèle d'impression : aucun
 
+## Analyse :
+
+Aucune
+
+## Statistique :
+
+Aucune
+
+## Modification :
+
+Aucune
+
 # La cartothèque
 
 # L'application
