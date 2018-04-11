@@ -745,18 +745,50 @@ Aucune
 
 * Généralités :
 
-|Gabarit|Thème|Cartes|Modules spé|Fonds de plans|Impression|Résultats|
-|:---|:---|:---|:---|:---|:---|:---|
-|Pro|Thème GeoCompiegnois 1.0.7 (Contrôle conformité AC et réseaux humides))|Contrôle de conformité Assainissement collectif|Bandeaux HTML,StreetView,GeoCadastre,Multimedia,Google Analytics,Page de connexion perso,Javacript|Cadastre, Plan de ville, Scan25, Ortho 2013|8 Modèles standards A4 et A3||
+|Gabarit|Thème|Modules spé|Impression|Résultats|
+|:---|:---|:---|:---|:---|
+|Pro|Thème GeoCompiegnois 1.0.7 (Contrôle conformité AC et réseaux humides))|Bandeaux HTML,StreetView,GeoCadastre,Multimedia,Google Analytics,Page de connexion perso,Javacript|8 Modèles standards A4 et A3||
 
 Note : le thème employé dans cette application intègre la suppression de la première colonne dans les tableaux des fiches d'information. Cela permet de ne pas afficher le champ qui tri l'ordre des contrôles par date pour chaque adresse.
 
 * Particularité de certains modules :
   * Module introduction : il contient un texte de présentation et les liens vers les fiches d'aide. Le libellé Application a été personnalisé et renommé en Avant de Commencer.
   * Module javacript : ce module été intégré pour forcer l'affichage du menu Application à l'ouverture de l'application.
-```var injector = angular.element('body').injector();
+`var injector = angular.element('body').injector();
 var acfApplicationService = injector.get('acfApplicationService');
 acfApplicationService.whenLoaded(setTimeout(function(){
 $(".sidepanel-item.launcher-application").click();
-}, 100));```
+}, 100));`
+  * Module Google Analytics : le n° ID est disponible sur le site de Google Analytics
+
+* Recherche globale :
+
+|Noms|Tri|Nb de sugggestion|Texte d'invite|
+|:---|:---|:---|:---|
+|Recherche dans la Base Adresse Locale,Recherche dans la Base de Voie locale, Localiser une commune de l'ARC|alpha|20|Rechercher une adresse, une voi ou une commune|
+
+* Carte : `Contrôle de conformité Assainissement collectif`
+
+Comportement au clic : (dés)active uniquement l'item cliqué
+Liste des recherches : Contrôle de conformité AC
+
+* Fonds de plan :
+
+|Nom|Au démarrage|opacité|
+|:---|:---|:---|
+|Cadastre|x|100%|
+|Plan de ville||100%|
+|Carte IGN 25000||100%|
+|Photographie aérienne 2013|x|70%|
+
+* Fonctionnalités
+
+|Groupe|Nom|
+|:---|:---|
+|Contrôle de conformité - AC|Recherche par adresse (AC)|
+||Recherche par N° de dossier (AC)|
+||Liste des contrôles NON CONFORME|
+||Recherche des contrôles depuis le|
+|Prestataires|Informations sur le prestataire|
+
 
