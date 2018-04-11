@@ -488,7 +488,7 @@ Source : `xapps_geo_v_euep_cc`
 |:---|:---|:---|
 |dans le gabarit|750x650|Vertical|
 
-|Nom de la section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|
 |(vide)|titre_html|Masqué|Vertical||||
 |(vide)|titre_liste_html|Masqué|Vertical||||
@@ -518,7 +518,7 @@ Source : `an_v_euep_cc`
 |:---|:---|:---|
 |dans le gabarit|1150x700|Onglets|
 
-|Nom de la section|Sous-section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|Nom de la section|Sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|:---|
 |(vide)||titre_fiche_affiche|Masqué|Vertical||||
 |Objet de la mission||affiche_logo, affiche_reg|Masqué|Vertical||||
@@ -658,7 +658,7 @@ Source : `xapps_an_euep_cc_nc`
 |:---|:---|:---|
 |dans le gabarit|700x650|Vertical|
 
-|Nom de la section|Sous-section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|Nom de la section|Sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|:---|
 |(vide)||affiche_espace_tete|Masqué|Vertical||||
 |(vide)||affiche_proprio|Masqué|Vertical||||
@@ -686,7 +686,7 @@ Source : `an_euep_cc_media`
 |:---|:---|:---|
 |dans le gabarit|530x650||
 
-|Nom de la section|Sous-section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|Nom de la section|Sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|:---|
 |(vide)||Operateur de saisie, intégré le, Type de document, Précision|Par défaut|Vertical||||
 
@@ -695,7 +695,7 @@ Source : `an_euep_cc_media`
 
 Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
 
-Note : seules les attributs obligatoire sont visibles par l'utilisateur. Les autres attributs sont rendus éditables par le fonctionnement du module média qui enregistre par lui-même les valeurs dans la table. 
+Note : seuls les attributs obligatoires sont visibles par l'utilisateur. Les autres attributs sont rendus éditables par le fonctionnement du module média qui enregistre par lui-même les valeurs dans la table. 
 
 |Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
 |:---|:---|:---|:---|:---|
