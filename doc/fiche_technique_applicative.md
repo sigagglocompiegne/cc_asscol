@@ -645,6 +645,32 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 **IMPORTANT** : L'édition des données jointes est désactivée.
  
  * Modèle d'impression : Fiche standard
+ 
+## Fiche d'information : `Conformité NON CONFORME - Courrier`
+
+Source : `xapps_an_euep_cc_nc`
+
+ * Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|700x650|Vertical|
+
+|Nom de la section|Sous-section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|(vide)||affiche_espace_tete|Masqué|Vertical||||
+|(vide)||affiche_proprio|Masqué|Vertical||||
+|(vide)||affiche_espace_objet|Masqué|Vertical||||
+|(vide)||affiche_objet|Masqué|Vertical||||
+|(vide)||affiche_texte_courrier, affiche_espace_signature, affiche_signature|Masqué|Vertical||||
+
+ * Saisie : sans objet
+ 
+ * Modèle d'impression : Courrier Contrôle de Conformité AC 
+ 
+**IMPORTANT** : un modèle spécifique a été créé pour gérer l'en-tête et le pied de page du courrier. Ce modèle est stocké ici en code R:\Projets\Metiers\1702RESH-ARC-ASS_controle_conformite_AC\4-Traitement\Courrier Controle de Conformite AC.html et a été injecté dans GEO. Le code peut-être modifié directement dans GEO via l'édition d'un  modèle.
 
 # La cartothèque
 
