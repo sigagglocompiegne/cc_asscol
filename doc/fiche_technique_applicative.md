@@ -154,15 +154,19 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |eusup||x|Existence d'une servitude avec uen autre propriété concernant les EP ou les EU ?|Formatage par une liste de domaine (lt_euep_cc_eval)|*Fiche d'information* : Dossier de conformité AC||
 |eusupdoc||x|Présence de documents attestant de cette servitude ?|Formatage par une liste de domaine (lt_euep_cc_eval)|*Fiche d'information* : Dossier de conformité AC||
 |eusuptype||x|Précisez|Formatage par une liste de domaine (lt_euep_sup)|*Fiche d'information* : Dossier de conformité AC||
-
-
+|nidcc||x|N° de dossier suivi||*Fiche d'information* : Dossier de conformité AC||
+|ordre_cc||x|Il y a||*Fiche d'information* : Conformité AC à l'adresse||
+|proprioad||x|Adresse||*Fiche d'information* : Dossier de conformité AC||
+|proprionom||x|Nom||*Fiche d'information* : Dossier de conformité AC||
 |propriopat||x|Civilité|Formatage par une liste de domaine (lt_euep_cc_pat)|*Fiche d'information* : Dossier de conformité AC||
-|rcc||x||Formatage par une liste de domaine (Conforme - Non conforme)|||
-|rrebrtype||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|rrechype||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|rredptype||x||Formatage par une liste de domaine (lt_euep_cc_typeres)|||
+|propriopatp||x|Précision||*Fiche d'information* : Dossier de conformité AC||
+|propriopre||x|Prénom||*Fiche d'information* : Dossier de conformité AC||
+|rcc||x|L'INSTALLATION EST|Formatage par une liste de domaine (Conforme - Non conforme)|*Fiche d'information* : Dossier de conformité AC||
+|rrebrtype||x|Boîte de raccordement ?|Formatage par une liste de domaine (lt_euep_cc_eval)|*Fiche d'information* : Dossier de conformité AC||
+|rrechype||x|Le raccordement est-il accessible depuis un regard sous la chaussée ?|Formatage par une liste de domaine (lt_euep_cc_eval)|*Fiche d'information* : Dossier de conformité AC||
+|rredptype||x|Réseau|Formatage par une liste de domaine (lt_euep_cc_typeres)|*Fiche d'information* : Dossier de conformité AC||
 |titre_fiche_affiche|x|||Formate en html le titre du dossier de conformité (1er onglet non nommé du dossier) |*Fiche d'information* : Dossier de conformité AC||
-|tnidcc||x||Formatage par une liste de domaine (lt_euep_cc_tnidcc)|||
+|tnidcc||x|Type de contrôle|Formatage par une liste de domaine (lt_euep_cc_tnidcc)|*Fiche d'information* : Dossier de conformité AC||
   
    * filtres : aucun
    * relations :
