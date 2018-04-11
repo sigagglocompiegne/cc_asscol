@@ -181,11 +181,13 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage|Renommage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_lien |x|||Formate le lien de téléchargement des documents joints |*Fiche d'information* : Dossier de conformité AC||
-|date_sai||x||Formatage de la date en dd-mm-yyyy|||
-|l_type||x||Formatage par une liste de domaine (lt_euep_doc)|||
+|affiche_lien |x|x|Télécharger|Formate le lien de téléchargement des documents joints |*Fiche d'information* : Dossier de conformité AC||
+|date_sai||x|Intégré le|Formatage de la date en dd-mm-yyyy|||
+|l_prec||x|Précision||||
+|l_type||x|Type de document|Formatage par une liste de domaine (lt_euep_doc)|||
 |media||x||Formatage du document joint en type image|||
-|miniature||x||Formatage de l'aperçu du document joint en type image|||
+|miniature||x|Fichier|Formatage de l'aperçu du document joint en type image|||
+|op_sai||x|Opérateur de saisie||||
    
    * filtres : aucun
    * relations : aucune
