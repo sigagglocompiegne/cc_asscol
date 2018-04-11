@@ -605,10 +605,46 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |eusup |x||lt_euep_cc_eval||
 |eusuptype ||00|lt_euep_sup||
 |eusupdoc ||00|lt_euep_cc_eval||
+|euecoul |x||lt_euep_cc_eval||
+|eufluo |x||lt_euep_cc_eval||
+|eubrsch |x||lt_euep_cc_eval||
+|eurefl |x||lt_euep_cc_eval||
+|euepsep |x||lt_euep_cc_eval||
+|eudivers ||||Champ texte à plusieurs lignes|
+|euanomal |x||lt_euep_cc_eval||
+|euobserv ||||Champ texte à plusieurs lignes|
+|eusiphon |x||lt_euep_cc_eval||
+|epdiagpc |x||lt_euep_cc_eval||
+|epracpc |x||lt_euep_cc_eval||
+|epregarext |x||lt_euep_cc_eval||
+|epracdp |x||lt_euep_cc_eval||
+|eppar |x||lt_euep_cc_eval||
+|epparpre ||||Champ texte à plusieurs lignes|
+|epfum |x||lt_euep_cc_eval||
+|epecoul |x||lt_euep_cc_eval||
+|epecoulobs ||||Champ texte à plusieurs lignes|
+|eprecup  |x||lt_euep_cc_eval||
+|eprecupcpt   ||00|lt_euep_cc_eval||
+|epautre  ||||Champ texte à plusieurs lignes|
+|epobserv  ||||Champ texte à plusieurs lignes|
+|euepanomal  ||||Champ texte à plusieurs lignes|
+|euepdivers  ||||Champ texte à plusieurs lignes|
+|ccbien  |x|20|lt_eupe_cc_bien|Boutons radios|
+|propriopat  |x||lt_euep_cc_pat||
+|propriopatp  |||||
+|achetpat  ||00|lt_euep_cc_pat||
+|achetpatp  |||||
+|achetnom  |||||
+|achetpre  |||||
+|achetad  |||||
+|ccvalid  |x|false||Boutons radios|
+|op_sai  ||%USER_LOGIN%|||
+|tnidcc  |x||lt_euep_cc_tnidcc|Boutons radios|
 
-**IMPORTANT** : L'édition des données jointes est activée ainsi que le champ de relation Adresse pour récupérer l'identifiant Adresse au niveau des dossiers qui sont saisies.
+
+**IMPORTANT** : L'édition des données jointes est désactivée.
  
- * Modèle d'impression : aucun
+ * Modèle d'impression : Fiche standard
 
 # La cartothèque
 
