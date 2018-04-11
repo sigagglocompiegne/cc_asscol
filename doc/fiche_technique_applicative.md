@@ -672,6 +672,48 @@ Source : `xapps_an_euep_cc_nc`
  
 **IMPORTANT** : un modèle spécifique a été créé pour gérer l'en-tête et le pied de page du courrier. Ce modèle est stocké ici en code R:\Projets\Metiers\1702RESH-ARC-ASS_controle_conformite_AC\4-Traitement\Courrier Controle de Conformite AC.html et a été injecté dans GEO. Le code peut-être modifié directement dans GEO via l'édition d'un  modèle.
 
+## Fiche d'information : `Média - Assainissement Contrôle de conformité`
+
+Note : cette fiche n'est pas censé s'ouvrir dans GEO comme une fiche standard mais via le module de gestion d'un média
+
+Source : `an_euep_cc_media`
+
+ * Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|530x650||
+
+|Nom de la section|Sous-section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|(vide)||Operateur de saisie, intégré le, Type de document, Précision|Par défaut|Vertical||||
+
+
+* Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+Note : seules les attributs obligatoire sont visibles par l'utilisateur. Les autres attributs sont rendus éditables par le fonctionnement du module média qui enregistre par lui-même les valeurs dans la table. 
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|id|||||
+|media|||||
+|miniature|||||
+|n_fichier|||||
+|t_fichier|||||
+|op_sai|x|%USER_LOGIN%|||
+|date_sai|x|%CURRENT_DATE%|||
+|l_type|x|00|lt_euep_doc||
+|l_prec|||||
+|gid|||||
+
+**IMPORTANT** : L'édition des données jointes est désactivée.
+ 
+ * Modèle d'impression : aucun
+
 # La cartothèque
 
 # L'application
