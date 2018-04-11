@@ -574,7 +574,37 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 
 |Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
 |:---|:---|:---|:---|:---|
-|id_adresse|||||
+|adapt|||||
+|adeta|||||
+|nidcc|||||
+|rcc|x||Conforme - Non Conforme|Bourons radios|
+|ccdate|x||||
+|ccdated|x||||
+|certype|x||lt_euep_cc_certificateur|Liste de choix|
+|certnom|x||||
+|certpre|x||||
+|proprionom|x||||
+|propriopre|x||||
+|proprioad|x|||Champ de texte à une ligne|
+|dotype|x||lt_euep_cc_ordre||
+|doaut|||||
+|donom|||||
+|dopre|||||
+|doad|||||
+|batitype|x||lt_euep_cc_typebati||
+|batiaut|||||
+|eppublic|x||lt_euep_cc_eval||
+|epaut||||Champ texte à plusieurs lignes|
+|rredptype|x||lt_euep_cc_typeres||
+|rrebrtype|x||lt_euep_cc_ceval||
+|rrechype ||00|lt_euep_cc_eval||
+|eupc |x||lt_euep_cc_eval||
+|euevent |x||lt_euep_cc_eval||
+|euregar |x||lt_euep_cc_eval||
+|euregardp |x||lt_euep_cc_eval||
+|eusup |x||lt_euep_cc_eval||
+|eusuptype ||00|lt_euep_sup||
+|eusupdoc ||00|lt_euep_cc_eval||
 
 **IMPORTANT** : L'édition des données jointes est activée ainsi que le champ de relation Adresse pour récupérer l'identifiant Adresse au niveau des dossiers qui sont saisies.
  
