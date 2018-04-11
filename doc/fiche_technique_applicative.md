@@ -747,7 +747,7 @@ Aucune
 
 |Gabarit|Thème|Modules spé|Fonds de plans|Impression|Résultats|
 |:---|:---|:---|:---|:---|:---|
-|Pro|Thème GeoCompiegnois 1.0.7 (Contrôle conformité AC et réseaux humides))|Bandeaux HTML,StreetView,GeoCadastre,Multimedia,Google Analytics,Page de connexion perso,Javacript|8 Modèles standards A4 et A3||
+|Pro|Thème GeoCompiegnois 1.0.7 (Contrôle conformité AC et réseaux humides))|Bandeaux HTML,StreetView,GeoCadastre,Multimedia,Google Analytics,Page de connexion perso,Javacript|8 Modèles standards A4 et A3|||
 
 Note : le thème employé dans cette application intègre la suppression de la première colonne dans les tableaux des fiches d'information. Cela permet de ne pas afficher le champ qui tri l'ordre des contrôles par date pour chaque adresse.
 
