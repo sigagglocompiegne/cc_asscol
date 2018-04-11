@@ -736,6 +736,12 @@ Aucune
 |Contrôle de conformité AC||x|x|x|x|xapps_geo_v_euep_cc|Conformité|x|x|x|x|||affiche_cc|0 à 1/10000é|picto de taille 45 (cc_picto_conforme.svg, cc_picto_non_conforme.svg),pas de picto pour aucun contrôle réalisé|Cf partie Données pour les paramètres d'étiquettage (champ etiquette_nbcc)|
 |Le réseau d'assainissement||x|x|x||||||||||||||
 |Le réseau d'assainissement|Base de données SIG (DSP)|x|x|||||x||||||||||
+|Le réseau d'assainissement|Levé de surface 2015 (Lachelle)|x|x|||||x||||||||||
+|Le réseau d'assainissement|Données CAO LDE / SAUR 2012|x|x|||||x||||||||||
+|Le réseau d'assainissement||x||||||x||||||||||
+|Le réseau d'eau potable||x|x|||||||||||||||
+|Le réseau d'eau potable|Géodétection 2017 (Lachelle)|x||||||x||||||||||
+|Le réseau d'eau potable|Données CAO SAUR|x|x|x||||x||||||||||
 
 # L'application
 
