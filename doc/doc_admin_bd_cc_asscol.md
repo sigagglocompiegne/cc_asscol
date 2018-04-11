@@ -1,4 +1,4 @@
-![picto](/img/Logo_web-GeoCompiegnois.png)
+![picto](/doc/img/Logo_web-GeoCompiegnois.png)
 
 # Documentation d'administration de la base #
 
