@@ -452,7 +452,7 @@ Source : `xapps_geo_v_euep_cc`
 |dans le gabarit|750x650|Vertical|
 
 |Nom de la section|Attribut|Position label|Agencement attribut|
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|
 |(vide)|titre_html|Masqué|Vertical|
 
 # La cartothèque
