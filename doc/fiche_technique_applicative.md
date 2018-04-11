@@ -453,7 +453,7 @@ Source : `xapps_geo_v_euep_cc`
 
 |Nom de la section|Attribut|Position label|Agencement attribut|
 |:---|:---|:---|:---|:---|
-|(vide)|titre_html|
+|(vide)|titre_html|Masqué|Vertical|
 
 # La cartothèque
 
