@@ -451,9 +451,12 @@ Source : `xapps_geo_v_euep_cc`
 |:---|:---|:---|
 |dans le gabarit|750x650|Vertical|
 
-|Nom de la section|Attribut|Position label|Agencement attribut|
-|:---|:---|:---|:---|
-|(vide)|titre_html|Masqué|Vertical|
+|Nom de la section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|
+|:---|:---|:---|:---|:---|
+|(vide)|titre_html|Masqué|Vertical||
+|(vide)|titre_liste_html|Masqué|Vertical||
+|(vide)|il y a
+N° de dossier|Masqué|Vertical||
 
 # La cartothèque
 
