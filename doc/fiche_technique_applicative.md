@@ -2,6 +2,8 @@
 
 # Fiche technique de l'application #
 
+# Schéma fonctionnel
+
 # Généralité
 
 |Représentation| Nom de l'application |Résumé|
