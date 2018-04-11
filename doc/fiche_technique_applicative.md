@@ -726,9 +726,7 @@ Aucune
 
 Aucune
 
-# La cartothèque
-
-## Carte : `Contrôle de conformité Assainissement collectif`
+# La cartothèque `Contrôle de conformité Assainissement collectif`
 
 |Groupe|Sous-groupe|Visible dans la légende|Visible au démarrage|Détails visibles|Déplié par défaut|Geotable|Renommée|Issue d'une autre carte|Visible dans la légende|Visible au démarrage|Déplié par défaut|Couche sélectionnable|Couche accrochable|Catégorisation|Seuil de visibilité|Symbologie|Autres|
 |:---|:---|:-:|:-:|:-:|:-:|:---|:---|:-:|:-:|:-:|:-:|:-:|:---|:---|:---|:---|:---|
@@ -743,8 +741,13 @@ Aucune
 |Le réseau d'eau potable|Géodétection 2017 (Lachelle)|x||||||x||||||||||
 |Le réseau d'eau potable|Données CAO SAUR|x|x|x||||x||||||||||
 
-# L'application
+# L'application `Contrôle de conformité Assainissement collectif`
 
-# Particularités
+* Généralités :
 
-Sans objet
+|Gabarit|Thème|Modules spé|Fonds de plans|Impression|Résultats|
+|:---|:---|:---|:---|:---|:---|
+|Pro|Thème GeoCompiegnois 1.0.7 (Contrôle conformité AC et réseaux humides))|Bandeaux HTML,StreetView,GeoCadastre,Multimedia,Google Analytics,Page de connexion perso,Javacript|8 Modèles standards A4 et A3||
+
+Note : le thème employé dans cette application intègre la suppression de la première colonne dans les tableaux des fiches d'information. Cela permet de ne pas afficher le champ qui tri l'ordre des contrôles par date pour chaque adresse.
+
