@@ -486,50 +486,50 @@ Source : `an_v_euep_cc`
 |:---|:---|:---|:---|:---|:---|:---|:---|
 |(vide)||titre_fiche_affiche|Masqué|Vertical||||
 |Objet de la mission||affiche_logo, affiche_reg|Masqué|Vertical||||
-|(vide)||Type de contrôle|A gauche|Vertical||||
-||(vide)|N° de dossier suivi|Par défaut|Vertical|tnidcc=='20'|||
-||(vide)|Type de bien, Contrôle initial, Etat de validation|Par défaut|Vertical||||
+|(vide)||tnidcc|A gauche|Vertical||||
+||(vide)|nidcc|Par défaut|Vertical|tnidcc=='20'|||
+||(vide)|ccbien, ccinit, ccvalid|Par défaut|Vertical||||
 |A/Conclusion du contrôle||affiche_conclusion|Masqué|Vertical||||
-||(vide)|L'installation est, Mission réalisée le|A gauche|Vertical||||
+||(vide)|rcc, ccdate|A gauche|Vertical||||
 ||(vide)|affiche_valide|Masqué|Vertical||||
-|B/Identitié de l'opérateur du diagnostic||Nom(certnom), Prénom(certpre), Nom de l'entreprise, Adresse(certi_adresse), Téléphone, Email, N° SIRET, Compagnie d'assurance, N° de police, Date de validité|Par défaut|Vertical||||
+|B/Identitié de l'opérateur du diagnostic||certnom, certpre, certtype, certi_adresse, certi_tel, certi_email, certi_siret, certi_assur, certi_numassur, certi_dassur|Par défaut|Vertical||||
 |C/Désignation du donneur d'ordre||||Vertical||||
-||Propriétaire|Civilité|Par défaut|Vertical||||
-||(vide) sous-onglet de propriétaire|Précision|Par défaut|Vertical|propriopat=='40'|||
-||(vide) sous-onglet de propriétaire|Nom(proprionom), Prénom(propriopre), Adresse(proprioad)|Par défaut|Vertical||||
-||Donneur d'ordre|Qualité|Par défaut|Vertical||||
-||(vide) sous-onglet de Donneur d'ordre|Précisez, Nom(donom), Prénom(dopre), Adresse(doas)|Par défaut|Vertical|dotype=='99'|||
-||Acheteur|Civilité|Par défaut|Vertical||||
-||(vide) sous-onglet de Acheteur|Précision|Par défaut|Vertical|achetpat=='40'|||
-||(vide) sous-onglet de Acheteur|Nom de l'acheteur, Prénom de l'acheteur, Adresse de l'acheteur|Par défaut|Vertical||||
+||Propriétaire|propriopat|Par défaut|Vertical||||
+||(vide) sous-onglet de propriétaire|propriopatp|Par défaut|Vertical|propriopat=='40'|||
+||(vide) sous-onglet de propriétaire|proprionom, propriopre, proprioad|Par défaut|Vertical||||
+||Donneur d'ordre|dotype|Par défaut|Vertical||||
+||(vide) sous-onglet de Donneur d'ordre|doaut, donom, dopre, doas|Par défaut|Vertical|dotype=='99'|||
+||Acheteur|achetpat|Par défaut|Vertical||||
+||(vide) sous-onglet de Acheteur|achetpatp|Par défaut|Vertical|achetpat=='40'|||
+||(vide) sous-onglet de Acheteur|achetnom, achetpre, achetad|Par défaut|Vertical||||
 |D/Désignation du ou des bâtiments||||Vertical||||
-||Type de bâtiment|Commune, Adresse(adresse), Appart n°, Etage, Type de bâtiment|Par défaut|Vertical||||
-||(vide) sous-onglet de Type de bâtiment|Précisez|Par défaut|Vertical|batitype=='99'|||
-||Desserte par le réseau public d'eau potable|L'habitation est desservie par une réseau public d'eau potable|Par défaut|Vertical||||
-||(vide) sous-onglet de Desserte par le réseau public d'eau potable|Alimentation autre que le réseau public d'eau potable|Par défaut|Vertical|eppublic=='20'|||
-|E/Nature des installations (domaine publique)|Réseau, Boîte de raccordement|||Vertical||||
-||(vide)|Le raccordement est-il accessible depuis un regard sous la chaussée|Par défaut|Vertical|rrebrtype=='20'|||
+||Type de bâtiment|commune, adresse, adapt, adeta, batitype|Par défaut|Vertical||||
+||(vide) sous-onglet de Type de bâtiment|batiaut|Par défaut|Vertical|batitype=='99'|||
+||Desserte par le réseau public d'eau potable|eppublic|Par défaut|Vertical||||
+||(vide) sous-onglet de Desserte par le réseau public d'eau potable|epaut|Par défaut|Vertical|eppublic=='20'|||
+|E/Nature des installations (domaine publique)|rredptype, rebrtype|||Vertical||||
+||(vide)|rrechype|Par défaut|Vertical|rrebrtype=='20'|||
 |F/Etat des installations (domaine privé)||||||||
 ||Collecte des eaux usées (EU)|||Vertical (ici pour la sous-section)||||
-||(vide) sous-onglet de Collecte des eaux usées (EU)|Le racccordement se fait-il sur les parties communes (appartement individuel), Présence d'eun évent ?, Existe-t-il un regard de collecte ? , Le regard est-il accessible en domaine privé ?|Par défaut|Vertical||||
-||(vide) sous-onglet de Collecte des eaux usées (EU)|Existence d'une servitude avec une autre propriété concernant les EP ou les EU ?|Par défaut|Vertical||||
-||(vide) sous-onglet de (vide) précédent|Précisez, Présence de documents attestant de cette servitude|Par défaut|Vertical|eusup=='10'|||
-||(vide) sous-onglet de Collecte des eaux usées (EU)|L'écoulement se fait-il correctement ?, Test à la fluorescéine réalisé sur tous les points d'eau ?, Le branchement est-il protégé par un dispositif anti-reflux ?, Présence de siphons sur chaque évacuation contrôlée ?, Les EP et les EP sont-elles collectés séparément ?, Divers|Par défaut|Vertical||||
-||Observations sous-onglet de Collecte des eaux usées (EU)|Anomalies constatées|Par défaut|Vertical||||
-||(vide) sous-onglet de Observations|Précisez|Par défaut|Vertical|euanomal=='10'|||
+||(vide) sous-onglet de Collecte des eaux usées (EU)|eupc, euevent, euregar , euregardp|Par défaut|Vertical||||
+||(vide) sous-onglet de Collecte des eaux usées (EU)|eusup|Par défaut|Vertical||||
+||(vide) sous-onglet de (vide) précédent|eusuptype, eusupdoc|Par défaut|Vertical|eusup=='10'|||
+||(vide) sous-onglet de Collecte des eaux usées (EU)|euecoul, eufluo, eubrsch, eurefl, eusiphon, euepsep, eudivers|Par défaut|Vertical||||
+||Observations sous-onglet de Collecte des eaux usées (EU)|euanomal|Par défaut|Vertical||||
+||(vide) sous-onglet de Observations|euobserv|Par défaut|Vertical|euanomal=='10'|||
 ||Collecte des eaux pluviales (EP)|||Vertical (ici pour la sous-section)||||
-||(vide) sous-onglet de Collecte des eaux pluviales (EP)|Diagnostic réalisé sur les parties communes, Le raccordement se fait sur les parties communes (appartement en collectivité), Existe-t-il un regard de collecte ?, Le regard est à l'extérieur d el'habitation ?, Existet-t-il un raccordement au réseau public d'évacuation des EP ? Les EP sont-elles traitées à la parcelle|Par défaut|Vertical||||
-||(vide) sous-onglet de (vide)|Précisez|Par défaut|Vertical|eppar=='10'|||
-||(vide) sous-onglet de (vide)|Test à la fumée réalisé ?, L'écoulement se fait-il correctement ?, Observations, Système de récupération des eaux pluviales|Par défaut|Vertical||||
-||(vide) sous-onglet de (vide)|En cas d'utilisation des eaux pluviales à usage domestique,présence impérative d'un compteur|Par défaut|Vertical|eprecup=='10'|||
-||(vide) sous-onglet de (vide)|Autres, Observations|Masqué|Vertical||||
-|G/Anomalies identifiées|Anomalies identifiées|||Vertical||||
+||(vide) sous-onglet de Collecte des eaux pluviales (EP)|epdiagpc, epracpc, epregardcol, epregarext, epracdp, eppar|Par défaut|Vertical||||
+||(vide) sous-onglet de (vide)|epparpre|Par défaut|Vertical|eppar=='10'|||
+||(vide) sous-onglet de (vide)|epfum, epecoul, epecoulobs, eprecup|Par défaut|Vertical||||
+||(vide) sous-onglet de (vide)|eprecupcpt|Par défaut|Vertical|eprecup=='10'|||
+||(vide) sous-onglet de (vide)|epautre, epobserv|Masqué|Vertical||||
+|G/Anomalies identifiées|euepanomal|||Vertical||||
 |H/Constations diverses||||Vertical (ici pour la sous-section)||||
-||Anomalies repérées n'entraînant pas une non-conformité sous-onglet de Constations diverses|Constatations diverses|Masqué|Vertical||||
-||(vide) sous-onglet de Constations diverses|Certificat de conformité délivré le |Par défaut|Vertical||||
+||Anomalies repérées n'entraînant pas une non-conformité sous-onglet de Constations diverses|euepdivers|Masqué|Vertical||||
+||(vide) sous-onglet de Constations diverses|ccdated |Par défaut|Vertical||||
 ||Attestation d'agrément sous-onglet de Constations diverses|affiche_attestation_logo |Masqué|Vertical||||
-|I/Pièces jointes||Fichier, Type de document, précision, télécharger|Par défaut|Vertical||Média-Assainissement Contrôle de conformité||
-||Aperçu sous-onglet de I/Pièces jointes|(champ toujours en test) |Masqué|Vertical||||
+|I/Pièces jointes||miniature, l_type, l_prec, affiche_lien|Par défaut|Vertical||Média-Assainissement Contrôle de conformité||
+||Aperçu sous-onglet de I/Pièces jointes|l_test(champ toujours en test) |Masqué|Vertical||||
 |Glossaire||affiche_glossaire|Masqué|Vertical||||
 
  * Saisie :
