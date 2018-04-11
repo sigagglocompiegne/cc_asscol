@@ -751,3 +751,12 @@ Aucune
 
 Note : le thème employé dans cette application intègre la suppression de la première colonne dans les tableaux des fiches d'information. Cela permet de ne pas afficher le champ qui tri l'ordre des contrôles par date pour chaque adresse.
 
+* Module introduction : il contient un texte de présentation et les liens vers les fiches d'aide. Le libellé Application a été personnalisé et renommé en Avant de Commencer.
+
+* Module javacript : ce module été intégré pour forcer l'affichage du menu Application à l'ouverture de l'application.
+```var injector = angular.element('body').injector();
+var acfApplicationService = injector.get('acfApplicationService');
+acfApplicationService.whenLoaded(setTimeout(function(){
+$(".sidepanel-item.launcher-application").click();
+}, 100));```
+
