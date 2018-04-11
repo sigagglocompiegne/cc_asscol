@@ -733,7 +733,7 @@ Aucune
 |Groupe|Sous-groupe|Visible dans la légende|Visible au démarrage|Détails visibles|Déplié par défaut|Geotable|Renommée|Issue d'une autre carte|Visible dans la légende|Visible au démarrage|Déplié par défaut|Couche sélectionnable|Couche accrochable|Catégorisation|Seuil de visibilité|Symbologie|
 |:---|:---|:-:|:-:|:-:|:-:|:---|:---|:-:|:-:|:-:|:-:|:-:|:---|:---|:---|:---|
 |Limite administrative||x|x|x||geo_v_osm_commune_arcba|Limite communale|x|x|x||||||Contour noir 1.5|
-|Contrôle de conformité AC||x|x|x|x|xapps_geo_v_euep_cc|Conformité|x|x|x|||||Contour noir 1.5|
+|Contrôle de conformité AC||x|x|x|x|xapps_geo_v_euep_cc|Conformité|x|x|x|x|||affiche_cc|0 à 1/10000é|picto de taille 45 (cc_picto_conforme.svg, cc_picto_non_conforme.svg),pas de picto pour aucun contrôle réalisé|
 
 # L'application
 
