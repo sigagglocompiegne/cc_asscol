@@ -48,17 +48,17 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 ## Géotable : `xapps_geo_v_euep_cc`
 
-|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
-|:---|:-:|:-:|:---|:---|:---|
-|affiche_blanc|x||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche d'un contrôle pour gérer le fait que GEO affiche dans cette info-bulle les 2 premiers champs intégrés dans le résultat d'une recherche|*Recherche :* Recherche par adresse (AC) |![picto](/img/info_bulle_result_rech_cc.png)|
-|affiche_cc |x||Formate l'affichage de la conformité au lieu de oui/non |*Cartothèque :* champ de catégorisation pour l'affichage du libellé de la conformité ||
-|affiche_controle |x||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC |![picto](/img/affiche_menu_result_rech_cc.png)|
-|affiche_result  |x||Formate l'affichage d'un texte précisant à l'utilisateur de cliquer pour zoomer sur l'adresse au résultat d'une recherche d'un contrôle par l'adresse|*Recherche :* Recherche par adresse (AC) |![picto](/img/affiche_menu_result_rech_cc_ad.png)|
-|ccdate  ||x|Formate la date du dernier en contrôle en dd/mm/yyyy|||
-|etiquette_nbcc  |x||Formate l'affichage du nombre de contrôle à l'adresse `si nb_cc > 0 affichage le nombre sinon rien`|*Cartothèque :* champ d'étiquette (avec Visibilité : 0 au 1/10000è et décalage : 5,8,0,50,50) ||
-|numero_complet  |x||Formate l'affichage du nombre complet de l'adresse `numero + repet` pour le filtre de recherche des contrôles par adresse (partie numéro)|*Recherche :* Recherche par adresse (AC) (filtre EUEP - C de C - Numéro voirie) ||
-|titre_html  |x||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_cc.png)|
-|titre_liste_html  |x||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_liste_cc.png)|
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_blanc|x|||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche d'un contrôle pour gérer le fait que GEO affiche dans cette info-bulle les 2 premiers champs intégrés dans le résultat d'une recherche|*Recherche :* Recherche par adresse (AC) |![picto](/img/info_bulle_result_rech_cc.png)|
+|affiche_cc |x|||Formate l'affichage de la conformité au lieu de oui/non |*Cartothèque :* champ de catégorisation pour l'affichage du libellé de la conformité ||
+|affiche_controle |x|||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC |![picto](/img/affiche_menu_result_rech_cc.png)|
+|affiche_result  |x|||Formate l'affichage d'un texte précisant à l'utilisateur de cliquer pour zoomer sur l'adresse au résultat d'une recherche d'un contrôle par l'adresse|*Recherche :* Recherche par adresse (AC) |![picto](/img/affiche_menu_result_rech_cc_ad.png)|
+|ccdate  ||x||Formate la date du dernier en contrôle en dd/mm/yyyy|||
+|etiquette_nbcc  |x|||Formate l'affichage du nombre de contrôle à l'adresse `si nb_cc > 0 affichage le nombre sinon rien`|*Cartothèque :* champ d'étiquette (avec Visibilité : 0 au 1/10000è et décalage : 5,8,0,50,50) ||
+|numero_complet  |x|||Formate l'affichage du nombre complet de l'adresse `numero + repet` pour le filtre de recherche des contrôles par adresse (partie numéro)|*Recherche :* Recherche par adresse (AC) (filtre EUEP - C de C - Numéro voirie) ||
+|titre_html  |x|||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_cc.png)|
+|titre_liste_html  |x|||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_liste_cc.png)|
 
    * filtres : aucun
    * relations :
@@ -71,66 +71,66 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 ## Table : `an_v_euep_cc`
 
-|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
-|:---|:-:|:-:|:---|:---|:---|
-|achetpat ||x|Formatage par une liste de domaine ( lt_euep_cc_pat)|||
-|affiche_adresse_gras |x||Affiche le champ `adresse` en gras dans le résultat d'une recherche | *Recherche* : Recherche des contrôles depuis le,  Recherche par N° de dossier (AC) ||
-|affiche_attestation_logo  |x||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_cc_init   |x||Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_ci.png)|
-|affiche_cc_valid   |x||Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_cv.png)|
-|affiche_conclusion    |x||Formate en html l'en-tête de la partie A/conclusion du rapport de conformité | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_controle  |x||Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/img/affiche_picto_fi.png)|
-|affiche_date_dernier_controle  |x|x|Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
-|affiche_dossier  |x||Formate en html l'affichage des résultats du contrôle dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_result_rech_cc_dos.png)|
-|affiche_glossaire  |x||Formate en html l'affichage du glossaire dans l'onglet du même nom  | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_logo  |x||Lien http de l'image du logo de l'ARC  (format image)  | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_nidcc |x||Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_reg |x||Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_tri |x||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_tri.png)|
-|affiche_validite |x||Formate la partie sur la durée du contrôle dans l'onglet A/Conclusion du contrôle du dossier de conformité | *Fiche d'information* : Dossier de conformité AC ||
-|batitype||x|Formatage par une liste de domaine (lt_euep_cc_typebati)|||
-|ccbien||x|Formatage par une liste de domaine (lt_euep_cc_bien)|||
-|ccdate||x|Formatage de la date en dd-mm-yyyy|||
-|ccdated||x|Formatage de la date en dd-mm-yyyy|||
-|ccinit||x|Formatage du booléen Vrai = oui et Faux = non|||
-|ccvalid||x|Formatage du booléen Vrai = Contrôle validé et Faux = Contrôle non validé|||
-|certi_dassur ||x|Formatage de la date en dd-mm-yyyy|||
-|certtype||x|Formatage par une liste de domaine (lt_euep_cc_certificateur)|||
-|date_maj||x|Formatage de la date en dd-mm-yyyy|||
-|date_sai||x|Formatage de la date en dd-mm-yyyy|||
-|dotype||x|Formatage par une liste de domaine (lt_euep_cc_ordre)|||
-|epdiagpc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|epecoul||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|epfum||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eppar||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eppublic||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|epracdp||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|epracpc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eprecup||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eprecupcpt||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|epregarcol||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|epregarext||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|euanomal||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eubrsch||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|euecoul||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|euepsep||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|euevent||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eufluo||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eupc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eurefl||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|euregar||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|euregardp||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eusiphon||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eusup||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eusupdoc||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|eusuptype||x|Formatage par une liste de domaine (lt_euep_sup)|||
-|propriopat||x|Formatage par une liste de domaine (lt_euep_cc_pat)|||
-|rcc||x|Formatage par une liste de domaine (Conforme - Non conforme)|||
-|rrebrtype||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|rrechype||x|Formatage par une liste de domaine (lt_euep_cc_eval)|||
-|rredptype||x|Formatage par une liste de domaine (lt_euep_cc_typeres)|||
-|titre_fiche_affiche|x||Formate en html le titre du dossier de conformité (1er onglet non nommé du dossier) |*Fiche d'information* : Dossier de conformité AC||
-|tnidcc||x|Formatage par une liste de domaine (lt_euep_cc_tnidcc)|||
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|achetpat ||x||Formatage par une liste de domaine ( lt_euep_cc_pat)|||
+|affiche_adresse_gras |x|||Affiche le champ `adresse` en gras dans le résultat d'une recherche | *Recherche* : Recherche des contrôles depuis le,  Recherche par N° de dossier (AC) ||
+|affiche_attestation_logo  |x|||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_cc_init   |x|||Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_ci.png)|
+|affiche_cc_valid   |x|||Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_cv.png)|
+|affiche_conclusion    |x|||Formate en html l'en-tête de la partie A/conclusion du rapport de conformité | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_controle  |x|||Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/img/affiche_picto_fi.png)|
+|affiche_date_dernier_controle  |x|x||Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
+|affiche_dossier  |x|||Formate en html l'affichage des résultats du contrôle dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_result_rech_cc_dos.png)|
+|affiche_glossaire  |x|||Formate en html l'affichage du glossaire dans l'onglet du même nom  | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_logo  |x|||Lien http de l'image du logo de l'ARC  (format image)  | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_nidcc |x|||Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_reg |x|||Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_tri |x|||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_tri.png)|
+|affiche_validite |x|||Formate la partie sur la durée du contrôle dans l'onglet A/Conclusion du contrôle du dossier de conformité | *Fiche d'information* : Dossier de conformité AC ||
+|batitype||x||Formatage par une liste de domaine (lt_euep_cc_typebati)|||
+|ccbien||x||Formatage par une liste de domaine (lt_euep_cc_bien)|||
+|ccdate||x||Formatage de la date en dd-mm-yyyy|||
+|ccdated||x||Formatage de la date en dd-mm-yyyy|||
+|ccinit||x||Formatage du booléen Vrai = oui et Faux = non|||
+|ccvalid||x||Formatage du booléen Vrai = Contrôle validé et Faux = Contrôle non validé|||
+|certi_dassur ||x||Formatage de la date en dd-mm-yyyy|||
+|certtype||x||Formatage par une liste de domaine (lt_euep_cc_certificateur)|||
+|date_maj||x||Formatage de la date en dd-mm-yyyy|||
+|date_sai||x||Formatage de la date en dd-mm-yyyy|||
+|dotype||x||Formatage par une liste de domaine (lt_euep_cc_ordre)|||
+|epdiagpc||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epecoul||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epfum||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eppar||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eppublic||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epracdp||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epracpc||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eprecup||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eprecupcpt||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epregarcol||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|epregarext||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euanomal||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eubrsch||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euecoul||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euepsep||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euevent||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eufluo||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eupc||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eurefl||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euregar||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|euregardp||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusiphon||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusup||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusupdoc||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|eusuptype||x||Formatage par une liste de domaine (lt_euep_sup)|||
+|propriopat||x||Formatage par une liste de domaine (lt_euep_cc_pat)|||
+|rcc||x||Formatage par une liste de domaine (Conforme - Non conforme)|||
+|rrebrtype||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|rrechype||x||Formatage par une liste de domaine (lt_euep_cc_eval)|||
+|rredptype||x||Formatage par une liste de domaine (lt_euep_cc_typeres)|||
+|titre_fiche_affiche|x|||Formate en html le titre du dossier de conformité (1er onglet non nommé du dossier) |*Fiche d'information* : Dossier de conformité AC||
+|tnidcc||x||Formatage par une liste de domaine (lt_euep_cc_tnidcc)|||
   
    * filtres : aucun
    * relations :
@@ -143,33 +143,33 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 ## Table : `an_euep_cc_media`
 
-|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
-|:---|:-:|:-:|:---|:---|:---|
-|affiche_lien |x||Formate le lien de téléchargement des documents joints |*Fiche d'information* : Dossier de conformité AC||
-|date_sai||x|Formatage de la date en dd-mm-yyyy|||
-|l_type||x|Formatage par une liste de domaine (lt_euep_doc)|||
-|media||x|Formatage du document joint en type image|||
-|miniature||x|Formatage de l'aperçu du document joint en type image|||
+|Attributs| Champ calculé | Formatage|Renommage |Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---:---|:---|:---|
+|affiche_lien |x|||Formate le lien de téléchargement des documents joints |*Fiche d'information* : Dossier de conformité AC||
+|date_sai||x||Formatage de la date en dd-mm-yyyy|||
+|l_type||x||Formatage par une liste de domaine (lt_euep_doc)|||
+|media||x||Formatage du document joint en type image|||
+|miniature||x||Formatage de l'aperçu du document joint en type image|||
    
    * filtres : aucun
    * relations : aucune
    
 ## Table : `xapps_an_euep_cc_nc`
 
-|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
-|:---|:-:|:-:|:---|:---|:---|
-|affiche_annee_cc|x||Formate la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conformet par date, Contrôle Non Conformet par année (*Recherche* : Liste des contrôles NON CONFORME)||
-|affiche_conformite|x||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/img/affiche_menu_result_rech_ccnc.png)|
-|affiche_espace_objet|x||Formatage en html d'un espace avant l'objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|affiche_espace_signature|x||Formatage en html d'un espace avant la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|affiche_espace_tete|x||Formatage en html d'un espace avant l'en-tête du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|affiche_espace_tete|x||Formate le mois du contrôle en français pour sélection du mois dans les recherches des contrôles non conforme|*Filtre* : Mois du contrôle de conformité AC (*Recherche* : Liste des contrôles NON CONFORME)||
-|affiche_objet|x||Formate en html la partie écrite Objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|affiche_proprio|x||Formate en html la partie coordonnée (ici propriétaire) du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|affiche_signature|x||Formate en html la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|affiche_texte_courrier|x||Formate en html le corps du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|ccdate||x|Formatage de la date en dd-mm-yyyy|||
-|ccdated||x|Formatage de la date en dd-mm-yyyy|||
+|Attributs| Champ calculé | Formatage |Renommage  |Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_annee_cc|x|||Formate la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conformet par date, Contrôle Non Conformet par année (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_conformite|x|||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/img/affiche_menu_result_rech_ccnc.png)|
+|affiche_espace_objet|x|||Formatage en html d'un espace avant l'objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_espace_signature|x|||Formatage en html d'un espace avant la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_espace_tete|x|||Formatage en html d'un espace avant l'en-tête du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_espace_tete|x|||Formate le mois du contrôle en français pour sélection du mois dans les recherches des contrôles non conforme|*Filtre* : Mois du contrôle de conformité AC (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_objet|x|||Formate en html la partie écrite Objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_proprio|x|||Formate en html la partie coordonnée (ici propriétaire) du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_signature|x|||Formate en html la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_texte_courrier|x|||Formate en html le corps du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|ccdate||x||Formatage de la date en dd-mm-yyyy|||
+|ccdated||x||Formatage de la date en dd-mm-yyyy|||
 
    * filtres : aucun
    * relations : 
@@ -181,12 +181,12 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 ## Table : `lt_euep_cc_certificateur`
 
-|Attributs| Champ calculé | Formatage |Particularité/Usage|Utilisation|Exemple|
-|:---|:-:|:-:|:---|:---|:---|
-|affiche_resultat|x||Formate le titre de résultat pour la recherche des informations d'un prestataire |*Recherche* : Informations sur le prestataire|![picto](/img/affiche_menu_rech_presta.png)|
-|date_assur||x|Formatage de la date en dd-mm-yyyy|||
-|etat||x|Formate l'affichage du booléen en Oui ou Non|||
-|exist||x|Formate l'affichage du booléen en Oui ou Non|||
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_resultat|x|||Formate le titre de résultat pour la recherche des informations d'un prestataire |*Recherche* : Informations sur le prestataire|![picto](/img/affiche_menu_rech_presta.png)|
+|date_assur||x||Formatage de la date en dd-mm-yyyy|||
+|etat||x||Formate l'affichage du booléen en Oui ou Non|||
+|exist||x||Formate l'affichage du booléen en Oui ou Non|||
 
    * filtres : 
 
@@ -486,9 +486,27 @@ Source : `an_v_euep_cc`
 |:---|:---|:---|:---|:---|:---|:---|:---|
 |(vide)||titre_fiche_affiche|Masqué|Vertical||||
 |Objet de la mission||affiche_logo, affiche_reg|Masqué|Vertical||||
-|(vide)||Type de contrôle|Masqué|Vertical||||
-||(vide)|N° de dossier suivi|Masqué|Vertical|tnidcc='20'|||
-||(vide)|Type de bien, Contrôle initial, Etat de validation|Masqué|Vertical||||
+|(vide)||Type de contrôle|A gauche|Vertical||||
+||(vide)|N° de dossier suivi|Par défaut|Vertical|tnidcc=='20'|||
+||(vide)|Type de bien, Contrôle initial, Etat de validation|Par défaut|Vertical||||
+|A/Conclusion du contrôle||affiche_conclusion|Masqué|Vertical||||
+||(vide)|L'installation est, Mission réalisée le|A gauche|Vertical||||
+||(vide)|affiche_valide|Masqué|Vertical||||
+|B/Identitié de l'opérateur du diagnostic||Nom(certnom), Prénom(certpre), Nom de l'entreprise, Adresse(certi_adresse), Téléphone, Email, N° SIRET, Compagnie d'assurance, N° de police, Date de validité|Par défaut|Vertical||||
+|C/Désignation du donneur d'ordre||||Vertical||||
+||Propriétaire|Civilité|Par défaut|Vertical||||
+||(vide) sous-onglet de propriétaire|Précision|Par défaut|Vertical|propriopat=='40'|||
+||(vide) sous-onglet de propriétaire|Nom(proprionom), Prénom(propriopre), Adresse(proprioad)|Par défaut|Vertical||||
+||Donneur d'ordre|Qualité|Par défaut|Vertical||||
+||(vide) sous-onglet de Donneur d'ordre|Précisez, Nom(donom), Prénom(dopre), Adresse(doas)|Par défaut|Vertical|dotype=='99'|||
+||Acheteur|Civilité|Par défaut|Vertical||||
+||(vide) sous-onglet de Acheteur|Précision|Par défaut|Vertical|achetpat=='40'|||
+||(vide) sous-onglet de Acheteur|Nom de l'acheteur, Prénom de l'acheteur, Adresse de l'acheteur|Par défaut|Vertical||||
+|D/Désignation du ou des bâtiments||||Vertical||||
+||Type de bâtiment|Commune, Adresse(adresse), Appart n°, Etage, Type de bâtiment|Par défaut|Vertical||||
+||(vide) sous-onglet de Type de bâtiment|Précisez|Par défaut|Vertical|batitype=='99'|||
+||Desserte par le réseau public d'eau potable|L'habitation est desservie par une réseau public d'eau potable|Par défaut|Vertical||||
+
 
  * Saisie :
 
