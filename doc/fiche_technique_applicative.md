@@ -753,8 +753,8 @@ Note : le thème employé dans cette application intègre la suppression de la p
 
 * Particularité de certains modules :
 
-* Module introduction : il contient un texte de présentation et les liens vers les fiches d'aide. Le libellé Application a été personnalisé et renommé en Avant de Commencer.
-* Module javacript : ce module été intégré pour forcer l'affichage du menu Application à l'ouverture de l'application.
+ * Module introduction : il contient un texte de présentation et les liens vers les fiches d'aide. Le libellé Application a été personnalisé et renommé en Avant de Commencer.
+ * Module javacript : ce module été intégré pour forcer l'affichage du menu Application à l'ouverture de l'application.
 ```var injector = angular.element('body').injector();
 var acfApplicationService = injector.get('acfApplicationService');
 acfApplicationService.whenLoaded(setTimeout(function(){
