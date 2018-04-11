@@ -26,7 +26,8 @@
 |Recherche des contrôles depuis le|||Accès réservé au service assainissement|
 |Information sur le prestataire|x||La connexion filtre l'affichage des informations sur le profil du prestataire|
 |Cartographie|x|||
-|Fiches d'informations des contrôles|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable|
+|Fiches d'informations Conformité AC à l'adresse|x|x|la liste des contrôles à l'adressse est disponible en lecture et l'insertion d'un nouveau contrôle est possible|
+|Fiches d'informations Dossier de conformité AC |x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable|
 |Fiches d'informations du prestataire|x|x|La connexion filtre l'affichage des informations sur le profil du prestataire|
 
 * **Personnes du service métier**
@@ -456,6 +457,38 @@ Source : `xapps_geo_v_euep_cc`
 |(vide)|titre_html|Masqué|Vertical||||
 |(vide)|titre_liste_html|Masqué|Vertical||||
 |(vide)|il y a, N° de dossier, Date du contrôle, Appart n°, Etage,affiche_cc_valid, affiche_cc_init, Conformité|Masqué|Vertical||Dossier de conformité AC|x|
+
+ * Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|id_adresse|||||
+
+**IMPORTANT** : L'édition des données jointes est activée ainsi que le champ de relation Adresse pour récupérer l'identifiant Adresse au niveau des dossiers qui sont saisies.
+ 
+ * Modèle d'impression : aucun
+ 
+ ## Fiche d'information : `Dossier de conformité AC`
+
+Source : `an_v_euep_cc`
+
+ * Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|1150x700|Onglets|
+
+|Nom de la section|Sous-section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|(vide)||titre_fiche_affiche|Masqué|Vertical||||
+|Objet de la mission||affiche_logo, affiche_reg|Masqué|Vertical||||
+|(vide)||Type de contrôle|Masqué|Vertical||||
+||(vide)|N° de dossier suivi|Masqué|Vertical|tnidcc='20'|||
+||(vide)|Type de bien, Contrôle initial, Etat de validation|Masqué|Vertical||||
 
  * Saisie :
 
