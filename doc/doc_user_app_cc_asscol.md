@@ -1,6 +1,6 @@
 ![picto](/img/Logo_web-GeoCompiegnois.png)
 
-# Fiche d'aide utilisateur #
+# Documentation utilisateur de l'application #
 
 **Pour tous les utilisateurs** :
 - [Saisir un nouveau contrôle](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideutil1_saisie_controle.pdf)
