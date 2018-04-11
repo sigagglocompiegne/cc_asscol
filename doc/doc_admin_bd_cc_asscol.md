@@ -405,6 +405,10 @@ Valeurs possibles :
 |20|Eaux pluviales|
 |ZZ|Sans objet|
 
+## Export Open Data
+
+Sans objet
+
 ---
 
 ## Schéma fonctionnel
