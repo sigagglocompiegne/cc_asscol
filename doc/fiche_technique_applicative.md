@@ -506,7 +506,31 @@ Source : `an_v_euep_cc`
 ||Type de bâtiment|Commune, Adresse(adresse), Appart n°, Etage, Type de bâtiment|Par défaut|Vertical||||
 ||(vide) sous-onglet de Type de bâtiment|Précisez|Par défaut|Vertical|batitype=='99'|||
 ||Desserte par le réseau public d'eau potable|L'habitation est desservie par une réseau public d'eau potable|Par défaut|Vertical||||
-
+||(vide) sous-onglet de Desserte par le réseau public d'eau potable|Alimentation autre que le réseau public d'eau potable|Par défaut|Vertical|eppublic=='20'|||
+|E/Nature des installations (domaine publique)|Réseau, Boîte de raccordement|||Vertical||||
+||(vide)|Le raccordement est-il accessible depuis un regard sous la chaussée|Par défaut|Vertical|rrebrtype=='20'|||
+|F/Etat des installations (domaine privé)||||||||
+||Collecte des eaux usées (EU)|||Vertical (ici pour la sous-section)||||
+||(vide) sous-onglet de Collecte des eaux usées (EU)|Le racccordement se fait-il sur les parties communes (appartement individuel), Présence d'eun évent ?, Existe-t-il un regard de collecte ? , Le regard est-il accessible en domaine privé ?|Par défaut|Vertical||||
+||(vide) sous-onglet de Collecte des eaux usées (EU)|Existence d'une servitude avec une autre propriété concernant les EP ou les EU ?|Par défaut|Vertical||||
+||(vide) sous-onglet de (vide) précédent|Précisez, Présence de documents attestant de cette servitude|Par défaut|Vertical|eusup=='10'|||
+||(vide) sous-onglet de Collecte des eaux usées (EU)|L'écoulement se fait-il correctement ?, Test à la fluorescéine réalisé sur tous les points d'eau ?, Le branchement est-il protégé par un dispositif anti-reflux ?, Présence de siphons sur chaque évacuation contrôlée ?, Les EP et les EP sont-elles collectés séparément ?, Divers|Par défaut|Vertical||||
+||Observations sous-onglet de Collecte des eaux usées (EU)|Anomalies constatées|Par défaut|Vertical||||
+||(vide) sous-onglet de Observations|Précisez|Par défaut|Vertical|euanomal=='10'|||
+||Collecte des eaux pluviales (EP)|||Vertical (ici pour la sous-section)||||
+||(vide) sous-onglet de Collecte des eaux pluviales (EP)|Diagnostic réalisé sur les parties communes, Le raccordement se fait sur les parties communes (appartement en collectivité), Existe-t-il un regard de collecte ?, Le regard est à l'extérieur d el'habitation ?, Existet-t-il un raccordement au réseau public d'évacuation des EP ? Les EP sont-elles traitées à la parcelle|Par défaut|Vertical||||
+||(vide) sous-onglet de (vide)|Précisez|Par défaut|Vertical|eppar=='10'|||
+||(vide) sous-onglet de (vide)|Test à la fumée réalisé ?, L'écoulement se fait-il correctement ?, Observations, Système de récupération des eaux pluviales|Par défaut|Vertical||||
+||(vide) sous-onglet de (vide)|En cas d'utilisation des eaux pluviales à usage domestique,présence impérative d'un compteur|Par défaut|Vertical|eprecup=='10'|||
+||(vide) sous-onglet de (vide)|Autres, Observations|Masqué|Vertical||||
+|G/Anomalies identifiées|Anomalies identifiées|||Vertical||||
+|H/Constations diverses||||Vertical (ici pour la sous-section)||||
+||Anomalies repérées n'entraînant pas une non-conformité sous-onglet de Constations diverses|Constatations diverses|Masqué|Vertical||||
+||(vide) sous-onglet de Constations diverses|Certificat de conformité délivré le |Par défaut|Vertical||||
+||Attestation d'agrément sous-onglet de Constations diverses|affiche_attestation_logo |Masqué|Vertical||||
+|I/Pièces jointes||Fichier, Type de document, précision, télécharger|Par défaut|Vertical||Média-Assainissement Contrôle de conformité||
+||Aperçu sous-onglet de I/Pièces jointes|(champ toujours en test) |Masqué|Vertical||||
+|Glossaire||affiche_glossaire|Masqué|Vertical||||
 
  * Saisie :
 
