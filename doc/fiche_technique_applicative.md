@@ -451,12 +451,11 @@ Source : `xapps_geo_v_euep_cc`
 |:---|:---|:---|
 |dans le gabarit|750x650|Vertical|
 
-|Nom de la section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|
-|:---|:---|:---|:---|:---|
-|(vide)|titre_html|Masqué|Vertical||
-|(vide)|titre_liste_html|Masqué|Vertical||
-|(vide)|il y a
-N° de dossier|Masqué|Vertical||
+|Nom de la section|Attribut|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|titre_html|Masqué|Vertical||||
+|(vide)|titre_liste_html|Masqué|Vertical||||
+|(vide)|il y a, N° de dossier, Date du contrôle, Appart n°, Etage,affiche_cc_valid, affiche_cc_init, Conformité|Masqué|Vertical||Dossier de conformité AC|x|
 
 # La cartothèque
 
