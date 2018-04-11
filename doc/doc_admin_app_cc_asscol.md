@@ -51,17 +51,17 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
 |affiche_cc |x|||Formate l'affichage de la conformité au lieu de oui/non |*Cartothèque :* champ de catégorisation pour l'affichage du libellé de la conformité ||
-|affiche_blanc|x|||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche d'un contrôle pour gérer le fait que GEO affiche dans cette info-bulle les 2 premiers champs intégrés dans le résultat d'une recherche|*Recherche :* Recherche par adresse (AC) |![picto](/img/info_bulle_result_rech_cc.png)|
+|affiche_blanc|x|||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche d'un contrôle pour gérer le fait que GEO affiche dans cette info-bulle les 2 premiers champs intégrés dans le résultat d'une recherche|*Recherche :* Recherche par adresse (AC) |![picto](/doc/img/info_bulle_result_rech_cc.png)|
 |affiche_cc |x|||Formate l'affichage de la conformité au lieu de oui/non |*Cartothèque :* champ de catégorisation pour l'affichage du libellé de la conformité ||
-|affiche_controle |x|||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC |![picto](/img/affiche_menu_result_rech_cc.png)|
-|affiche_result  |x|||Formate l'affichage d'un texte précisant à l'utilisateur de cliquer pour zoomer sur l'adresse au résultat d'une recherche d'un contrôle par l'adresse|*Recherche :* Recherche par adresse (AC) |![picto](/img/affiche_menu_result_rech_cc_ad.png)|
+|affiche_controle |x|||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC |![picto](/doc/img/affiche_menu_result_rech_cc.png)|
+|affiche_result  |x|||Formate l'affichage d'un texte précisant à l'utilisateur de cliquer pour zoomer sur l'adresse au résultat d'une recherche d'un contrôle par l'adresse|*Recherche :* Recherche par adresse (AC) |![picto](/doc/img/affiche_menu_result_rech_cc_ad.png)|
 |ccdate  ||x|Date du dernier contrôle|Formate la date du dernier en contrôle en dd/mm/yyyy|||
 |etiquette_nbcc  |x|||Formate l'affichage du nombre de contrôle à l'adresse `si nb_cc > 0 affichage le nombre sinon rien`|*Cartothèque :* champ d'étiquette (avec Visibilité : 0 au 1/10000è et décalage : 5,8,0,50,50) ||
 |nb_cc||x|Nombre de contrôle||||
 |numero_complet  |x|||Formate l'affichage du nombre complet de l'adresse `numero + repet` pour le filtre de recherche des contrôles par adresse (partie numéro)|*Recherche :* Recherche par adresse (AC) (filtre EUEP - C de C - Numéro voirie) ||
 |rcc||x|Conformité||||
-|titre_html  |x|||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_cc.png)|
-|titre_liste_html  |x|||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/img/affiche_synt_fi_liste_cc.png)|
+|titre_html  |x|||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/doc/img/affiche_synt_fi_cc.png)|
+|titre_liste_html  |x|||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/doc/img/affiche_synt_fi_liste_cc.png)|
 
    * filtres : aucun
    * relations :
@@ -85,17 +85,17 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |adeta||x|Etage||*Fiche d'information :* Dossier de conformité AC ||
 |affiche_adresse_gras |x|||Affiche le champ `adresse` en gras dans le résultat d'une recherche | *Recherche* : Recherche des contrôles depuis le,  Recherche par N° de dossier (AC) ||
 |affiche_attestation_logo  |x|||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_cc_init   |x|x|-|Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_ci.png)|
-|affiche_cc_valid   |x|x|-|Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/img/affiche_acronyme_cv.png)|
+|affiche_cc_init   |x|x|-|Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/doc/img/affiche_acronyme_ci.png)|
+|affiche_cc_valid   |x|x|-|Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/doc/img/affiche_acronyme_cv.png)|
 |affiche_conclusion    |x|||Formate en html l'en-tête de la partie A/conclusion du rapport de conformité | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_controle  |x|x|Conformité|Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/img/affiche_picto_fi.png)|
+|affiche_controle  |x|x|Conformité|Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/doc/img/affiche_picto_fi.png)|
 |affiche_date_dernier_controle  |x|x|Date du contrôle|Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
-|affiche_dossier  |x|||Formate en html l'affichage des résultats du contrôle dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_result_rech_cc_dos.png)|
+|affiche_dossier  |x|||Formate en html l'affichage des résultats du contrôle dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_result_rech_cc_dos.png)|
 |affiche_glossaire  |x|||Formate en html l'affichage du glossaire dans l'onglet du même nom  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_logo  |x|||Lien http de l'image du logo de l'ARC  (format image)  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_nidcc |x|x|N° de dossier|Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_reg |x|x|(null)|Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_tri |x|||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/img/affiche_tri.png)|
+|affiche_tri |x|||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_tri.png)|
 |affiche_validite |x|||Formate la partie sur la durée du contrôle dans l'onglet A/Conclusion du contrôle du dossier de conformité | *Fiche d'information* : Dossier de conformité AC ||
 |batiaut||x|Précisez||*Fiche d'information :* Dossier de conformité AC ||
 |batitype||x|Type de bâtiment|Formatage par une liste de domaine (lt_euep_cc_typebati)|*Fiche d'information* : Dossier de conformité AC||
@@ -195,7 +195,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |Attributs| Champ calculé | Formatage |Renommage  |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
 |affiche_annee_cc|x|||Formate la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conformet par date, Contrôle Non Conformet par année (*Recherche* : Liste des contrôles NON CONFORME)||
-|affiche_conformite|x|||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/img/affiche_menu_result_rech_ccnc.png)|
+|affiche_conformite|x|||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/doc/img/affiche_menu_result_rech_ccnc.png)|
 |affiche_espace_objet|x|||Formatage en html d'un espace avant l'objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_espace_signature|x|||Formatage en html d'un espace avant la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_espace_tete|x|||Formatage en html d'un espace avant l'en-tête du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
@@ -219,7 +219,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_resultat|x|||Formate le titre de résultat pour la recherche des informations d'un prestataire |*Recherche* : Informations sur le prestataire|![picto](/img/affiche_menu_rech_presta.png)|
+|affiche_resultat|x|||Formate le titre de résultat pour la recherche des informations d'un prestataire |*Recherche* : Informations sur le prestataire|![picto](/doc/img/affiche_menu_rech_presta.png)|
 |date_assur||x||Formatage de la date en dd-mm-yyyy|||
 |etat||x||Formate l'affichage du booléen en Oui ou Non|||
 |exist||x||Formate l'affichage du booléen en Oui ou Non|||
