@@ -415,7 +415,7 @@ Sans objet
 
 ### Modèle conceptuel simplifié
 
-![mcd](img/MCD.jpg)
+![mcd](img/MCD.png)
 
 ### Schéma fonctionnel
 
