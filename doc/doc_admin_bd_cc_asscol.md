@@ -415,9 +415,9 @@ Sans objet
 
 ### Modèle conceptuel simplifié
 
-![mcd](doc/img/MCD.jpg)
+![mcd](img/MCD.jpg)
 
 ### Schéma fonctionnel
 
-![schema_fonctionnel](doc/img/schema_fonctionnel.jpg)
+![schema_fonctionnel](img/schema_fonctionnel.jpg)
 
