@@ -742,7 +742,7 @@ Aucune
 
 Aucune
 
-## Modification :
+## Modification géométrique :
 
 Aucune
 
