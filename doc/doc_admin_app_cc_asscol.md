@@ -307,6 +307,24 @@ Sans objet
 
 Sont présentées ici uniquement les fonctionnalités spécifiques à l'application.
 
+## Recherche globale : `Recherche dans la Base Adresse Locale`
+
+Cette recherche permet à l'utilisateur de faire une recherche libre sur une adresse.
+
+Cette recherche a été créée pour l'application RVA. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
+
+## Recherche globale : `Recherche dans la Base de Voie Locale`
+
+Cette recherche permet à l'utilisateur de faire une recherche libre sur le libellé d'une voie.
+
+Cette recherche a été créée pour l'application RVA. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub rva au niveau de la documentation applicative.
+
+## Recherche globale : `Localiser une commune de l'ARC`
+
+Cette recherche permet à l'utilisateur de faire une recherche libre sur le nom d'une commune.
+
+Cette recherche a été créée pour l'application Cadastre-Urbanisme. Le détail de celle-ci est donc à visualiser dans le répertoire GitHub docurba au niveau de la documentation applicative.
+
 ## Recherche : `Recherche par adresse (AC)`
 
 Cette recherche permet à l'utilisateur de faire une recherche d'adresse guidée par sélection de la commune, de la voie puis du n° sur la voie. L'utilisateur accède à la fiche de synthèse des contrôles à cette adresse et peut ensuite accéder au dossier de conformité.
