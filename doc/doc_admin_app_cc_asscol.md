@@ -230,7 +230,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
 |:---|:---|:-:|:---:|:---:|:---|:---|
-|SECU|code (Code interne du donneur d'ordre)|x|Alphanumérique|est égale à une valeur de contexte|ass_cc_ac|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
+|SECU|code (Code interne du donneur d'ordre)|x|Alphanumérique|est égale à une valeur de contexte|id_presta|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
 
    * relations : aucune
 
