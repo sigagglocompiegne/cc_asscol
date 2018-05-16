@@ -405,6 +405,11 @@ Valeurs possibles :
 |20|Eaux pluviales|
 |ZZ|Sans objet|
 
+## Projet QGIS pour la gestion
+
+Aucun projet QGIS a été réalisé pour la gestion interne des données.
+
+
 ## Export Open Data
 
 Sans objet
