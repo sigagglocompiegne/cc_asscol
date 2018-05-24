@@ -1095,7 +1095,7 @@ v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_
 
 -- gestion des n° de dossier automatique et en cas de suivi
 v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN 
-	    (SELECT (SELECT insee FROM x_apps.xapps_geo_v_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc) as nnidcc)
+	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc) as nnidcc)
 	    ELSE 
 		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
 	    END;
