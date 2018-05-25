@@ -500,7 +500,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_valid(
 
 -- Sequence: m_reseau_humide.lt_euep_cc_anomal_seq
 
-DROP SEQUENCE IF EXISTS m_reseau_humide.lt_euep_cc_anomal_seq;
+DROP SEQUENCE IF EXISTS m_reseau_humide.lt_euep_cc_anomal_seq CASCADE;
 
 CREATE SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq
   INCREMENT 1
