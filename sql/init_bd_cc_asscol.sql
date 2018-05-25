@@ -1226,7 +1226,7 @@ RETURN NEW;
 ELSIF (TG_OP = 'UPDATE') THEN
 
 -- si le contrôle n'est pas validé alors on peut modifier les valeurs si non pas de modification possible
-IF (new.ccvalid = '20' or new.ccvalid = '30') and ((old.ccvalid = '20' or old.ccvalid='30')  or (new.ccvalid = '10' and ((old.ccvalid = '20' or old.ccvalid='30')))) THEN
+IF ((new.ccvalid = '20' or new.ccvalid = '30') and (old.ccvalid = '20' or old.ccvalid='30')) or (new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid='30')) THEN
 
 UPDATE m_reseau_humide.an_euep_cc
 SET 
