@@ -43,7 +43,7 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |:---|:---|:---|:---|
 |idcc|Identifiant interne unique du contrôle|integer|nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
 |id_adresse|Identifiant unique de l'objet point adresse (issu de la BAL)|bigint| |
-|ccvalid|validation par l'ARC du contrôle (la valeur true empêche la modification des données|boolean|false|
+|ccvalid|validation par l'ARC du contrôle (la valeur 10 empêche la modification des données|character varying(2)|20|
 |ccinit|information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité|boolean|false|
 |adapt|Complément de l'adresse avec le n° d'appartement dans le cadre d'un immeuble collectif|character varying(20)| |
 |adeta|Etage|integer| |
@@ -108,7 +108,8 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |eprecupcpt|Compteur présent en cas de récupération des eaux pluviales à usage domestique (clé étrangère sur la liste de valeur lt_euep_cc_eval)|character varying(2)|'ZZ'::character varying|
 |epautre|Autre|character varying(200)| |
 |epobserv|Observations diverses sur la collecte des eaux usées|character varying(200)| |
-|euepanomal|Anomalies identifiées entrainant la non conformité|character varying(1000)| |
+|euepanomal|Liste des anomalies identifiées entrainant la non conformité|character varying(20)| |
+|euepanomalpre|Précisions sur les anomalies|character varying(5000)| |
 |euepdivers|Constatations diverses|character varying(1000)| |
 |date_sai|Date de saisie|timestamp without time zone| |
 |date_maj|Datede mise à jour|timestamp without time zone| |
@@ -117,11 +118,12 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_idcc_seq``
-* 35 clés étrangères existent et correspondent aux classes de listes de valeurs
+* 36 clés étrangères existent et correspondent aux classes de listes de valeurs
 * le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
 * 2 triggers :
   * ``t_t1_an_euep_cc_insert`` : gère après une insertion la transformation des '' en valeur null
   * ``t_t2_log_an_euep_cc_insert_update`` : gère après une insertion ou une mise à jour l'écriture de la transaction dans la classe des logs
+* Par défaut l'enregistrement d'un nouveau dossier ou d'un suivi est non valide (même si une autre valeur est saisie = sécurité)
 
 ---
 
@@ -404,6 +406,53 @@ Valeurs possibles :
 |10|Eaux usées|
 |20|Eaux pluviales|
 |ZZ|Sans objet|
+
+---
+
+`lt_euep_cc_valid` : Liste des types de validation du contrôle
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des types de validation du contrôle(2)| |
+|valeur|Libellé des types de validation du contrôle(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|10|Contrôle validé|
+|20|Contrôle non vérifié|
+|30|Contrôle non validé (modification demandée)|
+
+---
+
+`lt_euep_cc_anomal` : Liste des anomalies relevées lors du contrôle
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|
+|code|Code interne des anomalies possibles lors d''un contrôle(2)| |
+|valeur|Libellé des anomalies possibles lors d''un contrôle(100)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|1|Maison ou immeuble ou local non raccordé|
+|2|Maison ou immeuble ou local partiellement raccordé|
+|3|Eaux usées raccordées sur le réseau d'eaux pluviales/ou au milieu naturel|
+|4|Eaux pluviales raccordées sur le réseau d'eaux usées (en partie privée)|
+|5|Présence d'ancien ouvrage de décantation (fosse septique, bac dégraisseur, etc..)|
+|6|Absence d'évent|
+|7|Diamètre de l'évent insuffisant|
+|8|Event non remonté au faîtage de la maison ou immeuble ou local|
+|9|Absence de clapet anti-retour|
+|10|Absence de siphon|
 
 ---
 
