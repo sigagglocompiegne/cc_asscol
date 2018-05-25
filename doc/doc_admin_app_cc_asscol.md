@@ -22,13 +22,16 @@
 |:---|:-:|:-:|:---|
 |Recherche par adresse|x|||
 |Recherche par n° de dossier|x|||
-|Liste des contrôles non conforme|||Accès réservé au service assainissement|
-|Recherche des contrôles depuis le|||Accès réservé au service assainissement|
-|Information sur le prestataire|x||La connexion filtre l'affichage des informations sur le profil du prestataire|
+|Liste des contrôles non conforme|x||Accès réservé au service assainissement|
+|Recherche des contrôles depuis le|x||Accès réservé au service assainissement|
+|Recherche des contrôles avec une demande de modifications|||Accès réservé au service assainissement|
+|Information sur le prestataire|x||La connexion filtre l'affichage des informations sur le profil du prestataire.|
 |Cartographie|x|||
 |Fiches d'informations Conformité AC à l'adresse|x|x|la liste des contrôles à l'adressse est disponible en lecture et l'insertion d'un nouveau contrôle est possible|
 |Fiches d'informations Dossier de conformité AC |x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable|
-|Fiches d'informations du prestataire|x|x|La connexion filtre l'affichage des informations sur le profil du prestataire|
+|Fiches d'informations du prestataire|x|x|La connexion filtre l'affichage des informations sur le profil du prestataire. Le prestataire peut modifier ses données ainsi que le service assainissement|
+
+
 
 * **Personnes du service métier**
 
@@ -40,7 +43,8 @@
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|aucune|||Pas d'accès autorisé. Les informations des contrôles devraient être consultables également dans l'application Réseau Humide en simple lecture pour les autres personnes du pôle|
+|Prestataires|||Peut saisir et modifier les dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
+|Autres personnes du service Environnement|||Accès en consultation sur une partie de l'application|
 
 # Les données
 
@@ -50,6 +54,8 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_anomalie  |x|||Formate l'affichage de la liste des anomalies présent dans le courrier d'envoi | ||
+|affiche_anomaliepre  |x|||Formate l'affichage des précisions sur les anomalies si saisie | ||
 |affiche_cc |x|||Formate l'affichage de la conformité au lieu de oui/non |*Cartothèque :* champ de catégorisation pour l'affichage du libellé de la conformité ||
 |affiche_blanc|x|||Contient le caractère `-` pour affichage dans l'info-bulle de résultat. Ce champ est affiché dans le résulat d'une recherche d'un contrôle pour gérer le fait que GEO affiche dans cette info-bulle les 2 premiers champs intégrés dans le résultat d'une recherche|*Recherche :* Recherche par adresse (AC) |![picto](/doc/img/info_bulle_result_rech_cc.png)|
 |affiche_cc |x|||Formate l'affichage de la conformité au lieu de oui/non |*Cartothèque :* champ de catégorisation pour l'affichage du libellé de la conformité ||
@@ -71,6 +77,8 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 | xapps_an_euep_cc_nc| id_adresse | 0 à n (égal) |
 |xapps_an_euep_cc| id_adresse | 0 à n (égal) |
 | xapps_v_adresse| id_adresse | 1 (égal) |
+
+   * Particularité : ATTENTION, l'ajout d'une anomalie doit être corrélée avec la modification du champ calculé `affiche_anomalie` pour intégrer le cas dans le courrier
 
 ## Table : `an_v_euep_cc`
 
@@ -647,7 +655,7 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |eprecupcpt   ||00|lt_euep_cc_eval||
 |epautre  ||||Champ texte à plusieurs lignes|
 |epobserv  ||||Champ texte à plusieurs lignes|
-|euepanomal  ||||Champ texte à plusieurs lignes|
+|euepanomal  |||lt_euep_cc_anomal|Cases à cocher multiples|
 |euepdivers  ||||Champ texte à plusieurs lignes|
 |ccbien  |x|20|lt_eupe_cc_bien|Boutons radios|
 |propriopat  |x||lt_euep_cc_pat||
@@ -657,7 +665,7 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |achetnom  |||||
 |achetpre  |||||
 |achetad  |||||
-|ccvalid  |x|false||Boutons radios|
+|ccvalid  |x|20|lt_euep_cc_valid|Boutons radios|
 |op_sai  ||%USER_LOGIN%|||
 |tnidcc  |x||lt_euep_cc_tnidcc|Boutons radios|
 
