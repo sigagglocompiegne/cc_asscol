@@ -652,7 +652,7 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   epautre character varying(200), -- Autre
   epobserv character varying(200), -- Observations diverses sur la collecte des eaux usées
   euepanomal character varying(20), -- Anomalies identifiées entrainant la non conformité (liste de valeur non liée pour ajout de plusieurs valeurs possible via GEO)
-  p2anomal character varying(100), -- Précision si anomalie concerne le code 2
+  euepanomalpre character varying(5000), -- Précision des anomalies
   euepdivers character varying(1000), -- Constatations diverses
   date_sai timestamp without time zone,
   date_maj timestamp without time zone,
@@ -739,7 +739,7 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.eprecupcpt IS 'Compteur présent en
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epautre IS 'Autre';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epobserv IS 'Observations diverses sur la collecte des eaux usées';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepanomal IS 'Anomalies identifiées entrainant la non conformité (liste de valeur non liée pour ajout de plusieurs valeurs possible via GEO)';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.p2anomal IS 'Précision si anomalie concerne le code 2';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepanomalpre IS 'Précision des anomalies';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepdivers IS 'Constatations diverses';
 
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_sai IS 'Date de saisie';
