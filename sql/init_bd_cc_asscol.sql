@@ -3,6 +3,11 @@
 -- 2018/02/01 : GB / initialisation du squelette de la structure dans la base de données pour gérer le suivi des contrôles de conformité
 --		GB / la donnée métier s'appuie sur le référentiel de voies et adresses locales (BAL) de l'ARC pour la localisation des contrôles
 -- 2018/03/22 : GB / ajout d'une table de log
+-- 2018/05/25 : GB / modification suite 1er test de l'application (ajout d'un type de validation et d'une liste d'anomalie avec un champ de précision 
+--	             pour les anomalies nécessaire
+--		     Le champ ccvalid devient un charactère (et non plus booléen) avec une clé étrangère sur le liste de valeur
+--                   Ajout d'une liste de valeur anomalie et stade de validation
+--                   Ajout d'un enregistrement dans la liste des prestataires
 -- #################################################################################################################################################
 
 
@@ -70,7 +75,7 @@ ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_anomal DROP CONSTRAINT IF EXIST
 DROP VIEW IF EXISTS x_apps.xapps_geo_v_euep_cc;
 DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc;
 DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc_nc;
-
+DROP VIEW IF EXISTS m_reseau_humide.an_v_euep_cc;
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
 -- ###                                                                  DOMAINES DE VALEURS                                                         ###
@@ -135,7 +140,8 @@ INSERT INTO m_reseau_humide.lt_euep_cc_certificateur(
     (5,'M.J CONSEIL',true,'2BIS PLACE SAINT-MEDARD 60350 ATTICHY','0969320404',null,'mjconseil60@wanadoo.fr',true,null,null,null,null),
     (6,'NANTAISE DES EAUX',true,'RUE D''HERLEVILLE 80170 ROSIERES EN SANTERRE','0344856615',null,null,true,null,null,null,null),
     (7,'SAUR',true,'CENTRE PICARDIE ET NORD, RUE FRANCOIS JACOB, PARC TERTIAIRE DE LACROIX BP 30147 60201 COMPIEGNE CEDEX','0360564001',null,null,true,null,null,null,null),
-    (8,'SUEZ Eau France',true,'AVENUE DU GROS GRELOT 60150 THOUROTTE','0977408408',null,null,true,null,null,null,null)
+    (8,'SUEZ Eau France',true,'AVENUE DU GROS GRELOT 60150 THOUROTTE','0977408408',null,null,true,null,null,null,null),
+    (9,'VEOLIA',true,'1 RUE DU THERAIN 60000 BEAUVAIS',null,null,null,true,'5268200550097','ALLIANZ','FRL 0021 8418','2018-12-31')
     ;
 
 
@@ -486,7 +492,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_valid(
             code, valeur)
     VALUES
     ('10','Contrôle validé'),
-    ('20','Contrôle non vérifié')
+    ('20','Contrôle non vérifié'),
     ('30','Contrôle non validé (modification demandée)')
     ;
     
@@ -494,7 +500,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_valid(
 
 -- Sequence: m_reseau_humide.lt_euep_cc_anomal_seq
 
--- DROP SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq;
+DROP SEQUENCE IF EXISTS m_reseau_humide.lt_euep_cc_anomal_seq;
 
 CREATE SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq
   INCREMENT 1
@@ -515,7 +521,7 @@ DROP TABLE IF EXISTS m_reseau_humide.lt_euep_cc_anomal;
 CREATE TABLE m_reseau_humide.lt_euep_cc_anomal
 (
   code integer NOT NULL DEFAULT nextval('m_reseau_humide.lt_euep_cc_anomal_seq'::regclass),
-  valeur character varying(80) NOT NULL,
+  valeur character varying(100) NOT NULL,
   CONSTRAINT lt_euep_cc_anomal_pkey PRIMARY KEY (code)
 )
 WITH (
@@ -527,8 +533,8 @@ GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_anomal TO postgres;
 GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_anomal TO groupe_sig;
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_anomal
   IS 'Liste des types de validation du contrôle';
-COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.code IS 'Code interne des anomalies possibles lors d'un contrôle';
-COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.valeur IS 'Libellé des anomalies possibles lors d'un contrôle';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.code IS 'Code interne des anomalies possibles lors d''un contrôle';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.valeur IS 'Libellé des anomalies possibles lors d''un contrôle';
 
 INSERT INTO m_reseau_humide.lt_euep_cc_anomal(
             code, valeur)
@@ -542,7 +548,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_anomal(
     (7,'Diamètre de l''évent insuffisant'),
     (8,'Event non remonté au faîtage de la maison ou immeuble ou local'),
     (9,'Absence de clapet anti-retour'),
-    (10,'Absence de siphon'),
+    (10,'Absence de siphon')
     ;
 
 -- ####################################################################################################################################################
@@ -580,7 +586,7 @@ CREATE TABLE m_reseau_humide.an_euep_cc
 (
   idcc integer NOT NULL DEFAULT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), -- Identifiant interne unique du contrôle
   id_adresse bigint NOT NULL, -- Identifiant unique de l'objet point adresse (issu de la BAL)
-  ccvalid character varying(2) DEFAULT '20', -- validation par l'ARC du contrôle (la valeur '10' empêche la modification des données)
+  ccvalid character varying(2) DEFAULT '20', -- validation par l'ARC du contrôle (la valeur 10 empêche la modification des données)
   ccinit boolean DEFAULT FALSE, -- information sur le fait que ce contrôle soit le contrôle initial à l'adresse
   adapt character varying(20), -- Complément de l'adresse avec le n° d'appartement dans le cadre d'un immeuble collectif
   adeta integer, -- Etage
@@ -667,7 +673,7 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.idcc IS 'Identifiant interne unique
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.tnidcc IS 'Type de dossier pour lacréation d''un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidcc IS 'N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccinit IS 'information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccvalid IS 'validation par l''ARC du contrôle (la valeur '10' empêche la modification des données';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccvalid IS 'validation par l''ARC du contrôle (la valeur 10 empêche la modification des données';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.id_adresse IS 'Identifiant unique de l''objet point adresse (issu de la BAL)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adapt IS 'Complément de l''adresse avec le n° d''appartement dans le cadre d''un immeuble collectif';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adeta IS 'Etage';
@@ -820,7 +826,7 @@ COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.geom IS 'Champ contenant la gé
 
 -- Sequence: m_reseau_humide.log_an_euep_cc_gid_seq
 
--- DROP SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq;
+DROP SEQUENCE IF EXISTS m_reseau_humide.log_an_euep_cc_gid_seq;
 
 CREATE SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq
   INCREMENT 1
@@ -996,7 +1002,7 @@ SELECT
 	c.email AS certi_email,
         c.tel AS certi_tel
 FROM
-	m_reseau_humide.an_euep_cc cc, m_reseau_humide.lt_euep_cc_certificateur c, x_apps.xapps_geo_v_adresse a
+	m_reseau_humide.an_euep_cc cc, m_reseau_humide.lt_euep_cc_certificateur c, x_apps.xapps_geo_vmr_adresse a
 WHERE cc.certtype = c.code and cc.id_adresse = a.id_adresse
 ORDER BY CAST (a.numero as int)
 ;
@@ -1035,7 +1041,7 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS
             a.mot_dir,
             a.libvoie_a,
             a.geom
-           FROM x_apps.xapps_geo_v_adresse a
+           FROM x_apps.xapps_geo_vmr_adresse a
           WHERE a.insee = '60023'::bpchar OR a.insee = '60067'::bpchar OR a.insee = '60068'::bpchar OR a.insee = '60070'::bpchar OR a.insee = '60151'::bpchar OR a.insee = '60156'::bpchar OR a.insee = '60159'::bpchar OR a.insee = '60323'::bpchar OR a.insee = '60325'::bpchar OR a.insee = '60326'::bpchar OR a.insee = '60337'::bpchar OR a.insee = '60338'::bpchar OR a.insee = '60382'::bpchar OR a.insee = '60402'::bpchar OR a.insee = '60447'::bpchar OR a.insee = '60578'::bpchar OR a.insee = '60579'::bpchar OR a.insee = '60597'::bpchar OR a.insee = '60600'::bpchar OR a.insee = '60665'::bpchar OR a.insee = '60667'::bpchar OR a.insee = '60674'::bpchar
         ), req_cc AS (
          SELECT c_1.id_adresse,
@@ -1132,7 +1138,7 @@ JOIN (SELECT id_adresse, max(ccdate) ccdate
 	ON cc.id_adresse = b.id_adresse
 	AND cc.ccdate = b.ccdate AND cc.rcc = 'non'
 JOIN m_reseau_humide.lt_euep_cc_certificateur c ON cc.certtype = c.code
-JOIN x_apps.xapps_geo_v_adresse a ON cc.id_adresse = a.id_adresse 
+JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse 
 AND cc.rcc = 'non'
 )
 SELECT	
