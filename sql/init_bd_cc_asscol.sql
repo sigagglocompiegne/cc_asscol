@@ -23,6 +23,7 @@ ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_eu
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_ordre_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_typebati_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_typeres_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_valid_fkey;
 
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrebrtype_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrechype_fkey;
@@ -63,6 +64,8 @@ ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_typeres DROP CONSTRAINT IF EXIS
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_sup DROP CONSTRAINT IF EXISTS lt_euep_sup_pkey;
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_eval DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_pkey;
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_tnidcc DROP CONSTRAINT IF EXISTS lt_euep_cc_tnidcc_pkey;
+ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_valid DROP CONSTRAINT IF EXISTS lt_euep_cc_valid_pkey;
+ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_anomal DROP CONSTRAINT IF EXISTS lt_euep_cc_anomal_pkey;
 
 DROP VIEW IF EXISTS x_apps.xapps_geo_v_euep_cc;
 DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc;
@@ -454,6 +457,93 @@ INSERT INTO m_reseau_humide.lt_euep_cc_tnidcc(
     ('10','Nouveau dossier'),
     ('20','Suivi du dossier n°')
     ;
+    
+-- ################################################################# Domaine valeur - lt_euep_cc_valid #############################################
+
+-- Table: m_reseau_humide.lt_euep_cc_valid
+
+DROP TABLE IF EXISTS m_reseau_humide.lt_euep_cc_valid;
+
+CREATE TABLE m_reseau_humide.lt_euep_cc_valid
+(
+  code character(2) NOT NULL,
+  valeur character varying(80) NOT NULL,
+  CONSTRAINT lt_euep_cc_valid_pkey PRIMARY KEY (code)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_reseau_humide.lt_euep_cc_valid
+  OWNER TO postgres;
+GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_valid TO postgres;
+GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_valid TO groupe_sig;
+COMMENT ON TABLE m_reseau_humide.lt_euep_cc_valid
+  IS 'Liste des types de validation du contrôle';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_valid.code IS 'Code interne des types de validation du contrôle';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_valid.valeur IS 'Libellé des types de validation du contrôle';
+
+INSERT INTO m_reseau_humide.lt_euep_cc_valid(
+            code, valeur)
+    VALUES
+    ('10','Contrôle validé'),
+    ('20','Contrôle non vérifié')
+    ('30','Contrôle non validé (modification demandée)')
+    ;
+    
+-- ################################################################# Domaine valeur - lt_euep_cc_anomal #############################################
+
+-- Sequence: m_reseau_humide.lt_euep_cc_anomal_seq
+
+-- DROP SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq;
+
+CREATE SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 11
+  CACHE 1;
+ALTER TABLE m_reseau_humide.lt_euep_cc_anomal_seq
+  OWNER TO postgres;
+GRANT ALL ON SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq TO postgres;
+GRANT ALL ON SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq TO groupe_sig;
+
+
+-- Table: m_reseau_humide.lt_euep_cc_anomal
+
+DROP TABLE IF EXISTS m_reseau_humide.lt_euep_cc_anomal;
+
+CREATE TABLE m_reseau_humide.lt_euep_cc_anomal
+(
+  code integer NOT NULL DEFAULT nextval('m_reseau_humide.lt_euep_cc_anomal_seq'::regclass),
+  valeur character varying(80) NOT NULL,
+  CONSTRAINT lt_euep_cc_anomal_pkey PRIMARY KEY (code)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_reseau_humide.lt_euep_cc_anomal
+  OWNER TO postgres;
+GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_anomal TO postgres;
+GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_anomal TO groupe_sig;
+COMMENT ON TABLE m_reseau_humide.lt_euep_cc_anomal
+  IS 'Liste des types de validation du contrôle';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.code IS 'Code interne des anomalies possibles lors d'un contrôle';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.valeur IS 'Libellé des anomalies possibles lors d'un contrôle';
+
+INSERT INTO m_reseau_humide.lt_euep_cc_anomal(
+            code, valeur)
+    VALUES
+    (1,'Maison ou immeuble ou local non raccordé'),
+    (2,'Maison ou immeuble ou local partiellement raccordé'),
+    (3,'Eaux usées raccordées sur le réseau d''eaux pluviales/ou au milieu naturel'),
+    (4,'Eaux pluviales raccordées sur le réseau d''eaux usées (en partie privée)'),
+    (5,'Présence d''ancien ouvrage de décantation (fosse septique, bac dégraisseur, etc..)'),
+    (6,'Absence d''évent'),
+    (7,'Diamètre de l''évent insuffisant'),
+    (8,'Event non remonté au faîtage de la maison ou immeuble ou local'),
+    (9,'Absence de clapet anti-retour'),
+    (10,'Absence de siphon'),
+    ;
 
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
@@ -490,7 +580,7 @@ CREATE TABLE m_reseau_humide.an_euep_cc
 (
   idcc integer NOT NULL DEFAULT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), -- Identifiant interne unique du contrôle
   id_adresse bigint NOT NULL, -- Identifiant unique de l'objet point adresse (issu de la BAL)
-  ccvalid boolean DEFAULT FALSE, -- validation par l'ARC du contrôle (la valeur true empêche la modification des données)
+  ccvalid character varying(2) DEFAULT '20', -- validation par l'ARC du contrôle (la valeur '10' empêche la modification des données)
   ccinit boolean DEFAULT FALSE, -- information sur le fait que ce contrôle soit le contrôle initial à l'adresse
   adapt character varying(20), -- Complément de l'adresse avec le n° d'appartement dans le cadre d'un immeuble collectif
   adeta integer, -- Etage
@@ -555,7 +645,8 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   eprecupcpt character varying(2) DEFAULT 'ZZ'::character varying, -- Compteur présent en cas de récupération des eaux pluviales à usage domestique (clé étrangère sur la liste de valeur lt_euep_cc_eval)
   epautre character varying(200), -- Autre
   epobserv character varying(200), -- Observations diverses sur la collecte des eaux usées
-  euepanomal character varying(1000), -- Anomalies identifiées entrainant la non conformité
+  euepanomal character varying(20), -- Anomalies identifiées entrainant la non conformité (liste de valeur non liée pour ajout de plusieurs valeurs possible via GEO)
+  p2anomal character varying(100), -- Précision si anomalie concerne le code 2
   euepdivers character varying(1000), -- Constatations diverses
   date_sai timestamp without time zone,
   date_maj timestamp without time zone,
@@ -576,7 +667,7 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.idcc IS 'Identifiant interne unique
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.tnidcc IS 'Type de dossier pour lacréation d''un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidcc IS 'N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccinit IS 'information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccvalid IS 'validation par l''ARC du contrôle (la valeur true empêche la modification des données';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccvalid IS 'validation par l''ARC du contrôle (la valeur '10' empêche la modification des données';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.id_adresse IS 'Identifiant unique de l''objet point adresse (issu de la BAL)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adapt IS 'Complément de l''adresse avec le n° d''appartement dans le cadre d''un immeuble collectif';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adeta IS 'Etage';
@@ -641,7 +732,8 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.eprecup IS 'Système de récupérat
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.eprecupcpt IS 'Compteur présent en cas de récupération des eaux pluviales à usage domestique (clé étrangère sur la liste de valeur lt_euep_cc_eval)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epautre IS 'Autre';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epobserv IS 'Observations diverses sur la collecte des eaux usées';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepanomal IS 'Anomalies identifiées entrainant la non conformité';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepanomal IS 'Anomalies identifiées entrainant la non conformité (liste de valeur non liée pour ajout de plusieurs valeurs possible via GEO)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.p2anomal IS 'Précision si anomalie concerne le code 2';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepdivers IS 'Constatations diverses';
 
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_sai IS 'Date de saisie';
@@ -862,6 +954,9 @@ ADD CONSTRAINT lt_euep_cc_eval_eppublic_fkey FOREIGN KEY (eppublic)
       ON UPDATE NO ACTION ON DELETE NO ACTION,
 ADD CONSTRAINT lt_euep_cc_eval_eprecupcpt_fkey FOREIGN KEY (eprecupcpt)
       REFERENCES m_reseau_humide.lt_euep_cc_eval (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+ADD CONSTRAINT lt_euep_cc_valid_fkey FOREIGN KEY (ccvalid)
+      REFERENCES m_reseau_humide.lt_euep_cc_valid (code) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
@@ -1109,11 +1204,11 @@ IF v_nidcc <> 'zz' THEN
 INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, ccinit, adapt, adeta, tnidcc, nidcc, rcc, ccdate, ccdated, ccbien, certtype ,certnom ,certpre ,propriopat, propriopatp, proprionom ,propriopre ,proprioad ,dotype ,doaut ,donom ,dopre ,doad ,
 					achetpat, achetpatp, achetnom, achetpre, achetad, batitype ,batiaut ,eppublic ,epaut ,rredptype ,
 					rrebrtype ,rrechype ,eupc ,euevent ,euregar ,euregardp ,eusup ,eusuptype ,eusupdoc ,euecoul ,eufluo ,eubrsch ,eurefl ,euepsep ,eudivers ,euanomal ,euobserv ,eusiphon ,epdiagpc ,epracpc ,epregarcol ,epregarext, 
-					epracdp ,eppar ,epparpre ,epfum ,epecoul ,epecoulobs ,eprecup ,eprecupcpt ,epautre ,epobserv ,euepanomal ,euepdivers,date_sai,op_sai,scr_geom)
+					epracdp ,eppar ,epparpre ,epfum ,epecoul ,epecoulobs ,eprecup ,eprecupcpt ,epautre ,epobserv ,euepanomal ,p2anomal,euepdivers,date_sai,op_sai,scr_geom)
 SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse , false, v_ccinit, new.adapt, new.adeta, new.tnidcc,v_nidcc, new.rcc , new.ccdate, new.ccdated, new.ccbien, new.certtype ,new.certnom ,new.certpre ,new.propriopat, new.propriopatp, new.proprionom ,new.propriopre ,new.proprioad ,new.dotype ,
 					new.doaut ,new.donom ,new.dopre ,new.doad, new.achetpat, new.achetpatp, new.achetnom, new.achetpre, new.achetad, new.batitype ,new.batiaut ,new.eppublic ,new.epaut ,new.rredptype ,
 					new.rrebrtype ,new.rrechype ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,new.eusuptype ,new.eusupdoc ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
-					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,new.eprecupcpt ,new.epautre ,new.epobserv ,new.euepanomal ,new.euepdivers,now(),new.op_sai,'61';
+					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,new.eprecupcpt ,new.epautre ,new.epobserv ,new.euepanomal ,new.p2anomal,new.euepdivers,now(),new.op_sai,'61';
 END IF;
 
 RETURN NEW;
@@ -1125,14 +1220,18 @@ RETURN NEW;
 ELSIF (TG_OP = 'UPDATE') THEN
 
 -- si le contrôle n'est pas validé alors on peut modifier les valeurs si non pas de modification possible
-IF (new.ccvalid = false and old.ccvalid = false) or (new.ccvalid = true and old.ccvalid = false) THEN
+IF (new.ccvalid = '20' or new.ccvalid = '30') and ((old.ccvalid = '20' or old.ccvalid='30')  or (new.ccvalid = '10' and ((old.ccvalid = '20' or old.ccvalid='30')))) THEN
 
 UPDATE m_reseau_humide.an_euep_cc
 SET 
 ccvalid = CASE 
-	  WHEN new.ccvalid = false and old.ccvalid = false THEN false
-	  WHEN new.ccvalid = true and old.ccvalid = false THEN true
-	  WHEN new.ccvalid = false and old.ccvalid = true THEN false
+	  WHEN new.ccvalid = '20' and old.ccvalid = '20' THEN '20'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '30' THEN '30'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '20' THEN '30'
+	  WHEN new.ccvalid = '20' and old.ccvalid = '30' THEN '20'
+	  WHEN new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid = '30') THEN '10'
+	  WHEN new.ccvalid = '20' and old.ccvalid = '10' THEN '20'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
 	  END,
 adapt = new.adapt,
 adeta = new.adeta,
@@ -1196,6 +1295,7 @@ eprecupcpt = new.eprecupcpt,
 epautre = epautre,
 epobserv = new.epobserv,
 euepanomal = new.euepanomal,
+p2anomal = new.p2anomal,
 euepdivers = new.euepdivers,
 date_maj = now()
 
@@ -1270,6 +1370,7 @@ UPDATE m_reseau_humide.an_euep_cc SET epecoulobs = null WHERE epecoulobs = '';
 UPDATE m_reseau_humide.an_euep_cc SET epautre = null WHERE epautre = '';
 UPDATE m_reseau_humide.an_euep_cc SET epobserv = null WHERE epobserv = '';
 UPDATE m_reseau_humide.an_euep_cc SET euepanomal = null WHERE euepanomal = '';
+UPDATE m_reseau_humide.an_euep_cc SET p2anomal = null WHERE p2anomal = '';
 UPDATE m_reseau_humide.an_euep_cc SET euepdivers = null WHERE euepdivers = '';
 
 RETURN NEW;
@@ -1376,6 +1477,7 @@ begin
 			CASE WHEN old.epautre <> new.epautre then 'epautre:' || old.epautre || ',' || new.epautre || ';' ELSE '' end ||
 			CASE WHEN old.epobserv <> new.epobserv then 'epobserv:' || old.epobserv || ',' || new.epobserv || ';' ELSE '' end ||
 			CASE WHEN old.euepanomal <> new.euepanomal then 'euepanomal:' || old.euepanomal || ',' || new.euepanomal || ';' ELSE '' end ||
+			CASE WHEN old.p2anomal <> new.p2anomal then 'p2anomal:' || old.p2anomal || ',' || new.p2anomal || ';' ELSE '' end ||
 			CASE WHEN old.euepdivers <> new.euepdivers then 'euepdivers:' || old.euepdivers || ',' || new.euepdivers || ';' ELSE '' end ||	
 			CASE WHEN old.op_sai <> new.op_sai then 'op_sai:' || old.op_sai || ',' || new.op_sai || ';' ELSE '' end; 
                         DELETE FROM m_reseau_humide.log_an_euep_cc WHERE modif is null or modif ='';
