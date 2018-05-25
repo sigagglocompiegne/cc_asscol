@@ -1376,7 +1376,7 @@ UPDATE m_reseau_humide.an_euep_cc SET epecoulobs = null WHERE epecoulobs = '';
 UPDATE m_reseau_humide.an_euep_cc SET epautre = null WHERE epautre = '';
 UPDATE m_reseau_humide.an_euep_cc SET epobserv = null WHERE epobserv = '';
 UPDATE m_reseau_humide.an_euep_cc SET euepanomal = null WHERE euepanomal = '';
-UPDATE m_reseau_humide.an_euep_cc SET p2anomal = null WHERE p2anomal = '';
+UPDATE m_reseau_humide.an_euep_cc SET euepanomalpre = null WHERE euepanomalpre = '';
 UPDATE m_reseau_humide.an_euep_cc SET euepdivers = null WHERE euepdivers = '';
 
 RETURN NEW;
@@ -1483,7 +1483,7 @@ begin
 			CASE WHEN old.epautre <> new.epautre then 'epautre:' || old.epautre || ',' || new.epautre || ';' ELSE '' end ||
 			CASE WHEN old.epobserv <> new.epobserv then 'epobserv:' || old.epobserv || ',' || new.epobserv || ';' ELSE '' end ||
 			CASE WHEN old.euepanomal <> new.euepanomal then 'euepanomal:' || old.euepanomal || ',' || new.euepanomal || ';' ELSE '' end ||
-			CASE WHEN old.p2anomal <> new.p2anomal then 'p2anomal:' || old.p2anomal || ',' || new.p2anomal || ';' ELSE '' end ||
+			CASE WHEN old.euepanomalpre <> new.euepanomalpre then 'p2anomal:' || old.p2anomal || ',' || new.p2anomal || ';' ELSE '' end ||
 			CASE WHEN old.euepdivers <> new.euepdivers then 'euepdivers:' || old.euepdivers || ',' || new.euepdivers || ';' ELSE '' end ||	
 			CASE WHEN old.op_sai <> new.op_sai then 'op_sai:' || old.op_sai || ',' || new.op_sai || ';' ELSE '' end; 
                         DELETE FROM m_reseau_humide.log_an_euep_cc WHERE modif is null or modif ='';
