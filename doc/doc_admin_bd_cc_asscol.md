@@ -181,8 +181,8 @@ Particularité(s) à noter :
         * une variable est calculée pour la génération du n° de dossier lorsque l'utilisateur choisit nouveau dossier dans l'applicatif métier
       
       * à l'insertion : vérification du n° de dossier (si il s'agit d'un suivi de dossier mal saisie, il ne passe rien)
-        * intégration des valeurs saisies par l'utilisateur (par défaut la séquence calcul le n° de l'identifiant unique de l'enregistrement, la validation du contrôle est forcée à `FALSE`, insertion de la variable définissant le contrôle initial et le n° de dossier)
-        * à la mise à jour : vérification de la validation du contrôle (si celui-ci est validé à `TRUE` par l'Agglomération, aucune modification n'est permise, si non les données peuvent être modifiées sauf le n° de dossier)        
+        * intégration des valeurs saisies par l'utilisateur (par défaut la séquence calcul le n° de l'identifiant unique de l'enregistrement, la validation du contrôle est forcée à `20`, insertion de la variable définissant le contrôle initial et le n° de dossier)
+        * à la mise à jour : vérification de la validation du contrôle (si celui-ci est validé à `10` par l'Agglomération, aucune modification n'est permise, si non les données peuvent être modifiées sauf le n° de dossier)        
 
 ---
 
