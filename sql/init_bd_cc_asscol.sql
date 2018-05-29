@@ -1203,6 +1203,12 @@ v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN
 		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
 	    END;
 
+-- recherche si il existe déjà un n° de dossier existant (pour le suivi) validé et conforme (pour empècher la saisie)
+
+
+-- recherche si il existe déjà un n° de dossier existant (pour le suivi) non validé (pour empècher la saisie)
+
+-- recherche si il existe un dossier existant à l'adresse (pour le suivi) (pour empècher la saisie)
 
 -- INSERT
 IF (TG_OP = 'INSERT') THEN
