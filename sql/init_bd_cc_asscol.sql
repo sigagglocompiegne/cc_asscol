@@ -679,7 +679,7 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.validobs IS 'commentaire sur les de
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.id_adresse IS 'Identifiant unique de l''objet point adresse (issu de la BAL)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adapt IS 'Complément de l''adresse avec le n° d''appartement dans le cadre d''un immeuble collectif';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adeta IS 'Etage';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.rcc IS 'Résultat du contrôle (true : conforme, false : non conforme)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.rcc IS 'Résultat du contrôle (oui : conforme, non : non conforme)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccdate IS 'Date du contrôle';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccdated IS 'Date de délivrance du contrôle';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.certtype IS 'Code de l''organisme certificateur agréé (clé étrangère sur la liste de valeur lt_euep_cc_certificateur)';
