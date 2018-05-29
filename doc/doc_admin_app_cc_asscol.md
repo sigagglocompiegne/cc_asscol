@@ -471,6 +471,7 @@ Source : `an_v_euep_cc`
 |affiche_adresse_gras|x|||||
 |affiche_dossier|x|||||
 |geom||||x||
+
 (la détection des doublons n'est pas activée ici)
 
  * Filtres :
