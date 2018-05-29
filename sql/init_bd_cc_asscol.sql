@@ -1241,7 +1241,7 @@ ccvalid = CASE
 	  WHEN new.ccvalid = '20' and old.ccvalid = '10' THEN '20'
 	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
 	  END,
-validobs = new.validobs,
+validobs = CASE WHEN new.ccvalid = '30' THEN new.validobs ELSE null END,
 adapt = new.adapt,
 adeta = new.adeta,
 rcc = new.rcc,
