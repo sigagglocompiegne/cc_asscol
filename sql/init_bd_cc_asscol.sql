@@ -141,7 +141,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_certificateur(
     (6,'NANTAISE DES EAUX',true,'RUE D''HERLEVILLE 80170 ROSIERES EN SANTERRE','0344856615',null,null,true,null,null,null,null),
     (7,'SAUR',true,'CENTRE PICARDIE ET NORD, RUE FRANCOIS JACOB, PARC TERTIAIRE DE LACROIX BP 30147 60201 COMPIEGNE CEDEX','0360564001',null,null,true,null,null,null,null),
     (8,'SUEZ Eau France',true,'AVENUE DU GROS GRELOT 60150 THOUROTTE','0977408408',null,null,true,null,null,null,null),
-    (9,'VEOLIA',true,'1 RUE DU THERAIN 60000 BEAUVAIS',null,null,null,true,'5268200550097','ALLIANZ','FRL 0021 8418','2018-12-31')
+    (9,'VEOLIA',true,'1 RUE DU THERAIN 60000 BEAUVAIS',null,null,'pascale.lecoutre@veolia.com;alain.michel2@veolia.com',true,'5268200550097','ALLIANZ','FRL 0021 8418','2018-12-31')
     ;
 
 
@@ -153,7 +153,7 @@ CREATE SEQUENCE m_reseau_humide.lt_euep_cc_certificateur_code_seq
   INCREMENT 1
   MINVALUE 1
   MAXVALUE 9223372036854775807
-  START 9
+  START 10
   CACHE 1;
 ALTER TABLE m_reseau_humide.lt_euep_cc_certificateur
   OWNER TO postgres;
@@ -587,10 +587,11 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   idcc integer NOT NULL DEFAULT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), -- Identifiant interne unique du contrôle
   id_adresse bigint NOT NULL, -- Identifiant unique de l'objet point adresse (issu de la BAL)
   ccvalid character varying(2) DEFAULT '20', -- validation par l'ARC du contrôle (la valeur 10 empêche la modification des données)
+  validobs character varying(1000), -- commentaire sur les demandes de modifications (uniquement si ccvalid = 30)
   ccinit boolean DEFAULT FALSE, -- information sur le fait que ce contrôle soit le contrôle initial à l'adresse
   adapt character varying(20), -- Complément de l'adresse avec le n° d'appartement dans le cadre d'un immeuble collectif
   adeta integer, -- Etage
-  tnidcc character varying(2), -- Type de dossier pour lacréation d'un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)
+  tnidcc character varying(2), -- Type de dossier pour la création d'un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)
   nidcc character varying(20) NOT NULL, -- N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)
   rcc character varying(3) NOT NULL, -- Résultat du contrôle (oui : conforme, non : non conforme, inconnu ?)
   ccdate timestamp without time zone, -- Date du contrôle
@@ -674,6 +675,7 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.tnidcc IS 'Type de dossier pour lac
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidcc IS 'N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccinit IS 'information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccvalid IS 'validation par l''ARC du contrôle (la valeur 10 empêche la modification des données';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.validobs IS 'commentaire sur les demandes de modifications (uniquement si ccvalid = 30)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.id_adresse IS 'Identifiant unique de l''objet point adresse (issu de la BAL)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adapt IS 'Complément de l''adresse avec le n° d''appartement dans le cadre d''un immeuble collectif';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adeta IS 'Etage';
@@ -1207,11 +1209,11 @@ IF (TG_OP = 'INSERT') THEN
 
 -- si le n° de dossier est nouveau ou un suivi est correctement saisi on insert si non rien
 IF v_nidcc <> 'zz' THEN
-INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, ccinit, adapt, adeta, tnidcc, nidcc, rcc, ccdate, ccdated, ccbien, certtype ,certnom ,certpre ,propriopat, propriopatp, proprionom ,propriopre ,proprioad ,dotype ,doaut ,donom ,dopre ,doad ,
+INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, validobs, ccinit, adapt, adeta, tnidcc, nidcc, rcc, ccdate, ccdated, ccbien, certtype ,certnom ,certpre ,propriopat, propriopatp, proprionom ,propriopre ,proprioad ,dotype ,doaut ,donom ,dopre ,doad ,
 					achetpat, achetpatp, achetnom, achetpre, achetad, batitype ,batiaut ,eppublic ,epaut ,rredptype ,
 					rrebrtype ,rrechype ,eupc ,euevent ,euregar ,euregardp ,eusup ,eusuptype ,eusupdoc ,euecoul ,eufluo ,eubrsch ,eurefl ,euepsep ,eudivers ,euanomal ,euobserv ,eusiphon ,epdiagpc ,epracpc ,epregarcol ,epregarext, 
 					epracdp ,eppar ,epparpre ,epfum ,epecoul ,epecoulobs ,eprecup ,eprecupcpt ,epautre ,epobserv ,euepanomal ,euepanomalpre,euepdivers,date_sai,op_sai,scr_geom)
-SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse , '20', v_ccinit, new.adapt, new.adeta, new.tnidcc,v_nidcc, new.rcc , new.ccdate, new.ccdated, new.ccbien, new.certtype ,new.certnom ,new.certpre ,new.propriopat, new.propriopatp, new.proprionom ,new.propriopre ,new.proprioad ,new.dotype ,
+SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse , '20', new.validobs, v_ccinit, new.adapt, new.adeta, new.tnidcc,v_nidcc, new.rcc , new.ccdate, new.ccdated, new.ccbien, new.certtype ,new.certnom ,new.certpre ,new.propriopat, new.propriopatp, new.proprionom ,new.propriopre ,new.proprioad ,new.dotype ,
 					new.doaut ,new.donom ,new.dopre ,new.doad, new.achetpat, new.achetpatp, new.achetnom, new.achetpre, new.achetad, new.batitype ,new.batiaut ,new.eppublic ,new.epaut ,new.rredptype ,
 					new.rrebrtype ,new.rrechype ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,new.eusuptype ,new.eusupdoc ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
 					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,new.eprecupcpt ,new.epautre ,new.epobserv ,new.euepanomal ,new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61';
@@ -1239,6 +1241,7 @@ ccvalid = CASE
 	  WHEN new.ccvalid = '20' and old.ccvalid = '10' THEN '20'
 	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
 	  END,
+validobs = new.validobs,
 adapt = new.adapt,
 adeta = new.adeta,
 rcc = new.rcc,
@@ -1351,6 +1354,7 @@ BEGIN
 
 -- UPDATE
 
+UPDATE m_reseau_humide.an_euep_cc SET validobs = null WHERE validobs = '';
 UPDATE m_reseau_humide.an_euep_cc SET adapt = null WHERE adapt = '';
 UPDATE m_reseau_humide.an_euep_cc SET certnom = null WHERE certnom = '';
 UPDATE m_reseau_humide.an_euep_cc SET certpre = null WHERE certpre = '';
