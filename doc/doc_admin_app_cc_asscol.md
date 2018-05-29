@@ -175,6 +175,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |rredptype||x|Réseau|Formatage par une liste de domaine (lt_euep_cc_typeres)|*Fiche d'information* : Dossier de conformité AC||
 |titre_fiche_affiche|x|||Formate en html le titre du dossier de conformité (1er onglet non nommé du dossier) |*Fiche d'information* : Dossier de conformité AC||
 |tnidcc||x|Type de contrôle|Formatage par une liste de domaine (lt_euep_cc_tnidcc)|*Fiche d'information* : Dossier de conformité AC||
+|validobs||x|Modifications demandées||*Fiche d'information* : Dossier de conformité AC||
   
    * filtres : aucun
    * relations :
@@ -451,6 +452,36 @@ Source : `an_v_euep_cc`
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
 |Date du contrôle|x|ccdate|est supérieure ou égale à une valeur saisie|||||Ce champ étant un  champ date, l'utilisateur dispose d'un calendrier pour la saisie de la date|
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Dossier de conformité AC
+
+## Recherche : `Recherche des contrôles avec une demande de modifications`
+
+Cette recherche permet à l'utilisateur de faire une recherche sur les contrôles de conformité ayant une demande de modifications faites au prestataire.
+
+  * Configuration :
+  
+Source : `an_v_euep_cc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_tri|x|||||
+|affiche_adresse_gras|x|||||
+|affiche_dossier|x|||||
+|geom||||x||
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|sans objet|||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|CC AC - Demande de modifications|x|ccvalid|est égale à une valeur par défaut|30|||||
 
 (1) si liste de domaine
 
