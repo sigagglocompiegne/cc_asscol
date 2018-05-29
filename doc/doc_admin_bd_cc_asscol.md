@@ -44,6 +44,7 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |idcc|Identifiant interne unique du contrôle|integer|nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)|
 |id_adresse|Identifiant unique de l'objet point adresse (issu de la BAL)|bigint| |
 |ccvalid|validation par l'ARC du contrôle (la valeur 10 empêche la modification des données|character varying(2)|20|
+|validobs|Modification demandée au prestataire (si ccvalid=30)|character varying(1000)||
 |ccinit|information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité|boolean|false|
 |adapt|Complément de l'adresse avec le n° d'appartement dans le cadre d'un immeuble collectif|character varying(20)| |
 |adeta|Etage|integer| |
