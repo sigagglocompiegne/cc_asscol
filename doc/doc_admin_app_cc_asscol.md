@@ -102,6 +102,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_glossaire  |x|||Formate en html l'affichage du glossaire dans l'onglet du même nom  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_logo  |x|||Lien http de l'image du logo de l'ARC  (format image)  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_nidcc |x|x|N° de dossier|Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_modif_demandee |x|x||Formate en HTML l'affichage des modifications demandées au prestataire  | *Recherche* : Recherche des contrôles avec une demande de modifications ||
 |affiche_reg |x|x|(null)|Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_tri |x|||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_tri.png)|
 |affiche_validite |x|||Formate la partie sur la durée du contrôle dans l'onglet A/Conclusion du contrôle du dossier de conformité | *Fiche d'information* : Dossier de conformité AC ||
@@ -471,6 +472,7 @@ Source : `an_v_euep_cc`
 |affiche_tri|x|||||
 |affiche_adresse_gras|x|||||
 |affiche_dossier|x|||||
+|affiche_modif_demandee|x|||||
 |geom||||x||
 
 (la détection des doublons n'est pas activée ici)
