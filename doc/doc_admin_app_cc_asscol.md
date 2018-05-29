@@ -163,6 +163,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |eusupdoc||x|Présence de documents attestant de cette servitude ?|Formatage par une liste de domaine (lt_euep_cc_eval)|*Fiche d'information* : Dossier de conformité AC||
 |eusuptype||x|Précisez|Formatage par une liste de domaine (lt_euep_sup)|*Fiche d'information* : Dossier de conformité AC||
 |nidcc||x|N° de dossier suivi||*Fiche d'information* : Dossier de conformité AC||
+|op_sai||x|null|Texte de remplacement utilisé avec un espace (évite l'affichage de la valeur dans la fiche)|*Fiche d'information* : Conformité AC à l'adresse||
 |ordre_cc||x|Il y a||*Fiche d'information* : Conformité AC à l'adresse||
 |proprioad||x|Adresse||*Fiche d'information* : Dossier de conformité AC||
 |proprionom||x|Nom||*Fiche d'information* : Dossier de conformité AC||
@@ -588,7 +589,7 @@ Source : `an_v_euep_cc`
 |A/Conclusion du contrôle||affiche_conclusion|Masqué|Vertical||||
 ||(vide)|rcc, ccdate|A gauche|Vertical||||
 ||(vide)|affiche_valide|Masqué|Vertical||||
-|B/Identitié de l'opérateur du diagnostic||certnom, certpre, certtype, certi_adresse, certi_tel, certi_email, certi_siret, certi_assur, certi_numassur, certi_dassur|Par défaut|Vertical||||
+|B/Identitié de l'opérateur du diagnostic||certnom, certpre, certtype, certi_adresse, certi_tel, certi_email, certi_siret, certi_assur, certi_numassur, certi_dassur,op_sai|Par défaut|Vertical||||
 |C/Désignation du donneur d'ordre||||Vertical||||
 ||Propriétaire|propriopat|Par défaut|Vertical||||
 ||(vide) sous-onglet de propriétaire|propriopatp|Par défaut|Vertical|propriopat=='40'|||
@@ -698,9 +699,10 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |achetpre  |||||
 |achetad  |||||
 |ccvalid  |x|20|lt_euep_cc_valid|Boutons radios|
-|op_sai  ||%USER_LOGIN%|||
+|op_sai  |x|%USER_LOGIN%|||
 |tnidcc  |x||lt_euep_cc_tnidcc|Boutons radios|
 
+ * Particularité : l'attirubt op_sai est obligatoire à la saisie mais non éditable. Il ne s'affiche pas dans la fiche car un espace a été initialisé comme texte de remplacement dans la table source. Ce contournement a été opéré pour saisir le login de connexion dans la base de données.
 
 **IMPORTANT** : L'édition des données jointes est désactivée.
  
@@ -849,6 +851,9 @@ Liste des recherches : Contrôle de conformité AC
 ||Recherche par N° de dossier (AC)|
 ||Liste des contrôles NON CONFORME|
 ||Recherche des contrôles depuis le|
+||Recherche des contrôles avec une demande de modifications|
 |Prestataires|Informations sur le prestataire|
+|Tableaux de bord|
+|
 
 
