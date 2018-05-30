@@ -130,19 +130,7 @@ COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_certificateur.nom_assur IS 'Libell�
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_certificateur.num_assur IS 'N° de la police d''assurance ou du contrat';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_certificateur.date_assur IS 'Date de fin validé du contrat d''assurance';
 
-INSERT INTO m_reseau_humide.lt_euep_cc_certificateur(
-            code, valeur,exist,adresse,tel,tel_port,email,etat,siret,nom_assur,num_assur,date_assur)
-    VALUES
-    (1,'ACTIV EXPERTISE',true,'141 RUE DU 14 JUILLET 60280 MARGNY-LES-COMPIEGNE','0663398739',null,'j.jardillier@activexpertise.fr',true,'82154070001825','GAN','141615626','20171231'),
-    (2,'A.GEO',true,'3 RUE SELLIER BP 20061 80500 MONTDIDIER','0322780873',null,'ageo-diagnostics@orange.fr',true,null,null,null,null),
-    (3,'AGENDA DIAGNOSTIC',true,'520 RUE D''ORROIRE 60400 NOYON','0344410138',null,'agendalain.catherine@orange.fr',true,null,null,null,null),
-    (4,'ALMIDIAG',true,'10 RUE VOLTAIRE 60180 NOGENT-SUR-OISE','0635495860',null,'mickael.pereira@almidiag.fr',true,'79810794200012','AXA','6622572904','20171231'),
-    (5,'M.J CONSEIL',true,'2BIS PLACE SAINT-MEDARD 60350 ATTICHY','0969320404',null,'mjconseil60@wanadoo.fr',true,null,null,null,null),
-    (6,'NANTAISE DES EAUX',true,'RUE D''HERLEVILLE 80170 ROSIERES EN SANTERRE','0344856615',null,null,true,null,null,null,null),
-    (7,'SAUR',true,'CENTRE PICARDIE ET NORD, RUE FRANCOIS JACOB, PARC TERTIAIRE DE LACROIX BP 30147 60201 COMPIEGNE CEDEX','0360564001',null,null,true,null,null,null,null),
-    (8,'SUEZ Eau France',true,'AVENUE DU GROS GRELOT 60150 THOUROTTE','0977408408',null,null,true,null,null,null,null),
-    (9,'VEOLIA',true,'1 RUE DU THERAIN 60000 BEAUVAIS',null,null,'pascale.lecoutre@veolia.com;alain.michel2@veolia.com',true,'5268200550097','ALLIANZ','FRL 0021 8418','2018-12-31')
-    ;
+-- la liste des valeurs intégrables n'est pas inséréde ici pour des raisons de confidentialités. Cette liste est disponible dans le fichier insert_certificateur.sql dans le répertoire métier correspondant.
 
 
 -- Sequence: m_reseau_humide.lt_euep_cc_certificateur_code_seq
@@ -153,7 +141,7 @@ CREATE SEQUENCE m_reseau_humide.lt_euep_cc_certificateur_code_seq
   INCREMENT 1
   MINVALUE 1
   MAXVALUE 9223372036854775807
-  START 10
+  START 11
   CACHE 1;
 ALTER TABLE m_reseau_humide.lt_euep_cc_certificateur
   OWNER TO postgres;
