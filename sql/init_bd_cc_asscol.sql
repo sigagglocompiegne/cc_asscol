@@ -1515,4 +1515,160 @@ CREATE TRIGGER t_t2_log_an_euep_cc_insert_update
   FOR EACH ROW
   EXECUTE PROCEDURE m_reseau_humide.ft_log_an_euep_cc();
 
+-- View: x_apps.xapps_an_v_euep_cc_tb1
+
+--DROP VIEW IF EXISTS x_apps.xapps_an_v_euep_cc_tb1;
+
+CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb1 AS 
+
+-- ancienne requête
+-- ****************
+
+ -- WITH req_t AS (
+--          WITH req_tot_yyyy AS (
+--                  SELECT DISTINCT a.insee,
+--                     a.commune,
+--                     to_char(cc.ccdate, 'YYYY'::text) AS annee,
+--                     count(*) OVER (PARTITION BY to_char(cc.ccdate, 'YYYY'::text), a.insee) AS nb
+--                    FROM m_reseau_humide.an_euep_cc cc
+--                      JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse
+--                   WHERE a.insee = '60023'::bpchar OR a.insee = '60151'::bpchar
+--                   ORDER BY a.insee
+--                 ), req_tot_yyyy_cc AS (
+--                  SELECT DISTINCT a.insee,
+--                     to_char(cc.ccdate, 'YYYY'::text) AS annee,
+--                     count(*) OVER (PARTITION BY to_char(cc.ccdate, 'YYYY'::text), a.insee) AS nb_cc
+--                    FROM m_reseau_humide.an_euep_cc cc,
+--                     x_apps.xapps_geo_vmr_adresse a
+--                   WHERE cc.id_adresse = a.id_adresse AND cc.rcc::text = 'oui'::text
+--                   ORDER BY a.insee, to_char(cc.ccdate, 'YYYY'::text)
+--                 ), req_tot_yyyy_nc AS (
+--                  SELECT DISTINCT a.insee,
+--                     to_char(cc.ccdate, 'YYYY'::text) AS annee,
+--                     count(*) OVER (PARTITION BY to_char(cc.ccdate, 'YYYY'::text), a.insee) AS nb_nc
+--                    FROM m_reseau_humide.an_euep_cc cc,
+--                     x_apps.xapps_geo_vmr_adresse a
+--                   WHERE cc.id_adresse = a.id_adresse AND cc.rcc::text = 'non'::text
+--                   ORDER BY a.insee, to_char(cc.ccdate, 'YYYY'::text)
+--                 )
+--          SELECT DISTINCT row_number() OVER () AS gid,
+--             ty.insee,
+--             ty.commune,
+--             ty.annee,
+--             ty.nb,
+--                 CASE
+--                     WHEN tycc.nb_cc >= 0 THEN tycc.nb_cc
+--                     ELSE 0::bigint
+--                 END AS nb_cc,
+--                 CASE
+--                     WHEN tync.nb_nc >= 0 THEN tync.nb_nc
+--                     ELSE 0::bigint
+--                 END AS nb_nc
+--            FROM req_tot_yyyy ty
+--              LEFT JOIN req_tot_yyyy_cc tycc ON (ty.insee::text || ty.annee) = (tycc.insee::text || tycc.annee)
+--              LEFT JOIN req_tot_yyyy_nc tync ON (ty.insee::text || ty.annee) = (tync.insee::text || tync.annee)
+--           WHERE ty.insee = '60023'::bpchar OR ty.insee = '60151'::bpchar
+--           ORDER BY ty.insee
+--         )
+--  SELECT DISTINCT row_number() over() as id,
+--  ((((((((((((('<table><tr>'::text || '<td rowspan="4">'::text) || req_t.commune::text) || '</td>'::text) || '<td>Année</td>'::text) || string_agg(('<td>'::text || req_t.annee) || '</td>'::text, ''::text)) || '</tr>'::text) || '<tr>'::text) || 
+-- '<td>Total</td>'::text) || string_agg(('<td>'::text || req_t.nb) || '</td>'::text, ''::text)) || '</tr><tr><td>Conforme</td>'::text) 
+-- || string_agg(('<td>'::text || req_t.nb_cc) || '</td>'::text, ''::text)) || '</tr><tr><td>Non conforme</td>'::text) 
+-- || string_agg(('<td>'::text || req_t.nb_nc) || '</td>'::text, ''::text)) || '</tr></table>'::text
+-- AS tableau
+--    FROM req_t
+--   GROUP BY req_t.commune;
+
+
+-- fin ancienne requête
+-- ****************
+WITH
+req_d as
+	(
+	with
+	req_a as
+		(
+		select distinct
+		g.insee || to_char(ccdate,'YYYY') as cle,
+		to_char(cc.ccdate,'YYYY') as annee,
+		g.insee,
+		g.libgeo as commune
+		from
+		m_reseau_humide.an_euep_cc cc, r_administratif.an_geo g
+		WHERE g.epci= '200067965'
+		order by g.insee || to_char(ccdate,'YYYY')
+		),
+		req_nb as
+		(
+		WITH
+		req_dbl as
+			(
+			SELECT
+			left(nidcc,5) || to_char(min(ccdate),'YYYY') as cle,
+			CASE WHEN count(*) > 1 THEN 1 ELSE 0 END as nb_suivi FROM m_reseau_humide.an_euep_cc cc group by nidcc
+			),
+		req_compte as
+			(
+			select DISTINCT
+			a.insee || to_char(cc.ccdate,'YYYY') as cle,
+			count(*) over(partition by to_char(cc.ccdate,'YYYY'), a.insee) as nb
+
+			FROM m_reseau_humide.an_euep_cc cc
+			JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse
+			LEFT JOIN r_administratif.an_geo g ON g.insee = a.insee
+			WHERE g.epci= '200067965'
+			order by a.insee || to_char(cc.ccdate,'YYYY')
+			)
+		SELECT DISTINCT
+		req_compte.cle,
+		req_compte.nb - sum(req_dbl.nb_suivi) as nb
+		FROM
+		req_compte,req_dbl
+		WHERE 
+		req_compte.cle = req_dbl.cle 
+		GROUP BY req_compte.cle, req_compte.nb
+		)
+	
+SELECT DISTINCT
+row_number() over() as id,
+
+
+'<tr>' || 
+'<td>' || 
+req_a.commune || 
+'</td>' ||
+
+'<td>Total</td>' || string_agg('<td align=center>' || CASE WHEN req_nb.nb is not null THEN req_nb.nb ELSE 0 END || '</td>', '') || '</tr>'
+-- '<tr><td>Conforme</td>'||
+-- string_agg('<td>' || req_t.nb_cc || '</td>', '') || '</tr><tr><td>Non conforme</td>' || 
+-- string_agg('<td>'|| req_t.nb_nc || '</td>', '') || '</tr></table>'
+AS tableau,
+string_agg('<td>' || req_a.annee || '</td>','') as annee,
+req_a.insee
+-- req_a.commune,
+-- CASE WHEN req_nb.nb is null THEN 0 ELSE req_nb.nb END as nb 
+FROM req_a left join req_nb on req_nb.cle = req_a.cle
+--WHERE req_a.insee = '60023'::bpchar OR req_a.insee = '60151'::bpchar
+group by req_a.commune, req_a.insee
+order by req_a.insee
+)
+SELECT
+
+row_number() over() as id,
+'<table border=1 align=center><tr><td colspan="2">&nbsp;</td>' || req_d.annee || '</tr>' ||
+string_agg(tableau,'') || '</table>' as tableau1
+FROM
+req_d
+group by req_d.annee;
+
+ALTER TABLE x_apps.xapps_an_v_euep_cc_tb1
+OWNER TO postgres;
+GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb1 TO postgres;
+GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb1 TO groupe_sig;
+COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb1
+IS 'Vue applicative formattant le tableau de bord n°1 par commune des contrôles de conformité AC pour affichage dans GEO';
+
+
+
+
 COMMIT;
