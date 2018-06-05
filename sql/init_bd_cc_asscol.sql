@@ -828,6 +828,40 @@ ALTER TABLE m_reseau_humide.log_an_euep_cc_gid_seq
   OWNER TO postgres;
 
 
+-- ########################################################################## table xapps_an_v_euep_cc_erreur #######################################################
+
+
+-- Table: x_apps.xapps_an_v_euep_cc_erreur
+
+-- DROP TABLE x_apps.xapps_an_v_euep_cc_erreur;
+
+CREATE TABLE x_apps.xapps_an_v_euep_cc_erreur
+(
+  gid integer NOT NULL, -- Identifiant unique
+  id_adresse integer, -- Identifiant de l'adresse
+  nidcc character varying(20), -- Identifiant du dossier
+  erreur character varying(500), -- Message
+  horodatage timestamp without time zone, -- Date (avec heure) de génération du message (ce champ permet de filtrer l'affichage < x secondsdans GEo)
+  CONSTRAINT xapps_an_v_euep_cc_erreur_pkey PRIMARY KEY (gid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE x_apps.xapps_an_v_euep_cc_erreur
+  OWNER TO postgres;
+GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_erreur TO postgres;
+GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_erreur TO groupe_sig;
+COMMENT ON TABLE x_apps.xapps_an_v_euep_cc_erreur
+  IS 'Table gérant les messages d''erreurs de sécurité remontés dans GEO suite à des enregistrements de contrôle de conformité';
+COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.gid IS 'Identifiant unique';
+COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.id_adresse IS 'Identifiant de l''adresse';
+COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.nidcc IS 'Identifiant du dossier';
+COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.erreur IS 'Message';
+COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.horodatage IS 'Date (avec heure) de génération du message (ce champ permet de filtrer l''affichage < x secondsdans GEo)';
+
+
+
+
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
 -- ###                                                           FKEY (clé étrangère)                                                               ###
@@ -1178,6 +1212,9 @@ $BODY$
 DECLARE v_ccinit boolean;
 DECLARE v_nidcc character varying;
 DECLARE v_ccvalid boolean;
+--DECLARE v_adresse integer;
+DECLARE t1_nidcc integer;
+DECLARE t2_nidcc integer;
 
 BEGIN
 
@@ -1191,18 +1228,25 @@ v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN
 		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
 	    END;
 
--- recherche si il existe déjà un n° de dossier existant (pour le suivi) validé et conforme (pour empècher la saisie)
 
+-- vérification sur la saisie des n° de dossier : compte le nombre de dossier validé et conforme (si = 0 peut insérer si non ne fait rien)
+t1_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid='10' and rcc='oui');
+-- vérification sur la saisie des n° de dossier : compte le nombre de dossier non validé (si >= 1 ne peut pas insérer un suivi de dossier sur un même dossier non validé)
+t2_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid <> '10');
 
--- recherche si il existe déjà un n° de dossier existant (pour le suivi) non validé (pour empècher la saisie)
-
--- recherche si il existe un dossier existant à l'adresse (pour le suivi) (pour empècher la saisie)
 
 -- INSERT
 IF (TG_OP = 'INSERT') THEN
 
+-- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
+-- contrôle sur le n° de dossier en suivi : ne peut pas saisir un suivi si le n° de dossier saisi n'existe pas à l'adresse CONFORME et VALIDE
+-- ici pas possibilité de remontée de message dans le fiche GEO. L'enregistrement ne se fait pas.
+
+
 -- si le n° de dossier est nouveau ou un suivi est correctement saisi on insert si non rien
-IF v_nidcc <> 'zz' THEN
+IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
+
+
 INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, validobs, ccinit, adapt, adeta, tnidcc, nidcc, rcc, ccdate, ccdated, ccbien, certtype ,certnom ,certpre ,propriopat, propriopatp, proprionom ,propriopre ,proprioad ,dotype ,doaut ,donom ,dopre ,doad ,
 					achetpat, achetpatp, achetnom, achetpre, achetad, batitype ,batiaut ,eppublic ,epaut ,rredptype ,
 					rrebrtype ,rrechype ,eupc ,euevent ,euregar ,euregardp ,eusup ,eusuptype ,eusupdoc ,euecoul ,eufluo ,eubrsch ,eurefl ,euepsep ,eudivers ,euanomal ,euobserv ,eusiphon ,epdiagpc ,epracpc ,epregarcol ,epregarext, 
@@ -1213,13 +1257,76 @@ SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse 
 					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,new.eprecupcpt ,new.epautre ,new.epobserv ,new.euepanomal ,new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61';
 END IF;
 
+
 RETURN NEW;
-
-
 
 
 -- UPDATE
 ELSIF (TG_OP = 'UPDATE') THEN
+
+
+-- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
+
+-- pas le bon prestataire
+IF old.certtype <> new.certtype  THEN
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un dossier que vous n''avez pas créé.<br>Modifications non prises en compte.',
+now()
+);
+
+END IF;
+
+-- ne peut pas modifier un dossier validé
+IF ((new.ccvalid = '20' or new.ccvalid = '30') and old.ccvalid = '10') or (old.ccvalid='10' and new.ccvalid='10') THEN
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un dossier validé.<br> Modifications non prises en compte.',
+now()
+);
+
+END IF;
+
+-- ne peut pas modifier le n° de dossier
+IF new.nidcc <> old.nidcc THEN
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un n° de dossier.<br> Les autres informations modifiées ont été prises en compte.',
+now()
+);
+
+END IF;
+
+-- ne peut pas modifier un suivi de dossier ou nouveau dossier
+IF new.tnidcc <> old.tnidcc THEN
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier le type de contrôle.<br> Les autres informations modifiées ont été prises en compte.',
+now()
+);
+
+END IF;
+
 
 -- si le prestataire qui modifie n'est pas celui qui a saisi pas de modification possible
 IF old.certtype = new.certtype THEN
@@ -1321,7 +1428,6 @@ $BODY$
 ALTER FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update()
   OWNER TO postgres;
 COMMENT ON FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
-
 
 
 
