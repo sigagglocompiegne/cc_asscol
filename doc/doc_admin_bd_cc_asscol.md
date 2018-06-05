@@ -189,6 +189,8 @@ Particularité(s) à noter :
 
 `xapps_geo_v_euep_cc` : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
 
+`xapps_an_v_euep_cc_erreur` : table alphanumérique contenant les messages d'erreurs temporaires renvoyés par le trigger de la vue éditable an_v_euep_cc dans le cas d'une erreur de modifications. Ces messages remontent temporairement dans la fiche du dossier de conformité.
+
 ## Liste de valeurs
 
 `lt_euep_cc_bien` : Liste des types de bien contrôlé
