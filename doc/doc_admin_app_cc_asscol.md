@@ -250,9 +250,9 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_message |x|x|requête SQL(1)|null|*Fiche d'information :* Dossier de conformité AC ||
+|affiche_message |x|x|null|(1)|*Fiche d'information :* Dossier de conformité AC ||
 
- `(1)
+ (1) Requête SQL permettant d'afficher temporairement un message d'erreur dans la fiche d'information`
  CASE WHEN
   extract(epoch from  now()::timestamp) - extract(epoch from
 {horodatage}::timestamp) <= 3 then 
@@ -611,15 +611,18 @@ Source : `an_v_euep_cc`
 |Nom de la section|Sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
 |:---|:---|:---|:---|:---|:---|:---|:---|
 |(vide)||titre_fiche_affiche|Masqué|Vertical||||
-|Objet de la mission||affiche_logo, affiche_reg|Masqué|Vertical||||
+|Objet de la mission||affiche_message,affiche_logo, affiche_reg|Masqué|Vertical||||
 |(vide)||tnidcc|A gauche|Vertical||||
 ||(vide)|nidcc|Par défaut|Vertical|tnidcc=='20'|||
 ||(vide)|ccbien, ccinit, ccvalid|Par défaut|Vertical||||
-|A/Conclusion du contrôle||affiche_conclusion|Masqué|Vertical||||
+|A/Conclusion du contrôle||affiche_message,affiche_conclusion|Masqué|Vertical||||
 ||(vide)|rcc, ccdate|A gauche|Vertical||||
 ||(vide)|affiche_valide|Masqué|Vertical||||
-|B/Identitié de l'opérateur du diagnostic||certnom, certpre, certtype, certi_adresse, certi_tel, certi_email, certi_siret, certi_assur, certi_numassur, certi_dassur,op_sai|Par défaut|Vertical||||
+|B/Identitié de l'opérateur du diagnostic|||Par défaut|Vertical||||
+||(vide)|affiche_message|Masqué|Vertical||||
+||(vide)|certnom, certpre, certtype, certi_adresse, certi_tel, certi_email, certi_siret, certi_assur, certi_numassur, certi_dassur,op_sai|Par défaut|Vertical||||
 |C/Désignation du donneur d'ordre||||Vertical||||
+||(vide)|affiche_message|Masqué|Vertical||||
 ||Propriétaire|propriopat|Par défaut|Vertical||||
 ||(vide) sous-onglet de propriétaire|propriopatp|Par défaut|Vertical|propriopat=='40'|||
 ||(vide) sous-onglet de propriétaire|proprionom, propriopre, proprioad|Par défaut|Vertical||||
@@ -629,13 +632,17 @@ Source : `an_v_euep_cc`
 ||(vide) sous-onglet de Acheteur|achetpatp|Par défaut|Vertical|achetpat=='40'|||
 ||(vide) sous-onglet de Acheteur|achetnom, achetpre, achetad|Par défaut|Vertical||||
 |D/Désignation du ou des bâtiments||||Vertical||||
+||(vide)|affiche_message|Masqué|Vertical||||
 ||Type de bâtiment|commune, adresse, adapt, adeta, batitype|Par défaut|Vertical||||
 ||(vide) sous-onglet de Type de bâtiment|batiaut|Par défaut|Vertical|batitype=='99'|||
 ||Desserte par le réseau public d'eau potable|eppublic|Par défaut|Vertical||||
 ||(vide) sous-onglet de Desserte par le réseau public d'eau potable|epaut|Par défaut|Vertical|eppublic=='20'|||
-|E/Nature des installations (domaine publique)|rredptype, rebrtype|||Vertical||||
+|E/Nature des installations (domaine publique)||||Vertical||||
+||(vide)|affiche_message|Masqué|Vertical||||
+||(vide)|rredptype, rebrtype|Par défaut|Vertical||||
 ||(vide)|rrechype|Par défaut|Vertical|rrebrtype=='20'|||
 |F/Etat des installations (domaine privé)||||||||
+||(vide)|affiche_message|Masqué|Vertical||||
 ||Collecte des eaux usées (EU)|||Vertical (ici pour la sous-section)||||
 ||(vide) sous-onglet de Collecte des eaux usées (EU)|eupc, euevent, euregar , euregardp|Par défaut|Vertical||||
 ||(vide) sous-onglet de Collecte des eaux usées (EU)|eusup|Par défaut|Vertical||||
@@ -649,14 +656,16 @@ Source : `an_v_euep_cc`
 ||(vide) sous-onglet de (vide)|epfum, epecoul, epecoulobs, eprecup|Par défaut|Vertical||||
 ||(vide) sous-onglet de (vide)|eprecupcpt|Par défaut|Vertical|eprecup=='10'|||
 ||(vide) sous-onglet de (vide)|epautre, epobserv|Masqué|Vertical||||
-|G/Anomalies identifiées|euepanomal|||Vertical||||
+|G/Anomalies identifiées||||Vertical||||
+||(vide)|affiche_message|Masqué|Vertical||||
+||(vide)|euepanomal|Au-dessus|Vertical||||
 |H/Constations diverses||||Vertical (ici pour la sous-section)||||
-||Anomalies repérées n'entraînant pas une non-conformité sous-onglet de Constations diverses|euepdivers|Masqué|Vertical||||
+||Anomalies repérées n'entraînant pas une non-conformité sous-onglet de Constations diverses|affiche_message,euepdivers,euepanomalpre|Masqué|Vertical||||
 ||(vide) sous-onglet de Constations diverses|ccdated |Par défaut|Vertical||||
 ||Attestation d'agrément sous-onglet de Constations diverses|affiche_attestation_logo |Masqué|Vertical||||
 |I/Pièces jointes||miniature, l_type, l_prec, affiche_lien|Par défaut|Vertical||Média-Assainissement Contrôle de conformité||
 ||Aperçu sous-onglet de I/Pièces jointes|l_test(champ toujours en test) |Masqué|Vertical||||
-|Glossaire||affiche_glossaire|Masqué|Vertical||||
+|Glossaire||affiche_message,affiche_glossaire|Masqué|Vertical||||
 
  * Saisie :
 
@@ -883,6 +892,6 @@ Liste des recherches : Contrôle de conformité AC
 ||Recherche des contrôles avec une demande de modifications|
 |Prestataires|Informations sur le prestataire|
 |Tableaux de bord|
-|
+||(en cours de réalisation)|
 
 
