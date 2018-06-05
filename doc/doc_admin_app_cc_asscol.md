@@ -187,6 +187,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |lt_euep_cc_certificateur| certtype - code | 1 (égal) |
 |xapps_geo_v_euep_cc| id_adresse | 0 à n (égal) |
 |an_euep_cc_media| idcc - id | 0 à n (égal) |
+| xapps_an_v_euep_cc_erreur| nidcc | 0 à 1 (égal) |
 
 ## Table : `an_euep_cc_media`
 
@@ -244,6 +245,32 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |SECU|code (Code interne du donneur d'ordre)|x|Alphanumérique|est égale à une valeur de contexte|id_presta|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
 
    * relations : aucune
+   
+## Table : `xapps_an_v_euep_cc_erreur`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_message |x|x|requête SQL(1)|null|*Fiche d'information :* Dossier de conformité AC ||
+
+ `(1)
+ CASE WHEN
+  extract(epoch from  now()::timestamp) - extract(epoch from
+{horodatage}::timestamp) <= 3 then 
+'<table width=100%><td bgcolor="#FF000">
+<font size=6 color="#ffffff"><center><b>' ||
+{erreur} ||
+'</b></center></font></td></table>'
+ELSE '' 
+END
+`
+   * filtres : aucun
+   * relations :
+
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+|lt_euep_cc_certificateur| certtype - code | 1 (égal) |
+|xapps_geo_v_euep_cc| id_adresse | 0 à n (égal) |
+|an_euep_cc_media| idcc - id | 0 à n (égal) |
 
 ## Table : `lt_euep_cc_tnidcc`
 
