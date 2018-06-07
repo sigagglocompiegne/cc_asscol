@@ -189,7 +189,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |an_euep_cc_media| idcc - id | 0 à n (égal) |
 | xapps_an_v_euep_cc_erreur| nidcc | 0 à 1 (égal) |
 
-## Table : `an_euep_cc_media`
+## Table : `an_v_euep_cc_media`
 
 |Attributs| Champ calculé | Formatage|Renommage |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
