@@ -191,6 +191,9 @@ Particularité(s) à noter :
 
 `xapps_an_v_euep_cc_erreur` : table alphanumérique contenant les messages d'erreurs temporaires renvoyés par le trigger de la vue éditable an_v_euep_cc dans le cas d'une erreur de modifications. Ces messages remontent temporairement dans la fiche du dossier de conformité.
 
+`an_v_euep_cc_media` : vue alphanumérique contenant les champs de la table an_euep_cc_media pour une gestion des droits selon la validation du dossier (cette table est intégrée dans GEO)
+
+
 ## Liste de valeurs
 
 `lt_euep_cc_bien` : Liste des types de bien contrôlé
