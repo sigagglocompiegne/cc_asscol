@@ -1182,6 +1182,35 @@ GRANT ALL ON TABLE x_apps.xapps_an_euep_cc_nc TO groupe_sig;
 COMMENT ON VIEW x_apps.xapps_an_euep_cc_nc
   IS 'Vue attributaire récupérant l''ensemble des contrôles non conforme (unique) pour recherche dans GEO des contrôles non conforme et export ou courrier';
 
+-- ####################################################### VIEW - an_v_euep_cc_media #################################################################
+
+-- COMMENT GB : -----------------------------------------------------------------------------------------------------------------------------------------------------
+-- vue permettant de gérer l'ajojut ou la suppression de média (si dossier valide,impossible d'ajouter ou de supprimer)
+-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- View: m_reseau_humide.an_v_euep_cc_media
+
+-- DROP VIEW m_reseau_humide.an_v_euep_cc_media;
+
+CREATE OR REPLACE VIEW m_reseau_humide.an_v_euep_cc_media AS 
+ SELECT an_euep_cc_media.gid,
+    an_euep_cc_media.id,
+    an_euep_cc_media.media,
+    an_euep_cc_media.miniature,
+    an_euep_cc_media.n_fichier,
+    an_euep_cc_media.t_fichier,
+    an_euep_cc_media.op_sai,
+    an_euep_cc_media.date_sai,
+    an_euep_cc_media.l_type,
+    an_euep_cc_media.l_prec
+   FROM m_reseau_humide.an_euep_cc_media;
+
+ALTER TABLE m_reseau_humide.an_v_euep_cc_media
+  OWNER TO postgres;
+GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc_media TO postgres;
+GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc_media TO groupe_sig;
+
 
 
 -- ####################################################################################################################################################
@@ -1769,3 +1798,84 @@ IS 'Vue applicative formattant le tableau de bord n°1 par commune des contrôle
 
 
 COMMIT;
+															 
+
+															 -- ##################################### FONCTION TRIGGER - t_t2_an_euep_cc_insert ##################################################################################
+-- ##################################### FONCTION TRIGGER - t_t1_an_v_euep_cc_media ##################################################################################
+
+															 -- Trigger: t_t1_an_v_euep_cc_media on m_reseau_humide.an_v_euep_cc_media
+
+-- DROP TRIGGER t_t1_an_v_euep_cc_media ON m_reseau_humide.an_v_euep_cc_media;
+
+CREATE TRIGGER t_t1_an_v_euep_cc_media
+  INSTEAD OF INSERT OR UPDATE
+  ON m_reseau_humide.an_v_euep_cc_media
+  FOR EACH ROW
+  EXECUTE PROCEDURE m_reseau_humide.t_t1_an_v_euep_cc_media();
+															 
+															 -- Trigger: t_t1_an_v_euep_cc_media_insert_update on m_reseau_humide.an_v_euep_cc_media
+
+-- DROP TRIGGER t_t1_an_v_euep_cc_media_insert_update ON m_reseau_humide.an_v_euep_cc_media;
+
+-- CREATE TRIGGER t_t1_an_v_euep_cc_media
+--   INSTEAD OF INSERT OR UPDATE
+--   ON m_reseau_humide.an_v_euep_cc_media
+--   FOR EACH ROW
+--   EXECUTE PROCEDURE m_reseau_humide.t_t1_an_v_euep_cc_media();
+
+-- Function: m_reseau_humide.t_t1_an_v_euep_cc_media()
+
+-- DROP FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media();
+
+CREATE OR REPLACE FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media()
+  RETURNS trigger AS
+$BODY$
+
+DECLARE t_valid integer;
+
+
+BEGIN
+
+-- recherche si le contrôle est validé, dans ce cas 1 et pas possible d'insérer, de mettre à jour ou de supprimer un média
+t_valid := (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10');
+
+-- si le controle n'est pas validé
+IF t_valid = 0 THEN
+
+-- INSERT
+IF (TG_OP = 'INSERT') THEN
+
+INSERT INTO m_reseau_humide.an_euep_cc_media (gid,id,media,miniature,n_fichier,t_fichier,op_sai,date_sai,l_type,l_prec)
+SELECT nextval('m_reseau_humide.an_euep_cc_media_gid_seq'::regclass),new.id,new.media,new.miniature,new.n_fichier,new.t_fichier,new.op_sai,new.date_sai,new.l_type,new.l_prec ;
+
+-- UPDATE
+ELSIF (TG_OP = 'UPDATE') THEN
+UPDATE m_reseau_humide.an_euep_cc_media 
+SET
+op_sai = new.op_sai,
+date_sai = new.date_sai,
+l_type = new.l_type,
+l_prec = new.l_prec
+WHERE gid = old.gid;
+
+-- DELETE
+ELSIF (TG_OP = 'DELETE') THEN
+
+DELETE FROM m_reseau_humide.an_euep_cc_media WHERE gid = old.gid;
+
+END IF;
+END IF;
+
+RETURN NEW;
+
+-- si validé on fait rien
+
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media()
+  OWNER TO postgres;
+COMMENT ON FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media() IS 'Fonction trigger pour la gestion de l''insertion des médias des dossiers de conformité';
+
+
