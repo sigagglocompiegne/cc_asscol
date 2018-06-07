@@ -480,5 +480,5 @@ Sans objet
 
 ### Schéma fonctionnel
 
-![schema_fonctionnel](img/schema_fonctionnel.jpg)
+![schema_fonctionnel](img/schema_fonctionnel_v2.jpg)
 
