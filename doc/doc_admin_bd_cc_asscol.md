@@ -476,7 +476,7 @@ Sans objet
 
 ### Modèle conceptuel simplifié
 
-![mcd](img/MCD.png)
+![mcd](img/MCD_v2.png)
 
 ### Schéma fonctionnel
 
