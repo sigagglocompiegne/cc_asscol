@@ -1215,131 +1215,407 @@ GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc_media TO groupe_sig;
 -- ####################################################### VIEW - xapps_an_v_euep_cc_tb1 #################################################################
 
 -- COMMENT GB : -----------------------------------------------------------------------------------------------------------------------------------------------------
--- vue permettant de générer le code HTML et lesrésultats du tableau n°1 du tableaude bord (contrôle par commune)
+-- vue permettant de générer le code HTML et les résultats du tableau n°1 du tableau de bord (contrôle par commune)
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- View: x_apps.xapps_an_v_euep_cc_tb1
 
-DROP VIEW x_apps.xapps_an_v_euep_cc_tb1;
+DROP VIEW IF EXISTS x_apps.xapps_an_v_euep_cc_tb1;
 
 CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb1 AS 
- WITH req_d AS (
-         WITH req_a AS (
-                 SELECT DISTINCT g.insee::text || to_char(cc.ccdate, 'YYYY'::text) AS cle,
-                    to_char(cc.ccdate, 'YYYY'::text) AS annee,
-                    g.insee,
-                    g.libgeo AS commune
-                   FROM m_reseau_humide.an_euep_cc cc,
-                    r_administratif.an_geo g
-                  WHERE g.epci::text = '200067965'::text
-                  ORDER BY g.insee::text || to_char(cc.ccdate, 'YYYY'::text)
-                ), req_nb AS (
-                 WITH req_dbl AS (
-                         SELECT "left"(cc.nidcc::text, 5) || to_char(min(cc.ccdate), 'YYYY'::text) AS cle,
-                                CASE
-                                    WHEN count(*) > 1 THEN 1
-                                    ELSE 0
-                                END AS nb_suivi
-                           FROM m_reseau_humide.an_euep_cc cc
-                          GROUP BY cc.nidcc
-                        ), req_compte AS (
-                         SELECT DISTINCT a.insee::text || to_char(cc.ccdate, 'YYYY'::text) AS cle,
-                            count(*) OVER (PARTITION BY to_char(cc.ccdate, 'YYYY'::text), a.insee) AS nb
-                           FROM m_reseau_humide.an_euep_cc cc
-                             JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse
-                             LEFT JOIN r_administratif.an_geo g ON g.insee::bpchar = a.insee
-                          WHERE g.epci::text = '200067965'::text
-                          ORDER BY a.insee::text || to_char(cc.ccdate, 'YYYY'::text)
-                        )
-                 SELECT DISTINCT req_compte.cle,
-                    req_compte.nb - sum(req_dbl.nb_suivi) AS nb
-                   FROM req_compte,
-                    req_dbl
-                  WHERE req_compte.cle = req_dbl.cle
-                  GROUP BY req_compte.cle, req_compte.nb
-                ), 
-                req_nbc AS (
-                 WITH req_dbl AS (
-                         SELECT "left"(cc.nidcc::text, 5) || to_char(min(cc.ccdate), 'YYYY'::text) AS cle,
-                                CASE
-                                    WHEN count(*) > 1 THEN 1
-                                    ELSE 0
-                                END AS nb_suivi
-                           FROM m_reseau_humide.an_euep_cc cc WHERE rcc='oui'
-                          GROUP BY cc.nidcc
-                        ), req_compte AS (
-                         SELECT DISTINCT a.insee::text || to_char(cc.ccdate, 'YYYY'::text) AS cle,
-                            count(*) OVER (PARTITION BY to_char(cc.ccdate, 'YYYY'::text), a.insee) AS nb
-                           FROM m_reseau_humide.an_euep_cc cc
-                             JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse
-                             LEFT JOIN r_administratif.an_geo g ON g.insee::bpchar = a.insee
-                          WHERE g.epci::text = '200067965'::text and rcc='oui'
-                          ORDER BY a.insee::text || to_char(cc.ccdate, 'YYYY'::text)
-                        )
-                 SELECT DISTINCT req_compte.cle,
-                    req_compte.nb - sum(req_dbl.nb_suivi) AS nb
-                   FROM req_compte,
-                    req_dbl
-                  WHERE req_compte.cle = req_dbl.cle
-                  GROUP BY req_compte.cle, req_compte.nb
-                  ORDER BY req_compte.cle
-		), 
-		req_nbnc AS (
-                 WITH req_dbl AS (
-                         SELECT "left"(cc.nidcc::text, 5) || to_char(min(cc.ccdate), 'YYYY'::text) AS cle,
-                                CASE
-                                    WHEN count(*) > 1 THEN 1
-                                    ELSE 0
-                                END AS nb_suivi
-                           FROM m_reseau_humide.an_euep_cc cc WHERE rcc='non'
-                          GROUP BY cc.nidcc
-                        ), req_compte AS (
-                         SELECT DISTINCT a.insee::text || to_char(cc.ccdate, 'YYYY'::text) AS cle,
-                            count(*) OVER (PARTITION BY to_char(cc.ccdate, 'YYYY'::text), a.insee) AS nb
-                           FROM m_reseau_humide.an_euep_cc cc
-                             JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse
-                             LEFT JOIN r_administratif.an_geo g ON g.insee::bpchar = a.insee
-                          WHERE g.epci::text = '200067965'::text and rcc='non'
-                          ORDER BY a.insee::text || to_char(cc.ccdate, 'YYYY'::text)
-                        )
-                 SELECT DISTINCT req_compte.cle,
-                    req_compte.nb - sum(req_dbl.nb_suivi) AS nb
-                   FROM req_compte,
-                    req_dbl
-                  WHERE req_compte.cle = req_dbl.cle
-                  GROUP BY req_compte.cle, req_compte.nb
-                  ORDER BY req_compte.cle
-		)
-               
-         SELECT DISTINCT row_number() OVER () AS id,
-            ((((('<tr>'::text || '<td rowspan="3">'::text) || req_a.commune::text) || '</td>'::text) || '<td>Total</td>'::text) || string_agg(('<td align=center>'::text ||
+
+-- sous requête global englobant l'ensemble des calculs pour formatage final du tableau HTML
+WITH
+req_d AS
+(
+
+-- sous requête permettant de récupérer pour toutes les communes de l'ARC une clé composée du code INSEE et de l'année
+-- ce traitement est nécessaire pour la jointure final. Cette requête permettre de faire de jointure avec tous les autres traitements pour récupérer toutes lignes pour toutes les communes même
+-- si certaines communes de remontes aucun résultat. On gère ici le fait de remonter des null si aucune donnée. Si null alors on affichera 0.
+WITH
+req_annee AS
+	-- requête alant chercher les communes de l'ARC et recomposition d'une clé (INSEE || annee). L'année correspondant aux années présentes dans la table des données alphanumériques des contrôles
+	(
+	select distinct
+		g.insee || to_char(ccdate,'YYYY') as cle,
+		to_char(cc.ccdate,'YYYY') as annee,
+		g.insee,
+		g.libgeo as commune
+	from
+		m_reseau_humide.an_euep_cc cc, r_administratif.an_geo g
+	WHERE g.epci= '200067965'--'246001010'
+	order by g.insee || to_char(ccdate,'YYYY')
+
+	),
+-- requête qui recherche le nb de contrôle total par commune et par année
+req_tcc AS
+	(
+	WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
+			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
+			),
+		req_nbcc AS
+                        -- comptage des contrôles par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc, count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_ccu
+			from
+				m_reseau_humide.an_euep_cc 
+			group by nidcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier par commune et par année
+		SELECT 
+			left(cc.nidcc,5) || a.annee as cle,
+			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_ccu) as nb_ccu
+		FROM	
+			req_amin a
+		INNER JOIN req_nbcc cc ON a.nidcc = cc.nidcc
+		GROUP BY left(cc.nidcc,5), annee
+		ORDER BY left(cc.nidcc,5)
+	),
+
+-- requête qui recherche le nb de contrôle total pour l'ARC
+req_tccarc AS (
+               WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
+			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc GROUP BY nidcc
+			),
+		req_nbccarc AS
+			-- comptage des contrôles par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc, count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_ccuarc
+			from
+				m_reseau_humide.an_euep_cc 
+			group by nidcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier par commune et par année
+		SELECT 
+			a.annee as cle,
+			sum(cc.nb_ccuarc) as nb_ccuarc
+		FROM	
+			req_amin a
+		INNER JOIN req_nbccarc cc ON a.nidcc = cc.nidcc
+		GROUP BY a.annee
+		ORDER BY annee
+),
+-- requête qui recherche le nb de contrôle conforme
+req_tccc AS
+	(
+	WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
+			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
+			),
+		req_nbccc AS
+			-- comptage des contrôles conformes par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc, rcc,count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_cccu
+			from
+				m_reseau_humide.an_euep_cc 
+			where rcc='oui'
+			group by nidcc,rcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier par commune conforme et par année
+		SELECT 
+			left(cc.nidcc,5) || a.annee as cle,
+			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_cccu) as nb_cccu
+		FROM	
+			req_amin a
+		INNER JOIN req_nbccc cc ON a.nidcc = cc.nidcc
+		GROUP BY left(cc.nidcc,5), annee
+		ORDER BY left(cc.nidcc,5)
+	),
+
+-- requête qui recherche le nb de contrôle conforme total ARC
+req_tcccarc AS (
+               WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier
+			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc GROUP BY nidcc
+			),
+		req_nbccarc AS
+			-- comptage des contrôles conformes par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc,rcc, count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_ccuarc
+			from
+				m_reseau_humide.an_euep_cc 
+			where rcc='oui'
+			group by nidcc, rcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier conforme par commune et par année
+		SELECT 
+			a.annee as cle,
+			sum(cc.nb_ccuarc) as nb_cccuarc
+		FROM	
+			req_amin a
+		INNER JOIN req_nbccarc cc ON a.nidcc = cc.nidcc
+		GROUP BY a.annee
+		ORDER BY annee
+),
+	
+-- requête qui recherche le nb de contrôle non conforme
+req_tccnc AS
+	(
+	WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
+			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
+			),
+		req_nbccnc AS
+			-- comptage des contrôles non conformes et pas devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc, count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_ccncu
+			from
+				m_reseau_humide.an_euep_cc 
+			where rcc='non' and nidcc not in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
+			group by nidcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier conforme par commune et par année
+		SELECT 
+			left(cc.nidcc,5) || a.annee as cle,
+			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_ccncu) as nb_ccncu
+		FROM	
+			req_amin a
+		INNER JOIN req_nbccnc cc ON a.nidcc = cc.nidcc
+		GROUP BY left(cc.nidcc,5), annee
+		ORDER BY left(cc.nidcc,5)
+	),
+-- requête qui recherche le nb de contrôle non conforme total ARC
+req_tccncarc AS (
+               WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
+			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc GROUP BY nidcc
+			),
+		req_nbccarc AS
+			-- comptage des contrôles non conformes et pas devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc,rcc, count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_ccuarc
+			from
+				m_reseau_humide.an_euep_cc 
+			where rcc='non' and nidcc not in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
+			group by nidcc, rcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier non conforme par commune et par année
+		SELECT 
+			a.annee as cle,
+			sum(cc.nb_ccuarc) as nb_ccncuarc
+		FROM	
+			req_amin a
+		INNER JOIN req_nbccarc cc ON a.nidcc = cc.nidcc
+		GROUP BY a.annee
+		ORDER BY annee
+),
+-- requête qui recherche le nb de contrôle non conforme passé en conforme (pour calculer le taux de mise en conformité)
+req_tccncc AS
+	(
+	WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
+			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
+			),
+		req_nbccncc AS
+			-- comptage des contrôles non conformes et devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc, count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_ccnccu
+			from
+				m_reseau_humide.an_euep_cc 
+			where rcc='non' and nidcc in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
+			group by nidcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier non conforme passé en conforme par commune et par année
+		SELECT 
+			left(cc.nidcc,5) || a.annee as cle,
+			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_ccnccu) as nb_ccnccu
+		FROM	
+			req_amin a
+		INNER JOIN req_nbccncc cc ON a.nidcc = cc.nidcc
+		GROUP BY left(cc.nidcc,5), annee
+		ORDER BY left(cc.nidcc,5)
+	),
+-- requête qui recherche le nb de contrôle non conforme passé en conforme pour l'ARC (pour calculer le taux de mise en conformité)
+req_tccncc_arc AS
+	(
+	WITH
+		req_amin AS
+			(
+			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
+			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
+			),
+		req_nbccncc AS
+			-- comptage des contrôles non conformes et devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
+			(
+			select nidcc, count(*) as nb,
+				CASE
+					WHEN count(*) > 1 
+					THEN 1
+				ELSE
+				count(*) END as nb_ccnccu
+			from
+				m_reseau_humide.an_euep_cc 
+			where rcc='non' and nidcc in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
+			group by nidcc
+			)
+		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier non conforme passé en conforme par commune et par année
+		SELECT 
+			a.annee as cle,
+			sum(cc.nb_ccnccu) as nb_ccnccu_arc
+		FROM	
+			req_amin a
+		INNER JOIN req_nbccncc cc ON a.nidcc = cc.nidcc
+		GROUP BY annee
+		ORDER BY annee
+	)
+
+-- requête formatant la 1ère partie du tableau : les lignes par commune
+SELECT DISTINCT row_number() OVER () AS id,
+	      -- ici création des cellules du tableau en intégrant à l'intérieur les résultats des requêtes précédentes
+	      -- je récupère le nom de la commune, la somme des contrôles par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
+              ((((('<tr>'::text || '<td rowspan="5">'::text) || a.commune::text) || '</td>'::text) || '<td>Total</td>'::text) || string_agg(('<td align=center>'::text ||
                 CASE
-                    WHEN req_nb.nb IS NOT NULL THEN req_nb.nb
+		   -- gestion ici des valeurs null non remonté, remplacement par 0
+                    WHEN tcc.nb_ccu IS NOT NULL THEN tcc.nb_ccu
                     ELSE 0::bigint
-                END) || '</td>'::text, ''::text)) || '</tr>'::text || '<tr><td>Conforme</td>' || string_agg('<td align=center>'::text ||
+                END) || '</td>'::text, ''::text)) || '</tr>'::text 
+		-- je récupère la somme des contrôles conforme par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
+		|| '<tr><td>Conforme</td>' || string_agg('<td align=center>'::text ||
                 CASE
-                    WHEN req_nbc.nb IS NOT NULL THEN req_nbc.nb
+                    WHEN tccc.nb_cccu IS NOT NULL THEN tccc.nb_cccu
                     ELSE 0::bigint
-                END || '</td>'::text, ''::text) || '</tr>'::text || '<tr><td>Non Conforme</td>' || string_agg('<td align=center>'::text ||
+                END || '</td>'::text, ''::text) || '</tr>'::text 
+		-- je récupère la somme des contrôles non conforme par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
+		|| '<tr><td>Non Conforme</td>'|| string_agg('<td align=center>'::text ||
                 CASE
-                    WHEN req_nbnc.nb IS NOT NULL THEN req_nbnc.nb
+                    WHEN tccnc.nb_ccncu IS NOT NULL THEN tccnc.nb_ccncu
                     ELSE 0::bigint
-                END || '</td>'::text, ''::text) || '</tr>'::text AS tableau,
-            string_agg(('<td>'::text || req_a.annee) || '</td>'::text, ''::text) AS annee,
-            req_a.insee
-           FROM req_a
-             LEFT JOIN req_nb ON req_nb.cle = req_a.cle
-             LEFT JOIN req_nbc ON req_nbc.cle = req_a.cle
-             LEFT JOIN req_nbnc ON req_nbnc.cle = req_a.cle
-           --where insee='60159'
-          GROUP BY req_a.commune, req_a.insee
-          ORDER BY req_a.insee
-        )
+                END || '</td>'::text, ''::text) || '</tr>'::text 
+		-- je calcul le taux de conformité des contrôles par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
+                || '<tr><td>Taux de conformité</td>' || string_agg('<td align=center>'::text ||
+                CASE
+                    WHEN tccc.nb_cccu IS NULL THEN '0%'::character varying
+                    ELSE round((tccc.nb_cccu/nullif(tcc.nb_ccu,0))*100,1) || '%'
+                END || '</td>'::text, ''::text) || '</tr>'::text 
+		-- je calcul le taux de mise en conformité des contrôles par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
+                || '<tr><td>Taux de mise en conformité<sup>(2)</sup></td>' || string_agg('<td align=center>'::text || 
+		CASE
+                    WHEN tccncc.nb_ccnccu IS NULL THEN '0%'::character varying
+                    ELSE round((tccncc.nb_ccnccu/(tccnc.nb_ccncu+tccncc.nb_ccnccu))*100,1) || '%'
+                END || '</td>'::text, ''::text) || '</tr>'::text
+		AS tableau,
+	    -- je formate ici la ligne haute du tableau des années de résultat
+            string_agg(('<td>'::text || a.annee) || '</td>'::text, ''::text) AS annee,
+	    -- je formate ici les lignes de résultats popur le total ARC (comme les communes)
+            -- contrôle total
+            string_agg(('<td align=center><b>'::text || tccarc.nb_ccuarc) || '</b></td>'::text, ''::text) AS nb_ccuarc,
+            -- contrôle conforme total
+            string_agg(('<td align=center><b>'::text || tcccarc.nb_cccuarc) || '</b></td>'::text, ''::text) AS nb_cccuarc,
+	    -- contrôle non conforme total
+	    string_agg(('<td align=center><b>'::text || tccncarc.nb_ccncuarc) || '</b></td>'::text, ''::text) AS nb_ccncuarc,
+            -- taux de conformité
+            string_agg('<td align=center><b>'::text || 
+		CASE
+                    WHEN tccncc_arc.nb_ccnccu_arc IS NULL THEN '0%'::character varying
+                    ELSE round((tccncc_arc.nb_ccnccu_arc/(tccncarc.nb_ccncuarc+tccncc_arc.nb_ccnccu_arc))*100,1) || '%'
+                END || '</td>'::text, ''::text) || '</tr>'::text
+                 AS tx_ccnccu_arc,
+            -- taux de mise en conformité
+            string_agg('<td align=center><b>'::text || 
+		CASE
+                    WHEN tcccarc.nb_cccuarc IS NULL THEN '0%'::character varying
+                    ELSE round((tcccarc.nb_cccuarc/nullif(tccarc.nb_ccuarc,0))*100,1) || '%'
+                END || '</td>'::text, ''::text) || '</tr>'::text
+                 AS tx_cccu_arc,
+             -- nombre de contrôle passé de non conforme à conforme
+             string_agg('<td align=center><b><font size=1>'::text || 
+		CASE
+                    WHEN tccncc_arc.nb_ccnccu_arc IS NULL THEN 0
+                    ELSE tccncc_arc.nb_ccnccu_arc
+                END || '</td>'::text, ''::text) || '</tr>'::text
+              AS nb_ccnccu_arc,
+        a.insee,
+	a.commune
+
+	FROM
+		-- ici première requête récupérant une ligne par commune et par année n
+		req_annee a
+                -- jointure gauche pour récupérer le même nombre de ligne par commune même si pas de données pour une année
+	LEFT JOIN req_tcc tcc ON a.cle = tcc.cle
+	LEFT JOIN req_tccc tccc ON a.cle = tccc.cle
+	LEFT JOIN req_tccnc tccnc ON a.cle = tccnc.cle
+	LEFT JOIN req_tccncc tccncc ON a.cle = tccncc.cle
+        LEFT JOIN req_tccarc tccarc ON right(a.cle,4)=tccarc.cle
+	LEFT JOIN req_tcccarc tcccarc ON right(a.cle,4)=tcccarc.cle
+	LEFT JOIN req_tccncarc tccncarc ON right(a.cle,4)=tccncarc.cle 
+        LEFT JOIN req_tccncc_arc tccncc_arc ON right(a.cle,4)=tccncc_arc.cle
+	GROUP BY a.insee, a.commune
+	ORDER BY a.insee
+
+     )
+-- requête final, formatant l'ensemble des parties du tableau final présenté dans l'application
  SELECT row_number() OVER () AS id,
-    ((('<table border=1 align=center><tr><td colspan="2">&nbsp;</td>'::text || req_d.annee) || '</tr>'::text) || string_agg(req_d.tableau, ''::text)) || '</table>'::text AS tableau1
+    -- première ligne du tableau (annéeà
+    '<table border=1 align=center><tr><td colspan="2">&nbsp;</td>'::text || req_d.annee || '</tr>'::text || string_agg(req_d.tableau, ''::text) || 
+    -- ligne du total
+     '<tr><td rowspan="6"><b>ARC<b></td><td><b>Total</b></td>' || req_d.nb_ccuarc || '</tr>' ||
+    -- ligne du nombre de controle conforme
+         '<tr><td><b>Conforme</b></td>' || req_d.nb_cccuarc || '</tr>' ||
+    -- ligne du nombre de controle non conforme
+             '<tr><td><b>Non conforme</b></td>' || req_d.nb_ccncuarc || '</tr>' ||
+    -- ligne du nombre du taux de conformité
+'<tr><td><b>Taux de conformité<sup>(3)</sup><b/></td>' || req_d.tx_cccu_arc || '</tr>' ||
+    -- ligne du nombre du taux mise en conformité
+'<tr><td><b>Taux de mise en conformité<sup>(2)</sup><b/></td>' || req_d.tx_ccnccu_arc || '</tr>' ||
+    -- ligne du nombre de controle passé de non conforme à conforme
+'<tr><td><b><font size=1>Nombre de contrôle mis en conformité</font></b></td>' || req_d.nb_ccnccu_arc || '</tr>' ||
+    '</table>'::text 
+  -- je nomme le champ stockant ce code HTML
+  AS tableau1
+
    FROM req_d
-   --WHERE insee='60159'
-  GROUP BY req_d.annee;
+  GROUP BY req_d.annee,req_d.nb_ccuarc,req_d.nb_cccuarc,req_d.nb_ccncuarc, req_d.tx_ccnccu_arc, req_d.nb_ccnccu_arc, req_d.tx_cccu_arc;
 
 ALTER TABLE x_apps.xapps_an_v_euep_cc_tb1
   OWNER TO postgres;
@@ -1348,16 +1624,17 @@ GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb1 TO groupe_sig;
 COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb1
   IS 'Vue applicative formattant le tableau de bord n°1 des contrôles de conformité AC pour affichage dans GEO';
 
+
 															    
 															    -- ####################################################### VIEW - xapps_an_v_euep_cc_tb1 #################################################################
 
 -- COMMENT GB : -----------------------------------------------------------------------------------------------------------------------------------------------------
--- vue permettant de générer le code HTML et lesrésultats du tableau n°2 du tableaude bord (contrôle par prestataire)
+-- vue permettant de générer le code HTML et les résultats du tableau n°2 du tableau de bord (contrôle par prestataire)
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- View: x_apps.xapps_an_v_euep_cc_tb2
 
--- DROP VIEW x_apps.xapps_an_v_euep_cc_tb2;
+DROP VIEW IF EXISTS x_apps.xapps_an_v_euep_cc_tb2;
 
 CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb2 AS 
  WITH req_d AS (
