@@ -1546,7 +1546,7 @@ SELECT DISTINCT row_number() OVER () AS id,
                 END || '</td>'::text, ''::text) || '</tr>'::text
 		AS tableau,
 	    -- je formate ici la ligne haute du tableau des années de résultat
-            string_agg(('<td>'::text || a.annee) || '</td>'::text, ''::text) AS annee,
+            string_agg(('<td align=center>'::text || a.annee) || '</td>'::text, ''::text) AS annee,
 	    -- je formate ici les lignes de résultats popur le total ARC (comme les communes)
             -- contrôle total
             string_agg(('<td align=center><b>'::text || tccarc.nb_ccuarc) || '</b></td>'::text, ''::text) AS nb_ccuarc,
