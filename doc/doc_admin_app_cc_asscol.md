@@ -284,6 +284,7 @@ END
 |affiche_result_titre |x|x|null|Affiche le tire du message dans le menu résultat incitant les utilisateurs à cliquer pour ouvrir la fiche contenant les tableaux|*Recherche :* Tableau de bord - Contrôle conformité AC ||
 |affiche_source |x|x|null|Affiche la source des données (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
 |affiche_titre_tableau1 |x|x|null|Affiche le titre du tableau (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+|tableau1 ||x|null|Code HTML du tableau|*Fiche d'information :* Dossier de conformité AC ||
 
    * filtres : aucun
    * relations :
@@ -301,6 +302,7 @@ END
 |affiche_nota |x|x|null|Affiche les annotations en bas de tableau (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
 |affiche_source |x|x|null|Affiche la source des données (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
 |affiche_titre_tableau2 |x|x|null|Affiche le titre du tableau (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+|tableau1 ||x|Tableau1|Code HTML du tableau|*Fiche d'information :* Dossier de conformité AC ||
 
    * filtres : aucun
    * relations : aucune
