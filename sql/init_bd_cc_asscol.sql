@@ -209,6 +209,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_typebati(
     ('00','Non renseigné (cf formulaire PDF)'),
     ('10','Maison individuelle'),
     ('20','Appartement'),
+    ('21','Immeuble  entier (partie commune)'),
     ('30','Local commercial'),
     ('40','Local agricole'),
     ('99','Autre')
