@@ -22,6 +22,8 @@
 |:---|:-:|:-:|:---|
 |Recherche par adresse|x|||
 |Recherche par n° de dossier|x|||
+|Recherche avancée d'une adresse|x|||
+|Recherche avancée d'une voie|x|||
 |Liste des contrôles non conforme|x||Accès réservé au service assainissement|
 |Recherche des contrôles depuis le|x||Accès réservé au service assainissement|
 |Recherche des contrôles avec une demande de modifications|||Accès réservé au service assainissement|
@@ -272,6 +274,39 @@ END
 |xapps_geo_v_euep_cc| id_adresse | 0 à n (égal) |
 |an_euep_cc_media| idcc - id | 0 à n (égal) |
 
+## Table : `xapps_an_v_euep_cc_tb1`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_message |x|x|affiche_barre_espace|Affiche un message au dessus des tableau si besoin (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+|affiche_nota |x|x|null|Affiche les annotations en bas de tableau (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+|affiche_result |x|x|null|Affiche un message dans le menu résultat incitant les utilisateurs à cliquer pour ouvrir la fiche contenant les tableaux|*Recherche :* Tableau de bord - Contrôle conformité AC ||
+|affiche_result_titre |x|x|null|Affiche le tire du message dans le menu résultat incitant les utilisateurs à cliquer pour ouvrir la fiche contenant les tableaux|*Recherche :* Tableau de bord - Contrôle conformité AC ||
+|affiche_source |x|x|null|Affiche la source des données (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+|affiche_titre_tableau1 |x|x|null|Affiche le titre du tableau (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+
+   * filtres : aucun
+   * relations :
+
+|Géotables ou Tables| Champs de jointure | Type |
+|:---|:---|:---|
+| xapps_an_v_euep_cc_tb2| id | 1 (égal) |
+
+* Particularité : 2 tableaux ont été créés, pour les affichés dans la même fiche, un identifiant unique incrémenté à 1 a été inséré dans chaque requête créant le tableau. Comme ces requêtes ne remontent qu'une seule ligne, la jointure peut se faire sur ce n° identifiant (id qui est égal à dans les  2 requêtes).
+
+## Table : `xapps_an_v_euep_cc_tb2`
+
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_nota |x|x|null|Affiche les annotations en bas de tableau (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+|affiche_source |x|x|null|Affiche la source des données (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+|affiche_titre_tableau2 |x|x|null|Affiche le titre du tableau (format HTML)|*Fiche d'information :* Dossier de conformité AC ||
+
+   * filtres : aucun
+   * relations : aucune
+
+* Particularité : ce tableau est lié à la table `xapps_an_v_euep_cc_tb1`
+
 ## Table : `lt_euep_cc_tnidcc`
 
 Sans objet
@@ -339,7 +374,7 @@ Sans objet
 
 |Source| Taille | Connexion |Lien de connexion|Média|Miniature|Type de media|Nom du média|Fichier origine|
 |:---|:---:|:---:|:---|:---|:---|:---|:---|:---|
-|an_euep_cc_media|900x900 et 60x60|Assainissement - Contrôle de conformité|/home/DOC_SIG_FIC/metiers/ress/ac/doc/|media|miniature|t_fichier|n_fichier||
+|an_v_euep_cc_media|900x900 et 60x60|Assainissement - Contrôle de conformité|/home/DOC_SIG_FIC/metiers/ress/ac/doc/|media|miniature|t_fichier|n_fichier||
    
 # Les fonctionnalités
 
@@ -456,7 +491,7 @@ Source : `xapps_an_euep_cc_nc`
 
  * Fiches d'information active : Conformité NON CONFORME - Courrier
  
-## Recherche : `Recherche des contrôles depuis le`
+## Recherche : `Recherche des contrôles depuis`
 
 Cette recherche permet à l'utilisateur de faire une recherche sur les contrôles de conformité à partir d'une certaine date.
 
@@ -476,11 +511,13 @@ Source : `an_v_euep_cc`
 
 |Groupe|Jointure|Filtres liés|
 |:---|:-:|:-:|
-|sans objet|||
+|Groupe de filtres par défaut|`OU`||
 
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Date de saisie du contrôle|x|date_sai|est supérieure ou égale à une valeur saisie|||||Ce champ étant un  champ date, l'utilisateur dispose d'un calendrier pour la saisie de la date|
 |Date du contrôle|x|ccdate|est supérieure ou égale à une valeur saisie|||||Ce champ étant un  champ date, l'utilisateur dispose d'un calendrier pour la saisie de la date|
+|Date de délivrance du contrôle|x|ccdated|est supérieure ou égale à une valeur saisie|||||Ce champ étant un  champ date, l'utilisateur dispose d'un calendrier pour la saisie de la date|
 
 (1) si liste de domaine
 
@@ -565,6 +602,36 @@ Source : `xapps_geo_v_euep_cc`
  * Filtres : aucun
 
  * Fiches d'information active : Informations des prestataires (AC)
+ 
+
+## Recherche : `Tableau de bord - Contrôle conformité AC`
+
+Cette recherche permet à l'utilisateur d'afficher les tableaux de bord.
+
+  * Configuration :
+  
+Source : `xapps_an_v_euep_cc_tb1`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_result_titre|x|||||
+|affiche_result|x|||||
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|sans objet|||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|sans objet||||||||||
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Tableau de bord - Contrôle conformité AC
+ 
 
 ## Fiche d'information : `Conformité AC à l'adresse`
 
@@ -812,6 +879,29 @@ Note : seuls les attributs obligatoires sont visibles par l'utilisateur. Les aut
 
 **IMPORTANT** : L'édition des données jointes est désactivée.
  
+ * Modèle d'impression : aucun
+ 
+## Fiche d'information : `Tableau de bord - Contrôle conformité AC`
+
+Source : `xapps_an_v_euep_cc_tb1`
+
+ * Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|700x650|Vertical|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|(vide)|affiche_titre_tableau1, tableau1, affiche_source,affiche_nota|Masqué|Vertical||||
+|(vide)|affiche_titre_tableau2, Tableau1, affiche_source,affiche_nota|Masqué|Vertical||||
+
+ * Saisie :
+ 
+Sans objet
+
  * Modèle d'impression : aucun
 
 ## Analyse :
