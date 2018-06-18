@@ -620,20 +620,22 @@ Source : `xapps_an_v_euep_cc_tb1`
 |affiche_result|x|||||
 (la détection des doublons n'est pas activée ici)
 
- * Filtres :
-
-|Groupe|Jointure|Filtres liés|
-|:---|:-:|:-:|
-|sans objet|||
-
-|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
-|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
-|sans objet||||||||||
+ * Filtres : aucun
 
 (1) si liste de domaine
 
  * Fiches d'information active : Tableau de bord - Contrôle conformité AC
  
+## Recherche : `Recherche avancée d'une adresse`
+
+Cette recherche permet à l'utilisateur de rechercher une adresse en mode proposition de valeur (sans saisie manuelle).
+Cette recherche est issue de l'application Voie-Adresse. Se référer à ce dossier pour le détail de cette recherche.
+
+ 
+## Recherche : `Recherche avancée d'une voie`
+
+Cette recherche permet à l'utilisateur de rechercher une voie en mode proposition de valeur (sans saisie manuelle).
+Cette recherche est issue de l'application Voie-Adresse. Se référer à ce dossier pour le détail de cette recherche.
 
 ## Fiche d'information : `Conformité AC à l'adresse`
 
@@ -808,6 +810,7 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |ccvalid  |x|20|lt_euep_cc_valid|Boutons radios|
 |op_sai  |x|%USER_LOGIN%|||
 |tnidcc  |x||lt_euep_cc_tnidcc|Boutons radios|
+|validobs  |x|||Champ texte à plusieurs lignes|
 
  * Particularité : l'attirubt op_sai est obligatoire à la saisie mais non éditable. Il ne s'affiche pas dans la fiche car un espace a été initialisé comme texte de remplacement dans la table source. Ce contournement a été opéré pour saisir le login de connexion dans la base de données.
 
