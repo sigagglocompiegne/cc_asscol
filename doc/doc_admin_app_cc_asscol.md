@@ -983,10 +983,14 @@ Liste des recherches : Contrôle de conformité AC
 |Contrôle de conformité - AC|Recherche par adresse (AC)|
 ||Recherche par N° de dossier (AC)|
 ||Liste des contrôles NON CONFORME|
-||Recherche des contrôles depuis le|
+||Recherche des contrôles depuis|
 ||Recherche des contrôles avec une demande de modifications|
 |Prestataires|Informations sur le prestataire|
 |Tableaux de bord|
-||(en cours de réalisation)|
+||Tableau de bord - Contrôle conformité AC|
+|Recherche avancée d'une adresse|
+||Recherche avancée d'une adresse|
+|Recherche avancée d'une voie|
+||Recherche avancée d'une voie|
 
 
