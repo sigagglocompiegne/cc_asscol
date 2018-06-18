@@ -170,9 +170,6 @@ Particularité(s) à noter :
 
 `an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier ainsi que l'identifiant et les informations de l'adresse issue de la BAL
 
- ### classes d'objets applicatives :
-`xapps_an_euep_cc_n` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
-
 Particularité(s) à noter :
 * 1 trigger :
   * `t_t1_an_v_euep_cc_update_insert` : gère pour l'instance d'insertion ou de mise à jour l'intégration des données dans la classe d'objet `an_v_euep_cc`
@@ -183,9 +180,12 @@ Particularité(s) à noter :
       
       * à l'insertion : vérification du n° de dossier (si il s'agit d'un suivi de dossier mal saisie, il ne passe rien)
         * intégration des valeurs saisies par l'utilisateur (par défaut la séquence calcul le n° de l'identifiant unique de l'enregistrement, la validation du contrôle est forcée à `20`, insertion de la variable définissant le contrôle initial et le n° de dossier)
-        * à la mise à jour : vérification de la validation du contrôle (si celui-ci est validé à `10` par l'Agglomération, aucune modification n'est permise, si non les données peuvent être modifiées sauf le n° de dossier)        
+        * à la mise à jour : vérification de la validation du contrôle (si celui-ci est validé à `10` par l'Agglomération, aucune modification n'est permise, si non les données peuvent être modifiées sauf le n° de dossier)   
 
 ---
+
+### classes d'objets applicatives :
+`xapps_an_euep_cc_nc` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
 
 `xapps_geo_v_euep_cc` : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
 
@@ -193,6 +193,17 @@ Particularité(s) à noter :
 
 `an_v_euep_cc_media` : vue alphanumérique contenant les champs de la table an_euep_cc_media pour une gestion des droits selon la validation du dossier (cette table est intégrée dans GEO)
 
+Particularité(s) à noter :
+* 1 trigger :
+  * `t_t1_an_v_euep_cc_media` : gère pour l'instance d'insertion, de mise à jour ou de suppression l'intégration des données dans la classe d'objet `an_euep_cc_media`. Cette vue a été réalisée pour palier le fait que GEO ne gère pas des droits par rapport à une variable qui empêche les insertions, mises à jour ou suppression.
+  
+    * fonctionnement :
+      * à l'entrée : 
+        * une variable est calculée pour définir si le contrôle est valide
+        * si le contrôle est valide, on ne peut ni insérer, ni mettre à jour, ni supprimer
+        * si le contrôle n'est pas valide, on peut insérer, mettre à jour ou supprimer un document
+
+---
 
 ## Liste de valeurs
 
