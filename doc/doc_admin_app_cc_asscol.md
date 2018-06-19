@@ -626,12 +626,6 @@ Source : `xapps_an_v_euep_cc_tb1`
 
  * Fiches d'information active : Tableau de bord - Contrôle conformité AC
  
-## Recherche : `Recherche avancée d'une adresse`
-
-Cette recherche permet à l'utilisateur de rechercher une adresse en mode proposition de valeur (sans saisie manuelle).
-Cette recherche est issue de l'application Voie-Adresse. Se référer à ce dossier pour le détail de cette recherche.
-
- 
 ## Recherche : `Recherche avancée d'une voie`
 
 Cette recherche permet à l'utilisateur de rechercher une voie en mode proposition de valeur (sans saisie manuelle).
@@ -988,8 +982,6 @@ Liste des recherches : Contrôle de conformité AC
 |Prestataires|Informations sur le prestataire|
 |Tableaux de bord|
 ||Tableau de bord - Contrôle conformité AC|
-|Recherche avancée d'une adresse|
-||Recherche avancée d'une adresse|
 |Recherche avancée d'une voie|
 ||Recherche avancée d'une voie|
 
