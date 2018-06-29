@@ -1754,7 +1754,7 @@ INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, validobs, cci
 SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse , '20', new.validobs, v_ccinit, new.adapt, new.adeta, new.tnidcc,v_nidcc, new.rcc , new.ccdate, new.ccdated, new.ccbien, new.certtype ,new.certnom ,new.certpre ,new.propriopat, new.propriopatp, new.proprionom ,new.propriopre ,new.proprioad ,new.dotype ,
 					new.doaut ,new.donom ,new.dopre ,new.doad, new.achetpat, new.achetpatp, new.achetnom, new.achetpre, new.achetad, new.batitype ,new.batiaut ,new.eppublic ,new.epaut ,new.rredptype ,
 					new.rrebrtype ,CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
-					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,new.eprecupcpt ,new.epautre ,new.epobserv ,new.euepanomal ,new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61';
+					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END,new.epautre ,new.epobserv ,new.euepanomal ,new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61';
 END IF;
 
 
@@ -1905,7 +1905,7 @@ epfum = new.epfum,
 epecoul = new.epecoul,
 epecoulobs = new.epecoulobs,
 eprecup = new.eprecup,
-eprecupcpt = new.eprecupcpt,
+eprecupcpt = CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END,
 epautre = new.epautre,
 epobserv = new.epobserv,
 euepanomal = new.euepanomal,
