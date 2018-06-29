@@ -721,11 +721,11 @@ Source : `an_v_euep_cc`
 ||(vide) sous-onglet de (vide)|epfum, epecoul, epecoulobs, eprecup|Par défaut|Vertical||||
 ||(vide) sous-onglet de (vide)|eprecupcpt|Par défaut|Vertical|eprecup=='10'|||
 ||(vide) sous-onglet de (vide)|epautre, epobserv|Masqué|Vertical||||
-|G/Anomalies identifiées||||Vertical||||
+|G/Anomalies identifiées|affiche_message|||Vertical||||
 ||(vide)|affiche_message|Masqué|Vertical||||
 ||(vide)|euepanomal|Au-dessus|Vertical||||
-|H/Constations diverses||||Vertical (ici pour la sous-section)||||
-||Anomalies repérées n'entraînant pas une non-conformité sous-onglet de Constations diverses|affiche_message,euepdivers,euepanomalpre|Masqué|Vertical||||
+|H/Constations diverses|affiche_message|||Vertical (ici pour la sous-section)||||
+||(vide)|euepdivers|Par défaut|Vertical||||
 ||(vide) sous-onglet de Constations diverses|ccdated |Par défaut|Vertical||||
 ||Attestation d'agrément sous-onglet de Constations diverses|affiche_attestation_logo |Masqué|Vertical||||
 |I/Pièces jointes||miniature, l_type, l_prec, affiche_lien|Par défaut|Vertical||Média-Assainissement Contrôle de conformité||
