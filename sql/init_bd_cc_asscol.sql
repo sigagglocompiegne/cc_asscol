@@ -1713,7 +1713,10 @@ DECLARE v_ccvalid boolean;
 DECLARE t1_nidcc integer;
 DECLARE t2_nidcc integer;
 
+
 BEGIN
+
+
 
 -- gestion automatique si ils'agit du contrôle initial à l'adresse
 v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_adresse=new.id_adresse)>= 1  THEN false ELSE true END;
@@ -1750,7 +1753,7 @@ INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, validobs, cci
 					epracdp ,eppar ,epparpre ,epfum ,epecoul ,epecoulobs ,eprecup ,eprecupcpt ,epautre ,epobserv ,euepanomal ,euepanomalpre,euepdivers,date_sai,op_sai,scr_geom)
 SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse , '20', new.validobs, v_ccinit, new.adapt, new.adeta, new.tnidcc,v_nidcc, new.rcc , new.ccdate, new.ccdated, new.ccbien, new.certtype ,new.certnom ,new.certpre ,new.propriopat, new.propriopatp, new.proprionom ,new.propriopre ,new.proprioad ,new.dotype ,
 					new.doaut ,new.donom ,new.dopre ,new.doad, new.achetpat, new.achetpatp, new.achetnom, new.achetpre, new.achetad, new.batitype ,new.batiaut ,new.eppublic ,new.epaut ,new.rredptype ,
-					new.rrebrtype ,new.rrechype ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,new.eusuptype ,new.eusupdoc ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
+					new.rrebrtype ,CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
 					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,new.eprecupcpt ,new.epautre ,new.epobserv ,new.euepanomal ,new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61';
 END IF;
 
@@ -1843,6 +1846,7 @@ ccvalid = CASE
 	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
 	  END,
 validobs = CASE WHEN new.ccvalid = '30' THEN new.validobs ELSE null END,
+euepdivers = new.euepdivers,
 adapt = new.adapt,
 adeta = new.adeta,
 rcc = new.rcc,
@@ -1873,14 +1877,14 @@ eppublic = new.eppublic,
 epaut = new.epaut,
 rredptype = new.rredptype,
 rrebrtype = new.rrebrtype,
-rrechype = new.rrechype,
+rrechype = CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END,
 eupc = new.eupc,
 euevent = new.euevent,
 euregar = new.euregar,
 euregardp = new.euregardp,
 eusup = new.eusup,
-eusuptype = new.eusuptype,
-eusupdoc = new.eusupdoc,
+eusuptype = CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END,
+eusupdoc = CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END,
 euecoul = new.euecoul,
 eufluo = new.eufluo,
 eubrsch = new.eubrsch,
@@ -1906,7 +1910,6 @@ epautre = new.epautre,
 epobserv = new.epobserv,
 euepanomal = new.euepanomal,
 euepanomalpre = new.euepanomalpre,
-euepdivers = new.euepdivers,
 date_maj = now()
 
 WHERE an_euep_cc.idcc = OLD.idcc;
