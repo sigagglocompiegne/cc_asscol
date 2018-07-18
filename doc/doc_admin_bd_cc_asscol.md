@@ -50,6 +50,7 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |adeta|Etage|integer| |
 |tnidcc|Type de dossier pour lacréation d'un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)|character varying(2)| |
 |nidcc|N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)|character varying(20)| |
+|nidccp|N° interne au prestataire du contrôle|character varying(20)| |
 |rcc|Résultat du contrôle (true : conforme, false : non conforme)|character varying(3)| |
 |ccdate|Date du contrôle|timestamp without time zone| |
 |ccdated|Date de délivrance du contrôle|timestamp without time zone| |
@@ -62,6 +63,7 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |proprionom|Nom de la personne désignant le propriétaire|character varying(80)| |
 |propriopre|Prénom de la personne désignant le propriétaire|character varying(80)| |
 |proprioad|Adresse de la personne désignant le propriétaire|character varying(254)| |
+|proprioadcp|Code postal et commune de la personne désignant le propriétaire|character varying(254)| |
 |dotype|Code de la qualité du donneur d'ordre (clé étrangère sur la liste de valeur lt_euep_cc_ordre)|character varying(2)|'00'::character varying|
 |doaut|Autre donneur d'ordre si pas présent dans dotype|character varying(80)| |
 |donom|Nom de la personne désignant le donneur d'ordre|character varying(80)| |
