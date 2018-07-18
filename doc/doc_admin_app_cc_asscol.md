@@ -168,9 +168,11 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |eusupdoc||x|Présence de documents attestant de cette servitude ?|Formatage par une liste de domaine (lt_euep_cc_eval)|*Fiche d'information* : Dossier de conformité AC||
 |eusuptype||x|Précisez|Formatage par une liste de domaine (lt_euep_sup)|*Fiche d'information* : Dossier de conformité AC||
 |nidcc||x|N° de dossier suivi||*Fiche d'information* : Dossier de conformité AC||
+|nidccp||x|Référence diagnostiqueur||*Fiche d'information* : Dossier de conformité AC||
 |op_sai||x|null|Texte de remplacement utilisé avec un espace (évite l'affichage de la valeur dans la fiche)|*Fiche d'information* : Conformité AC à l'adresse||
 |ordre_cc||x|Il y a||*Fiche d'information* : Conformité AC à l'adresse||
 |proprioad||x|Adresse||*Fiche d'information* : Dossier de conformité AC||
+|proprioadcp||x|Code postal|Formatage d'une liste de domaine avec CP et nom de la commune|*Fiche d'information* : Dossier de conformité AC||
 |proprionom||x|Nom||*Fiche d'information* : Dossier de conformité AC||
 |propriopat||x|Civilité|Formatage par une liste de domaine (lt_euep_cc_pat)|*Fiche d'information* : Dossier de conformité AC||
 |propriopatp||x|Précision||*Fiche d'information* : Dossier de conformité AC||
@@ -368,6 +370,13 @@ Sans objet
    * relations : aucune
    
 ## Table : `lt_euep_cc_ordre`
+
+Sans objet
+
+   * filtres : aucun
+   * relations : aucune
+   
+## Table : `lk_insee_codepostal_fr`
 
 Sans objet
 
@@ -692,7 +701,7 @@ Source : `an_v_euep_cc`
 ||(vide)|affiche_message|Masqué|Vertical||||
 ||Propriétaire|propriopat|Par défaut|Vertical||||
 ||(vide) sous-onglet de propriétaire|propriopatp|Par défaut|Vertical|propriopat=='40'|||
-||(vide) sous-onglet de propriétaire|proprionom, propriopre, proprioad|Par défaut|Vertical||||
+||(vide) sous-onglet de propriétaire|proprionom, propriopre, proprioad,proprioadcp|Par défaut|Vertical||||
 ||Donneur d'ordre|dotype|Par défaut|Vertical||||
 ||(vide) sous-onglet de Donneur d'ordre|doaut, donom, dopre, doas|Par défaut|Vertical|dotype=='99'|||
 ||Acheteur|achetpat|Par défaut|Vertical||||
@@ -752,6 +761,7 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |proprionom|x||||
 |propriopre|x||||
 |proprioad|x|||Champ de texte à une ligne|
+|proprioadcp|x||lk_insee_codepostal_fr||
 |dotype|x||lt_euep_cc_ordre||
 |doaut|||||
 |donom|||||
