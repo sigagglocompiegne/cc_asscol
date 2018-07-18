@@ -690,7 +690,7 @@ Source : `an_v_euep_cc`
 |Objet de la mission||affiche_message,affiche_logo, affiche_reg|Masqué|Vertical||||
 |(vide)||tnidcc|A gauche|Vertical||||
 ||(vide)|nidcc|Par défaut|Vertical|tnidcc=='20'|||
-||(vide)|ccbien, ccinit, ccvalid|Par défaut|Vertical||||
+|(vide)||ccbien, ccinit, ccvalid,nidccp|Par défaut|Vertical||||
 |A/Conclusion du contrôle||affiche_message,affiche_conclusion|Masqué|Vertical||||
 ||(vide)|rcc, ccdate|A gauche|Vertical||||
 ||(vide)|affiche_valide|Masqué|Vertical||||
@@ -817,6 +817,8 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |op_sai  |x|%USER_LOGIN%|||
 |tnidcc  |x||lt_euep_cc_tnidcc|Boutons radios|
 |validobs  |x|||Champ texte à plusieurs lignes|
+|nidccp  |||||
+|proprioadcp |||lk_insee_codepostal_fr|Suggection de valeurs (en test)|
 
  * Particularité : l'attirubt op_sai est obligatoire à la saisie mais non éditable. Il ne s'affiche pas dans la fiche car un espace a été initialisé comme texte de remplacement dans la table source. Ce contournement a été opéré pour saisir le login de connexion dans la base de données.
 
