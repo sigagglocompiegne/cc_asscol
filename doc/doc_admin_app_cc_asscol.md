@@ -64,6 +64,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_controle |x|||Formate l'affichage du résultat d'une recherche d'un contrôle en html dans le menu du même nom |*Recherche :* Recherche par adresse (AC), Contrôle de conformité AC |![picto](/doc/img/affiche_menu_result_rech_cc.png)|
 |affiche_result  |x|||Formate l'affichage d'un texte précisant à l'utilisateur de cliquer pour zoomer sur l'adresse au résultat d'une recherche d'un contrôle par l'adresse|*Recherche :* Recherche par adresse (AC) |![picto](/doc/img/affiche_menu_result_rech_cc_ad.png)|
 |ccdate  ||x|Date du dernier contrôle|Formate la date du dernier en contrôle en dd/mm/yyyy|||
+|certtype  ||x|Code du ou des prestataires|Champ de filtre à la connexion pour l'affichage des pictos à l'adresse selon le prestataire|||
 |etiquette_nbcc  |x|||Formate l'affichage du nombre de contrôle à l'adresse `si nb_cc > 0 affichage le nombre sinon rien`|*Cartothèque :* champ d'étiquette (avec Visibilité : 0 au 1/10000è et décalage : 5,8,0,50,50) ||
 |nb_cc||x|Nombre de contrôle||||
 |numero_complet  |x|||Formate l'affichage du nombre complet de l'adresse `numero + repet` pour le filtre de recherche des contrôles par adresse (partie numéro)|*Recherche :* Recherche par adresse (AC) (filtre EUEP - C de C - Numéro voirie) ||
@@ -71,7 +72,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |titre_html  |x|||Formate un tableau en html affichant les informations de synthèse du ou des contrôles à l'adresse|*Fiche d'information :* Conformité AC à l'adresse |![picto](/doc/img/affiche_synt_fi_cc.png)|
 |titre_liste_html  |x|||Formate un tableau en html affichant uniquement la ligne du titre du tableau contenant la liste des contrôles déjà effectués à cette adresse |*Fiche d'information :* Conformité AC à l'adresse |![picto](/doc/img/affiche_synt_fi_liste_cc.png)|
 
-   * filtres : aucun
+   * filtres : sur le champ certtype, (à définir), id_presta
    * relations :
 
 |Géotables ou Tables| Champs de jointure | Type |
