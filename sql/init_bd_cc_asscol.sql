@@ -582,6 +582,7 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   adeta integer, -- Etage
   tnidcc character varying(2), -- Type de dossier pour la création d'un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)
   nidcc character varying(20) NOT NULL, -- N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)
+  nidccp character varying(20), -- N° interne du prestataire
   rcc character varying(3) NOT NULL, -- Résultat du contrôle (oui : conforme, non : non conforme, inconnu ?)
   ccdate timestamp without time zone, -- Date du contrôle
   ccdated timestamp without time zone, -- Date de délivrance du contrôle
@@ -594,6 +595,7 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   proprionom character varying(80), -- Nom de la personne désignant le propriétaire
   propriopre character varying(80), -- Prénom de la personne désignant le propriétaire
   proprioad character varying(254), -- Adresse de la personne désignant le propriétaire
+  proprioadcp character varying(254), -- Code postal et commune du propriétaire
   dotype character varying(2) DEFAULT '00'::character varying, -- Code de la qualité du donneur d'ordre (clé étrangère sur la liste de valeur lt_euep_cc_ordre)
   doaut character varying(80), -- Autre donneur d'ordre si pas présent dans dotype
   donom character varying(80), -- Nom de la personne désignant le donneur d'ordre
@@ -662,6 +664,7 @@ COMMENT ON TABLE m_reseau_humide.an_euep_cc
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.idcc IS 'Identifiant interne unique du contrôle';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.tnidcc IS 'Type de dossier pour lacréation d''un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidcc IS 'N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidccp IS 'N° de dossier interne au prestataire';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccinit IS 'information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccvalid IS 'validation par l''ARC du contrôle (la valeur 10 empêche la modification des données';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.validobs IS 'commentaire sur les demandes de modifications (uniquement si ccvalid = 30)';
@@ -679,6 +682,7 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.propriopatp IS 'Patronyme du propri
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.proprionom IS 'Nom de la personne désignant le propriétaire';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.propriopre IS 'Prénom de la personne désignant le propriétaire';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.proprioad IS 'Adresse de la personne désignant le propriétaire';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.proprioadcp IS 'Code postal et commune du propriétaire';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.dotype IS 'Code de la qualité du donneur d''ordre (clé étrangère sur la liste de valeur lt_euep_cc_ordre)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.doaut IS 'Autre donneur d''ordre si pas présent dans dotype';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccbien IS 'Code du type de bien contrôlé (neuf ou ancien) (clé étrangère sur la liste de valeur lt_euep_cc_bien)';
@@ -1070,7 +1074,8 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS
           WHERE a.insee = '60023'::bpchar OR a.insee = '60067'::bpchar OR a.insee = '60068'::bpchar OR a.insee = '60070'::bpchar OR a.insee = '60151'::bpchar OR a.insee = '60156'::bpchar OR a.insee = '60159'::bpchar OR a.insee = '60323'::bpchar OR a.insee = '60325'::bpchar OR a.insee = '60326'::bpchar OR a.insee = '60337'::bpchar OR a.insee = '60338'::bpchar OR a.insee = '60382'::bpchar OR a.insee = '60402'::bpchar OR a.insee = '60447'::bpchar OR a.insee = '60578'::bpchar OR a.insee = '60579'::bpchar OR a.insee = '60597'::bpchar OR a.insee = '60600'::bpchar OR a.insee = '60665'::bpchar OR a.insee = '60667'::bpchar OR a.insee = '60674'::bpchar
         ), req_cc AS (
          SELECT c_1.id_adresse,
-            count(*) AS nb_cc
+            count(*) AS nb_cc,
+	    string_agg(c_1.certtype::text, ','::text) AS certtype
            FROM m_reseau_humide.an_euep_cc c_1
           GROUP BY c_1.id_adresse
         ), req_ccdate AS (
@@ -1096,6 +1101,7 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS
             WHEN c.nb_cc IS NULL THEN 0::bigint
             ELSE c.nb_cc
         END AS nb_cc,
+    c.certtype,
     cd.rcc,
     cd.ccdate,
     b.geom
@@ -1697,7 +1703,6 @@ COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb2
 
 -- ##################################### FONCTION TRIGGER - t_t1_an_v_euep_cc_insert_update #######################################################
 
-
 -- Function: m_reseau_humide.t1_an_v_euep_cc_insert_update()
 
 -- DROP FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update();
@@ -1750,11 +1755,12 @@ IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
 INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, validobs, ccinit, adapt, adeta, tnidcc, nidcc, rcc, ccdate, ccdated, ccbien, certtype ,certnom ,certpre ,propriopat, propriopatp, proprionom ,propriopre ,proprioad ,dotype ,doaut ,donom ,dopre ,doad ,
 					achetpat, achetpatp, achetnom, achetpre, achetad, batitype ,batiaut ,eppublic ,epaut ,rredptype ,
 					rrebrtype ,rrechype ,eupc ,euevent ,euregar ,euregardp ,eusup ,eusuptype ,eusupdoc ,euecoul ,eufluo ,eubrsch ,eurefl ,euepsep ,eudivers ,euanomal ,euobserv ,eusiphon ,epdiagpc ,epracpc ,epregarcol ,epregarext, 
-					epracdp ,eppar ,epparpre ,epfum ,epecoul ,epecoulobs ,eprecup ,eprecupcpt ,epautre ,epobserv ,euepanomal ,euepanomalpre,euepdivers,date_sai,op_sai,scr_geom)
+					epracdp ,eppar ,epparpre ,epfum ,epecoul ,epecoulobs ,eprecup ,eprecupcpt ,epautre ,epobserv ,euepanomal ,euepanomalpre,euepdivers,date_sai,op_sai,scr_geom,nidccp,proprioadcp)
 SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse , '20', new.validobs, v_ccinit, new.adapt, new.adeta, new.tnidcc,v_nidcc, new.rcc , new.ccdate, new.ccdated, new.ccbien, new.certtype ,new.certnom ,new.certpre ,new.propriopat, new.propriopatp, new.proprionom ,new.propriopre ,new.proprioad ,new.dotype ,
 					new.doaut ,new.donom ,new.dopre ,new.doad, new.achetpat, new.achetpatp, new.achetnom, new.achetpre, new.achetad, new.batitype ,new.batiaut ,new.eppublic ,new.epaut ,new.rredptype ,
 					new.rrebrtype ,CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
-					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END,new.epautre ,new.epobserv ,new.euepanomal ,new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61';
+					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END,new.epautre ,new.epobserv ,new.euepanomal ,
+					new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61',new.nidccp,new.proprioadcp;
 END IF;
 
 
@@ -1849,6 +1855,7 @@ validobs = CASE WHEN new.ccvalid = '30' THEN new.validobs ELSE null END,
 euepdivers = new.euepdivers,
 adapt = new.adapt,
 adeta = new.adeta,
+nidccp = new.nidccp,
 rcc = new.rcc,
 ccdate = new.ccdate,
 ccdated = new.ccdated,
@@ -1861,6 +1868,7 @@ propriopatp = new.propriopatp,
 proprionom = new.proprionom,
 propriopre = new.propriopre,
 proprioad = new.proprioad,
+proprioadcp = new.proprioadcp,
 dotype = new.dotype,
 doaut = new.doaut,
 donom = new.donom,
@@ -1930,7 +1938,6 @@ ALTER FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update()
 COMMENT ON FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
 
 
-
 -- Trigger: t_t1_an_v_euep_cc_insert_update on m_reseau_humide.an_v_euep_cc
 
 -- DROP TRIGGER t_t1_an_v_euep_cc_update_insert ON m_reseau_humide.an_v_euep_cc;
@@ -1985,6 +1992,9 @@ UPDATE m_reseau_humide.an_euep_cc SET epobserv = null WHERE epobserv = '';
 UPDATE m_reseau_humide.an_euep_cc SET euepanomal = null WHERE euepanomal = '';
 UPDATE m_reseau_humide.an_euep_cc SET euepanomalpre = null WHERE euepanomalpre = '';
 UPDATE m_reseau_humide.an_euep_cc SET euepdivers = null WHERE euepdivers = '';
+UPDATE m_reseau_humide.an_euep_cc SET nidccp = null WHERE nidccp = '';
+UPDATE m_reseau_humide.an_euep_cc SET proprioadcp = null WHERE proprioadcp = '';
+
 
 RETURN NEW;
 
