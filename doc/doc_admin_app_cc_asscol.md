@@ -21,7 +21,7 @@
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
 |Recherche par adresse|x|||
-|Recherche par n° de dossier|x|||
+|Recherche par n° de dossier|x||La connexion filtre l'affichage des dossiers sur le profil du prestataire.|
 |Recherche avancée d'une adresse|x|||
 |Recherche avancée d'une voie|x|||
 |Liste des contrôles non conforme|x||Accès réservé au service assainissement|
@@ -29,8 +29,8 @@
 |Recherche des contrôles avec une demande de modifications|||Accès réservé au service assainissement|
 |Information sur le prestataire|x||La connexion filtre l'affichage des informations sur le profil du prestataire.|
 |Cartographie|x|||
-|Fiches d'informations Conformité AC à l'adresse|x|x|la liste des contrôles à l'adressse est disponible en lecture et l'insertion d'un nouveau contrôle est possible|
-|Fiches d'informations Dossier de conformité AC |x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable|
+|Fiches d'informations Conformité AC à l'adresse|x|x|la liste des contrôles à l'adressse est disponible en lecture et l'insertion d'un nouveau contrôle est possible. La connexion filtre l'affichage des positions sur le profil du prestataire.|
+|Fiches d'informations Dossier de conformité AC |x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés. L'attribut de validation n'est pas éditable. La connexion filtre l'affichage des dossiers sur le profil du prestataire.|
 |Fiches d'informations du prestataire|x|x|La connexion filtre l'affichage des informations sur le profil du prestataire. Le prestataire peut modifier ses données ainsi que le service assainissement|
 
 
@@ -106,6 +106,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_nidcc |x|x|N° de dossier|Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_modif_demandee |x|x||Formate en HTML l'affichage des modifications demandées au prestataire  | *Recherche* : Recherche des contrôles avec une demande de modifications ||
 |affiche_reg |x|x|(null)|Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_schema  |x|||Lien http de l'image du schéma générique de raccordement du glossaire  (format image)  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_tri |x|||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_tri.png)|
 |affiche_validite |x|||Formate la partie sur la durée du contrôle dans l'onglet A/Conclusion du contrôle du dossier de conformité | *Fiche d'information* : Dossier de conformité AC ||
 |batiaut||x|Précisez||*Fiche d'information :* Dossier de conformité AC ||
@@ -181,7 +182,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |tnidcc||x|Type de contrôle|Formatage par une liste de domaine (lt_euep_cc_tnidcc)|*Fiche d'information* : Dossier de conformité AC||
 |validobs||x|Modifications demandées||*Fiche d'information* : Dossier de conformité AC||
   
-   * filtres : aucun
+   * filtres : sur le champ certtype, est égale à une valeur de contexte, id_presta
    * relations :
 
 |Géotables ou Tables| Champs de jointure | Type |
