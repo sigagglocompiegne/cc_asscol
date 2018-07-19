@@ -20,9 +20,8 @@
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|Recherche par adresse|x|||
-|Recherche par n° de dossier|x||La connexion filtre l'affichage des dossiers sur le profil du prestataire.|
-|Recherche avancée d'une adresse|x|||
+|Recherche par adresse(AC)|x|||
+|Recherche d'un dossier par N°(AC)|x||La connexion filtre l'affichage des dossiers sur le profil du prestataire.|
 |Recherche avancée d'une voie|x|||
 |Liste des contrôles non conforme|x||Accès réservé au service assainissement|
 |Recherche des contrôles depuis le|x||Accès réservé au service assainissement|
@@ -45,7 +44,7 @@
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|Prestataires|||Peut saisir et modifier les dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
+|Prestataires|||Peut saisir et modifier uniquement ses dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
 |Autres personnes du service Environnement|||Accès en consultation sur une partie de l'application|
 
 # Les données
