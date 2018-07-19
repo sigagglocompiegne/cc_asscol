@@ -103,7 +103,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_date_dernier_controle  |x|x|Date du contrôle|Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
 |affiche_dossier  |x|||Formate en html l'affichage des résultats du contrôle dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_result_rech_cc_dos.png)|
 |affiche_glossaire  |x|||Formate en html l'affichage du glossaire dans l'onglet du même nom  | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_logo  |x|||Lien http de l'image du logo de l'ARC  (format image)  | *Fiche d'information* : Dossier de conformité AC ||
+|affiche_logo  |x|||Lien http de l'image du logo de l'ARC + prestataire (format image)  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_nidcc |x|x|N° de dossier|Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_modif_demandee |x|x||Formate en HTML l'affichage des modifications demandées au prestataire  | *Recherche* : Recherche des contrôles avec une demande de modifications ||
 |affiche_reg |x|x|(null)|Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
@@ -761,7 +761,7 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
 |proprionom|x||||
 |propriopre|x||||
 |proprioad|x|||Champ de texte à une ligne|
-|proprioadcp|x||lk_insee_codepostal_fr||
+|proprioadcp|x||(valeur suggérée ne fonctionne pas, en attente de résolution)||
 |dotype|x||lt_euep_cc_ordre||
 |doaut|||||
 |donom|||||
