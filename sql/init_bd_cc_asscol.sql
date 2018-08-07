@@ -112,9 +112,12 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_certificateur
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_certificateur TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_certificateur TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_certificateur TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_certificateur TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_certificateur TO edit_sig;
+
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_certificateur
   IS 'Liste des certificateurs agrées pour les contrôles de conformité assainissement';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_certificateur.code IS 'Code interne du certificateur agréé';
@@ -143,8 +146,12 @@ CREATE SEQUENCE m_reseau_humide.lt_euep_cc_certificateur_code_seq
   MAXVALUE 9223372036854775807
   START 11
   CACHE 1;
-ALTER TABLE m_reseau_humide.lt_euep_cc_certificateur
-  OWNER TO postgres;
+ALTER SEQUENCE m_reseau_humide.lt_euep_cc_certificateur_code_seq
+  OWNER TO sig_create;
+
+GRANT ALL ON m_reseau_humide.lt_euep_cc_certificateur_code_seq TO sig_create;
+GRANT SELECT, USAGE ON SEQUENCE m_reseau_humide.lt_euep_cc_certificateur_code_seq TO public;
+
 
 -- ################################################################# Domaine valeur - lt_euep_cc_ordre #############################################
 
@@ -162,9 +169,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_ordre
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_ordre TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_ordre TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_ordre TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_ordre TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_ordre TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_ordre
   IS 'Liste des donneurs d''ordre pour les contrôles de conformité assainissement';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_ordre.code IS 'Code interne du donneur d''ordre';
@@ -195,9 +204,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_typebati
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_typebati TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_typebati TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_typebati TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_typebati TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_typebati TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_typebati
   IS 'Liste des types de bâtiments pour les contrôles de conformité assainissement';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_typebati.code IS 'Code interne des types de bâtiments';
@@ -232,9 +243,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_typeres
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_typeres TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_typeres TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_typeres TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_typeres TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_typeres TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_typeres
   IS 'Liste des types de réseau raccordé au domaine public pour les contrôles de conformité assainissement';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_typeres.code IS 'Code interne des types de réseau';
@@ -266,9 +279,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_eval
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_eval TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_eval TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_eval TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_eval TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_eval TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_eval
   IS 'Liste des types de réponse aux questions pour les contrôles de conformité assainissement';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_eval.code IS 'Code interne des types de réponse';
@@ -301,9 +316,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_sup
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_sup TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_sup TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_sup TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_sup TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_sup TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_sup
   IS 'Liste des types de servitude avec une autre propriété';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_sup.code IS 'Code interne des types de sevitudes';
@@ -334,9 +351,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_bien
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_bien TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_bien TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_bien TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_bien TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_bien TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_bien
   IS 'Liste des types de bien contrôlé';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_bien.code IS 'Code interne des types de bien';
@@ -366,9 +385,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_pat
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_pat TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_pat TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_pat TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_pat TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_pat TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_pat
   IS 'Liste des types de patronyme';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_pat.code IS 'Code interne des types de patronyme';
@@ -401,9 +422,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_doc
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_doc TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_doc TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_doc TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_doc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_doc TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_doc
   IS 'Liste des types documents joints au dossier de contrôle de conformité assainissement';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_doc.code IS 'Code interne des types de documents';
@@ -438,9 +461,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_tnidcc
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_tnidcc TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_tnidcc TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_tnidcc TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_tnidcc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_tnidcc TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_tnidcc
   IS 'Liste des types de suivi des n° dossier pour un nouveau contrôle';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_tnidcc.code IS 'Code interne des types de suivi des n° dossier pour un nouveau contrôle';
@@ -469,9 +494,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_valid
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_valid TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_valid TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_valid TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_valid TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_valid TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_valid
   IS 'Liste des types de validation du contrôle';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_valid.code IS 'Code interne des types de validation du contrôle';
@@ -498,9 +525,10 @@ CREATE SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq
   START 11
   CACHE 1;
 ALTER TABLE m_reseau_humide.lt_euep_cc_anomal_seq
-  OWNER TO postgres;
-GRANT ALL ON SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq TO postgres;
-GRANT ALL ON SEQUENCE m_reseau_humide.lt_euep_cc_anomal_seq TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_anomal_seq TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_anomal_seq TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_anomal_seq TO edit_sig;
 
 
 -- Table: m_reseau_humide.lt_euep_cc_anomal
@@ -517,9 +545,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.lt_euep_cc_anomal
-  OWNER TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_anomal TO postgres;
-GRANT SELECT, INSERT ON TABLE m_reseau_humide.lt_euep_cc_anomal TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_anomal TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_anomal TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_anomal TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.lt_euep_cc_anomal
   IS 'Liste des types de validation du contrôle';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.code IS 'Code interne des anomalies possibles lors d''un contrôle';
@@ -564,8 +594,11 @@ CREATE SEQUENCE m_reseau_humide.an_euep_cc_idcc_seq
   MAXVALUE 9223372036854775807
   START 1
   CACHE 1;
-ALTER TABLE m_reseau_humide.an_euep_cc
-  OWNER TO postgres;
+ALTER SEQUENCE m_reseau_humide.an_euep_cc_idcc_seq
+  OWNER TO sig_create;
+GRANT ALL ON SEQUENCE m_reseau_humide.an_euep_cc_idcc_seq TO sig_create;
+GRANT SELECT, USAGE ON SEQUENCE m_reseau_humide.an_euep_cc_idcc_seq TO public;
+
 
 -- Table: m_reseau_humide.an_euep_cc
 
@@ -656,9 +689,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.an_euep_cc
-  OWNER TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_euep_cc TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_euep_cc TO groupe_sig WITH GRANT OPTION;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.an_euep_cc TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.an_euep_cc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_euep_cc TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.an_euep_cc
   IS 'Donnée alphanumerique de suivi des dossiers des contrôles de conformité';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.idcc IS 'Identifiant interne unique du contrôle';
@@ -764,9 +799,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.an_euep_cc_media
-  OWNER TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_euep_cc_media TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_euep_cc_media TO groupe_sig WITH GRANT OPTION;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.an_euep_cc_media TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.an_euep_cc_media TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_euep_cc_media TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.an_euep_cc_media
   IS 'Table gérant la liste des documents de suivi d''une cession ou d''une acquisition et gérer avec le module média dans GEO (application Foncier)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc_media.id IS 'Identifiant de cession ou d''acquisition';
@@ -803,9 +840,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE m_reseau_humide.log_an_euep_cc
-  OWNER TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.log_an_euep_cc TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.log_an_euep_cc TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.log_an_euep_cc TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.log_an_euep_cc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.log_an_euep_cc TO edit_sig;
+
 COMMENT ON TABLE m_reseau_humide.log_an_euep_cc
   IS 'Table permettant de suivre les modifications intervenues sur les données des contrôles de conformité. Cette table est mise à jour via des triggers intégrés au niveau des vues de gestion.';
 COMMENT ON COLUMN m_reseau_humide.log_an_euep_cc.gid IS 'identifiant unique';
@@ -829,8 +868,10 @@ CREATE SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq
   MAXVALUE 9223372036854775807
   START 1
   CACHE 1;
-ALTER TABLE m_reseau_humide.log_an_euep_cc_gid_seq
-  OWNER TO postgres;
+ALTER SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq
+  OWNER TO sig_create;
+GRANT ALL ON SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq TO sig_create;
+GRANT SELECT, USAGE ON SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq TO public;
 
 
 -- ########################################################################## table xapps_an_v_euep_cc_erreur #######################################################
@@ -853,9 +894,11 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE x_apps.xapps_an_v_euep_cc_erreur
-  OWNER TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_erreur TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_erreur TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.xapps_an_v_euep_cc_erreur TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.xapps_an_v_euep_cc_erreur TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_an_v_euep_cc_erreur TO edit_sig;
+
 COMMENT ON TABLE x_apps.xapps_an_v_euep_cc_erreur
   IS 'Table gérant les messages d''erreurs de sécurité remontés dans GEO suite à des enregistrements de contrôle de conformité';
 COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.gid IS 'Identifiant unique';
@@ -1039,9 +1082,11 @@ ORDER BY CAST (a.numero as int)
 
 
 ALTER TABLE m_reseau_humide.an_v_euep_cc
-  OWNER TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.an_v_euep_cc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_v_euep_cc TO edit_sig;
+
 COMMENT ON VIEW m_reseau_humide.an_v_euep_cc
   IS 'Vue attributaire éditable des dossiers de conformité AC (contenant les points d''adresse non éditable) récupérant l''ensemble des contrôles triés par date pour gestion dans GEO et l''édition';
 
@@ -1112,9 +1157,11 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS
      ;
 
 ALTER TABLE x_apps.xapps_geo_v_euep_cc
-  OWNER TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_euep_cc TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_geo_v_euep_cc TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.xapps_geo_v_euep_cc TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.xapps_geo_v_euep_cc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_geo_v_euep_cc TO edit_sig;
+
 COMMENT ON VIEW x_apps.xapps_geo_v_euep_cc
   IS 'Vue applicative récupérant le nombre de dossier de conformité par adresse et affichant l''état du dernier contrôle (conforme ou non conforme) pour affichage dans GEO';
 
@@ -1183,9 +1230,11 @@ ORDER BY CAST (nc.numero as int);
 
 
 ALTER TABLE x_apps.xapps_an_euep_cc_nc
-  OWNER TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_euep_cc_nc TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_euep_cc_nc TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.xapps_an_euep_cc_nc TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.xapps_an_euep_cc_nc TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_an_euep_cc_nc TO edit_sig;
+
 COMMENT ON VIEW x_apps.xapps_an_euep_cc_nc
   IS 'Vue attributaire récupérant l''ensemble des contrôles non conforme (unique) pour recherche dans GEO des contrôles non conforme et export ou courrier';
 
@@ -1214,9 +1263,10 @@ CREATE OR REPLACE VIEW m_reseau_humide.an_v_euep_cc_media AS
    FROM m_reseau_humide.an_euep_cc_media;
 
 ALTER TABLE m_reseau_humide.an_v_euep_cc_media
-  OWNER TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc_media TO postgres;
-GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc_media TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.an_v_euep_cc_media TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.an_v_euep_cc_media TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_v_euep_cc_media TO edit_sig;
 
 
 -- ####################################################### VIEW - xapps_an_v_euep_cc_tb1 #################################################################
@@ -1625,9 +1675,11 @@ SELECT DISTINCT row_number() OVER () AS id,
   GROUP BY req_d.annee,req_d.nb_ccuarc,req_d.nb_cccuarc,req_d.nb_ccncuarc, req_d.tx_ccnccu_arc, req_d.nb_ccnccu_arc, req_d.tx_cccu_arc;
 
 ALTER TABLE x_apps.xapps_an_v_euep_cc_tb1
-  OWNER TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb1 TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb1 TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb1 TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb1 TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb1 TO edit_sig;
+
 COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb1
   IS 'Vue applicative formattant le tableau de bord n°1 des contrôles de conformité AC pour affichage dans GEO';
 
@@ -1679,9 +1731,10 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb2 AS
   GROUP BY req_d.annee;
 
 ALTER TABLE x_apps.xapps_an_v_euep_cc_tb2
-  OWNER TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO postgres;
-GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO groupe_sig;
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb2 TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb2 TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb2 TO edit_sig;
 COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb2
   IS 'Vue applicative formatant le tableau de bord n°2 des contrôles de conformité AC (nombre de contrôle par prestataire) pour affichage dans GEO';
 
@@ -1934,7 +1987,12 @@ $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
 ALTER FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update()
-  OWNER TO postgres;
+  OWNER TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update() TO public;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update() TO create_sig;
+
+															 
 COMMENT ON FUNCTION m_reseau_humide.t1_an_v_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
 
 
@@ -2003,7 +2061,11 @@ $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
 ALTER FUNCTION m_reseau_humide.t2_an_euep_cc_insert()
-  OWNER TO postgres;
+  OWNER TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t2_an_euep_cc_insert() TO public;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t2_an_euep_cc_insert() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t2_an_euep_cc_insert() TO create_sig;
+															 
 COMMENT ON FUNCTION m_reseau_humide.t2_an_euep_cc_insert() IS 'Fonction trigger nettoyer les valeurs '' en null';
 
 -- Trigger: t2_an_euep_cc_insert on m_reseau_humide.an_euep_cc
@@ -2113,7 +2175,10 @@ $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
 ALTER FUNCTION m_reseau_humide.ft_log_an_euep_cc()
-  OWNER TO postgres;
+  OWNER TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_log_an_euep_cc() TO public;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_log_an_euep_cc() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_log_an_euep_cc() TO create_sig;
 
 
 COMMIT;
@@ -2203,7 +2268,11 @@ $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
 ALTER FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media()
-  OWNER TO postgres;
+  OWNER TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media() TO public;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media() TO create_sig;
+															 
 COMMENT ON FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media() IS 'Fonction trigger pour la gestion de l''insertion des médias des dossiers de conformité';
 
 
