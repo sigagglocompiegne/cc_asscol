@@ -1700,7 +1700,7 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb2 AS
          WITH req_a AS (
                  SELECT DISTINCT g.code || to_char(cc.ccdate, 'YYYY'::text) AS cle,
                     to_char(cc.ccdate, 'YYYY'::text) AS annee,
-                    g.code,
+                    --g.code,
                     g.valeur
                    FROM m_reseau_humide.an_euep_cc cc,
                     m_reseau_humide.lt_euep_cc_certificateur g
@@ -1713,28 +1713,28 @@ CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb2 AS
                   ORDER BY a.code || to_char(cc.ccdate, 'YYYY'::text)
                 )
          SELECT DISTINCT row_number() OVER () AS id,
-            (((('<tr>'::text || '<td>'::text) || req_a.valeur::text) || '</td>'::text) || string_agg(('<td align=center>'::text ||
+            '<tr>'::text || '<td>'::text || req_a.valeur::text || '</td>'::text || string_agg('<td align=center>'::text ||
                 CASE
                     WHEN req_compte.nb IS NOT NULL THEN req_compte.nb
                     ELSE 0::bigint
-                END) || '</td>'::text, ''::text)) || '</tr>'::text AS tableau,
-            string_agg(('<td>'::text || req_a.annee) || '</td>'::text, ''::text) AS annee,
-            req_a.code
+                END || '</td>'::text, ''::text) || '</tr>'::text AS tableau,
+            string_agg('<td>'::text || req_a.annee || '</td>'::text, ''::text) AS annee/*,
+            req_a.code*/
            FROM req_a
              LEFT JOIN req_compte ON req_compte.cle = req_a.cle
-          GROUP BY req_a.valeur, req_a.code
-          ORDER BY req_a.code
+          GROUP BY req_a.valeur--, req_a.code
+        --  ORDER BY req_a.code
         )
  SELECT row_number() OVER () AS id,
-    ((('<table border=1 align=center><tr><td>&nbsp;</td>'::text || req_d.annee) || '</tr>'::text) || string_agg(req_d.tableau, ''::text)) || '</table>'::text AS tableau1
+    '<table border=1 align=center><tr><td>&nbsp;</td>'::text || req_d.annee || '</tr>'::text || string_agg(req_d.tableau, ''::text) || '</table>'::text AS tableau1
    FROM req_d
-  GROUP BY req_d.annee;
+ GROUP BY req_d.annee;
 
 ALTER TABLE x_apps.xapps_an_v_euep_cc_tb2
   OWNER TO sig_create;
-GRANT ALL ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb2 TO sig_create;
-GRANT SELECT ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb2 TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb2 TO edit_sig;
+GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO sig_create;
+GRANT SELECT ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO edit_sig;
 COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb2
   IS 'Vue applicative formatant le tableau de bord n°2 des contrôles de conformité AC (nombre de contrôle par prestataire) pour affichage dans GEO';
 
