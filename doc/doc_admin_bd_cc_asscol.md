@@ -272,6 +272,7 @@ Valeurs possibles :
 |10|Oui|
 |20|Non|
 |30|Non visible|
+|40|Inconnu|
 |ZZ|Sans objet|
 
 ---
@@ -472,6 +473,8 @@ Valeurs possibles :
 |8|Event non remonté au faîtage de la maison ou immeuble ou local|
 |9|Absence de clapet anti-retour|
 |10|Absence de siphon|
+|11|Destination des eaux usées indéterminée|
+|12|Vidange de piscine raccordée sur le branchement eaux usées|
 
 ---
 
