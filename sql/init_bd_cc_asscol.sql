@@ -1817,6 +1817,7 @@ SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse 
 					new.rrebrtype ,CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
 					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END,new.epautre ,new.epobserv ,new.euepanomal ,
 					new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61',new.nidccp,new.proprioadcp;
+
 END IF;
 
 
@@ -1874,7 +1875,7 @@ now()
 
 END IF;
 
--- ne peut pas modifier un suivi de dossier ou nouveau dossier
+-- ne peut pas modifier un type de dossier (suivi de dossier ou nouveau dossier)
 IF new.tnidcc <> old.tnidcc THEN
 --v_adresse := old.id_adresse;
 DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
@@ -1888,7 +1889,6 @@ now()
 );
 
 END IF;
-
 
 -- si le prestataire qui modifie n'est pas celui qui a saisi pas de modification possible
 IF old.certtype = new.certtype THEN
