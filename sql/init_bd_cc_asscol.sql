@@ -296,6 +296,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_eval(
     ('10','Oui'),
     ('20','Non'),
     ('30','Non visible'),
+    ('40','Inconnu'),
     ('ZZ','Sans objet')
     ;
 
@@ -567,7 +568,9 @@ INSERT INTO m_reseau_humide.lt_euep_cc_anomal(
     (7,'Diamètre de l''évent insuffisant'),
     (8,'Event non remonté au faîtage de la maison ou immeuble ou local'),
     (9,'Absence de clapet anti-retour'),
-    (10,'Absence de siphon')
+    (10,'Absence de siphon'),
+    (11,'Destination des eaux usées indéterminée'),
+    (12,'Vidange de piscine raccordée sur le branchement eaux usées')
     ;
 
 -- ####################################################################################################################################################
