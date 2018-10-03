@@ -9,6 +9,10 @@
  * **résumé fonctionnel** :
  les données des contrôles de conformité sont localisées à l'adresse postale du bien contrôlé. La classe d'objets des points d'adresse de la BAL de l'Agglomération est donc utilisée pour la primitive géographique. Seuls les données métiers des contrôles font l'objet d'un stockage dans des classes d'objets non géographiques. Cette donnée métier est donc urbanisée avec la donnée adresse. Une des particularités de cette donnée, est qu'il faut en assurer un suivi chronologique. On doit pouvoir à une adresse donnée, visualiser et consulter l'ensemble des contrôles déjà réalisés et ceux en cours.
 
+## Schéma fonctionnel
+
+![schema_fonctionnel](img/schema_fonctionnel_v3.jpg)
+
 ## Dépendances
 
 La base de données des contrôles de conformité s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentatation de cette base.
@@ -489,13 +493,9 @@ Sans objet
 
 ---
 
-## Schéma fonctionnel
-
-### Modèle conceptuel simplifié
+## Modèle conceptuel simplifié
 
 ![mcd](img/MCD_v2.png)
 
-### Schéma fonctionnel
 
-![schema_fonctionnel](img/schema_fonctionnel_v3.jpg)
 
