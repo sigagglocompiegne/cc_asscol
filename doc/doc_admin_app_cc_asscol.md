@@ -2,6 +2,13 @@
 
 # Documentation d'administration de l'application #
 
+* Statut
+  - [ ] à rédiger
+  - [ ] en cours de rédaction
+  - [ ] relecture
+  - [x] finaliser
+  - [ ] révision
+
 # Généralité
 
 |Représentation| Nom de l'application |Résumé|
