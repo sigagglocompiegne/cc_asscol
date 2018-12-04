@@ -11,7 +11,7 @@
 
 ## Schéma fonctionnel
 
-![schema_fonctionnel](img/schema_fonctionnel_v3.jpg)
+![schema_fonctionnel](img/schema_fonctionnel_v4.jpg)
 
 ## Dépendances
 
