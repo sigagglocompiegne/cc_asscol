@@ -52,7 +52,7 @@
 |:---|:-:|:-:|:---|
 |Prestataires|||Peut saisir et modifier uniquement ses dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
 |Autres personnes du service Environnement|||Accès en consultation sur une partie de l'application|
-|Table et liste de domaine lt_euep_cc_valid|x||Un attribut de contexte a até créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage de la valeur 40 uniquement au service SIG pour la suppression du dossier. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Pour le service SIG aucune valeur attribuée|
+|Serice SIG|x||Pour la table et la liste de domaine lt_euep_cc_valid, un attribut de contexte a até créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage de la valeur 40 uniquement au service SIG pour la suppression du dossier. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Pour le service SIG aucune valeur attribuée|
 
 # Les données
 
