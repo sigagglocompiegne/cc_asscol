@@ -46,13 +46,13 @@
 |:---|:-:|:-:|:---|
 |Toutes|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés|
 
-* **Autres profils**
+* **Autres profils ou particularités**
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|Prestataires|||Peut saisir et modifier uniquement ses dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
-|Autres personnes du service Environnement|||Accès en consultation sur une partie de l'application|
-|Serice SIG|x||Pour la table et la liste de domaine lt_euep_cc_valid, un attribut de contexte a até créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage de la valeur 40 uniquement au service SIG pour la suppression du dossier. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Pour le service SIG aucune valeur attribuée|
+|Prestataires|x|x|Peut saisir et modifier uniquement ses dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
+|Autres personnes du service Environnement|x||Accès en consultation sur une partie de l'application|
+|Serice SIG|x|x|Pour la table et la liste de domaine lt_euep_cc_valid, un attribut de contexte a até créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage de la valeur 40 uniquement au service SIG pour la suppression du dossier. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Pour le service SIG aucune valeur attribuée|
 
 # Les données
 
