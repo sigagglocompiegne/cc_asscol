@@ -511,6 +511,7 @@ INSERT INTO m_reseau_humide.lt_euep_cc_valid(
     ('10','Contrôle validé'),
     ('20','Contrôle non vérifié'),
     ('30','Contrôle non validé (modification demandée)')
+    ('40','Contrôle à supprimer')
     ;
     
 -- ################################################################# Domaine valeur - lt_euep_cc_anomal #############################################
@@ -1827,6 +1828,13 @@ RETURN NEW;
 -- UPDATE
 ELSIF (TG_OP = 'UPDATE') THEN
 
+-- gestion des suppressions des contrôles (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
+IF (new.ccvalid = '40') THEN
+
+DELETE FROM m_reseau_humide.an_euep_cc_media WHERE id = (SELECT idcc FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc);
+DELETE FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc;
+
+ELSE
 
 -- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
 
