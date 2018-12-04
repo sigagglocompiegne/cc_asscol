@@ -12,3 +12,4 @@
 **Pour les administrateurs** :
 - [Edition des courriers](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideadmin1_edition_courrier.pdf)
 - [Recherche des dossiers depuis une date](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideadmin2_recherche_dossier.pdf)
+- [Supprimer un dossier](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideadmin3_suppression_dossier.pdf)
