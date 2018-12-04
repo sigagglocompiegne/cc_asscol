@@ -52,7 +52,7 @@
 |:---|:-:|:-:|:---|
 |Prestataires|x|x|Peut saisir et modifier uniquement ses dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
 |Autres personnes du service Environnement|x||Accès en consultation sur une partie de l'application|
-|Serice SIG|x|x|Pour la table et la liste de domaine lt_euep_cc_valid, un attribut de contexte a até créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage de la valeur 40 uniquement au service SIG pour la suppression du dossier. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Pour le service SIG aucune valeur attribuée|
+|Serice SIG|x|x|Pour la table et la liste de domaine lt_euep_cc_valid, un attribut de contexte a été créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage de la valeur 40 uniquement au service SIG pour la suppression du dossier. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Pour le service SIG aucune valeur attribuée|
 
 # Les données
 
@@ -318,73 +318,37 @@ END
    * relations : aucune
 
 * Particularité : ce tableau est lié à la table `xapps_an_v_euep_cc_tb1`
-
-## Table : `lt_euep_cc_tnidcc`
+  
+   
+## Table : `lt_euep_cc_certificateur`
 
 Sans objet
 
-   * filtres : aucun
+   * filtres :
+
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:-:|:---:|:---:|:---|:---|
+|SECU|code (Code interne du donneur d'ordre)|x|Alphanumérique|est égale à une valeur de contexte|id_presta|Filtre de sécurité permettant à chaque prestataire de visualiser et de modifier uniquement ces informations de contact|
+|Prestataire|code (Code interne du donneur d'ordre)||Alphanumérique|est égale à une liste de valeur|lt_euep_cc_certificateur |Permet la sélection du perstataire dans une liste déroulante|
+
    * relations : aucune
    
-## Table : `lt_euep_cc_typeres`
-
-Sans objet
-
-   * filtres : aucun
-   * relations : aucune
    
-## Table : `lt_euep_cc_bien`
+## Table : `lt_euep_cc_valid`
 
 Sans objet
 
-   * filtres : aucun
-   * relations : aucune
+   * filtres :
    
-## Table : `lt_euep_cc_pat`
-
-Sans objet
-
-   * filtres : aucun
-   * relations : aucune
-
-## Table : `lt_euep_doc`
-
-Sans objet
-
-   * filtres : aucun
-   * relations : aucune
+|SECU|code (Code interne des types de validation)|x|Alphanumérique|est égale à une valeur de contexte|cc_valid|Filtre de sécurité permettant d'afficher la valeur '40' (contrôle à supprimer) uniquement pour les rôles administrateurs de GEO à savoir le service SIG. Pour les autres, ils ont accés uniquement aux valeurs '10','20' et '30' qui sont saisies dans l'attribit cc_valid au niveau des droits|
    
-## Table : `lt_euep_sup`
-
-Sans objet
-
-   * filtres : aucun
-   * relations : aucune
-   
-## Table : `lt_euep_cc_eval`
-
-Sans objet
-
-   * filtres : aucun
-   * relations : aucune
-   
-## Table : `lt_euep_cc_typebati`
-
-Sans objet
-
-   * filtres : aucun
-   * relations : aucune
-   
-## Table : `lt_euep_cc_ordre`
-
-Sans objet
-
-   * filtres : aucun
    * relations : aucune
    
 ## Table : `lk_insee_codepostal_fr`
 
-Sans objet
+|Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|dept |x|x||Code du département déduit du champ {cp_com}|Aucune utilisation||
 
    * filtres : aucun
    * relations : aucune
