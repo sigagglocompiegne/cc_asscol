@@ -442,6 +442,7 @@ Valeurs possibles :
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code
+* La valeur 40 n'est jamais écrite en base. Il sert uniquement temporairement pour supprimer un dossier si elle est sélectionné dans le dossier dans GEO
 
 Valeurs possibles :
 
@@ -450,6 +451,9 @@ Valeurs possibles :
 |10|Contrôle validé|
 |20|Contrôle non vérifié|
 |30|Contrôle non validé (modification demandée)|
+|40|Contrôle à supprimer|
+
+
 
 ---
 
