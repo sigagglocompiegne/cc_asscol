@@ -340,6 +340,8 @@ Sans objet
 
    * filtres :
    
+|Nom|Attribut| Au chargement | Type | Condition |Valeur|Description|
+|:---|:---|:-:|:---:|:---:|:---|:---|
 |SECU|code (Code interne des types de validation)|x|Alphanumérique|est égale à une valeur de contexte|cc_valid|Filtre de sécurité permettant d'afficher la valeur '40' (contrôle à supprimer) uniquement pour les rôles administrateurs de GEO à savoir le service SIG. Pour les autres, ils ont accés uniquement aux valeurs '10','20' et '30' qui sont saisies dans l'attribit cc_valid au niveau des droits|
    
    * relations : aucune
