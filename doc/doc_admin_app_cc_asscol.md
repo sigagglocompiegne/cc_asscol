@@ -220,7 +220,12 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
 |Attributs| Champ calculé | Formatage |Renommage  |Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
-|affiche_annee_cc|x|||Formate la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conformet par date, Contrôle Non Conformet par année (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_adresse_export |x||Adresse du contrôle|Formate l'adresse pour l'export Excel|*Recherche* : Exporter la liste des contrôles non conformes|`replace({adresse},'60',' 60')`|
+|affiche_annee_cc|x|||Formate la date du contrôle en yyyy pour sélection de l'année dans les recherches des contrôles non conforme|*Filtre* : Contrôle Non Conforme par date, Contrôle Non Conforme par année (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_annee_controle|x||Année du contrôle|Formate l'année du contrôle pour l'export Excel|*Recherche* : Exporter la liste des contrôles non conformes|`to_char({ccdate},'YYYY')`|
+|affiche_anomalie|x||Année du contrôle|Décodage des anomalies (liste de domaine inutilisable dans ces cas)|*Champ calculé* : affiche_anomalie_export, affiche_texte_courrier, *Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_anomalie_export|x||Anomalie(s)|Formate les anomalies pour l'export Excel|*Recherche* : Exporter la liste des contrôles non conformes|`CASE WHEN substring({affiche_anomalie} FROM 1 FOR 4) = '<br>' THEN replace(substring({affiche_anomalie},5),'<br>',',') ELSE replace({affiche_anomalie},'<br>',',') END`|
+|affiche_anomaliepre|x|||Formate le message pour les précisions d'anomalie dans le courrier|*Champ calculé* : affiche_texte_courrier|`CASE WHEN {euepanomalpre} is null THEN '' ELSE '<br><u>Précisions sur les anomalies constatées</u> : <br><br>'|| {euepanomalpre}END`|
 |affiche_conformite|x|||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/doc/img/affiche_menu_result_rech_ccnc.png)|
 |affiche_espace_objet|x|||Formatage en html d'un espace avant l'objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_espace_signature|x|||Formatage en html d'un espace avant la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
