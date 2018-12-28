@@ -962,7 +962,7 @@ Aucune
 
 |Gabarit|Thème|Modules spé|Impression|Résultats|
 |:---|:---|:---|:---|:---|
-|Pro|Thème GeoCompiegnois 1.0.7 (Contrôle conformité AC et réseaux humides))|Bandeaux HTML,StreetView,GeoCadastre,Multimedia,Google Analytics,Page de connexion perso,Javacript|8 Modèles standards A4 et A3||
+|Pro|Thème GeoCompiegnois 1.0.7 (Contrôle conformité AC et réseaux humides))|Bandeaux HTML,StreetView,GeoCadastre,Multimedia,Google Analytics,Page de connexion perso,Javacript,Export Fonctionnalités (Contrôle Conformatité AC)|8 Modèles standards A4 et A3||
 
 Note : le thème employé dans cette application intègre la suppression de la première colonne dans les tableaux des fiches d'information. Cela permet de ne pas afficher le champ qui tri l'ordre des contrôles par date pour chaque adresse.
 
@@ -975,7 +975,8 @@ acfApplicationService.whenLoaded(setTimeout(function(){
 $(".sidepanel-item.launcher-application").click();
 }, 100));`
   * Module Google Analytics : le n° ID est disponible sur le site de Google Analytics
-
+  * Export Fonctionnalités (Contrôle Conformatité AC) : Exporter les fonctionnalités d'après la liste (Exporter la lists des contrôles non conformes)
+  
 * Recherche globale :
 
 |Noms|Tri|Nb de sugggestion|Texte d'invite|
@@ -1002,9 +1003,10 @@ Liste des recherches : Contrôle de conformité AC
 |:---|:---|
 |Contrôle de conformité - AC|Recherche par adresse (AC)|
 ||Recherche par N° de dossier (AC)|
-||Liste des contrôles NON CONFORME|
 ||Recherche des contrôles depuis|
 ||Recherche des contrôles avec une demande de modifications|
+|Gestion des contrôles non conformes|Liste des contrôles NON CONFORME|
+||Exporter la liste des contrôles non conformes|
 |Prestataires|Informations sur le prestataire|
 |Tableaux de bord|
 ||Tableau de bord - Contrôle conformité AC|
