@@ -225,13 +225,16 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_annee_controle|x||Année du contrôle|Formate l'année du contrôle pour l'export Excel|*Recherche* : Exporter la liste des contrôles non conformes|`to_char({ccdate},'YYYY')`|
 |affiche_anomalie|x||Année du contrôle|Décodage des anomalies (liste de domaine inutilisable dans ces cas)|*Champ calculé* : affiche_anomalie_export, affiche_texte_courrier, *Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_anomalie_export|x||Anomalie(s)|Formate les anomalies pour l'export Excel|*Recherche* : Exporter la liste des contrôles non conformes|`CASE WHEN substring({affiche_anomalie} FROM 1 FOR 4) = '<br>' THEN replace(substring({affiche_anomalie},5),'<br>',',') ELSE replace({affiche_anomalie},'<br>',',') END`|
-|affiche_anomaliepre|x|||Formate le message pour les précisions d'anomalie dans le courrier|*Champ calculé* : affiche_texte_courrier|`CASE WHEN {euepanomalpre} is null THEN '' ELSE '<br><u>Précisions sur les anomalies constatées</u> : <br><br>'|| {euepanomalpre}END`|
+|affiche_anomaliepre|x|||Formate le message pour les précisions d'anomalie dans le courrier|*Champ calculé* : affiche_texte_courrier|`CASE WHEN {euepanomalpre} is null THEN '' ELSE '<br><u>Précisions sur les anomalies constatées</u> : <br><br>' {euepanomalpre}END`|
+|affiche_commune_export|x||Commune du contrôle|Formate le nom du champ pour l'export Excel|*Recherche* : Exporter la liste des contrôles non conformes||
 |affiche_conformite|x|||Formatage en html l'affichage du résultat dans le menu du même nom pour la recherche d'un contrôle non conforme|*Recherche* : Liste des contrôles NON CONFORME|![picto](/doc/img/affiche_menu_result_rech_ccnc.png)|
 |affiche_espace_objet|x|||Formatage en html d'un espace avant l'objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_espace_signature|x|||Formatage en html d'un espace avant la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_espace_tete|x|||Formatage en html d'un espace avant l'en-tête du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
-|affiche_espace_tete|x|||Formate le mois du contrôle en français pour sélection du mois dans les recherches des contrôles non conforme|*Filtre* : Mois du contrôle de conformité AC (*Recherche* : Liste des contrôles NON CONFORME)||
+|affiche_mois_cc|x|||Formate le mois du contrôle en français pour sélection du mois dans les recherches des contrôles non conforme|*Filtre* : Mois du contrôle de conformité AC (*Recherche* : Liste des contrôles NON CONFORME)||
 |affiche_objet|x|||Formate en html la partie écrite Objet du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
+|affiche_patronyme_export|x||Patronyme|Formate le patronyme pour l'export Excel|*Recherche* : Exporter la liste des contrôles non conformes|`CASE WHEN {propriopat} = '00' THEN '' WHEN {propriopat} = '10' THEN 'M' WHEN {propriopat} = '20' THEN 'Mme'
+WHEN {propriopat} = '30' THEN 'M et Mme' WHEN {propriopat} = '40' THEN {propriopatp} END`|
 |affiche_proprio|x|||Formate en html la partie coordonnée (ici propriétaire) du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_signature|x|||Formate en html la partie signature du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
 |affiche_texte_courrier|x|||Formate en html le corps du courrier|*Fiche d'information* : Conformité NON CONFORME - Courrier||
@@ -481,6 +484,35 @@ Source : `xapps_an_euep_cc_nc`
 
  * Fiches d'information active : Conformité NON CONFORME - Courrier
  
+## Recherche : `Exporter la liste des contrôles non conformes`
+
+Cette recherche permet à l'utilisateur d'exporter (en excel par ex) la liste des contrôles non conformes.
+
+  * Configuration :
+  
+Source : `xapps_an_euep_cc_nc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|affiche_annee_controle|x|||||
+|affiche_commune_export|x|||||
+|affiche_adresse_export|x|||||
+|adapt||||||
+|adeta||||||
+|affiche_patronyme_export||||||
+|proprionom||||||
+|propriopre||||||
+|proprioad||||||
+|affiche_anomalie_export||||||
+
+(la détection des doublons n'est pas activée ici)
+
+ * Filtres : aucun
+
+(1) si liste de domaine
+
+ * Fiches d'information active : aucune
+ 
 ## Recherche : `Recherche des contrôles depuis`
 
 Cette recherche permet à l'utilisateur de faire une recherche sur les contrôles de conformité à partir d'une certaine date.
@@ -594,6 +626,7 @@ Source : `xapps_geo_v_euep_cc`
  * Fiches d'information active : Informations des prestataires (AC)
  
 
+
 ## Recherche : `Tableau de bord - Contrôle conformité AC`
 
 Cette recherche permet à l'utilisateur d'afficher les tableaux de bord.
@@ -613,6 +646,8 @@ Source : `xapps_an_v_euep_cc_tb1`
 (1) si liste de domaine
 
  * Fiches d'information active : Tableau de bord - Contrôle conformité AC
+ 
+ 
  
 ## Recherche : `Recherche avancée d'une voie`
 
