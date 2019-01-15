@@ -484,6 +484,7 @@ Valeurs possibles :
 |11|Destination des eaux usées indéterminée|
 |12|Vidange de piscine raccordée sur le branchement eaux usées|
 |13|Eaux pluviales raccordées sur le réseau d'eaux usées (en partie publique)|
+|14|Absence de bac dégraisseur|
 
 ---
 
