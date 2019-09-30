@@ -8,6 +8,7 @@
 --		     Le champ ccvalid devient un charactère (et non plus booléen) avec une clé étrangère sur le liste de valeur
 --                   Ajout d'une liste de valeur anomalie et stade de validation
 --                   Ajout d'un enregistrement dans la liste des prestataires
+-- 2019/09/30 : GB / ajout d'une valeur dans lt_euep_cc_valid pour gérer le déverrouillage d'un dossier
 -- #################################################################################################################################################
 
 
@@ -511,7 +512,8 @@ INSERT INTO m_reseau_humide.lt_euep_cc_valid(
     ('10','Contrôle validé'),
     ('20','Contrôle non vérifié'),
     ('30','Contrôle non validé (modification demandée)')
-    ('40','Contrôle à supprimer')
+    ('40','Contrôle à supprimer'),
+    ('50','Contrôle à déverrouiller')
     ;
     
 -- ################################################################# Domaine valeur - lt_euep_cc_anomal #############################################
@@ -1837,6 +1839,17 @@ DELETE FROM m_reseau_humide.an_euep_cc_media WHERE id = (SELECT idcc FROM m_rese
 DELETE FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc;
 
 ELSE
+										      
+-- gestion des contrôles (uniquement possible si valeur indiqué dans l'attribut cc_valid attaché à l'utilisateur dans GEO, accès à la valeur 50 de la liste de valeurs lt_euep_cc_valid)
+
+IF (new.ccvalid = '50') THEN
+
+UPDATE m_reseau_humide.an_euep_cc
+SET 
+ccvalid = '30'
+WHERE an_euep_cc.idcc = OLD.idcc;
+
+END IF;
 
 -- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
 
