@@ -132,9 +132,18 @@ Particularité(s) à noter :
 * 36 clés étrangères existent et correspondent aux classes de listes de valeurs
 * le n° de dossier nidcc est composé come suit ```[insee]cc[n° auto max+1 déjà présent sur la commune```. Cet identifiant est généré automatiquement à la création d'un nouveau contrôle depuis l'application métier
 * 2 triggers :
-  * ``t_t1_an_euep_cc_insert`` : gère après une insertion la transformation des '' en valeur null
-  * ``t_t2_log_an_euep_cc_insert_update`` : gère après une insertion ou une mise à jour l'écriture de la transaction dans la classe des logs
+  * ``t_t1_an_euep_cc_update_insert`` : gère l'insertion et la mise à jour des dossiers
+  * ``t_t2_an_euep_cc_delete`` : gère la suppression des dossiers
+  * ``t_t3_an_euep_cc_insert`` : gère après une insertion la transformation des '' en valeur null
+  * ``t_t3_log_an_euep_cc_insert_update`` : gère après une insertion ou une mise à jour l'écriture de la transaction dans la classe des logs
+  
 * Par défaut l'enregistrement d'un nouveau dossier ou d'un suivi est non valide (même si une autre valeur est saisie = sécurité)
+
+    * fonctionnement :
+      * à l'entrée : 
+        * un contrôle validé ne peut pas être modifié
+        * un contrôle validé ou non ne peut pas être supprimé
+        * seuls les administrateurs peuvent rendre un contrôle de nouveau modifiable ou le supprimer
 
 ---
 
@@ -175,22 +184,6 @@ Particularité(s) à noter :
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique ``log_an_euep_cc_gid_seq``
-
----
-
-`an_v_euep_cc` : vue attributaire éditable (contenant le point d''adresse qui est lui non éditable) récupérant l''ensemble des contrôles triés par date pour leur gestion dans l'application métier ainsi que l'identifiant et les informations de l'adresse issue de la BAL
-
-Particularité(s) à noter :
-* 1 trigger :
-  * `t_t1_an_v_euep_cc_update_insert` : gère pour l'instance d'insertion ou de mise à jour l'intégration des données dans la classe d'objet `an_v_euep_cc`
-    * fonctionnement :
-      * à l'entrée : 
-        * une variable est calculée pour définir si il existe déjà au moins un contrôle à l'adresse qui permet d'en déduire si il s'agit d'un contrôle initial
-        * une variable est calculée pour la génération du n° de dossier lorsque l'utilisateur choisit nouveau dossier dans l'applicatif métier
-      
-      * à l'insertion : vérification du n° de dossier (si il s'agit d'un suivi de dossier mal saisie, il ne passe rien)
-        * intégration des valeurs saisies par l'utilisateur (par défaut la séquence calcul le n° de l'identifiant unique de l'enregistrement, la validation du contrôle est forcée à `20`, insertion de la variable définissant le contrôle initial et le n° de dossier)
-        * à la mise à jour : vérification de la validation du contrôle (si celui-ci est validé à `10` par l'Agglomération, aucune modification n'est permise, si non les données peuvent être modifiées sauf le n° de dossier. La valeur '40' supprime le dossier et les données inscrites dans la table des médias)   
 
 ---
 
