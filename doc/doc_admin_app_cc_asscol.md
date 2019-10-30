@@ -89,7 +89,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 
    * Particularité : ATTENTION, l'ajout d'une anomalie doit être corrélée avec la modification du champ calculé `affiche_anomalie` pour intégrer le cas dans le courrier
 
-## Table : `an_v_euep_cc`
+## Table : `an_euep_cc`
 
 |Attributs| Champ calculé | Formatage |Renommage|Particularité/Usage|Utilisation|Exemple|
 |:---|:-:|:-:|:---|:---|:---|:---|
@@ -100,18 +100,19 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |achetpre||x|Prénom de l'acheteur||*Fiche d'information :* Dossier de conformité AC ||
 |adapt||x|Appart n°||*Fiche d'information :* Dossier de conformité AC ||
 |adeta||x|Etage||*Fiche d'information :* Dossier de conformité AC ||
-|affiche_adresse_gras |x|||Affiche le champ `adresse` en gras dans le résultat d'une recherche | *Recherche* : Recherche des contrôles depuis le,  Recherche par N° de dossier (AC) ||
+|affiche_attestation_formation  |x|||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_attestation_logo  |x|||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_cc_init   |x|x|-|Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/doc/img/affiche_acronyme_ci.png)|
 |affiche_cc_valid   |x|x|-|Formate l'affichage de l'acronyme au survol de la souris sur le picto validation | *Fiche d'information* : Dossier de conformité AC |![picto](/doc/img/affiche_acronyme_cv.png)|
 |affiche_conclusion    |x|||Formate en html l'en-tête de la partie A/conclusion du rapport de conformité | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_controle  |x|x|Conformité|Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/doc/img/affiche_picto_fi.png)|
-|affiche_date_dernier_controle  |x|x|Date du contrôle|Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
+|affiche_date_controle  |x|x|Date du contrôle|Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
 |affiche_dossier  |x|||Formate en html l'affichage des résultats du contrôle dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_result_rech_cc_dos.png)|
+|affiche_en_tete_impression  |x|||Blanc pour rien n'afficher dans le titre de la fiche lors de l'impression | ||
 |affiche_glossaire  |x|||Formate en html l'affichage du glossaire dans l'onglet du même nom  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_logo  |x|||Lien http de l'image du logo de l'ARC + prestataire (format image)  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_nidcc |x|x|N° de dossier|Formate le n° de dossier  | *Fiche d'information* : Dossier de conformité AC ||
-|affiche_modif_demandee |x|x||Formate en HTML l'affichage des modifications demandées au prestataire  | *Recherche* : Recherche des contrôles avec une demande de modifications ||
+|affiche_modif_demande |x|x||Formate en HTML l'affichage des modifications demandées au prestataire  | *Recherche* : Recherche des contrôles avec une demande de modifications ||
 |affiche_reg |x|x|(null)|Formate en html la partie règlementaire présente dans l'onglet Objet de la mission du dossier de conformité   | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_schema  |x|||Lien http de l'image du schéma générique de raccordement du glossaire  (format image)  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_tri |x|||Formate en html le n° d'ordre des contrôles et affiché dans les résultats d'une recherche | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_tri.png)|
@@ -176,6 +177,7 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |nidcc||x|N° de dossier suivi||*Fiche d'information* : Dossier de conformité AC||
 |nidccp||x|Référence diagnostiqueur||*Fiche d'information* : Dossier de conformité AC||
 |op_sai||x|null|Texte de remplacement utilisé avec un espace (évite l'affichage de la valeur dans la fiche)|*Fiche d'information* : Conformité AC à l'adresse||
+|ordre_tri  |x||Il y a|Calcul de la différence entre la date du contrôle et la date du jour pour trie dans la fiche des contrôles à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
 |ordre_cc||x|Il y a||*Fiche d'information* : Conformité AC à l'adresse||
 |proprioad||x|Adresse||*Fiche d'information* : Dossier de conformité AC||
 |proprioadcp||x|Code postal|Formatage d'une liste de domaine avec CP et nom de la commune|*Fiche d'information* : Dossier de conformité AC||
@@ -430,7 +432,7 @@ Cette recherche permet à l'utilisateur de faire une recherche de contrôle par 
 
   * Configuration :
   
-Source : `an_v_euep_cc`
+Source : `an_euep_cc`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
@@ -519,7 +521,7 @@ Cette recherche permet à l'utilisateur de faire une recherche sur les contrôle
 
   * Configuration :
   
-Source : `an_v_euep_cc`
+Source : `an_euep_cc`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
@@ -551,7 +553,7 @@ Cette recherche permet à l'utilisateur de faire une recherche sur les contrôle
 
   * Configuration :
   
-Source : `an_v_euep_cc`
+Source : `an_euep_cc`
 
 |Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
 |:---|:-:|:-:|:-:|:-:|:-:|
@@ -686,7 +688,7 @@ Sont présent ici uniquement les attributs éditables ou disposant d'un mode de 
  
  ## Fiche d'information : `Dossier de conformité AC`
 
-Source : `an_v_euep_cc`
+Source : `an_euep_cc`
 
  * Statistique : aucune
  
