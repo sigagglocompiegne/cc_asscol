@@ -9,6 +9,11 @@
 --                   Ajout d'une liste de valeur anomalie et stade de validation
 --                   Ajout d'un enregistrement dans la liste des prestataires
 -- 2019/09/30 : GB / ajout d'une valeur dans lt_euep_cc_valid pour gérer le déverrouillage d'un dossier
+-- 2019/10/30 : GB / optimisation de l'application pour l'ouverture des dossiers (la vue an_v_euep_cc n'est plus utilisée, la table an_eueup_cc
+--                   est utilisée directement, les fonctions triggers ont été ramenées à la table avec des ajustements)
+--		     Le trigger de gestion des médias (par la vue) a été également remanié pour gérer l'impossibilité d'insérer
+--                   de modifier ou de supprimer un média relié à un contrôle validé
+
 -- #################################################################################################################################################
 
 
@@ -76,7 +81,7 @@ ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_anomal DROP CONSTRAINT IF EXIST
 DROP VIEW IF EXISTS x_apps.xapps_geo_v_euep_cc;
 DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc;
 DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc_nc;
-DROP VIEW IF EXISTS m_reseau_humide.an_v_euep_cc;
+-- DROP VIEW IF EXISTS m_reseau_humide.an_v_euep_cc; (vue supprimée)
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
 -- ###                                                                  DOMAINES DE VALEURS                                                         ###
@@ -1058,8 +1063,8 @@ ADD CONSTRAINT lt_euep_cc_valid_fkey FOREIGN KEY (ccvalid)
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
--- ####################################################### VIEW - an_v_euep_cc #################################################################
-
+-- ####################################################### VIEW - an_v_euep_cc (vue supprimée) #################################################################
+/*
 -- View: m_reseau_humide.an_v_euep_cc
 
 CREATE OR REPLACE VIEW m_reseau_humide.an_v_euep_cc AS
@@ -1097,7 +1102,7 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_v_euep_cc TO ed
 
 COMMENT ON VIEW m_reseau_humide.an_v_euep_cc
   IS 'Vue attributaire éditable des dossiers de conformité AC (contenant les points d''adresse non éditable) récupérant l''ensemble des contrôles triés par date pour gestion dans GEO et l''édition';
-
+*/
 
 
 -- ####################################################### VIEW - xapps_geo_v_euep_cc #################################################################
@@ -1762,8 +1767,8 @@ COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb2
 -- ####################################################################################################################################################
 
 
--- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_insert_update #######################################################
-
+-- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_insert_update (supprimée) #######################################################
+/*
 -- Function: m_reseau_humide.ft_m_an_v_euep_cc_insert_update()
 
 -- DROP FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_insert_update();
@@ -2031,7 +2036,456 @@ CREATE TRIGGER t_t1_an_v_euep_cc_update_insert
   ON m_reseau_humide.an_v_euep_cc
   FOR EACH ROW
   EXECUTE PROCEDURE m_reseau_humide.ft_m_an_v_euep_cc_insert_update();
+*/
 
+-- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert_update ##################################################################################
+
+-- FUNCTION: m_reseau_humide.ft_m_an_euep_cc_insert_update()
+
+-- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update();
+
+CREATE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF 
+AS $BODY$
+DECLARE v_ccinit boolean;
+DECLARE v_nidcc character varying;
+DECLARE v_ccvalid boolean;
+--DECLARE v_adresse integer;
+DECLARE t1_nidcc integer;
+DECLARE t2_nidcc integer;
+
+BEGIN
+
+-- gestion automatique si ils'agit du contrôle initial à l'adresse
+v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_adresse=new.id_adresse)>= 1  THEN false ELSE true END;
+
+-- gestion des n° de dossier automatique et en cas de suivi
+v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN 
+	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc) as nnidcc)
+	    ELSE 
+		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
+	    END;
+
+-- vérification sur la saisie des n° de dossier : compte le nombre de dossier validé et conforme (si = 0 peut insérer si non ne fait rien)
+t1_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid='10' and rcc='oui');
+-- vérification sur la saisie des n° de dossier : compte le nombre de dossier non validé (si >= 1 ne peut pas insérer un suivi de dossier sur un même dossier non validé)
+t2_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid <> '10');
+
+-- INSERT
+IF (TG_OP = 'INSERT') THEN
+
+-- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
+-- contrôle sur le n° de dossier en suivi : ne peut pas saisir un suivi si le n° de dossier saisi n'existe pas à l'adresse CONFORME et VALIDE
+-- ici pas possibilité de remontée de message dans le fiche GEO. L'enregistrement ne se fait pas.
+
+-- si le n° de dossier est nouveau ou un suivi est correctement saisi on insert si non rien
+IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
+
+new.idcc := (select nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass));
+new.nidcc := v_nidcc;
+new.ccinit := v_ccinit;
+
+new.rrechype := CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END;
+new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
+new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
+new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
+new.date_sai := now();
+new.scr_geom := '61';
+END IF;
+
+RETURN NEW;
+
+-- UPDATE
+ELSIF (TG_OP = 'UPDATE') THEN
+
+-- gestion des contrôles non supprimés (les supprimés sont gérés dans un trigger after)
+-- (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
+-- gestion des contrôles (uniquement possible si valeur indiqué dans l'attribut cc_valid attaché à l'utilisateur dans GEO, accès à la valeur 50 de la liste de valeurs lt_euep_cc_valid)
+
+-- si le contrôle est à supprimer, passe en dehors des contrôles ci-dessous et passera dans le trigger after
+-- si le contrôle est à dévalider passe dans la première boucle
+IF (new.ccvalid = '50') THEN
+new.ccvalid := '30';
+
+new.ccinit := old.ccinit ;
+new.adapt := old.adapt ;
+new.adeta := old.adeta ;
+new.tnidcc := old.tnidcc ;
+new.nidcc := old.nidcc ;
+new.rcc := old.rcc ;
+new.ccdate := old.ccdate ;
+new.ccdated := old.ccdated ;
+new.ccbien := old.ccbien ;
+new.certtype := old.certtype ;
+new.certnom := old.certnom ;
+new.certpre := old.certpre ;
+new.propriopat := old.propriopat ;
+new.propriopatp := old.propriopatp ;
+new.proprionom := old.proprionom ;
+new.propriopre := old.propriopre ;
+new.proprioad := old.proprioad ;
+new.dotype := old.dotype ;
+new.doaut := old.doaut ;
+new.donom := old.donom ;
+new.dopre := old.dopre ;
+new.doad := old.doad ;
+new.achetpat := old.achetpat ;
+new.achetpatp := old.achetpatp ;
+new.achetnom := old.achetnom ;
+new.achetpre := old.achetpre ;
+new.achetad := old.achetad ;
+new.batitype := old.batitype ;
+new.batiaut := old.batiaut ;
+new.eppublic := old.eppublic ;
+new.epaut := old.epaut ;
+new.rredptype := old.rredptype ;
+new.rrebrtype := old.rrebrtype ;
+new.rrechype := old.rrechype ;
+new.eupc := old.eupc ;
+new.euevent := old.euevent ;
+new.euregar := old.euregar ;
+new.euregardp := old.euregardp ;
+new.eusup := old.eusup ;
+new.eusuptype := old.eusuptype ;
+new.eusupdoc := old.eusupdoc ;
+new.euecoul := old.euecoul ;
+new.eufluo := old.eufluo ;
+new.eubrsch := old.eubrsch ;
+new.eurefl := old.eurefl ;
+new.euepsep := old.euepsep ;
+new.eudivers := old.eudivers ;
+new.euanomal := old.euanomal ;
+new.euobserv := old.euobserv ;
+new.eusiphon := old.eusiphon ;
+new.epdiagpc := old.epdiagpc ;
+new.epracpc := old.epracpc ;
+new.epregarcol := old.epregarcol ;
+new.epregarext := old.epregarext ;
+new.epracdp := old.epracdp ;
+new.eppar := old.eppar ;
+new.epparpre := old.epparpre ;
+new.epfum := old.epfum ;
+new.epecoul := old.epecoul ;
+new.epecoulobs := old.epecoulobs ;
+new.eprecup := old.eprecup ;
+new.eprecupcpt := old.eprecupcpt ;
+new.epautre := old.epautre ;
+new.epobserv := old.epobserv ;
+new.euepanomal := old.euepanomal ;
+new.euepanomalpre := old.euepanomalpre ;
+new.euepdivers := old.euepdivers ;
+new.date_sai := old.date_sai ;
+new.date_maj := old.date_maj ;
+new.op_sai := old.op_sai ;
+new.scr_geom := old.op_sai ;
+new.nidccp := old.nidccp ;
+new.proprioadcp := old.proprioadcp ;
+
+ELSE
+
+IF (old.ccvalid = '10' AND new.ccvalid = '10') OR (old.ccvalid = '10' AND (new.ccvalid = '20' or new.ccvalid = '30')) THEN
+
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un dossier validé.<br> Modifications non prises en compte.',
+now()
+);
+
+new.ccvalid := old.ccvalid ;
+new.validobs := old.validobs ;
+new.ccinit := old.ccinit ;
+new.adapt := old.adapt ;
+new.adeta := old.adeta ;
+new.tnidcc := old.tnidcc ;
+new.nidcc := old.nidcc ;
+new.rcc := old.rcc ;
+new.ccdate := old.ccdate ;
+new.ccdated := old.ccdated ;
+new.ccbien := old.ccbien ;
+new.certtype := old.certtype ;
+new.certnom := old.certnom ;
+new.certpre := old.certpre ;
+new.propriopat := old.propriopat ;
+new.propriopatp := old.propriopatp ;
+new.proprionom := old.proprionom ;
+new.propriopre := old.propriopre ;
+new.proprioad := old.proprioad ;
+new.dotype := old.dotype ;
+new.doaut := old.doaut ;
+new.donom := old.donom ;
+new.dopre := old.dopre ;
+new.doad := old.doad ;
+new.achetpat := old.achetpat ;
+new.achetpatp := old.achetpatp ;
+new.achetnom := old.achetnom ;
+new.achetpre := old.achetpre ;
+new.achetad := old.achetad ;
+new.batitype := old.batitype ;
+new.batiaut := old.batiaut ;
+new.eppublic := old.eppublic ;
+new.epaut := old.epaut ;
+new.rredptype := old.rredptype ;
+new.rrebrtype := old.rrebrtype ;
+new.rrechype := old.rrechype ;
+new.eupc := old.eupc ;
+new.euevent := old.euevent ;
+new.euregar := old.euregar ;
+new.euregardp := old.euregardp ;
+new.eusup := old.eusup ;
+new.eusuptype := old.eusuptype ;
+new.eusupdoc := old.eusupdoc ;
+new.euecoul := old.euecoul ;
+new.eufluo := old.eufluo ;
+new.eubrsch := old.eubrsch ;
+new.eurefl := old.eurefl ;
+new.euepsep := old.euepsep ;
+new.eudivers := old.eudivers ;
+new.euanomal := old.euanomal ;
+new.euobserv := old.euobserv ;
+new.eusiphon := old.eusiphon ;
+new.epdiagpc := old.epdiagpc ;
+new.epracpc := old.epracpc ;
+new.epregarcol := old.epregarcol ;
+new.epregarext := old.epregarext ;
+new.epracdp := old.epracdp ;
+new.eppar := old.eppar ;
+new.epparpre := old.epparpre ;
+new.epfum := old.epfum ;
+new.epecoul := old.epecoul ;
+new.epecoulobs := old.epecoulobs ;
+new.eprecup := old.eprecup ;
+new.eprecupcpt := old.eprecupcpt ;
+new.epautre := old.epautre ;
+new.epobserv := old.epobserv ;
+new.euepanomal := old.euepanomal ;
+new.euepanomalpre := old.euepanomalpre ;
+new.euepdivers := old.euepdivers ;
+new.date_sai := old.date_sai ;
+new.date_maj := old.date_maj ;
+new.op_sai := old.op_sai ;
+new.scr_geom := old.op_sai ;
+new.nidccp := old.nidccp ;
+new.proprioadcp := old.proprioadcp ;
+
+ELSE
+
+-- pas le bon prestataire
+IF old.certtype <> new.certtype  THEN
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un dossier que vous n''avez pas créé.<br>Modifications non prises en compte.',
+now()
+);
+
+new.ccvalid := old.ccvalid ;
+new.validobs := old.validobs ;
+new.ccinit := old.ccinit ;
+new.adapt := old.adapt ;
+new.adeta := old.adeta ;
+new.tnidcc := old.tnidcc ;
+new.nidcc := old.nidcc ;
+new.rcc := old.rcc ;
+new.ccdate := old.ccdate ;
+new.ccdated := old.ccdated ;
+new.ccbien := old.ccbien ;
+new.certtype := old.certtype ;
+new.certnom := old.certnom ;
+new.certpre := old.certpre ;
+new.propriopat := old.propriopat ;
+new.propriopatp := old.propriopatp ;
+new.proprionom := old.proprionom ;
+new.propriopre := old.propriopre ;
+new.proprioad := old.proprioad ;
+new.dotype := old.dotype ;
+new.doaut := old.doaut ;
+new.donom := old.donom ;
+new.dopre := old.dopre ;
+new.doad := old.doad ;
+new.achetpat := old.achetpat ;
+new.achetpatp := old.achetpatp ;
+new.achetnom := old.achetnom ;
+new.achetpre := old.achetpre ;
+new.achetad := old.achetad ;
+new.batitype := old.batitype ;
+new.batiaut := old.batiaut ;
+new.eppublic := old.eppublic ;
+new.epaut := old.epaut ;
+new.rredptype := old.rredptype ;
+new.rrebrtype := old.rrebrtype ;
+new.rrechype := old.rrechype ;
+new.eupc := old.eupc ;
+new.euevent := old.euevent ;
+new.euregar := old.euregar ;
+new.euregardp := old.euregardp ;
+new.eusup := old.eusup ;
+new.eusuptype := old.eusuptype ;
+new.eusupdoc := old.eusupdoc ;
+new.euecoul := old.euecoul ;
+new.eufluo := old.eufluo ;
+new.eubrsch := old.eubrsch ;
+new.eurefl := old.eurefl ;
+new.euepsep := old.euepsep ;
+new.eudivers := old.eudivers ;
+new.euanomal := old.euanomal ;
+new.euobserv := old.euobserv ;
+new.eusiphon := old.eusiphon ;
+new.epdiagpc := old.epdiagpc ;
+new.epracpc := old.epracpc ;
+new.epregarcol := old.epregarcol ;
+new.epregarext := old.epregarext ;
+new.epracdp := old.epracdp ;
+new.eppar := old.eppar ;
+new.epparpre := old.epparpre ;
+new.epfum := old.epfum ;
+new.epecoul := old.epecoul ;
+new.epecoulobs := old.epecoulobs ;
+new.eprecup := old.eprecup ;
+new.eprecupcpt := old.eprecupcpt ;
+new.epautre := old.epautre ;
+new.epobserv := old.epobserv ;
+new.euepanomal := old.euepanomal ;
+new.euepanomalpre := old.euepanomalpre ;
+new.euepdivers := old.euepdivers ;
+new.date_sai := old.date_sai ;
+new.date_maj := old.date_maj ;
+new.op_sai := old.op_sai ;
+new.scr_geom := old.op_sai ;
+new.nidccp := old.nidccp ;
+new.proprioadcp := old.proprioadcp ;
+
+ELSE
+
+-- ne peut pas modifier le n° de dossier
+IF new.nidcc <> old.nidcc THEN
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un n° de dossier.<br> Les autres informations modifiées ont été prises en compte.',
+now()
+);
+new.nidcc := old.nidcc;
+
+ELSE
+
+-- ne peut pas modifier un suivi de dossier ou nouveau dossier
+IF new.tnidcc <> old.tnidcc THEN
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier le type de contrôle.<br> Les autres informations modifiées ont été prises en compte.',
+now()
+);
+new.tnidcc := old.tnidcc;
+ELSE
+
+-- si le prestataire qui modifie est celui qui a saisi modifications possibles
+IF old.certtype = new.certtype THEN
+
+-- si le contrôle n'est pas validé alors on peut modifier les valeurs si non pas de modification possible
+IF ((new.ccvalid = '20' or new.ccvalid = '30') and (old.ccvalid = '20' or old.ccvalid='30')) or (new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid='30')) THEN
+
+new.ccvalid := CASE 
+	  WHEN new.ccvalid = '20' and old.ccvalid = '20' THEN '20'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '30' THEN '30'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '20' THEN '30'
+	  WHEN new.ccvalid = '20' and old.ccvalid = '30' THEN '20'
+	  WHEN new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid = '30') THEN '10'
+	  WHEN new.ccvalid = '20' and old.ccvalid = '10' THEN '20'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
+	  END;
+new.validobs := CASE WHEN new.ccvalid = '30' THEN new.validobs ELSE null END;
+new.rrechype := CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END;
+new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
+new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
+new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
+new.date_maj := now();
+
+RETURN NEW;
+
+END IF;
+END IF;
+END IF;
+END IF;
+END IF;
+END IF;
+END IF;
+END IF;
+
+RETURN NEW;
+
+END;
+$BODY$;
+
+ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO PUBLIC;
+
+COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
+    IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
+															 
+															 
+-- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_delete ##################################################################################
+
+-- FUNCTION: m_reseau_humide.ft_m_an_euep_cc_delete()
+
+-- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete();
+
+CREATE FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF 
+AS $BODY$
+
+BEGIN
+
+-- gestion des suppressions des contrôles (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
+IF (new.ccvalid = '40') THEN
+
+DELETE FROM m_reseau_humide.an_euep_cc_media WHERE id = (SELECT idcc FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc);
+DELETE FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc AND idcc = OLD.idcc;
+END IF;
+
+RETURN NEW;
+
+END;
+$BODY$;
+
+ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete() TO PUBLIC;
+
+COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete()
+    IS 'Fonction trigger pour supprimer un contrôle';
+
+															 
 -- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert ##################################################################################
 
 
@@ -2103,6 +2557,10 @@ CREATE TRIGGER t_t2_an_euep_cc_insert
   ON m_reseau_humide.an_euep_cc
   FOR EACH ROW
   EXECUTE PROCEDURE m_reseau_humide.ft_m_an_euep_cc_insert();
+
+
+-- ##################################### FONCTION TRIGGER - ft_m_log_an_euep_cc ##################################################################################
+
 
 -- Function: m_reseau_humide.ft_m_log_an_euep_cc()
 
@@ -2209,10 +2667,6 @@ GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_log_an_euep_cc() TO create_sig;
 
 COMMIT;
 												 
-												 
-
--- ##################################### FONCTION TRIGGER - t_t2_an_euep_cc_insert ##################################################################################
-
 CREATE TRIGGER t_t2_log_an_euep_cc_insert_update
   AFTER INSERT OR UPDATE
   ON m_reseau_humide.an_euep_cc
@@ -2223,31 +2677,33 @@ CREATE TRIGGER t_t2_log_an_euep_cc_insert_update
 -- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_media ##################################################################################
 
 
+-- FUNCTION: m_reseau_humide.ft_m_an_v_euep_cc_media()
 
--- Function: m_reseau_humide.t_t1_an_v_euep_cc_media()
+-- DROP FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media();
 
--- DROP FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_media();
-
-CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
-  RETURNS trigger AS
-$BODY$
+CREATE FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF 
+AS $BODY$
 
 DECLARE t_valid integer;
-
 
 BEGIN
 
 -- recherche si le contrôle est validé, dans ce cas 1 et pas possible d'insérer, de mettre à jour ou de supprimer un média
-t_valid := (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10');
+--t_valid := (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10');
 
 -- si le controle n'est pas validé
-IF t_valid = 0 THEN
+--IF t_valid = 0 THEN
 
 -- INSERT
 IF (TG_OP = 'INSERT') THEN
 
 INSERT INTO m_reseau_humide.an_euep_cc_media (gid,id,media,miniature,n_fichier,t_fichier,op_sai,date_sai,l_type,l_prec)
-SELECT nextval('m_reseau_humide.an_euep_cc_media_gid_seq'::regclass),new.id,new.media,new.miniature,new.n_fichier,new.t_fichier,new.op_sai,new.date_sai,new.l_type,new.l_prec ;
+SELECT nextval('m_reseau_humide.an_euep_cc_media_gid_seq'::regclass),new.id,new.media,new.miniature,new.n_fichier,new.t_fichier,new.op_sai,new.date_sai,new.l_type,new.l_prec
+WHERE (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10') = 0;
 
 -- UPDATE
 ELSIF (TG_OP = 'UPDATE') THEN
@@ -2257,31 +2713,33 @@ op_sai = new.op_sai,
 date_sai = new.date_sai,
 l_type = new.l_type,
 l_prec = new.l_prec
-WHERE gid = old.gid;
+WHERE gid = new.gid AND (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10') = 0;
 
 -- DELETE
 ELSIF (TG_OP = 'DELETE') THEN
 
-DELETE FROM m_reseau_humide.an_euep_cc_media WHERE gid = old.gid;
+DELETE FROM m_reseau_humide.an_euep_cc_media WHERE  gid = old.gid AND (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=old.id and ccvalid ='10') = 0;
 
 END IF;
-END IF;
+
+--END IF;
 
 RETURN NEW;
 
 -- si validé on fait rien
 
 END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
+$BODY$;
+
 ALTER FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
-  OWNER TO sig_create;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO public;
+    OWNER TO sig_create;
+
 GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO sig_create;
 GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO create_sig;
-															 
-COMMENT ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() IS 'Fonction trigger pour la gestion de l''insertion des médias des dossiers de conformité';
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO PUBLIC;
+
+COMMENT ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
+    IS 'Fonction trigger pour la gestion de l''insertion des médias des dossiers de conformité';
 
 -- Trigger: t_t1_an_v_euep_cc_media on m_reseau_humide.ft_m_an_v_euep_cc_media
 
