@@ -15,7 +15,7 @@ Par conséquent, les calculs exploitant directement la base de données ne renvo
 
 ## Schéma fonctionnel
 
-![schema_fonctionnel](img/schema_fonctionnel_v4.jpg)
+![schema_fonctionnel](img/schema_fonctionnel_v5.jpg)
 
 ## Dépendances
 
