@@ -2271,7 +2271,7 @@ new.euepdivers := old.euepdivers ;
 new.date_sai := old.date_sai ;
 new.date_maj := old.date_maj ;
 new.op_sai := old.op_sai ;
-new.scr_geom := old.op_sai ;
+new.scr_geom := old.scr_geom ;
 new.nidccp := old.nidccp ;
 new.proprioadcp := old.proprioadcp ;
 
@@ -2362,7 +2362,7 @@ new.euepdivers := old.euepdivers ;
 new.date_sai := old.date_sai ;
 new.date_maj := old.date_maj ;
 new.op_sai := old.op_sai ;
-new.scr_geom := old.op_sai ;
+new.scr_geom := old.scr_geom ;
 new.nidccp := old.nidccp ;
 new.proprioadcp := old.proprioadcp ;
 
