@@ -13,6 +13,9 @@
 --                   est utilisée directement, les fonctions triggers ont été ramenées à la table avec des ajustements)
 --		     Le trigger de gestion des médias (par la vue) a été également remanié pour gérer l'impossibilité d'insérer
 --                   de modifier ou de supprimer un média relié à un contrôle validé
+-- 2020/01/13 : GB / Ajout d'un média pour gérer les documents propres au diagnostiqueur (attestation) et liste de valeur du type
+--                   de document
+--	        GB / Ouverture des droits pour supprimer ou dévalider un contrôle pour le service Assainissement
 
 -- #################################################################################################################################################
 
@@ -35,6 +38,7 @@ ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_eu
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_typebati_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_typeres_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_valid_fkey;
+
 
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrebrtype_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrechype_fkey;
@@ -65,7 +69,7 @@ ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_eu
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eprecup_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eprecupcpt_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc_media DROP CONSTRAINT IF EXISTS lt_euep_doc_fkey;
-
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc_certi_media DROP CONSTRAINT IF EXISTS lt_euep_doc_certif_fkey;
 
 
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_certificateur DROP CONSTRAINT lt_euep_cc_certificateur_pkey;
@@ -88,11 +92,41 @@ DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc_nc;
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
+-- ################################################################# Domaine valeur - lt_euep_doc_certif #############################################
+
+-- Table: m_reseau_humide.lt_euep_doc_certif
+
+-- DROP TABLE m_reseau_humide.lt_euep_doc_certif;
+
+CREATE TABLE m_reseau_humide.lt_euep_doc_certif
+(
+  code character(2) NOT NULL, -- Code interne des types de documents
+  valeur character varying(80) NOT NULL, -- Libellé des types de documents
+  CONSTRAINT lt_euep_doc_certif_pkey PRIMARY KEY (code)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_reseau_humide.lt_euep_doc_certif
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_doc_certif TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_doc_certif TO create_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_doc_certif TO edit_sig;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_doc_certif TO read_sig;
+COMMENT ON TABLE m_reseau_humide.lt_euep_doc_certif
+  IS 'Liste des types documents joints au certificateur (attestation)';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_doc_certif.code IS 'Code interne des types de documents';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_doc_certif.valeur IS 'Libellé des types de documents';
+
+INSERT INTO m_reseau_humide.lt_euep_doc_certif(
+            code, valeur)
+    VALUES
+    ('10','Attestation d''assurance'),
+    ('11','Attestation de formation')
+    ;
 
 
--- COMMENT GB : ------------------------------------------------------------------------------------------------------------------
--- Création d'une séquence ici pour gérer les insertions de nouveaux certificateurs par le service gestionnaire possible dans GEO)
--- -------------------------------------------------------------------------------------------------------------------------------
+-- ################################################################# Domaine valeur - lt_euep_cc_certificateur #############################################
 
 -- Table: m_reseau_humide.lt_euep_cc_certificateur
 
@@ -829,6 +863,55 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc_media.date_sai IS 'Date d''intégra
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc_media.l_type IS 'Code du type de document de cessions ou d''acquisitions';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc_media.l_prec IS 'Précision sur le document';
 
+
+-- ########################################################################## table an_euep_cc_certi_media #######################################################
+
+-- Table: m_reseau_humide.an_euep_cc_certi_media
+
+-- DROP TABLE m_reseau_humide.an_euep_cc_certi_media;
+
+CREATE TABLE m_reseau_humide.an_euep_cc_certi_media
+(
+  gid serial NOT NULL,
+  id integer, -- Identifiant du certificateur
+  media text, -- Champ Média de GEO
+  miniature bytea, -- Champ miniature de GEO
+  n_fichier text, -- Nom du fichier
+  t_fichier text, -- Type de média dans GEO
+  op_sai character varying(100), -- Libellé de l'opérateur ayant intégrer le document
+  date_sai timestamp without time zone, -- Date d'intégration du document
+  l_type character varying(2), -- Code du type de document (attestation)
+  dfin timestamp without time zone, -- Date de fin d'attestation
+  l_prec character varying(50),
+  l_nom character varying(100), -- Nom de la personne à laquelle l'attestation de formation est rattachée
+  CONSTRAINT an_euep_cc_certi_media_pkey PRIMARY KEY (gid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_reseau_humide.an_euep_cc_certi_media
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.an_euep_cc_certi_media TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.an_euep_cc_certi_media TO create_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_euep_cc_certi_media TO edit_sig;
+GRANT SELECT ON TABLE m_reseau_humide.an_euep_cc_certi_media TO read_sig;
+COMMENT ON TABLE m_reseau_humide.an_euep_cc_certi_media
+  IS 'Table gérant la liste des documents liés au certificateur (assurance, formation,...)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.id IS 'Identifiant du certificateur';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.media IS 'Champ Média de GEO';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.miniature IS 'Champ miniature de GEO';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.n_fichier IS 'Nom du fichier';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.t_fichier IS 'Type de média dans GEO';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.op_sai IS 'Libellé de l''opérateur ayant intégrer le document';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.date_sai IS 'Date d''intégration du document';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.l_type IS 'Code du type de document (attestation)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.dfin IS 'Date de fin d''attestation';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc_certi_media.l_nom IS 'Nom de la personne à laquelle l''attestation de formation est rattachée';
+
+
+
+
+
 -- ########################################################################## table log_an_euep_cc #######################################################
 
 -- Table: m_reseau_humide.log_an_euep_cc
@@ -934,6 +1017,14 @@ COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.horodatage IS 'Date (avec heu
 ALTER TABLE m_reseau_humide.an_euep_cc_media
 ADD CONSTRAINT lt_euep_doc_fkey FOREIGN KEY (l_type)
       REFERENCES m_reseau_humide.lt_euep_doc (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+      
+      
+-- Table: m_reseau_humide.an_euep_cc_certi_media
+
+ALTER TABLE m_reseau_humide.an_euep_cc_certi_media
+  ADD CONSTRAINT lt_euep_doc_certif_fkey FOREIGN KEY (l_type)
+      REFERENCES m_reseau_humide.lt_euep_doc_certif (code) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 -- Table: m_reseau_humide.an_euep_cc
