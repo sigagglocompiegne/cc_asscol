@@ -44,7 +44,7 @@
 
 |Fonctionnalités|Lecture|Ecriture|Précisions|
 |:---|:-:|:-:|:---|
-|Toutes|x|x|Les contrôles validés sont accessibles en lecture mais ne peuvent plus être modifiés|
+|Toutes|x|x|Les contrôles validés sont accessibles en lecture. L'accès à la suppression et à la dévalidation est possible depuis le 13 janvier 2020 (un attribut de contexte "cc_valid" a été créé portant les valeurs supplémentaires 40 et 50 pour les utilisateurs concernés)|
 
 * **Autres profils ou particularités**
 
@@ -52,7 +52,7 @@
 |:---|:-:|:-:|:---|
 |Prestataires|x|x|Peut saisir et modifier uniquement ses dossiers (tant qu'ils ne sont pas validés) et modifier ses coordonnées)|
 |Autres personnes du service Environnement|x||Accès en consultation sur une partie de l'application|
-|Service SIG|x|x|Pour la table et la liste de domaine lt_euep_cc_valid, un attribut de contexte a été créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage de la valeur 40 uniquement au service SIG pour la suppression du dossier. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Pour le service SIG aucune valeur attribuée|
+|Service SIG|x|x|Pour la table et la liste de domaine lt_euep_cc_valid, un attribut de contexte a été créé (cc_valid) pour gérer les droits d'accès aux valeurs et permet la restriction d'affichage. Chaque prestataire et utilisateur se voit attribuer les valeurs 10,20,30 pour cet attribut. Les valeurs 40 et 50 sont restreintes au service assainissement.|
 
 # Les données
 
@@ -214,6 +214,24 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |media||x||Formatage du document joint en type image|||
 |miniature||x|Fichier|Formatage de l'aperçu du document joint en type image|||
 |op_sai||x|Opérateur de saisie||||
+   
+   * filtres : aucun
+   * relations : aucune
+   
+
+## Table : `an_euep_cc_certi_media`
+
+|Attributs| Champ calculé | Formatage|Renommage |Particularité/Usage|Utilisation|Exemple|
+|:---|:-:|:-:|:---|:---|:---|:---|
+|affiche_media |x|x|affiche_media|Formate le nom à afficher sous le media pour le distinguer|*Fiche d'information* : Informations des prestataires (AC)||
+|date_sai||x|Date de saisie|Formatage de la date en dd-mm-yyyy|||
+|l_prec||x|Précision||||
+|l_type||x|Type d'attestation|Formatage par une liste de domaine (lt_euep_doc_certif)|||
+|media||x||Formatage du document joint en type image|||
+|miniature||x|Fichier|Formatage de l'aperçu du document joint en type image|||
+|op_sai||x|Opérateur de saisie||||
+|dfin||x|Fin de l'attestation d'assurance||||
+|l_nom||x|Attestation de formation pour||||
    
    * filtres : aucun
    * relations : aucune
@@ -656,6 +674,35 @@ Source : `xapps_an_v_euep_cc_tb1`
 Cette recherche permet à l'utilisateur de rechercher une voie en mode proposition de valeur (sans saisie manuelle).
 Cette recherche est issue de l'application Voie-Adresse. Se référer à ce dossier pour le détail de cette recherche.
 
+## Fiche d'information : `Informations des prestataires (AC)`
+
+Source : `lt_euep_cc_certificateur`
+
+ * Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|530x650|Vertical|
+
+|Nom de la section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|
+|Informations du prestataire|Etat de la certification,Nom de l'entreprise,Adresse,Téléphone fixe, Téléphone portable,EMail,N° SIRET,Compagnie d'assurance,N° de la police,Date de fin de validité|Par défaut|Vertical||||
+|Médiathèque|Champ miniature de GEO, affiche_media|Par défaut|Vertical||Media - certificateur||
+
+ * Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|Nom de l'entreprise (valeur), Adresse (adresse), Téléphone fixe (tel), Téléphone portable (tel_port), N° SIRET (siret), Compagnie d'assurance (nom_assur), N° de la police (num_assur), Date de fin de validité (date_assur), Email (email), exist (exist)|||||
+
+**IMPORTANT** : L'édition des données jointes est désactivée.
+ 
+ * Modèle d'impression : aucun
+
 ## Fiche d'information : `Conformité AC à l'adresse`
 
 Source : `xapps_geo_v_euep_cc`
@@ -902,6 +949,57 @@ Note : seuls les attributs obligatoires sont visibles par l'utilisateur. Les aut
 |date_sai|x|%CURRENT_DATE%|||
 |l_type|x|00|lt_euep_doc||
 |l_prec|||||
+|gid|||||
+
+**IMPORTANT** : L'édition des données jointes est désactivée.
+ 
+ * Modèle d'impression : aucun
+ 
+## Fiche d'information : `Media - certificateur`
+
+Note : cette fiche n'est pas censé s'ouvrir dans GEO comme une fiche standard mais via le module de gestion d'un média
+
+Source : `an_euep_cc_certi_media`
+
+ * Statistique : aucune
+ 
+ * Représentation :
+ 
+|Mode d'ouverture|Taille|Agencement des sections|
+|:---|:---|:---|
+|dans le gabarit|530x650||
+
+|Nom de la section|Sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|(vide)||Operateur de saisie, Date de saisie, Précision, Type d'attestation|Par défaut|Vertical||||
+
+|Nom de la section|Sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|(vide)||Fin de l'attestation d'assurance|Par défaut|Vertical|l_type == '10'|||
+
+|Nom de la section|Sous-section|Attributs|Position label|Agencement attribut|Visibilité conditionnelle|Fichie liée|Ajout de données autorisé|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|(vide)||Attestation de formation pour|Par défaut|Vertical|l_type == '11'|||
+
+* Saisie :
+
+Sont présent ici uniquement les attributs éditables ou disposant d'un mode de représentation spécifique.
+
+Note : seuls les attributs obligatoires sont visibles par l'utilisateur. Les autres attributs sont rendus éditables par le fonctionnement du module média qui enregistre par lui-même les valeurs dans la table. 
+
+|Attribut|Obligatoire|Valeur par défaut|Liste de domaine|Représentation|
+|:---|:---|:---|:---|:---|
+|id|||||
+|media|||||
+|miniature|||||
+|n_fichier|||||
+|t_fichier|||||
+|op_sai|x|%USER_LOGIN%|||
+|date_sai|x|%CURRENT_DATE%|||
+|l_type|x||lt_euep_doc_certif||
+|l_prec|||||
+|l_nom|||||
+|dfin|||||
 |gid|||||
 
 **IMPORTANT** : L'édition des données jointes est désactivée.
