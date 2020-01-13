@@ -159,8 +159,31 @@ Particularité(s) à noter :
 |t_fichier|Type de média dans GEO|text| |
 |op_sai|Libellé de l'opérateur ayant intégrer le document|character varying(100)| |
 |date_sai|Date d'intégration du document|timestamp without time zone| |
-|l_type|Code du type de document de cessions ou d'acquisitions|character varying(2)| |
+|l_type|Code du type de document intégré|character varying(2)| |
 |l_prec|Précision sur le document|character varying(50)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_media_gid_seq``
+* Une clé étrangère exsiste sur la table de valeur `lt_euep_doc`
+
+---
+
+   `an_euep_cc_certi_media` : table des médias structurée selon les recommandations de l'éditeur des applications métiers. Elle permet de stocker des documents liés aux diagnostiqueurs (ici documents d'attestation d'assurance ou de formation)
+   
+|Nom attribut | Définition | Type | Valeurs par défaut |
+|:---|:---|:---|:---|
+|gid|Identifiant unique|integer|nextval('m_reseau_humide.an_euep_cc_media_gid_seq'::regclass)|
+|id|Identifiant du certificateur|integer| |
+|media|Champ Média de GEO|text| |
+|miniature|Champ miniature de GEO|bytea| |
+|n_fichier|Nom du fichier|text| |
+|t_fichier|Type de média dans GEO|text| |
+|op_sai|Libellé de l'opérateur ayant intégrer le document|character varying(100)| |
+|date_sai|Date d'intégration du document|timestamp without time zone| |
+|l_type|Code du type de document (attestation)|character varying(2)| |
+|dfin|Date de fin d'attestation|timestamp without time zone| |
+|l_prec|Précision sur le document|character varying(50)| |
+|l_nom|Nom de la personne à laquelle l'attestation de formation est rattachée|character varying(100)| |
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ gid avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_media_gid_seq``
@@ -406,6 +429,25 @@ Valeurs possibles :
 |50|Diagniostic parties communes|
 |51|Diagniostic parties privatives|
 |99|Autres documents (à préciser ci-dessous)|
+
+---
+
+`lt_euep_doc_certif` : Liste des types d'attestation
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|:---|:---|    
+|code|CCode interne des types de documents|character(2)| |
+|valeur|Libellé des types de documents|character varying(80)| |
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code 
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|
+|10|Attestation d'assurance|
+|11|Attestation de formation|
 
 ---
 
