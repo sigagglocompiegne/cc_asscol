@@ -16,7 +16,8 @@
 -- 2020/01/13 : GB / Ajout d'un média pour gérer les documents propres au diagnostiqueur (attestation) et liste de valeur du type
 --                   de document
 --	        GB / Ouverture des droits pour supprimer ou dévalider un contrôle pour le service Assainissement
-
+-- 2020/06/02 : GB / Modification fonction trigger de mise à jour et d'insertion pour gérer les mauvaises saisies des contres-visites
+--		GB / Modification fonction trigger de suppression avec seulement l'identifiant unique idcc et non avec nidcc car doublon si contre-visite
 -- #################################################################################################################################################
 
 
@@ -2139,7 +2140,7 @@ CREATE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
     RETURNS trigger
     LANGUAGE 'plpgsql'
     COST 100
-    VOLATILE NOT LEAKPROOF 
+    VOLATILE NOT LEAKPROOF
 AS $BODY$
 DECLARE v_ccinit boolean;
 DECLARE v_nidcc character varying;
@@ -2155,8 +2156,8 @@ v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_
 
 -- gestion des n° de dossier automatique et en cas de suivi
 v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN 
-	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc) as nnidcc)
-	    ELSE 
+	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc WHERE nidcc like '60%' AND nidcc like '%cc%' ) as nnidcc)
+		ELSE 
 		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
 	    END;
 
@@ -2171,11 +2172,24 @@ IF (TG_OP = 'INSERT') THEN
 -- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
 -- contrôle sur le n° de dossier en suivi : ne peut pas saisir un suivi si le n° de dossier saisi n'existe pas à l'adresse CONFORME et VALIDE
 -- ici pas possibilité de remontée de message dans le fiche GEO. L'enregistrement ne se fait pas.
+IF NEW.tnidcc = '20' AND new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc) THEN
+
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+new.id_adresse,
+new.nidcc,
+'Référence du dossier incorrecte. Votre contrôle ne sera pas soumis à validation.<br>
+Merci d''inscrire la référence du dossier originel qui doit être sous cette forme <i>(60159cc569)</i>.',
+now()
+);
+
+END IF;
 
 -- si le n° de dossier est nouveau ou un suivi est correctement saisi on insert si non rien
 IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
 
-new.idcc := (select nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass));
+new.idcc :=  (select nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)) ;
 new.nidcc := v_nidcc;
 new.ccinit := v_ccinit;
 
@@ -2185,8 +2199,8 @@ new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
 new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
 new.date_sai := now();
 new.scr_geom := '61';
-END IF;
 
+END IF;
 RETURN NEW;
 
 -- UPDATE
@@ -2459,8 +2473,51 @@ new.proprioadcp := old.proprioadcp ;
 
 ELSE
 
--- ne peut pas modifier le n° de dossier
-IF new.nidcc <> old.nidcc THEN
+-- ne peut pas modifier le n° de dossier sauf si mauvaise référence de suivi
+-- si référence différente alors
+IF (new.nidcc <> old.nidcc) THEN
+
+-- si la référence saisie n'est toujours formatée ou n'est pas en base (contrôle originel)
+IF (new.nidcc not like '60%' AND new.nidcc not like '%cc%') OR (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
+
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Référence du dossier incorrecte ou dossier originel n''existe pas. <br>
+Votre contrôle ne sera pas soumis à validation.<br>
+Merci d''inscrire la référence exacte du dossier originel qui doit être sous cette forme <i>(60159cc569)</i>.',
+now()
+);
+new.nidcc := old.nidcc;
+
+ELSE
+-- si la référence est normalisée et que le contrôle originel existe je prends la nouvelle référence sinon erreur
+IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (new.nidcc in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
+	IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (old.nidcc like '60%' AND old.nidcc like '%cc%') THEN
+	DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+	INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+	(
+	nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+	old.id_adresse,
+	old.nidcc,
+	'Vous ne pouvez pas modifier un n° de dossier avec une référence existante.<br>
+	Faites une demande au service assainissement de l''ARC en cas d''erreur.<br> Les autres informations modifiées ont été prises en compte.',
+	now()
+	);
+	new.nidcc := old.nidcc;
+	
+	ELSE
+	
+	new.nidcc := new.nidcc;
+	
+	END IF;
+
+ELSE
+
 --v_adresse := old.id_adresse;
 DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
 INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
@@ -2472,6 +2529,9 @@ old.nidcc,
 now()
 );
 new.nidcc := old.nidcc;
+
+END IF;
+END IF;
 
 ELSE
 
@@ -2532,11 +2592,14 @@ ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
     OWNER TO sig_create;
 
 GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO sig_create;
+
 GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO create_sig;
+
 GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO PUBLIC;
 
 COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
     IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
+
 															 
 															 
 -- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_delete ##################################################################################
@@ -2557,8 +2620,8 @@ BEGIN
 -- gestion des suppressions des contrôles (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
 IF (new.ccvalid = '40') THEN
 
-DELETE FROM m_reseau_humide.an_euep_cc_media WHERE id = (SELECT idcc FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc);
-DELETE FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc AND idcc = OLD.idcc;
+DELETE FROM m_reseau_humide.an_euep_cc_media WHERE id = (SELECT idcc FROM m_reseau_humide.an_euep_cc WHERE idcc = OLD.idcc);
+DELETE FROM m_reseau_humide.an_euep_cc WHERE idcc = OLD.idcc;
 END IF;
 
 RETURN NEW;
