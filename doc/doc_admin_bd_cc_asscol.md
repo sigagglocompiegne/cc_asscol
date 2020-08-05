@@ -524,6 +524,9 @@ Valeurs possibles :
 |12|Vidange de piscine raccordée sur le branchement eaux usées|
 |13|Eaux pluviales raccordées sur le réseau d'eaux usées (en partie publique)|
 |14|Absence de bac dégraisseur|
+|15|Servitude sans documents|
+|16|Vidange de piscine raccordée sur réseau d'eaux pluviales|
+
 
 ---
 
