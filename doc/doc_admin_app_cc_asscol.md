@@ -204,6 +204,24 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |an_euep_cc_media| idcc - id | 0 à n (égal) |
 | xapps_an_v_euep_cc_erreur| nidcc | 0 à 1 (égal) |
 
+  * déclencheurs :
+ 
+Un fonctionnel automatique d'envoi d'email a été généré pour gérer la communication entre les prestataires saississant les contrôles et les service de l'Agglomération devant les contrôlés.
+Il repose sur la mise en place de déclencheurs directement dans l'application.
+
+|Non|Opérations|Conditions|Type|Actions|
+|:---|:---|:---|:---|
+|Pas de suppression possible d'un dossier|delete||Annule la saisie|Boîte de dialogue affichée à l'utilisateur lui indiquant une suppression impossible| 
+|Nouveau dossier (envoi ARC)|insert||Envoi un email au service de l'ARC|Formatage d'un champ calculé pour le corps du message (affiche_email_nvdossier)| 
+|Nouveau dossier (accusé de réception)|insert||Envoi un email au prestataire sur l'attribut liste_email|Formatage d'un champ calculé pour le corps du message (affiche_ar_nvdossier)| 
+|Validation dossier (accusé de réception)|update|si état du dossier pas de 20 à 10|Envoi un email au prestataire sur l'attribut liste_email lors de la valdation par l'ARC|Formatage d'un champ calculé pour le corps du message (affiche_email_valide)| 
+|Demande de modification|update|si état du dossier passe de 20 à 30|Envoi un email au prestataire sur l'attribut liste_email|Formatage d'un champ calculé pour le corps du message (affiche_email_demandedemodif)| 
+|Demande de modification d'un dossier effectuée|update|si l'état du dossier reste à 30 et modification(s) demandée(s) inchangée|Envoi un email au service de l'ARC|Formatage d'un champ calculé pour le corps du message (affiche_email_redemandemodif)| 
+|Demande de modification d'un dossier (accusé réception)|update|si l'état du dossier reste à 30 et modification(s) demandée(s) inchangée|Envoi un email au prestataire sur l'attribut liste_email|Formatage d'un champ calculé pour le corps du message (affiche_ar_modifdemandee)| 
+|Nouvelle demande de modification |update|si l'état du dossier reste à 30 et modification(s) demandée(s) est différentes|Envoi un email au prestataire sur l'attribut liste_email|Formatage d'un champ calculé pour le corps du message (affiche_email_nvelledemandemodif)| 
+|Dévalidation d'un contrôle |update|si l'état du dossier passe de 10 à une autre valeur|Envoi un email au prestataire sur l'attribut liste_email|Formatage d'un champ calculé pour le corps du message (affiche_email_devalide)| 
+|Validation dossier (accusé réception) - suite demande de modif ARC |update|si l'état du dossier passe de 30 à 10|Envoi un email au prestataire sur l'attribut liste_email|Formatage d'un champ calculé pour le corps du message (affiche_email_valide)| 
+
 ## Table : `an_v_euep_cc_media`
 
 |Attributs| Champ calculé | Formatage|Renommage |Particularité/Usage|Utilisation|Exemple|
