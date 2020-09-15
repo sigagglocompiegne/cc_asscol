@@ -101,6 +101,9 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |achetpre||x|Prénom de l'acheteur||*Fiche d'information :* Dossier de conformité AC ||
 |adapt||x|Appart n°||*Fiche d'information :* Dossier de conformité AC ||
 |adeta||x|Etage||*Fiche d'information :* Dossier de conformité AC ||
+|affiche_annnee  |x|||Affichage de l'année du contrôle | *Filtre pour la recherche* : Recherche des contrôles par prestataire ||
+|affiche_ar_modifdemandee  |x|||Corps du message envoyé pour accusé de réception lors d'une demande de modification par l'ARC| *Déclencheurs* : Demande de modification d'un dossier (accusé réception) ||
+|affiche_ar_nvdossier  |x|||Corps du message envoyé pour accusé de réception lors d'une saisie d'un nouveau contrôle| *Déclencheurs* : Nouveau dossier ||
 |affiche_attestation_formation  |x|||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_attestation_logo  |x|||Lien http de l'image de l'attestation d'aggrément du prestataire par l'ARC (format image) | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_cc_init   |x|x|-|Formate l'affichage de l'acronyme au survol de la souris sur le picto contrôle initial | *Fiche d'information* : Dossier de conformité AC |![picto](/doc/img/affiche_acronyme_ci.png)|
@@ -109,6 +112,12 @@ Sont décrites ici les Géotables et/ou Tables intégrées dans GEO pour les bes
 |affiche_controle  |x|x|Conformité|Formate l'affichage des pictos de conformité  | *Fiche d'information* : Conformité AC à l'adresse |![picto](/doc/img/affiche_picto_fi.png)|
 |affiche_date_controle  |x|x|Date du contrôle|Formate l'affichage de la date du contrôle en dd/mm/yyyy dans la liste des contrôles présent à l'adresse | *Fiche d'information* : Conformité AC à l'adresse ||
 |affiche_dossier  |x|||Formate en html l'affichage des résultats du contrôle dans le menu du même nom à la recherche d'un contrôle | *Recherche* : Recherche des contrôles depuis le, Recherche par N° de dossier (AC) |![picto](/doc/img/affiche_result_rech_cc_dos.png)|
+|affiche_email_demandemodif  |x|||Corps du message envoyé pour une demande de modification| *Déclencheurs* : Demande de modification ||
+|affiche_email_devalide  |x|||Corps du message envoyé pour une dévalidation d'un contrôle| *Déclencheurs* : Dévalidation d'un contrôle ||
+|affiche_email_nvdossier  |x|||Corps du message envoyé pour la saisie d'un nouveau contrôle| *Déclencheurs* : Nouveau dossier ||
+|affiche_email_nvelledemandemodif  |x|||Corps du message envoyé pour une nouvelle demande de modification sur un contrôle| *Déclencheurs* : Nouvelle demande de modification ||
+|affiche_email_redemandemodif  |x|||Corps du message envoyé pour la correction d'un contrôle suite une demande de modification sur le contrôle| *Déclencheurs* : Demande de modification d'un dossier effectuée ||
+|affiche_email_valide  |x|||Corps du message envoyé lors de la validation d'un contrôle| *Déclencheurs* : Validation dossier et Validation dossier (accusé réception) - suite demande de modif ARC ||
 |affiche_en_tete_impression  |x|||Blanc pour rien n'afficher dans le titre de la fiche lors de l'impression | ||
 |affiche_glossaire  |x|||Formate en html l'affichage du glossaire dans l'onglet du même nom  | *Fiche d'information* : Dossier de conformité AC ||
 |affiche_logo  |x|||Lien http de l'image du logo de l'ARC + prestataire (format image)  | *Fiche d'information* : Dossier de conformité AC ||
