@@ -210,7 +210,7 @@ Un fonctionnel automatique d'envoi d'email a été généré pour gérer la comm
 Il repose sur la mise en place de déclencheurs directement dans l'application.
 
 |Non|Opérations|Conditions|Type|Actions|
-|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|
 |Pas de suppression possible d'un dossier|delete||Annule la saisie|Boîte de dialogue affichée à l'utilisateur lui indiquant une suppression impossible| 
 |Nouveau dossier (envoi ARC)|insert||Envoi un email au service de l'ARC|Formatage d'un champ calculé pour le corps du message (affiche_email_nvdossier)| 
 |Nouveau dossier (accusé de réception)|insert||Envoi un email au prestataire sur l'attribut liste_email|Formatage d'un champ calculé pour le corps du message (affiche_ar_nvdossier)| 
