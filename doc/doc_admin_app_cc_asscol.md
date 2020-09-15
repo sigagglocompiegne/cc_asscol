@@ -29,7 +29,7 @@
 |:---|:-:|:-:|:---|
 |Recherche par adresse(AC)|x|||
 |Recherche d'un dossier par N°(AC)|x||La connexion filtre l'affichage des dossiers sur le profil du prestataire.|
-|Recherche des contrôles par prestataire|x|||
+|Recherche des contrôles par prestataire|x||Accès réservé au service assainissement|
 |Recherche avancée d'une voie|x|||
 |Liste des contrôles non conforme|x||Accès réservé au service assainissement|
 |Recherche des contrôles depuis le|x||Accès réservé au service assainissement|
@@ -470,6 +470,40 @@ Source : `an_euep_cc`
 |Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
 |:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
 |EUEP - C de C - Dossier|x|nidcc|est égale à une valeur suggérée d'une liste de domaine (Dossier AC)|nidcc|nidcc|nidcc|||
+
+(1) si liste de domaine
+
+ * Fiches d'information active : Dossier de conformité AC
+
+## Recherche : `Recherche des contrôles par prestataire`
+
+Cette recherche permet à l'utilisateur de rechercher l'ensemble des contrôles réalisés par un ou plusieurs prestataires par année pour réaliser un export au format Excel.
+
+  * Configuration :
+  
+Source : `an_euep_cc`
+
+|Attribut|Afficher|Rechercher|Suggestion|Attribut de géométrie|Tri des résultats|
+|:---|:-:|:-:|:-:|:-:|:-:|
+|Nom de l'entreprise (certtype)|x|||||
+|Adresse (affiche_adresse_gras)|x|||||
+|Dossier (affiche_dossier)||||||
+|Type de bien (ccbien)|x|||||
+|Mission réalisée le (ccdate)|x|||||
+|L'installation est (rcc)|x|||||
+(la détection des doublons n'est pas activée ici)
+(tri des résultats par la date de la mission (ccdate))
+
+ * Filtres :
+
+|Groupe|Jointure|Filtres liés|
+|:---|:-:|:-:|
+|sans objet|||
+
+|Nom|Obligatoire|Attribut|Condition|Valeur|Champ d'affichage (1)|Champ de valeurs (1)|Champ de tri (1)|Ajout autorisé (1)|Particularités|
+|:---|:-:|:---|:---|:---|:---|:---|:---|:-:|:---|
+|Prestataire (an_euep_cc)|x|certtype|est égale à une valeur choisie par l'utilisateur parmi une liste (lt_euep_cc_certificateur)|affiche_liste|certtype|certtype|||
+|Année du contrôle (an_euep_cc)||affiche_annee|est égale à une valeur choisie par l'utilisateur parmi une liste prédéfinie |affiche_annee|affiche_annee|affiche_annee|||
 
 (1) si liste de domaine
 
