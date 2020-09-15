@@ -1175,4 +1175,13 @@ Liste des recherches : Contrôle de conformité AC
 |Recherche avancée d'une voie|
 ||Recherche avancée d'une voie|
 
+* Tableau de bord
 
+|Nom|Contenu|Type|Commentaires|
+|:---|:---|:---|:---|
+|CC - Tableau de bord|Contrôle en attente de validation|Recherche|Affiche la liste des contrôles non validés (permet de zoomer sur l'adresse et d'ouvrir le dossier)|
+||Contrôle avec une demande de modification|Recherche|Affiche la liste des contrôles avec une demande de modification de l'ARC (permet de zoomer sur l'adresse et d'ouvrir le dossier)|
+||Nombre de contrôles (année en cours)|Statistiques|Graphique par prestataire avec le nombre de contrôle sur l'année en cours (peut avec un filtre changer l'année)|
+||Contrôle de conformité par prestataire|Texte|Affiche un tableau indiquant le nombre de contrôle par prestataire et par année|
+
+Les autres tableaux de bords (CC - Tableau de bord(21), CC - Tableau de bord(3), CC - Tableau de bord(4)) contiennent une partie du tableau bord ci-dessus mais présenté différemment, nn attente d'un retour d'usage pour adaptation.
