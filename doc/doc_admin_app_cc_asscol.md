@@ -29,6 +29,7 @@
 |:---|:-:|:-:|:---|
 |Recherche par adresse(AC)|x|||
 |Recherche d'un dossier par N°(AC)|x||La connexion filtre l'affichage des dossiers sur le profil du prestataire.|
+|Recherche des contrôles par prestataire|x|||
 |Recherche avancée d'une voie|x|||
 |Liste des contrôles non conforme|x||Accès réservé au service assainissement|
 |Recherche des contrôles depuis le|x||Accès réservé au service assainissement|
