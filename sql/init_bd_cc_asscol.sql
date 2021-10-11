@@ -482,8 +482,8 @@ INSERT INTO m_reseau_humide.lt_euep_doc(
     ('20','Photographies ou planche de photos'),
     ('30','Schéma de l''installation'),
     ('40','Demande de raccordement'),
-    ('50','Diagniostic parties communes'),
-    ('51','Diagniostic parties privatives'),
+    ('50','Diagnostic parties communes'),
+    ('51','Diagnostic parties privatives'),
     ('99','Autres documents (à préciser ci-dessous)')
     ;
 
