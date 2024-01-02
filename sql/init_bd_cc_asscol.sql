@@ -58,6 +58,7 @@ ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_eval DROP CONSTRAINT IF EXISTS 
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_tnidcc DROP CONSTRAINT IF EXISTS lt_euep_cc_tnidcc_pkey;
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_valid DROP CONSTRAINT IF EXISTS lt_euep_cc_valid_pkey;
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_anomal DROP CONSTRAINT IF EXISTS lt_euep_cc_anomal_pkey;
+ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_conform DROP CONSTRAINT IF EXISTS lt_euep_cc_conform_pkey;
 
 DROP VIEW IF EXISTS x_apps.xapps_geo_v_euep_cc;
 DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc;
@@ -68,6 +69,40 @@ DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc_nc;
 -- ###                                                                  DOMAINES DE VALEURS                                                         ###
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
+
+-- ################################################################# Domaine valeur - lt_euep_cc_conform #############################################
+
+-- Table: m_reseau_humide.v
+
+-- DROP TABLE m_reseau_humide.lt_euep_cc_conform;
+
+CREATE TABLE m_reseau_humide.lt_euep_cc_conform
+(
+  code character(2) NOT NULL, -- Code interne des types de documents
+  valeur character varying(80) NOT NULL, -- Libellé des types de documents
+  CONSTRAINT lt_euep_cc_conform_pkey PRIMARY KEY (code)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_reseau_humide.lt_euep_cc_conform
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_conform TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_cc_conform TO create_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_cc_conform TO edit_sig;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_cc_conform TO read_sig;
+COMMENT ON TABLE m_reseau_humide.lt_euep_cc_conform
+  IS 'Liste des types de conformité';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_conform.code IS 'Code interne des types de conformité';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_conform.valeur IS 'Libellé des types de conformité';
+
+INSERT INTO m_reseau_humide.lt_euep_cc_conform(
+            code, valeur)
+    VALUES
+    ('10','Conforme'),
+    ('21','Non-conforme simple'),
+    ('22','Non-conforme grave')
+    ;
 
 -- ################################################################# Domaine valeur - lt_euep_doc_certif #############################################
 
