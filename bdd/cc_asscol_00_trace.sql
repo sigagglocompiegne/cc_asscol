@@ -10,4 +10,4 @@
 #################################################################### SUIVI CODE SQL ####################################################################
 
 -- 2024/01/02 : GB / mise à jour base de données et fonctionnel suite nouvelle réglementation au 1er janvier 2024. Suivi des contrôles non conforme grave
--- 2020 : GB / Mise en oeuvre d'une application pour le suivi des contrôles de conformité d'assainissement collectif
+-- 2019 : GB / Mise en oeuvre d'une application pour le suivi des contrôles de conformité d'assainissement collectif
