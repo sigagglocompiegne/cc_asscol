@@ -7,44 +7,44 @@
 -- suppression des clés étrangères si elles existent avant de reconstituer le modèle
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 BEGIN;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_certificateur_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_bien_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_tnidcc_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_pat_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_certificateur_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_conform_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epdiagpc_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epecoul_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epfum_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eppar_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eppublic_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epracdp_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epracpc_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eprecup_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eprecupcpt_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epregarcol_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epregarext_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euanomal_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eubrsch_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euecoul_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euepsep_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euevent_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eufluo_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eupc_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eurefl_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euregar_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euregardp_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eusiphon_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eusup_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eusupdoc_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrebrtype_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrechype_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_ordre_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_pat_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_tnidcc_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_typebati_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_typeres_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_valid_fkey;
-
-
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrebrtype_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_rrechype_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eupc_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euevent_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euregar_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euregardp_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eusup_fkey;
+ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_radcom_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_sup_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eusupdoc_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euecoul_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eufluo_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eubrsch_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eurefl_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euepsep_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_euanomal_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eusiphon_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epdiagpc_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epracpc_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epregarcol_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epregarext_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epracdp_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eppublic_fkey;
 
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eppar_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epfum_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_epecoul_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eprecup_fkey;
-ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc DROP CONSTRAINT IF EXISTS lt_euep_cc_eval_eprecupcpt_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc_media DROP CONSTRAINT IF EXISTS lt_euep_doc_fkey;
 ALTER TABLE IF EXISTS m_reseau_humide.an_euep_cc_certi_media DROP CONSTRAINT IF EXISTS lt_euep_doc_certif_fkey;
 
@@ -60,10 +60,13 @@ ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_valid DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_anomal DROP CONSTRAINT IF EXISTS lt_euep_cc_anomal_pkey;
 ALTER TABLE IF EXISTS m_reseau_humide.lt_euep_cc_conform DROP CONSTRAINT IF EXISTS lt_euep_cc_conform_pkey;
 
-DROP VIEW IF EXISTS x_apps.xapps_geo_v_euep_cc;
-DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc;
-DROP VIEW IF EXISTS x_apps.xapps_an_euep_cc_nc;
--- DROP VIEW IF EXISTS m_reseau_humide.an_v_euep_cc; (vue supprimée)
+DROP VIEW IF EXISTS m_reseau_humide.xapps_geo_v_euep_cc;
+DROP VIEW IF EXISTS m_reseau_humide.xapps_an_euep_cc_nc;
+DROP VIEW IF EXISTS m_reseau_humide.xapps_an_v_euep_cc_tab1;
+DROP VIEW IF EXISTS m_reseau_humide.xapps_an_v_euep_cc_tab2;
+DROP VIEW IF EXISTS m_reseau_humide.xapps_an_v_euep_cc_tab3;
+DROP VIEW IF EXISTS m_reseau_humide.xapps_an_v_euep_cc_media;
+
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
 -- ###                                                                  DOMAINES DE VALEURS                                                         ###
@@ -594,6 +597,10 @@ CREATE TABLE m_reseau_humide.lt_euep_cc_anomal
 (
   code integer NOT NULL DEFAULT nextval('m_reseau_humide.lt_euep_cc_anomal_seq'::regclass),
   valeur character varying(100) NOT NULL,
+  tri integer	 
+  nc character varying(1),
+  valid character varying(3) NOT NULL,
+	
   CONSTRAINT lt_euep_cc_anomal_pkey PRIMARY KEY (code)
 )
 WITH (
@@ -609,24 +616,30 @@ COMMENT ON TABLE m_reseau_humide.lt_euep_cc_anomal
   IS 'Liste des types de validation du contrôle';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.code IS 'Code interne des anomalies possibles lors d''un contrôle';
 COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.valeur IS 'Libellé des anomalies possibles lors d''un contrôle';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.tri IS 'Attribut permettant de trier les anomalies par rodre de préférnece d''affichage dans GEO';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.nc IS 'Anomalie entraînant une non conformité grave (o:non, 1:oui)';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_cc_anomal.valid IS 'Anomalie encore en vigueur';
 
 INSERT INTO m_reseau_humide.lt_euep_cc_anomal(
-            code, valeur)
+            code, valeur,tri,nc,valid)
     VALUES
-    (1,'Maison ou immeuble ou local non raccordé'),
-    (2,'Maison ou immeuble ou local partiellement raccordé'),
-    (3,'Eaux usées raccordées sur le réseau d''eaux pluviales/ou au milieu naturel'),
-    (4,'Eaux pluviales raccordées sur le réseau d''eaux usées (en partie privée)'),
-    (5,'Présence d''ancien ouvrage de décantation (fosse septique, bac dégraisseur, etc..)'),
-    (6,'Absence d''évent'),
-    (7,'Diamètre de l''évent insuffisant'),
-    (8,'Event non remonté au faîtage de la maison ou immeuble ou local'),
-    (9,'Absence de clapet anti-retour'),
-    (10,'Absence de siphon'),
-    (11,'Destination des eaux usées indéterminée'),
-    (12,'Vidange de piscine raccordée sur le branchement eaux usées')
-    (13,'Eaux pluviales raccordées sur le réseau d''eaux usées (en partie publique)')
-    (14,'Absence de bac dégraisseur')
+    (18,'Maison ou immeuble ou local non raccordé',1,1,'oui'),
+    (2,'Maison ou immeuble ou local partiellement raccordé',2,1,'oui'),
+    (3,'Eaux usées raccordées sur le réseau d''eaux pluviales/ou au milieu naturel',13,1,'oui'),
+    (4,'Eaux pluviales raccordées sur le réseau d''eaux usées (en partie privée)',15,0,'oui'),
+    (5,'Présence d''ancien ouvrage de décantation (fosse septique, bac dégraisseur, etc..)',3,0,'oui'),
+    (6,'Absence d''évent',4,0,'oui'),
+    (7,'Diamètre de l''évent insuffisant',5,0,'oui'),
+    (8,'Event non remonté au faîtage de la maison ou immeuble ou local',6,0,'oui'),
+    (9,'Absence de clapet anti-retour',7,0,'oui'),
+    (10,'Absence de siphon',8,0,'oui'),
+    (11,'Destination des eaux usées indéterminée',9,1,'oui'),
+    (12,'Vidange de piscine raccordée sur le branchement eaux usées',10,0,'oui')
+    (13,'Eaux pluviales raccordées sur le réseau d''eaux usées (en partie publique)',14,0,'non')
+    (14,'Absence de bac dégraisseur',11,0,'oui')
+    (15,'Absence du document attestant une servitude de passage',17,'0','oui')
+    (16,'Vidange de piscine raccordée sur réseau d''eaux pluviales',12,'0','oui')
+    (17,'Eaux pluviales raccordés sur le réseau SEPARATIF des eaux usées',16,1,'oui')	
     ;
 
 -- ####################################################################################################################################################
@@ -677,7 +690,6 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   nidccp character varying(20), -- N° interne du prestataire
   rcc character varying(3) NOT NULL, -- Résultat du contrôle (oui : conforme, non : non conforme, inconnu ?)
   ccdate timestamp without time zone, -- Date du contrôle
-  ccdated timestamp without time zone, -- Date de délivrance du contrôle
   ccbien character varying(2) DEFAULT '00'::character varying, -- Code du type de bien contrôlé (neuf ou ancien)
   certtype integer, -- Code de l'organisme certificateur agréé (clé étrangère sur la liste de valeur lt_euep_cc_certificateur)
   certnom character varying(80), -- Nom de la personne appartenant à l'organisme certificateur agréé qui a fait le contrôle
@@ -742,6 +754,8 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   date_maj timestamp without time zone,
   op_sai character varying(80),
   scr_geom character varying(2),
+  op_maj character varying(80),
+  maj_nc boolean not null default false,	
   CONSTRAINT an_euep_cc_pkey PRIMARY KEY (idcc)
 )
 WITH (
@@ -756,18 +770,17 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_euep_cc TO edit
 COMMENT ON TABLE m_reseau_humide.an_euep_cc
   IS 'Donnée alphanumerique de suivi des dossiers des contrôles de conformité';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.idcc IS 'Identifiant interne unique du contrôle';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.tnidcc IS 'Type de dossier pour lacréation d''un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidcc IS 'N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidccp IS 'N° de dossier interne au prestataire';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccinit IS 'information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.id_adresse IS 'Identifiant unique de l''objet point adresse (issu de la BAL)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccvalid IS 'validation par l''ARC du contrôle (la valeur 10 empêche la modification des données';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.validobs IS 'commentaire sur les demandes de modifications (uniquement si ccvalid = 30)';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.id_adresse IS 'Identifiant unique de l''objet point adresse (issu de la BAL)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccinit IS 'information sur le fait que ce contrôle soit le contrôle initial dans le cas de contrôle supplémentaire suite à une non conformité';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adapt IS 'Complément de l''adresse avec le n° d''appartement dans le cadre d''un immeuble collectif';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.adeta IS 'Etage';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.rcc IS 'Résultat du contrôle (oui : conforme, non : non conforme)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.tnidcc IS 'Type de dossier pour lacréation d''un nouveau contrôle (clé étrangère sur la liste de valeur lt_euep_cc_tnidcc)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidcc IS 'N° de dossier du contrôle (ce numéro suit pour une vérification en cas de non conformité)';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.rcc IS 'Résultat du contrôle (oui: conforme, non : non conforme)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccdate IS 'Date du contrôle';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccdated IS 'Date de délivrance du contrôle';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccbien IS 'Code du type de bien contrôlé (neuf ou ancien) (clé étrangère sur la liste de valeur lt_euep_cc_bien)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.certtype IS 'Code de l''organisme certificateur agréé (clé étrangère sur la liste de valeur lt_euep_cc_certificateur)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.certnom IS 'Nom de la personne appartenant à l''organisme certificateur agréé qui a fait le contrôle';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.certpre IS 'Prénom de la personne appartenant à l''organisme certificateur agréé qui a fait le contrôle';
@@ -776,20 +789,16 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.propriopatp IS 'Patronyme du propri
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.proprionom IS 'Nom de la personne désignant le propriétaire';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.propriopre IS 'Prénom de la personne désignant le propriétaire';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.proprioad IS 'Adresse de la personne désignant le propriétaire';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.proprioadcp IS 'Code postal et commune du propriétaire';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.dotype IS 'Code de la qualité du donneur d''ordre (clé étrangère sur la liste de valeur lt_euep_cc_ordre)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.doaut IS 'Autre donneur d''ordre si pas présent dans dotype';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.ccbien IS 'Code du type de bien contrôlé (neuf ou ancien) (clé étrangère sur la liste de valeur lt_euep_cc_bien)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.donom IS 'Nom de la personne désignant le donneur d''ordre';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.dopre IS 'Prénom de la personne désignant le donneur d''ordre';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.doad IS 'Adresse de la personne désignant le donneur d''ordre';
-
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.achetpat IS 'Patronyme de l''acheteur (clé étrangère sur la liste de valeur lt_euep_cc_pat)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.achetpatp IS 'Patronyme de l''acheteur (précision si autre renseigné dans achetpat)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.achetnom IS 'Nom de la personne désignant l''acheteur';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.achetpre IS 'Prénom de la personne désignant l''acheteur';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.achetad IS 'Adresse de la personne désignant l''acheteur';
-
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.batitype IS 'Code du type de bâtiment concerné par le contrôle (clé étrangère sur la liste de valeur lt_euep_cc_typebati)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.batiaut IS 'Autre type de bâtiment si pas présent dans batitype';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.eppublic IS 'Desservie par un réseau public d''eau potable (clé étrangère sur la liste de valeur lt_euep_cc_eval)';
@@ -830,11 +839,18 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epobserv IS 'Observations diverses 
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepanomal IS 'Anomalies identifiées entrainant la non conformité (liste de valeur non liée pour ajout de plusieurs valeurs possible via GEO)';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepanomalpre IS 'Précision des anomalies';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepdivers IS 'Constatations diverses';
-
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_sai IS 'Date de saisie';
-COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_maj IS 'Datede mise à jour';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.dbinsert IS 'Date de saisie';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.dbupdate IS 'Datede mise à jour';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.op_sai IS 'Opérateur de saisie';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.scr_geom IS 'Source du référentiel géographique de saisie';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.nidccp IS 'Numéro interne au prestataire du contrôle';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.proprioadcp IS 'Code postal et commune de l''adresse du propriétaire';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_notif IS 'Date de la première notification';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_rel IS 'Date de la relance effective';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epracdpdom IS 'Précision du raccordement au réseau public d''évacuation des EP';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepconstd IS 'Constatations diverses observées sur le réseau d''assainissement';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.op_maj IS 'Opérateur de mise à jour (pas utilisé dans les déclencheurs de GEO, incompatible avec la mise à jour d''un contrôle';
+
 
 -- ########################################################################## table an_euep_cc_media #######################################################
 
@@ -982,8 +998,8 @@ GRANT ALL ON SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq TO sig_create;
 GRANT SELECT, USAGE ON SEQUENCE m_reseau_humide.log_an_euep_cc_gid_seq TO public;
 
 
--- ########################################################################## table xapps_an_v_euep_cc_erreur #######################################################
-
+-- ########################################################################## table old_xapps_an_v_euep_cc_erreur #######################################################
+/*
 
 -- Table: x_apps.xapps_an_v_euep_cc_erreur
 
@@ -1016,7 +1032,7 @@ COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.erreur IS 'Message';
 COMMENT ON COLUMN x_apps.xapps_an_v_euep_cc_erreur.horodatage IS 'Date (avec heure) de génération du message (ce champ permet de filtrer l''affichage < x secondsdans GEo)';
 
 
-
+*/
 
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
@@ -1041,24 +1057,30 @@ ALTER TABLE m_reseau_humide.an_euep_cc_certi_media
 
 -- Table: m_reseau_humide.an_euep_cc
 
-  
-
 ALTER TABLE m_reseau_humide.an_euep_cc
-
-ADD CONSTRAINT lt_euep_cc_pat_fkey FOREIGN KEY (propriopat)
-      REFERENCES m_reseau_humide.lt_euep_cc_pat (code) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
 
 ADD CONSTRAINT lt_euep_cc_bien_fkey FOREIGN KEY (ccbien)
       REFERENCES m_reseau_humide.lt_euep_cc_bien (code) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
+
+ADD CONSTRAINT lt_euep_cc_certificateur_fkey FOREIGN KEY (rcc)
+      REFERENCES m_reseau_humide.lt_euep_cc_conform (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+
+ADD CONSTRAINT lt_euep_cc_conform_fkey FOREIGN KEY (certtype)
+      REFERENCES m_reseau_humide.lt_euep_cc_certificateur (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,	
+	
+ADD CONSTRAINT lt_euep_cc_pat_fkey FOREIGN KEY (propriopat)
+      REFERENCES m_reseau_humide.lt_euep_cc_pat (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+
+
+	
 ADD CONSTRAINT lt_euep_cc_tnidcc_fkey FOREIGN KEY (tnidcc)
       REFERENCES m_reseau_humide.lt_euep_cc_tnidcc (code) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
 
-ADD CONSTRAINT lt_euep_cc_certificateur_fkey FOREIGN KEY (certtype)
-      REFERENCES m_reseau_humide.lt_euep_cc_certificateur (code) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
 ADD CONSTRAINT lt_euep_cc_ordre_fkey FOREIGN KEY (dotype)
       REFERENCES m_reseau_humide.lt_euep_cc_ordre (code) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -1151,8 +1173,11 @@ ADD CONSTRAINT lt_euep_cc_eval_eprecupcpt_fkey FOREIGN KEY (eprecupcpt)
       ON UPDATE NO ACTION ON DELETE NO ACTION,
 ADD CONSTRAINT lt_euep_cc_valid_fkey FOREIGN KEY (ccvalid)
       REFERENCES m_reseau_humide.lt_euep_cc_valid (code) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
 
+ADD CONSTRAINT lt_euep_racdom_fkey FOREIGN KEY (epracdpdom)
+      REFERENCES m_reseau_humide.lt_euep_racdom (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 -- ####################################################################################################################################################
@@ -1210,10 +1235,10 @@ COMMENT ON VIEW m_reseau_humide.an_v_euep_cc
 
 -- ####################################################### VIEW - xapps_geo_v_euep_cc #################################################################
 
--- View: x_apps.xapps_geo_v_euep_cc
+-- m_reseau_humide.xapps_geo_v_euep_cc source
 
-CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS 
- WITH req_ad AS (
+CREATE OR REPLACE VIEW m_reseau_humide.xapps_geo_v_euep_cc
+AS WITH req_ad AS (
          SELECT a.id_adresse,
             a.commune,
             a.libvoie_c,
@@ -1236,7 +1261,7 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS
         ), req_cc AS (
          SELECT c_1.id_adresse,
             count(*) AS nb_cc,
-	    string_agg(c_1.certtype::text, ','::text) AS certtype
+            string_agg(c_1.certtype::text, ','::text) AS certtype
            FROM m_reseau_humide.an_euep_cc c_1
           GROUP BY c_1.id_adresse
         ), req_ccdate AS (
@@ -1247,7 +1272,7 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS
              JOIN ( SELECT an_euep_cc.id_adresse,
                     max(an_euep_cc.ccdate) AS ccdate
                    FROM m_reseau_humide.an_euep_cc
-                  GROUP BY an_euep_cc.id_adresse) b ON a.id_adresse = b.id_adresse AND a.ccdate = b.ccdate
+                  GROUP BY an_euep_cc.id_adresse) b_1 ON a.id_adresse = b_1.id_adresse AND a.ccdate = b_1.ccdate
         )
  SELECT row_number() OVER () AS gid,
     b.id_adresse,
@@ -1269,90 +1294,234 @@ CREATE OR REPLACE VIEW x_apps.xapps_geo_v_euep_cc AS
    FROM req_ad b
      LEFT JOIN req_cc c ON b.id_adresse = c.id_adresse
      LEFT JOIN req_ccdate cd ON b.id_adresse = cd.id_adresse
-    ORDER BY CAST (b.numero as int)
-     ;
+  ORDER BY (b.numero::integer);
 
-ALTER TABLE x_apps.xapps_geo_v_euep_cc
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_reseau_humide.xapps_geo_v_euep_cc TO sig_create;
-GRANT SELECT ON TABLE m_reseau_humide.xapps_geo_v_euep_cc TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_geo_v_euep_cc TO edit_sig;
-
-COMMENT ON VIEW x_apps.xapps_geo_v_euep_cc
-  IS 'Vue applicative récupérant le nombre de dossier de conformité par adresse et affichant l''état du dernier contrôle (conforme ou non conforme) pour affichage dans GEO';
-
+COMMENT ON VIEW m_reseau_humide.xapps_geo_v_euep_cc IS 'Vue applicative récupérant le nombre de dossier de conformité par adresse et affichant l''état du dernier contrôle (conforme ou non conforme) pour affichage dans GEO';
 
 
 
 -- ####################################################### VIEW - xapps_an_euep_cc_nc #################################################################
 
--- View: x_apps.xapps_an_euep_cc
+-- m_reseau_humide.xapps_an_euep_cc_nc source
 
-CREATE OR REPLACE VIEW x_apps.xapps_an_euep_cc_nc AS
+CREATE OR REPLACE VIEW m_reseau_humide.xapps_an_euep_cc_nc
+AS WITH req_ccdate AS (
+         SELECT a.id_adresse,
+            a.rcc,
+            a.ccdate,
+            a.nidcc
+           FROM m_reseau_humide.an_euep_cc a
+             JOIN ( SELECT an_euep_cc.id_adresse,
+                    an_euep_cc.nidcc,
+                    max(an_euep_cc.ccdate) AS ccdate
+                   FROM m_reseau_humide.an_euep_cc
+                  GROUP BY an_euep_cc.id_adresse, an_euep_cc.nidcc) b ON a.nidcc::text = b.nidcc::text AND a.ccdate = b.ccdate
+        ), req_nc AS (
+         SELECT row_number() OVER (PARTITION BY cc.nidcc ORDER BY (to_char(now() - cc.ccdate::timestamp with time zone, 'DD'::text)))::integer AS ordre_tri,
+            to_char(now() - cc.ccdate::timestamp with time zone, 'DD'::text)::integer AS ordre_cc,
+            cc.idcc,
+            cc.id_adresse,
+            cc.ccvalid,
+            cc.validobs,
+            cc.ccinit,
+            cc.adapt,
+            cc.adeta,
+            cc.tnidcc,
+            cc.nidcc,
+            cc.rcc,
+            cc.ccdate,
+            cc.ccbien,
+            cc.certtype,
+            cc.certnom,
+            cc.certpre,
+            cc.propriopat,
+            cc.propriopatp,
+            cc.proprionom,
+            cc.propriopre,
+            cc.proprioad,
+            cc.dotype,
+            cc.doaut,
+            cc.donom,
+            cc.dopre,
+            cc.doad,
+            cc.achetpat,
+            cc.achetpatp,
+            cc.achetnom,
+            cc.achetpre,
+            cc.achetad,
+            cc.batitype,
+            cc.batiaut,
+            cc.eppublic,
+            cc.epaut,
+            cc.rredptype,
+            cc.rrebrtype,
+            cc.rrechype,
+            cc.eupc,
+            cc.euevent,
+            cc.euregar,
+            cc.euregardp,
+            cc.eusup,
+            cc.eusuptype,
+            cc.eusupdoc,
+            cc.euecoul,
+            cc.eufluo,
+            cc.eubrsch,
+            cc.eurefl,
+            cc.euepsep,
+            cc.eudivers,
+            cc.euanomal,
+            cc.euobserv,
+            cc.eusiphon,
+            cc.epdiagpc,
+            cc.epracpc,
+            cc.epregarcol,
+            cc.epregarext,
+            cc.epracdp,
+            cc.eppar,
+            cc.epparpre,
+            cc.epfum,
+            cc.epecoul,
+            cc.epecoulobs,
+            cc.eprecup,
+            cc.eprecupcpt,
+            cc.epautre,
+            cc.epobserv,
+            cc.euepanomal,
+            cc.euepanomalpre,
+            cc.euepdivers,
+            cc.dbinsert,
+            cc.dbupdate,
+            cc.op_sai,
+            cc.scr_geom,
+            a.commune,
+            a.numero,
+            a.repet,
+            a.libvoie_c,
+            a.libvoie_a,
+            a.codepostal AS code_postal,
+                CASE
+                    WHEN a.complement IS NULL OR a.complement::text = ''::text THEN ''::character varying
+                    ELSE a.complement
+                END AS complement,
+            ((((((a.etiquette::text || ' '::text) || a.libvoie_c::text) ||
+                CASE
+                    WHEN a.complement IS NULL OR a.complement::text = ''::text THEN ''::text
+                    ELSE chr(10) || a.complement::text
+                END) || chr(10)) || a.codepostal::text) || ' '::text) || a.commune::text AS adresse,
+            c.adresse AS certi_adresse,
+            c.siret AS certi_siret,
+            c.nom_assur AS certi_assur,
+            c.num_assur AS certi_numassur,
+            c.date_assur AS certi_dassur,
+            cc.date_notif,
+            cc.date_rel
+           FROM m_reseau_humide.an_euep_cc cc
+             JOIN ( SELECT an_euep_cc.id_adresse,
+                    an_euep_cc.nidcc,
+                    max(an_euep_cc.ccdate) AS ccdate
+                   FROM m_reseau_humide.an_euep_cc
+                  GROUP BY an_euep_cc.id_adresse, an_euep_cc.nidcc) b ON cc.nidcc::text = b.nidcc::text AND cc.ccdate = b.ccdate AND cc.rcc::text = '22'::text
+             JOIN m_reseau_humide.lt_euep_cc_certificateur c ON cc.certtype = c.code
+             JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse AND cc.rcc::text = '22'::text
+        )
+ SELECT row_number() OVER () AS gid,
+    nc.ordre_tri,
+    nc.ordre_cc,
+    nc.idcc,
+    nc.id_adresse,
+    nc.ccvalid,
+    nc.validobs,
+    nc.ccinit,
+    nc.adapt,
+    nc.adeta,
+    nc.tnidcc,
+    nc.nidcc,
+    nc.rcc,
+    nc.ccdate,
+    nc.ccbien,
+    nc.certtype,
+    nc.certnom,
+    nc.certpre,
+    nc.propriopat,
+    nc.propriopatp,
+    nc.proprionom,
+    nc.propriopre,
+    nc.proprioad,
+    nc.dotype,
+    nc.doaut,
+    nc.donom,
+    nc.dopre,
+    nc.doad,
+    nc.achetpat,
+    nc.achetpatp,
+    nc.achetnom,
+    nc.achetpre,
+    nc.achetad,
+    nc.batitype,
+    nc.batiaut,
+    nc.eppublic,
+    nc.epaut,
+    nc.rredptype,
+    nc.rrebrtype,
+    nc.rrechype,
+    nc.eupc,
+    nc.euevent,
+    nc.euregar,
+    nc.euregardp,
+    nc.eusup,
+    nc.eusuptype,
+    nc.eusupdoc,
+    nc.euecoul,
+    nc.eufluo,
+    nc.eubrsch,
+    nc.eurefl,
+    nc.euepsep,
+    nc.eudivers,
+    nc.euanomal,
+    nc.euobserv,
+    nc.eusiphon,
+    nc.epdiagpc,
+    nc.epracpc,
+    nc.epregarcol,
+    nc.epregarext,
+    nc.epracdp,
+    nc.eppar,
+    nc.epparpre,
+    nc.epfum,
+    nc.epecoul,
+    nc.epecoulobs,
+    nc.eprecup,
+    nc.eprecupcpt,
+    nc.epautre,
+    nc.epobserv,
+    nc.euepanomal,
+    nc.euepanomalpre,
+    nc.euepdivers,
+    nc.dbinsert,
+    nc.dbupdate,
+    nc.op_sai,
+    nc.scr_geom,
+    nc.commune,
+    nc.numero,
+    nc.repet,
+    nc.libvoie_c,
+    nc.libvoie_a,
+    nc.code_postal,
+    nc.complement,
+    nc.adresse,
+    nc.certi_adresse,
+    nc.certi_siret,
+    nc.certi_assur,
+    nc.certi_numassur,
+    nc.certi_dassur,
+    nc.date_notif,
+    nc.date_rel
+   FROM req_nc nc
+     JOIN req_ccdate cd ON nc.nidcc::text = cd.nidcc::text
+  ORDER BY nc.nidcc, (nc.numero::integer);
 
-WITH
-req_ccdate as (
-	SELECT 
-		a.id_adresse,
-		a.rcc,
-		a.ccdate
-	FROM 
-		m_reseau_humide.an_euep_cc a
-	JOIN (SELECT id_adresse, max(ccdate) ccdate
-		FROM m_reseau_humide.an_euep_cc 
-		GROUP BY id_adresse ) b
-	ON a.id_adresse = b.id_adresse
-	AND a.ccdate = b.ccdate
-),
-req_nc as (
-SELECT
-        row_number() over(partition by cc.nidcc order by to_char((current_timestamp - cc.ccdate),'DD'))::integer as ordre_tri,
-        to_char((current_timestamp - cc.ccdate),'DD')::integer as ordre_cc,
-	cc.*,
-	a.commune,
-	a.numero,
-	a.repet,
-	a.libvoie_c,
-	a.libvoie_a,
-        a.codepostal as code_postal,
-        CASE WHEN a.complement is null or a.complement ='' THEN '' ELSE a.complement END as complement,
-	a.etiquette || ' ' || a.libvoie_c ||
-	CASE WHEN a.complement is null or a.complement ='' THEN '' ELSE chr(10) || a.complement END ||
-	chr(10) || a.codepostal || ' ' || a.commune as adresse,
-	c.adresse as certi_adresse,
-	c.siret as certi_siret,
-	c.nom_assur as certi_assur,
-	c.num_assur as certi_numassur,
-	c.date_assur as certi_dassur
-FROM
-	m_reseau_humide.an_euep_cc cc
-JOIN (SELECT id_adresse, max(ccdate) ccdate
-		FROM m_reseau_humide.an_euep_cc 
-		GROUP BY id_adresse ) b
-	ON cc.id_adresse = b.id_adresse
-	AND cc.ccdate = b.ccdate AND cc.rcc = 'non'
-JOIN m_reseau_humide.lt_euep_cc_certificateur c ON cc.certtype = c.code
-JOIN x_apps.xapps_geo_vmr_adresse a ON cc.id_adresse = a.id_adresse 
-AND cc.rcc = 'non'
-)
-SELECT	
-	row_number() over() as gid,
-	nc.*
-FROM req_nc nc
-JOIN req_ccdate cd ON nc.id_adresse = cd.id_adresse
-ORDER BY CAST (nc.numero as int);
+COMMENT ON VIEW m_reseau_humide.xapps_an_euep_cc_nc IS 'Vue attributaire récupérant l''ensemble des contrôles non conforme (unique) pour recherche dans GEO des contrôles non conforme et export ou courrier';
 
-
-
-
-ALTER TABLE x_apps.xapps_an_euep_cc_nc
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_reseau_humide.xapps_an_euep_cc_nc TO sig_create;
-GRANT SELECT ON TABLE m_reseau_humide.xapps_an_euep_cc_nc TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_an_euep_cc_nc TO edit_sig;
-
-COMMENT ON VIEW x_apps.xapps_an_euep_cc_nc
-  IS 'Vue attributaire récupérant l''ensemble des contrôles non conforme (unique) pour recherche dans GEO des contrôles non conforme et export ou courrier';
 
 -- ####################################################### VIEW - an_v_euep_cc_media #################################################################
 
@@ -1391,471 +1560,354 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.an_v_euep_cc_media
 -- vue permettant de générer le code HTML et les résultats du tableau n°1 du tableau de bord (contrôle par commune)
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- View: x_apps.xapps_an_v_euep_cc_tb1
+-- m_reseau_humide.xapps_an_v_euep_cc_tb1 source
 
-DROP VIEW IF EXISTS x_apps.xapps_an_v_euep_cc_tb1;
-
-CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb1 AS 
-
--- sous requête global englobant l'ensemble des calculs pour formatage final du tableau HTML
-WITH
-req_d AS
-(
-
--- sous requête permettant de récupérer pour toutes les communes de l'ARC une clé composée du code INSEE et de l'année
--- ce traitement est nécessaire pour la jointure final. Cette requête permettre de faire de jointure avec tous les autres traitements pour récupérer toutes lignes pour toutes les communes même
--- si certaines communes de remontes aucun résultat. On gère ici le fait de remonter des null si aucune donnée. Si null alors on affichera 0.
-WITH
-req_annee AS
-	-- requête alant chercher les communes de l'ARC et recomposition d'une clé (INSEE || annee). L'année correspondant aux années présentes dans la table des données alphanumériques des contrôles
-	(
-	select distinct
-		g.insee || to_char(ccdate,'YYYY') as cle,
-		to_char(cc.ccdate,'YYYY') as annee,
-		g.insee,
-		g.libgeo as commune
-	from
-		m_reseau_humide.an_euep_cc cc, r_administratif.an_geo g
-	WHERE g.epci= '200067965'--'246001010'
-	order by g.insee || to_char(ccdate,'YYYY')
-
-	),
--- requête qui recherche le nb de contrôle total par commune et par année
-req_tcc AS
-	(
-	WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
-			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
-			),
-		req_nbcc AS
-                        -- comptage des contrôles par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc, count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_ccu
-			from
-				m_reseau_humide.an_euep_cc 
-			group by nidcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier par commune et par année
-		SELECT 
-			left(cc.nidcc,5) || a.annee as cle,
-			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_ccu) as nb_ccu
-		FROM	
-			req_amin a
-		INNER JOIN req_nbcc cc ON a.nidcc = cc.nidcc
-		GROUP BY left(cc.nidcc,5), annee
-		ORDER BY left(cc.nidcc,5)
-	),
-
--- requête qui recherche le nb de contrôle total pour l'ARC
-req_tccarc AS (
-               WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
-			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc GROUP BY nidcc
-			),
-		req_nbccarc AS
-			-- comptage des contrôles par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc, count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_ccuarc
-			from
-				m_reseau_humide.an_euep_cc 
-			group by nidcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier par commune et par année
-		SELECT 
-			a.annee as cle,
-			sum(cc.nb_ccuarc) as nb_ccuarc
-		FROM	
-			req_amin a
-		INNER JOIN req_nbccarc cc ON a.nidcc = cc.nidcc
-		GROUP BY a.annee
-		ORDER BY annee
-),
--- requête qui recherche le nb de contrôle conforme
-req_tccc AS
-	(
-	WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
-			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
-			),
-		req_nbccc AS
-			-- comptage des contrôles conformes par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc, rcc,count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_cccu
-			from
-				m_reseau_humide.an_euep_cc 
-			where rcc='oui'
-			group by nidcc,rcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier par commune conforme et par année
-		SELECT 
-			left(cc.nidcc,5) || a.annee as cle,
-			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_cccu) as nb_cccu
-		FROM	
-			req_amin a
-		INNER JOIN req_nbccc cc ON a.nidcc = cc.nidcc
-		GROUP BY left(cc.nidcc,5), annee
-		ORDER BY left(cc.nidcc,5)
-	),
-
--- requête qui recherche le nb de contrôle conforme total ARC
-req_tcccarc AS (
-               WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier
-			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc GROUP BY nidcc
-			),
-		req_nbccarc AS
-			-- comptage des contrôles conformes par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc,rcc, count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_ccuarc
-			from
-				m_reseau_humide.an_euep_cc 
-			where rcc='oui'
-			group by nidcc, rcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier conforme par commune et par année
-		SELECT 
-			a.annee as cle,
-			sum(cc.nb_ccuarc) as nb_cccuarc
-		FROM	
-			req_amin a
-		INNER JOIN req_nbccarc cc ON a.nidcc = cc.nidcc
-		GROUP BY a.annee
-		ORDER BY annee
-),
-	
--- requête qui recherche le nb de contrôle non conforme
-req_tccnc AS
-	(
-	WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
-			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
-			),
-		req_nbccnc AS
-			-- comptage des contrôles non conformes et pas devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc, count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_ccncu
-			from
-				m_reseau_humide.an_euep_cc 
-			where rcc='non' and nidcc not in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
-			group by nidcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier conforme par commune et par année
-		SELECT 
-			left(cc.nidcc,5) || a.annee as cle,
-			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_ccncu) as nb_ccncu
-		FROM	
-			req_amin a
-		INNER JOIN req_nbccnc cc ON a.nidcc = cc.nidcc
-		GROUP BY left(cc.nidcc,5), annee
-		ORDER BY left(cc.nidcc,5)
-	),
--- requête qui recherche le nb de contrôle non conforme total ARC
-req_tccncarc AS (
-               WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
-			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc GROUP BY nidcc
-			),
-		req_nbccarc AS
-			-- comptage des contrôles non conformes et pas devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc,rcc, count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_ccuarc
-			from
-				m_reseau_humide.an_euep_cc 
-			where rcc='non' and nidcc not in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
-			group by nidcc, rcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier non conforme par commune et par année
-		SELECT 
-			a.annee as cle,
-			sum(cc.nb_ccuarc) as nb_ccncuarc
-		FROM	
-			req_amin a
-		INNER JOIN req_nbccarc cc ON a.nidcc = cc.nidcc
-		GROUP BY a.annee
-		ORDER BY annee
-),
--- requête qui recherche le nb de contrôle non conforme passé en conforme (pour calculer le taux de mise en conformité)
-req_tccncc AS
-	(
-	WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
-			SELECT nidcc, to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
-			),
-		req_nbccncc AS
-			-- comptage des contrôles non conformes et devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc, count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_ccnccu
-			from
-				m_reseau_humide.an_euep_cc 
-			where rcc='non' and nidcc in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
-			group by nidcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier non conforme passé en conforme par commune et par année
-		SELECT 
-			left(cc.nidcc,5) || a.annee as cle,
-			left(cc.nidcc,5) as insee, a.annee, sum(cc.nb_ccnccu) as nb_ccnccu
-		FROM	
-			req_amin a
-		INNER JOIN req_nbccncc cc ON a.nidcc = cc.nidcc
-		GROUP BY left(cc.nidcc,5), annee
-		ORDER BY left(cc.nidcc,5)
-	),
--- requête qui recherche le nb de contrôle non conforme passé en conforme pour l'ARC (pour calculer le taux de mise en conformité)
-req_tccncc_arc AS
-	(
-	WITH
-		req_amin AS
-			(
-			-- recherche l'année minimum de chaque dossier. Cette recherche permet dans le formatage de cette sous requête de ne pas compter des contrôles de suivi ayant lieu une année n+1
-			SELECT DISTINCT nidcc, left(nidcc,5), to_char(min(ccdate),'YYYY') as annee FROM m_reseau_humide.an_euep_cc  GROUP BY nidcc  
-			),
-		req_nbccncc AS
-			-- comptage des contrôles non conformes et devenu conforme par dossier. Si plusieurs contrôles ayant le même n°, on le compte qu'une fois
-			(
-			select nidcc, count(*) as nb,
-				CASE
-					WHEN count(*) > 1 
-					THEN 1
-				ELSE
-				count(*) END as nb_ccnccu
-			from
-				m_reseau_humide.an_euep_cc 
-			where rcc='non' and nidcc in (select nidcc from m_reseau_humide.an_euep_cc where rcc='oui')
-			group by nidcc
-			)
-		-- synthèse des 2 sous requêtes précédentes. Je compte le nombre de dossier non conforme passé en conforme par commune et par année
-		SELECT 
-			a.annee as cle,
-			sum(cc.nb_ccnccu) as nb_ccnccu_arc
-		FROM	
-			req_amin a
-		INNER JOIN req_nbccncc cc ON a.nidcc = cc.nidcc
-		GROUP BY annee
-		ORDER BY annee
-	)
-
--- requête formatant la 1ère partie du tableau : les lignes par commune
-SELECT DISTINCT row_number() OVER () AS id,
-	      -- ici création des cellules du tableau en intégrant à l'intérieur les résultats des requêtes précédentes
-	      -- je récupère le nom de la commune, la somme des contrôles par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
-              ((((('<tr>'::text || '<td rowspan="5">'::text) || a.commune::text) || '</td>'::text) || '<td>Total</td>'::text) || string_agg(('<td align=center>'::text ||
+CREATE OR REPLACE VIEW m_reseau_humide.xapps_an_v_euep_cc_tb1
+AS WITH req_d AS (
+         WITH req_annee AS (
+                 SELECT DISTINCT g.insee::text || to_char(cc.ccdate, 'YYYY'::text) AS cle,
+                    to_char(cc.ccdate, 'YYYY'::text) AS annee,
+                    g.insee,
+                    g.libgeo AS commune
+                   FROM m_reseau_humide.an_euep_cc cc,
+                    r_administratif.an_geo g
+                  WHERE g.epci::text = '200067965'::text
+                  ORDER BY (g.insee::text || to_char(cc.ccdate, 'YYYY'::text))
+                ), req_tcc AS (
+                 WITH req_amin AS (
+                         SELECT an_euep_cc.nidcc,
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbcc AS (
+                         SELECT an_euep_cc.nidcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_ccu
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        )
+                 SELECT "left"(cc.nidcc::text, 5) || a_1.annee AS cle,
+                    "left"(cc.nidcc::text, 5) AS insee,
+                    a_1.annee,
+                    sum(cc.nb_ccu) AS nb_ccu
+                   FROM req_amin a_1
+                     JOIN req_nbcc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY ("left"(cc.nidcc::text, 5)), a_1.annee
+                  ORDER BY ("left"(cc.nidcc::text, 5))
+                ), req_tccarc AS (
+                 WITH req_amin AS (
+                         SELECT DISTINCT an_euep_cc.nidcc,
+                            "left"(an_euep_cc.nidcc::text, 5) AS "left",
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbccarc AS (
+                         SELECT an_euep_cc.nidcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_ccuarc
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        )
+                 SELECT a_1.annee AS cle,
+                    sum(cc.nb_ccuarc) AS nb_ccuarc
+                   FROM req_amin a_1
+                     JOIN req_nbccarc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY a_1.annee
+                  ORDER BY a_1.annee
+                ), req_tccc AS (
+                 WITH req_amin AS (
+                         SELECT an_euep_cc.nidcc,
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbccc AS (
+                         SELECT an_euep_cc.nidcc,
+                            an_euep_cc.rcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_cccu
+                           FROM m_reseau_humide.an_euep_cc
+                          WHERE an_euep_cc.rcc::text = '10'::text
+                          GROUP BY an_euep_cc.nidcc, an_euep_cc.rcc
+                        )
+                 SELECT "left"(cc.nidcc::text, 5) || a_1.annee AS cle,
+                    "left"(cc.nidcc::text, 5) AS insee,
+                    a_1.annee,
+                    sum(cc.nb_cccu) AS nb_cccu
+                   FROM req_amin a_1
+                     JOIN req_nbccc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY ("left"(cc.nidcc::text, 5)), a_1.annee
+                  ORDER BY ("left"(cc.nidcc::text, 5))
+                ), req_tcccarc AS (
+                 WITH req_amin AS (
+                         SELECT DISTINCT an_euep_cc.nidcc,
+                            "left"(an_euep_cc.nidcc::text, 5) AS "left",
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbccarc AS (
+                         SELECT an_euep_cc.nidcc,
+                            an_euep_cc.rcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_ccuarc
+                           FROM m_reseau_humide.an_euep_cc
+                          WHERE an_euep_cc.rcc::text = '10'::text
+                          GROUP BY an_euep_cc.nidcc, an_euep_cc.rcc
+                        )
+                 SELECT a_1.annee AS cle,
+                    sum(cc.nb_ccuarc) AS nb_cccuarc
+                   FROM req_amin a_1
+                     JOIN req_nbccarc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY a_1.annee
+                  ORDER BY a_1.annee
+                ), req_tccnc AS (
+                 WITH req_amin AS (
+                         SELECT an_euep_cc.nidcc,
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbccnc AS (
+                         SELECT an_euep_cc.nidcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_ccncu
+                           FROM m_reseau_humide.an_euep_cc
+                          WHERE (an_euep_cc.rcc::text = ANY (ARRAY['21'::text, '22'::text])) AND NOT (an_euep_cc.nidcc::text IN ( SELECT an_euep_cc_1.nidcc
+                                   FROM m_reseau_humide.an_euep_cc an_euep_cc_1
+                                  WHERE an_euep_cc_1.rcc::text = '10'::text))
+                          GROUP BY an_euep_cc.nidcc
+                        )
+                 SELECT "left"(cc.nidcc::text, 5) || a_1.annee AS cle,
+                    "left"(cc.nidcc::text, 5) AS insee,
+                    a_1.annee,
+                    sum(cc.nb_ccncu) AS nb_ccncu
+                   FROM req_amin a_1
+                     JOIN req_nbccnc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY ("left"(cc.nidcc::text, 5)), a_1.annee
+                  ORDER BY ("left"(cc.nidcc::text, 5))
+                ), req_tccncarc AS (
+                 WITH req_amin AS (
+                         SELECT DISTINCT an_euep_cc.nidcc,
+                            "left"(an_euep_cc.nidcc::text, 5) AS "left",
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbccarc AS (
+                         SELECT an_euep_cc.nidcc,
+                            an_euep_cc.rcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_ccuarc
+                           FROM m_reseau_humide.an_euep_cc
+                          WHERE (an_euep_cc.rcc::text = ANY (ARRAY['21'::text, '22'::text])) AND NOT (an_euep_cc.nidcc::text IN ( SELECT an_euep_cc_1.nidcc
+                                   FROM m_reseau_humide.an_euep_cc an_euep_cc_1
+                                  WHERE an_euep_cc_1.rcc::text = '10'::text))
+                          GROUP BY an_euep_cc.nidcc, an_euep_cc.rcc
+                        )
+                 SELECT a_1.annee AS cle,
+                    sum(cc.nb_ccuarc) AS nb_ccncuarc
+                   FROM req_amin a_1
+                     JOIN req_nbccarc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY a_1.annee
+                  ORDER BY a_1.annee
+                ), req_tccncc AS (
+                 WITH req_amin AS (
+                         SELECT an_euep_cc.nidcc,
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbccncc AS (
+                         SELECT an_euep_cc.nidcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_ccnccu
+                           FROM m_reseau_humide.an_euep_cc
+                          WHERE (an_euep_cc.rcc::text = ANY (ARRAY['21'::text, '22'::text])) AND (an_euep_cc.nidcc::text IN ( SELECT an_euep_cc_1.nidcc
+                                   FROM m_reseau_humide.an_euep_cc an_euep_cc_1
+                                  WHERE an_euep_cc_1.rcc::text = '10'::text))
+                          GROUP BY an_euep_cc.nidcc
+                        )
+                 SELECT "left"(cc.nidcc::text, 5) || a_1.annee AS cle,
+                    "left"(cc.nidcc::text, 5) AS insee,
+                    a_1.annee,
+                    sum(cc.nb_ccnccu) AS nb_ccnccu
+                   FROM req_amin a_1
+                     JOIN req_nbccncc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY ("left"(cc.nidcc::text, 5)), a_1.annee
+                  ORDER BY ("left"(cc.nidcc::text, 5))
+                ), req_tccncc_arc AS (
+                 WITH req_amin AS (
+                         SELECT DISTINCT an_euep_cc.nidcc,
+                            "left"(an_euep_cc.nidcc::text, 5) AS "left",
+                            to_char(min(an_euep_cc.ccdate), 'YYYY'::text) AS annee
+                           FROM m_reseau_humide.an_euep_cc
+                          GROUP BY an_euep_cc.nidcc
+                        ), req_nbccncc AS (
+                         SELECT an_euep_cc.nidcc,
+                            count(*) AS nb,
+                                CASE
+                                    WHEN count(*) > 1 THEN 1::bigint
+                                    ELSE count(*)
+                                END AS nb_ccnccu
+                           FROM m_reseau_humide.an_euep_cc
+                          WHERE (an_euep_cc.rcc::text = ANY (ARRAY['21'::text, '22'::text])) AND (an_euep_cc.nidcc::text IN ( SELECT an_euep_cc_1.nidcc
+                                   FROM m_reseau_humide.an_euep_cc an_euep_cc_1
+                                  WHERE an_euep_cc_1.rcc::text = '10'::text))
+                          GROUP BY an_euep_cc.nidcc
+                        )
+                 SELECT a_1.annee AS cle,
+                    sum(cc.nb_ccnccu) AS nb_ccnccu_arc
+                   FROM req_amin a_1
+                     JOIN req_nbccncc cc ON a_1.nidcc::text = cc.nidcc::text
+                  GROUP BY a_1.annee
+                  ORDER BY a_1.annee
+                )
+         SELECT DISTINCT row_number() OVER () AS id,
+            ((((((((((((((((('<tr>'::text || '<td rowspan="5">'::text) || a.commune::text) || '</td>'::text) || '<td>Total</td>'::text) || string_agg(('<td align=center>'::text ||
                 CASE
-		   -- gestion ici des valeurs null non remonté, remplacement par 0
                     WHEN tcc.nb_ccu IS NOT NULL THEN tcc.nb_ccu
-                    ELSE 0::bigint
-                END) || '</td>'::text, ''::text)) || '</tr>'::text 
-		-- je récupère la somme des contrôles conforme par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
-		|| '<tr><td>Conforme</td>' || string_agg('<td align=center>'::text ||
+                    ELSE 0::bigint::numeric
+                END) || '</td>'::text, ''::text)) || '</tr>'::text) || '<tr><td>Conforme</td>'::text) || string_agg(('<td align=center>'::text ||
                 CASE
                     WHEN tccc.nb_cccu IS NOT NULL THEN tccc.nb_cccu
-                    ELSE 0::bigint
-                END || '</td>'::text, ''::text) || '</tr>'::text 
-		-- je récupère la somme des contrôles non conforme par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
-		|| '<tr><td>Non Conforme</td>'|| string_agg('<td align=center>'::text ||
+                    ELSE 0::bigint::numeric
+                END) || '</td>'::text, ''::text)) || '</tr>'::text) || '<tr><td>Non Conforme</td>'::text) || string_agg(('<td align=center>'::text ||
                 CASE
                     WHEN tccnc.nb_ccncu IS NOT NULL THEN tccnc.nb_ccncu
-                    ELSE 0::bigint
-                END || '</td>'::text, ''::text) || '</tr>'::text 
-		-- je calcul le taux de conformité des contrôles par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
-                || '<tr><td>Taux de conformité</td>' || string_agg('<td align=center>'::text ||
+                    ELSE 0::bigint::numeric
+                END) || '</td>'::text, ''::text)) || '</tr>'::text) || '<tr><td>Taux de conformité</td>'::text) || string_agg(('<td align=center>'::text ||
                 CASE
-                    WHEN tccc.nb_cccu IS NULL THEN '0%'::character varying
-                    ELSE round((tccc.nb_cccu/nullif(tcc.nb_ccu,0))*100,1) || '%'
-                END || '</td>'::text, ''::text) || '</tr>'::text 
-		-- je calcul le taux de mise en conformité des contrôles par année en agrégeant les cellules correspondant aux n lignes des années retournées par la requête
-                || '<tr><td>Taux de mise en conformité<sup>(2)</sup></td>' || string_agg('<td align=center>'::text || 
-		CASE
-                    WHEN tccncc.nb_ccnccu IS NULL THEN '0%'::character varying
-                    ELSE round((tccncc.nb_ccnccu/(tccnc.nb_ccncu+tccncc.nb_ccnccu))*100,1) || '%'
-                END || '</td>'::text, ''::text) || '</tr>'::text
-		AS tableau,
-	    -- je formate ici la ligne haute du tableau des années de résultat
+                    WHEN tccc.nb_cccu IS NULL THEN '0%'::character varying::text
+                    ELSE round(tccc.nb_cccu / NULLIF(tcc.nb_ccu, 0::numeric) * 100::numeric, 1) || '%'::text
+                END) || '</td>'::text, ''::text)) || '</tr>'::text) || '<tr><td>Taux de mise en conformité<sup>(2)</sup></td>'::text) || string_agg(('<td align=center>'::text ||
+                CASE
+                    WHEN tccncc.nb_ccnccu IS NULL THEN '0%'::character varying::text
+                    ELSE round(tccncc.nb_ccnccu / (tccnc.nb_ccncu + tccncc.nb_ccnccu) * 100::numeric, 1) || '%'::text
+                END) || '</td>'::text, ''::text)) || '</tr>'::text AS tableau,
             string_agg(('<td align=center>'::text || a.annee) || '</td>'::text, ''::text) AS annee,
-	    -- je formate ici les lignes de résultats popur le total ARC (comme les communes)
-            -- contrôle total
             string_agg(('<td align=center><b>'::text || tccarc.nb_ccuarc) || '</b></td>'::text, ''::text) AS nb_ccuarc,
-            -- contrôle conforme total
             string_agg(('<td align=center><b>'::text || tcccarc.nb_cccuarc) || '</b></td>'::text, ''::text) AS nb_cccuarc,
-	    -- contrôle non conforme total
-	    string_agg(('<td align=center><b>'::text || tccncarc.nb_ccncuarc) || '</b></td>'::text, ''::text) AS nb_ccncuarc,
-            -- taux de conformité
-            string_agg('<td align=center><b>'::text || 
-		CASE
-                    WHEN tccncc_arc.nb_ccnccu_arc IS NULL THEN '0%'::character varying
-                    ELSE round((tccncc_arc.nb_ccnccu_arc/(tccncarc.nb_ccncuarc+tccncc_arc.nb_ccnccu_arc))*100,1) || '%'
-                END || '</td>'::text, ''::text) || '</tr>'::text
-                 AS tx_ccnccu_arc,
-            -- taux de mise en conformité
-            string_agg('<td align=center><b>'::text || 
-		CASE
-                    WHEN tcccarc.nb_cccuarc IS NULL THEN '0%'::character varying
-                    ELSE round((tcccarc.nb_cccuarc/nullif(tccarc.nb_ccuarc,0))*100,1) || '%'
-                END || '</td>'::text, ''::text) || '</tr>'::text
-                 AS tx_cccu_arc,
-             -- nombre de contrôle passé de non conforme à conforme
-             string_agg('<td align=center><b><font size=1>'::text || 
-		CASE
-                    WHEN tccncc_arc.nb_ccnccu_arc IS NULL THEN 0
+            string_agg(('<td align=center><b>'::text || tccncarc.nb_ccncuarc) || '</b></td>'::text, ''::text) AS nb_ccncuarc,
+            string_agg(('<td align=center><b>'::text ||
+                CASE
+                    WHEN tccncc_arc.nb_ccnccu_arc IS NULL THEN '0%'::character varying::text
+                    ELSE round(tccncc_arc.nb_ccnccu_arc / (tccncarc.nb_ccncuarc + tccncc_arc.nb_ccnccu_arc) * 100::numeric, 1) || '%'::text
+                END) || '</td>'::text, ''::text) || '</tr>'::text AS tx_ccnccu_arc,
+            string_agg(('<td align=center><b>'::text ||
+                CASE
+                    WHEN tcccarc.nb_cccuarc IS NULL THEN '0%'::character varying::text
+                    ELSE round(tcccarc.nb_cccuarc / NULLIF(tccarc.nb_ccuarc, 0::numeric) * 100::numeric, 1) || '%'::text
+                END) || '</td>'::text, ''::text) || '</tr>'::text AS tx_cccu_arc,
+            string_agg(('<td align=center><b><font size=1>'::text ||
+                CASE
+                    WHEN tccncc_arc.nb_ccnccu_arc IS NULL THEN 0::numeric
                     ELSE tccncc_arc.nb_ccnccu_arc
-                END || '</td>'::text, ''::text) || '</tr>'::text
-              AS nb_ccnccu_arc,
-        a.insee,
-	a.commune
-
-	FROM
-		-- ici première requête récupérant une ligne par commune et par année n
-		req_annee a
-                -- jointure gauche pour récupérer le même nombre de ligne par commune même si pas de données pour une année
-	LEFT JOIN req_tcc tcc ON a.cle = tcc.cle
-	LEFT JOIN req_tccc tccc ON a.cle = tccc.cle
-	LEFT JOIN req_tccnc tccnc ON a.cle = tccnc.cle
-	LEFT JOIN req_tccncc tccncc ON a.cle = tccncc.cle
-        LEFT JOIN req_tccarc tccarc ON right(a.cle,4)=tccarc.cle
-	LEFT JOIN req_tcccarc tcccarc ON right(a.cle,4)=tcccarc.cle
-	LEFT JOIN req_tccncarc tccncarc ON right(a.cle,4)=tccncarc.cle 
-        LEFT JOIN req_tccncc_arc tccncc_arc ON right(a.cle,4)=tccncc_arc.cle
-	GROUP BY a.insee, a.commune
-	ORDER BY a.insee
-
-     )
--- requête final, formatant l'ensemble des parties du tableau final présenté dans l'application
+                END) || '</td>'::text, ''::text) || '</tr>'::text AS nb_ccnccu_arc,
+            a.insee,
+            a.commune
+           FROM req_annee a
+             LEFT JOIN req_tcc tcc ON a.cle = tcc.cle
+             LEFT JOIN req_tccc tccc ON a.cle = tccc.cle
+             LEFT JOIN req_tccnc tccnc ON a.cle = tccnc.cle
+             LEFT JOIN req_tccncc tccncc ON a.cle = tccncc.cle
+             LEFT JOIN req_tccarc tccarc ON "right"(a.cle, 4) = tccarc.cle
+             LEFT JOIN req_tcccarc tcccarc ON "right"(a.cle, 4) = tcccarc.cle
+             LEFT JOIN req_tccncarc tccncarc ON "right"(a.cle, 4) = tccncarc.cle
+             LEFT JOIN req_tccncc_arc tccncc_arc ON "right"(a.cle, 4) = tccncc_arc.cle
+          GROUP BY a.insee, a.commune
+          ORDER BY a.insee
+        )
  SELECT row_number() OVER () AS id,
-    -- première ligne du tableau (annéeà
-    '<table border=1 align=center><tr><td colspan="2">&nbsp;</td>'::text || req_d.annee || '</tr>'::text || string_agg(req_d.tableau, ''::text) || 
-    -- ligne du total
-     '<tr><td rowspan="6"><b>ARC<b></td><td><b>Total</b></td>' || req_d.nb_ccuarc || '</tr>' ||
-    -- ligne du nombre de controle conforme
-         '<tr><td><b>Conforme</b></td>' || req_d.nb_cccuarc || '</tr>' ||
-    -- ligne du nombre de controle non conforme
-             '<tr><td><b>Non conforme</b></td>' || req_d.nb_ccncuarc || '</tr>' ||
-    -- ligne du nombre du taux de conformité
-'<tr><td><b>Taux de conformité<sup>(3)</sup><b/></td>' || req_d.tx_cccu_arc || '</tr>' ||
-    -- ligne du nombre du taux mise en conformité
-'<tr><td><b>Taux de mise en conformité<sup>(2)</sup><b/></td>' || req_d.tx_ccnccu_arc || '</tr>' ||
-    -- ligne du nombre de controle passé de non conforme à conforme
-'<tr><td><b><font size=1>Nombre de contrôle mis en conformité</font></b></td>' || req_d.nb_ccnccu_arc || '</tr>' ||
-    '</table>'::text 
-  -- je nomme le champ stockant ce code HTML
-  AS tableau1
-
+    ((((((((((((((((((((('<table border=1 align=center><tr><td colspan="2">&nbsp;</td>'::text || req_d.annee) || '</tr>'::text) || string_agg(req_d.tableau, ''::text)) || '<tr><td rowspan="6"><b>ARC<b></td><td><b>Total</b></td>'::text) || req_d.nb_ccuarc) || '</tr>'::text) || '<tr><td><b>Conforme</b></td>'::text) || req_d.nb_cccuarc) || '</tr>'::text) || '<tr><td><b>Non conforme</b></td>'::text) || req_d.nb_ccncuarc) || '</tr>'::text) || '<tr><td><b>Taux de conformité<sup>(3)</sup><b/></td>'::text) || req_d.tx_cccu_arc) || '</tr>'::text) || '<tr><td><b>Taux de mise en conformité<sup>(2)</sup><b/></td>'::text) || req_d.tx_ccnccu_arc) || '</tr>'::text) || '<tr><td><b><font size=1>Nombre de contrôle mis en conformité</font></b></td>'::text) || req_d.nb_ccnccu_arc) || '</tr>'::text) || '</table>'::text AS tableau1
    FROM req_d
-  GROUP BY req_d.annee,req_d.nb_ccuarc,req_d.nb_cccuarc,req_d.nb_ccncuarc, req_d.tx_ccnccu_arc, req_d.nb_ccnccu_arc, req_d.tx_cccu_arc;
+  GROUP BY req_d.annee, req_d.nb_ccuarc, req_d.nb_cccuarc, req_d.nb_ccncuarc, req_d.tx_ccnccu_arc, req_d.nb_ccnccu_arc, req_d.tx_cccu_arc;
 
-ALTER TABLE x_apps.xapps_an_v_euep_cc_tb1
-  OWNER TO sig_create;
-GRANT ALL ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb1 TO sig_create;
-GRANT SELECT ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb1 TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb1 TO edit_sig;
-
-COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb1
-  IS 'Vue applicative formattant le tableau de bord n°1 des contrôles de conformité AC pour affichage dans GEO';
-
+COMMENT ON VIEW m_reseau_humide.xapps_an_v_euep_cc_tb1 IS 'Vue applicative formattant le tableau de bord n°1 des contrôles de conformité AC pour affichage dans GEO';
 
 															    
-															    -- ####################################################### VIEW - xapps_an_v_euep_cc_tb1 #################################################################
+-- ####################################################### VIEW - xapps_an_v_euep_cc_tb2 #################################################################
 
 -- COMMENT GB : -----------------------------------------------------------------------------------------------------------------------------------------------------
 -- vue permettant de générer le code HTML et les résultats du tableau n°2 du tableau de bord (contrôle par prestataire)
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- View: x_apps.xapps_an_v_euep_cc_tb2
+-- m_reseau_humide.xapps_an_v_euep_cc_tb2 source
 
-DROP VIEW IF EXISTS x_apps.xapps_an_v_euep_cc_tb2;
-
-CREATE OR REPLACE VIEW x_apps.xapps_an_v_euep_cc_tb2 AS 
- WITH req_d AS (
+CREATE OR REPLACE VIEW m_reseau_humide.xapps_an_v_euep_cc_tb2
+AS WITH req_d AS (
          WITH req_a AS (
                  SELECT DISTINCT g.code || to_char(cc.ccdate, 'YYYY'::text) AS cle,
                     to_char(cc.ccdate, 'YYYY'::text) AS annee,
-                    --g.code,
                     g.valeur
                    FROM m_reseau_humide.an_euep_cc cc,
                     m_reseau_humide.lt_euep_cc_certificateur g
-                  ORDER BY g.code || to_char(cc.ccdate, 'YYYY'::text)
+                  ORDER BY (g.code || to_char(cc.ccdate, 'YYYY'::text))
                 ), req_compte AS (
                  SELECT DISTINCT a.code || to_char(cc.ccdate, 'YYYY'::text) AS cle,
-                    count(*) OVER (PARTITION BY to_char(cc.ccdate, 'YYYY'::text), a.code) AS nb
+                    count(*) OVER (PARTITION BY (to_char(cc.ccdate, 'YYYY'::text)), a.code) AS nb
                    FROM m_reseau_humide.an_euep_cc cc
                      JOIN m_reseau_humide.lt_euep_cc_certificateur a ON cc.certtype = a.code
-                  ORDER BY a.code || to_char(cc.ccdate, 'YYYY'::text)
+                  ORDER BY (a.code || to_char(cc.ccdate, 'YYYY'::text))
                 )
          SELECT DISTINCT row_number() OVER () AS id,
-            '<tr>'::text || '<td>'::text || req_a.valeur::text || '</td>'::text || string_agg('<td align=center>'::text ||
+            (((('<tr>'::text || '<td>'::text) || req_a.valeur::text) || '</td>'::text) || string_agg(('<td align=center>'::text ||
                 CASE
                     WHEN req_compte.nb IS NOT NULL THEN req_compte.nb
                     ELSE 0::bigint
-                END || '</td>'::text, ''::text) || '</tr>'::text AS tableau,
-            string_agg('<td>'::text || req_a.annee || '</td>'::text, ''::text) AS annee/*,
-            req_a.code*/
+                END) || '</td>'::text, ''::text ORDER BY req_a.annee)) || '</tr>'::text AS tableau,
+            string_agg(('<td>'::text || req_a.annee) || '</td>'::text, ''::text ORDER BY req_a.annee) AS annee
            FROM req_a
              LEFT JOIN req_compte ON req_compte.cle = req_a.cle
-          GROUP BY req_a.valeur--, req_a.code
-        --  ORDER BY req_a.code
+          GROUP BY req_a.valeur
         )
  SELECT row_number() OVER () AS id,
-    '<table border=1 align=center><tr><td>&nbsp;</td>'::text || req_d.annee || '</tr>'::text || string_agg(req_d.tableau, ''::text) || '</table>'::text AS tableau1
+    ((('<table border=1 align=center><tr><td>&nbsp;</td>'::text || req_d.annee) || '</tr>'::text) || string_agg(req_d.tableau, ''::text)) || '</table>'::text AS tableau1
    FROM req_d
- GROUP BY req_d.annee;
+  GROUP BY req_d.annee;
 
-ALTER TABLE x_apps.xapps_an_v_euep_cc_tb2
-  OWNER TO sig_create;
-GRANT ALL ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO sig_create;
-GRANT SELECT ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO read_sig;
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE x_apps.xapps_an_v_euep_cc_tb2 TO edit_sig;
-COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb2
-  IS 'Vue applicative formatant le tableau de bord n°2 des contrôles de conformité AC (nombre de contrôle par prestataire) pour affichage dans GEO';
+COMMENT ON VIEW m_reseau_humide.xapps_an_v_euep_cc_tb2 IS 'Vue applicative formatant le tableau de bord n°2 des contrôles de conformité AC (nombre de contrôle par prestataire) pour affichage dans GEO';
 
-															    
-															    
+-- ####################################################### VIEW - xapps_an_v_euep_cc_tb3 #################################################################															    
+
+-- m_reseau_humide.xapps_an_v_euep_cc_tb3 source
+
+CREATE OR REPLACE VIEW m_reseau_humide.xapps_an_v_euep_cc_tb3
+AS SELECT DISTINCT cc.certtype,
+    lt.valeur AS certnom,
+    to_char(cc.ccdate, 'YYYY'::text) AS annee,
+    count(*) AS nb_cc
+   FROM m_reseau_humide.an_euep_cc cc
+     LEFT JOIN m_reseau_humide.lt_euep_cc_certificateur lt ON cc.certtype = lt.code
+  GROUP BY cc.certtype, lt.valeur, (to_char(cc.ccdate, 'YYYY'::text))
+  ORDER BY lt.valeur;
+
+COMMENT ON VIEW m_reseau_humide.xapps_an_v_euep_cc_tb3 IS 'Vue applicative formatant une table pour la réalisation des statistiques par certificateur dans GEO';
+
+-- Permissions
+
+ALTER TABLE m_reseau_humide.xapps_an_v_euep_cc_tb3 OWNER TO create_sig;
+GRANT ALL ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb3 TO create_sig;
+GRANT SELECT ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb3 TO sig_read;
+GRANT ALL ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb3 TO sig_create;
+GRANT INSERT, DELETE, SELECT, UPDATE ON TABLE m_reseau_humide.xapps_an_v_euep_cc_tb3 TO sig_edit;
+
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
 -- ###                                                                    LES INDEXES                                                               ###
@@ -1869,762 +1921,14 @@ COMMENT ON VIEW x_apps.xapps_an_v_euep_cc_tb2
 -- ###                                                                                                                                              ###
 -- ####################################################################################################################################################
 
-
--- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_insert_update (supprimée) #######################################################
-/*
--- Function: m_reseau_humide.ft_m_an_v_euep_cc_insert_update()
-
--- DROP FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_insert_update();
-
-CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_insert_update()
-  RETURNS trigger AS
-$BODY$
-
-DECLARE v_ccinit boolean;
-DECLARE v_nidcc character varying;
-DECLARE v_ccvalid boolean;
---DECLARE v_adresse integer;
-DECLARE t1_nidcc integer;
-DECLARE t2_nidcc integer;
-
-
-BEGIN
-
-
-
--- gestion automatique si ils'agit du contrôle initial à l'adresse
-v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_adresse=new.id_adresse)>= 1  THEN false ELSE true END;
-
--- gestion des n° de dossier automatique et en cas de suivi
-v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN 
-	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc) as nnidcc)
-	    ELSE 
-		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
-	    END;
-
-
--- vérification sur la saisie des n° de dossier : compte le nombre de dossier validé et conforme (si = 0 peut insérer si non ne fait rien)
-t1_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid='10' and rcc='oui');
--- vérification sur la saisie des n° de dossier : compte le nombre de dossier non validé (si >= 1 ne peut pas insérer un suivi de dossier sur un même dossier non validé)
-t2_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid <> '10');
-
-
--- INSERT
-IF (TG_OP = 'INSERT') THEN
-
--- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
--- contrôle sur le n° de dossier en suivi : ne peut pas saisir un suivi si le n° de dossier saisi n'existe pas à l'adresse CONFORME et VALIDE
--- ici pas possibilité de remontée de message dans le fiche GEO. L'enregistrement ne se fait pas.
-
-
--- si le n° de dossier est nouveau ou un suivi est correctement saisi on insert si non rien
-IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
-
-
-INSERT INTO m_reseau_humide.an_euep_cc (idcc, id_adresse, ccvalid, validobs, ccinit, adapt, adeta, tnidcc, nidcc, rcc, ccdate, ccdated, ccbien, certtype ,certnom ,certpre ,propriopat, propriopatp, proprionom ,propriopre ,proprioad ,dotype ,doaut ,donom ,dopre ,doad ,
-					achetpat, achetpatp, achetnom, achetpre, achetad, batitype ,batiaut ,eppublic ,epaut ,rredptype ,
-					rrebrtype ,rrechype ,eupc ,euevent ,euregar ,euregardp ,eusup ,eusuptype ,eusupdoc ,euecoul ,eufluo ,eubrsch ,eurefl ,euepsep ,eudivers ,euanomal ,euobserv ,eusiphon ,epdiagpc ,epracpc ,epregarcol ,epregarext, 
-					epracdp ,eppar ,epparpre ,epfum ,epecoul ,epecoulobs ,eprecup ,eprecupcpt ,epautre ,epobserv ,euepanomal ,euepanomalpre,euepdivers,date_sai,op_sai,scr_geom,nidccp,proprioadcp)
-SELECT nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass), new.id_adresse , '20', new.validobs, v_ccinit, new.adapt, new.adeta, new.tnidcc,v_nidcc, new.rcc , new.ccdate, new.ccdated, new.ccbien, new.certtype ,new.certnom ,new.certpre ,new.propriopat, new.propriopatp, new.proprionom ,new.propriopre ,new.proprioad ,new.dotype ,
-					new.doaut ,new.donom ,new.dopre ,new.doad, new.achetpat, new.achetpatp, new.achetnom, new.achetpre, new.achetad, new.batitype ,new.batiaut ,new.eppublic ,new.epaut ,new.rredptype ,
-					new.rrebrtype ,CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END ,new.eupc,new.euevent ,new.euregar ,new.euregardp ,new.eusup ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END ,CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END ,new.euecoul ,new.eufluo ,new.eubrsch ,new.eurefl ,new.euepsep ,new.eudivers ,new.euanomal ,new.euobserv ,new.eusiphon ,new.epdiagpc ,new.epracpc ,new.epregarcol ,new.epregarext, 
-					new.epracdp ,new.eppar ,new.epparpre ,new.epfum ,new.epecoul ,new.epecoulobs ,new.eprecup ,CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END,new.epautre ,new.epobserv ,new.euepanomal ,
-					new.euepanomalpre,new.euepdivers,now(),new.op_sai,'61',new.nidccp,new.proprioadcp;
-
-END IF;
-
-
-RETURN NEW;
-
-
--- UPDATE
-ELSIF (TG_OP = 'UPDATE') THEN
-
--- gestion des suppressions des contrôles (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
-IF (new.ccvalid = '40') THEN
-
-DELETE FROM m_reseau_humide.an_euep_cc_media WHERE id = (SELECT idcc FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc);
-DELETE FROM m_reseau_humide.an_euep_cc WHERE nidcc = OLD.nidcc;
-
-ELSE
-										      
--- gestion des contrôles (uniquement possible si valeur indiqué dans l'attribut cc_valid attaché à l'utilisateur dans GEO, accès à la valeur 50 de la liste de valeurs lt_euep_cc_valid)
-
-IF (new.ccvalid = '50') THEN
-
-UPDATE m_reseau_humide.an_euep_cc
-SET 
-ccvalid = '30'
-WHERE an_euep_cc.idcc = OLD.idcc;
-
-END IF;
-
--- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
-
--- pas le bon prestataire
-IF old.certtype <> new.certtype  THEN
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier un dossier que vous n''avez pas créé.<br>Modifications non prises en compte.',
-now()
-);
-
-END IF;
-
--- ne peut pas modifier un dossier validé
-IF ((new.ccvalid = '20' or new.ccvalid = '30') and old.ccvalid = '10') or (old.ccvalid='10' and new.ccvalid='10') THEN
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier un dossier validé.<br> Modifications non prises en compte.',
-now()
-);
-
-END IF;
-
--- ne peut pas modifier le n° de dossier
-IF new.nidcc <> old.nidcc THEN
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier un n° de dossier.<br> Les autres informations modifiées ont été prises en compte.',
-now()
-);
-
-END IF;
-
--- ne peut pas modifier un type de dossier (suivi de dossier ou nouveau dossier)
-IF new.tnidcc <> old.tnidcc THEN
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier le type de contrôle.<br> Les autres informations modifiées ont été prises en compte.',
-now()
-);
-
-END IF;
-
--- si le prestataire qui modifie n'est pas celui qui a saisi pas de modification possible
-IF old.certtype = new.certtype THEN
-
--- si le contrôle n'est pas validé alors on peut modifier les valeurs si non pas de modification possible
-IF ((new.ccvalid = '20' or new.ccvalid = '30') and (old.ccvalid = '20' or old.ccvalid='30')) or (new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid='30')) THEN
-
-UPDATE m_reseau_humide.an_euep_cc
-SET 
-ccvalid = CASE 
-	  WHEN new.ccvalid = '20' and old.ccvalid = '20' THEN '20'
-	  WHEN new.ccvalid = '30' and old.ccvalid = '30' THEN '30'
-	  WHEN new.ccvalid = '30' and old.ccvalid = '20' THEN '30'
-	  WHEN new.ccvalid = '20' and old.ccvalid = '30' THEN '20'
-	  WHEN new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid = '30') THEN '10'
-	  WHEN new.ccvalid = '20' and old.ccvalid = '10' THEN '20'
-	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
-	  END,
-validobs = CASE WHEN new.ccvalid = '30' THEN new.validobs ELSE null END,
-euepdivers = new.euepdivers,
-adapt = new.adapt,
-adeta = new.adeta,
-nidccp = new.nidccp,
-rcc = new.rcc,
-ccdate = new.ccdate,
-ccdated = new.ccdated,
-ccbien = new.ccbien,
-certtype = new.certtype,
-certnom = new.certnom,
-certpre = new.certpre,
-propriopat = new.propriopat,
-propriopatp = new.propriopatp,
-proprionom = new.proprionom,
-propriopre = new.propriopre,
-proprioad = new.proprioad,
-proprioadcp = new.proprioadcp,
-dotype = new.dotype,
-doaut = new.doaut,
-donom = new.donom,
-dopre = new.dopre,
-doad = new.doad,
-achetpat = new.achetpat,
-achetpatp = new.achetpatp,
-achetnom = new.achetnom,
-achetpre = new.achetpre,
-achetad = new.achetad,
-batitype = new.batitype,
-batiaut = new.batiaut,
-eppublic = new.eppublic,
-epaut = new.epaut,
-rredptype = new.rredptype,
-rrebrtype = new.rrebrtype,
-rrechype = CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END,
-eupc = new.eupc,
-euevent = new.euevent,
-euregar = new.euregar,
-euregardp = new.euregardp,
-eusup = new.eusup,
-eusuptype = CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END,
-eusupdoc = CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END,
-euecoul = new.euecoul,
-eufluo = new.eufluo,
-eubrsch = new.eubrsch,
-eurefl = new.eurefl,
-euepsep = new.euepsep,
-eudivers = new.eudivers,
-euanomal = new.euanomal,
-euobserv = new.euobserv,
-eusiphon = new.eusiphon,
-epdiagpc = new.epdiagpc,
-epracpc = new.epracpc,
-epregarcol = new.epregarcol,
-epregarext = new.epregarext,
-epracdp = new.epracdp,
-eppar = new.eppar,
-epparpre = new.epparpre,
-epfum = new.epfum,
-epecoul = new.epecoul,
-epecoulobs = new.epecoulobs,
-eprecup = new.eprecup,
-eprecupcpt = CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END,
-epautre = new.epautre,
-epobserv = new.epobserv,
-euepanomal = new.euepanomal,
-euepanomalpre = new.euepanomalpre,
-date_maj = now()
-
-WHERE an_euep_cc.idcc = OLD.idcc;
-RETURN NEW;
-
-END IF;
-END IF;
-END IF;
-
-RETURN NEW;
-
-END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION m_reseau_humide.t_t1_an_v_euep_cc_insert_update()
-  OWNER TO sig_create;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_insert_update() TO public;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_insert_update() TO sig_create;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_insert_update() TO create_sig;
-
-															 
-COMMENT ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
-
-
--- Trigger: t_t1_an_v_euep_cc_insert_update on m_reseau_humide.an_v_euep_cc
-
--- DROP TRIGGER t_t1_an_v_euep_cc_update_insert ON m_reseau_humide.an_v_euep_cc;
-
-CREATE TRIGGER t_t1_an_v_euep_cc_update_insert
-  INSTEAD OF INSERT OR UPDATE
-  ON m_reseau_humide.an_v_euep_cc
-  FOR EACH ROW
-  EXECUTE PROCEDURE m_reseau_humide.ft_m_an_v_euep_cc_insert_update();
-*/
-
--- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert_update ##################################################################################
-
--- FUNCTION: m_reseau_humide.ft_m_an_euep_cc_insert_update()
-
--- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update();
-
-CREATE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF
-AS $BODY$
-DECLARE v_ccinit boolean;
-DECLARE v_nidcc character varying;
-DECLARE v_ccvalid boolean;
---DECLARE v_adresse integer;
-DECLARE t1_nidcc integer;
-DECLARE t2_nidcc integer;
-
-BEGIN
-
--- gestion automatique si ils'agit du contrôle initial à l'adresse
-v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_adresse=new.id_adresse)>= 1  THEN false ELSE true END;
-
--- gestion des n° de dossier automatique et en cas de suivi
-v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN 
-	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc WHERE nidcc like '60%' AND nidcc like '%cc%' ) as nnidcc)
-		ELSE 
-		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
-	    END;
-
--- vérification sur la saisie des n° de dossier : compte le nombre de dossier validé et conforme (si = 0 peut insérer si non ne fait rien)
-t1_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid='10' and rcc='oui');
--- vérification sur la saisie des n° de dossier : compte le nombre de dossier non validé (si >= 1 ne peut pas insérer un suivi de dossier sur un même dossier non validé)
-t2_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid <> '10');
-
--- INSERT
-IF (TG_OP = 'INSERT') THEN
-
--- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
--- contrôle sur le n° de dossier en suivi : ne peut pas saisir un suivi si le n° de dossier saisi n'existe pas à l'adresse CONFORME et VALIDE
--- ici pas possibilité de remontée de message dans le fiche GEO. L'enregistrement ne se fait pas.
-IF NEW.tnidcc = '20' AND new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc) THEN
-
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-new.id_adresse,
-new.nidcc,
-'Référence du dossier incorrecte. Votre contrôle ne sera pas soumis à validation.<br>
-Merci d''inscrire la référence du dossier originel qui doit être sous cette forme <i>(60159cc569)</i>.',
-now()
-);
-
-END IF;
-
--- si le n° de dossier est nouveau ou un suivi est correctement saisi on insert si non rien
-IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
-
-new.idcc :=  (select nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)) ;
-new.nidcc := v_nidcc;
-new.ccinit := v_ccinit;
-
-new.rrechype := CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END;
-new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
-new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
-new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
-new.date_sai := now();
-new.scr_geom := '61';
-
-END IF;
-RETURN NEW;
-
--- UPDATE
-ELSIF (TG_OP = 'UPDATE') THEN
-
--- gestion des contrôles non supprimés (les supprimés sont gérés dans un trigger after)
--- (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
--- gestion des contrôles (uniquement possible si valeur indiqué dans l'attribut cc_valid attaché à l'utilisateur dans GEO, accès à la valeur 50 de la liste de valeurs lt_euep_cc_valid)
-
--- si le contrôle est à supprimer, passe en dehors des contrôles ci-dessous et passera dans le trigger after
--- si le contrôle est à dévalider passe dans la première boucle
-IF (new.ccvalid = '50') THEN
-new.ccvalid := '30';
-
-new.ccinit := old.ccinit ;
-new.adapt := old.adapt ;
-new.adeta := old.adeta ;
-new.tnidcc := old.tnidcc ;
-new.nidcc := old.nidcc ;
-new.rcc := old.rcc ;
-new.ccdate := old.ccdate ;
-new.ccdated := old.ccdated ;
-new.ccbien := old.ccbien ;
-new.certtype := old.certtype ;
-new.certnom := old.certnom ;
-new.certpre := old.certpre ;
-new.propriopat := old.propriopat ;
-new.propriopatp := old.propriopatp ;
-new.proprionom := old.proprionom ;
-new.propriopre := old.propriopre ;
-new.proprioad := old.proprioad ;
-new.dotype := old.dotype ;
-new.doaut := old.doaut ;
-new.donom := old.donom ;
-new.dopre := old.dopre ;
-new.doad := old.doad ;
-new.achetpat := old.achetpat ;
-new.achetpatp := old.achetpatp ;
-new.achetnom := old.achetnom ;
-new.achetpre := old.achetpre ;
-new.achetad := old.achetad ;
-new.batitype := old.batitype ;
-new.batiaut := old.batiaut ;
-new.eppublic := old.eppublic ;
-new.epaut := old.epaut ;
-new.rredptype := old.rredptype ;
-new.rrebrtype := old.rrebrtype ;
-new.rrechype := old.rrechype ;
-new.eupc := old.eupc ;
-new.euevent := old.euevent ;
-new.euregar := old.euregar ;
-new.euregardp := old.euregardp ;
-new.eusup := old.eusup ;
-new.eusuptype := old.eusuptype ;
-new.eusupdoc := old.eusupdoc ;
-new.euecoul := old.euecoul ;
-new.eufluo := old.eufluo ;
-new.eubrsch := old.eubrsch ;
-new.eurefl := old.eurefl ;
-new.euepsep := old.euepsep ;
-new.eudivers := old.eudivers ;
-new.euanomal := old.euanomal ;
-new.euobserv := old.euobserv ;
-new.eusiphon := old.eusiphon ;
-new.epdiagpc := old.epdiagpc ;
-new.epracpc := old.epracpc ;
-new.epregarcol := old.epregarcol ;
-new.epregarext := old.epregarext ;
-new.epracdp := old.epracdp ;
-new.eppar := old.eppar ;
-new.epparpre := old.epparpre ;
-new.epfum := old.epfum ;
-new.epecoul := old.epecoul ;
-new.epecoulobs := old.epecoulobs ;
-new.eprecup := old.eprecup ;
-new.eprecupcpt := old.eprecupcpt ;
-new.epautre := old.epautre ;
-new.epobserv := old.epobserv ;
-new.euepanomal := old.euepanomal ;
-new.euepanomalpre := old.euepanomalpre ;
-new.euepdivers := old.euepdivers ;
-new.date_sai := old.date_sai ;
-new.date_maj := old.date_maj ;
-new.op_sai := old.op_sai ;
-new.scr_geom := old.scr_geom ;
-new.nidccp := old.nidccp ;
-new.proprioadcp := old.proprioadcp ;
-
-ELSE
-
-IF (old.ccvalid = '10' AND new.ccvalid = '10') OR (old.ccvalid = '10' AND (new.ccvalid = '20' or new.ccvalid = '30')) THEN
-
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier un dossier validé.<br> Modifications non prises en compte.',
-now()
-);
-
-new.ccvalid := old.ccvalid ;
-new.validobs := old.validobs ;
-new.ccinit := old.ccinit ;
-new.adapt := old.adapt ;
-new.adeta := old.adeta ;
-new.tnidcc := old.tnidcc ;
-new.nidcc := old.nidcc ;
-new.rcc := old.rcc ;
-new.ccdate := old.ccdate ;
-new.ccdated := old.ccdated ;
-new.ccbien := old.ccbien ;
-new.certtype := old.certtype ;
-new.certnom := old.certnom ;
-new.certpre := old.certpre ;
-new.propriopat := old.propriopat ;
-new.propriopatp := old.propriopatp ;
-new.proprionom := old.proprionom ;
-new.propriopre := old.propriopre ;
-new.proprioad := old.proprioad ;
-new.dotype := old.dotype ;
-new.doaut := old.doaut ;
-new.donom := old.donom ;
-new.dopre := old.dopre ;
-new.doad := old.doad ;
-new.achetpat := old.achetpat ;
-new.achetpatp := old.achetpatp ;
-new.achetnom := old.achetnom ;
-new.achetpre := old.achetpre ;
-new.achetad := old.achetad ;
-new.batitype := old.batitype ;
-new.batiaut := old.batiaut ;
-new.eppublic := old.eppublic ;
-new.epaut := old.epaut ;
-new.rredptype := old.rredptype ;
-new.rrebrtype := old.rrebrtype ;
-new.rrechype := old.rrechype ;
-new.eupc := old.eupc ;
-new.euevent := old.euevent ;
-new.euregar := old.euregar ;
-new.euregardp := old.euregardp ;
-new.eusup := old.eusup ;
-new.eusuptype := old.eusuptype ;
-new.eusupdoc := old.eusupdoc ;
-new.euecoul := old.euecoul ;
-new.eufluo := old.eufluo ;
-new.eubrsch := old.eubrsch ;
-new.eurefl := old.eurefl ;
-new.euepsep := old.euepsep ;
-new.eudivers := old.eudivers ;
-new.euanomal := old.euanomal ;
-new.euobserv := old.euobserv ;
-new.eusiphon := old.eusiphon ;
-new.epdiagpc := old.epdiagpc ;
-new.epracpc := old.epracpc ;
-new.epregarcol := old.epregarcol ;
-new.epregarext := old.epregarext ;
-new.epracdp := old.epracdp ;
-new.eppar := old.eppar ;
-new.epparpre := old.epparpre ;
-new.epfum := old.epfum ;
-new.epecoul := old.epecoul ;
-new.epecoulobs := old.epecoulobs ;
-new.eprecup := old.eprecup ;
-new.eprecupcpt := old.eprecupcpt ;
-new.epautre := old.epautre ;
-new.epobserv := old.epobserv ;
-new.euepanomal := old.euepanomal ;
-new.euepanomalpre := old.euepanomalpre ;
-new.euepdivers := old.euepdivers ;
-new.date_sai := old.date_sai ;
-new.date_maj := old.date_maj ;
-new.op_sai := old.op_sai ;
-new.scr_geom := old.scr_geom ;
-new.nidccp := old.nidccp ;
-new.proprioadcp := old.proprioadcp ;
-
-ELSE
-
--- pas le bon prestataire
-IF old.certtype <> new.certtype  THEN
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier un dossier que vous n''avez pas créé.<br>Modifications non prises en compte.',
-now()
-);
-
-new.ccvalid := old.ccvalid ;
-new.validobs := old.validobs ;
-new.ccinit := old.ccinit ;
-new.adapt := old.adapt ;
-new.adeta := old.adeta ;
-new.tnidcc := old.tnidcc ;
-new.nidcc := old.nidcc ;
-new.rcc := old.rcc ;
-new.ccdate := old.ccdate ;
-new.ccdated := old.ccdated ;
-new.ccbien := old.ccbien ;
-new.certtype := old.certtype ;
-new.certnom := old.certnom ;
-new.certpre := old.certpre ;
-new.propriopat := old.propriopat ;
-new.propriopatp := old.propriopatp ;
-new.proprionom := old.proprionom ;
-new.propriopre := old.propriopre ;
-new.proprioad := old.proprioad ;
-new.dotype := old.dotype ;
-new.doaut := old.doaut ;
-new.donom := old.donom ;
-new.dopre := old.dopre ;
-new.doad := old.doad ;
-new.achetpat := old.achetpat ;
-new.achetpatp := old.achetpatp ;
-new.achetnom := old.achetnom ;
-new.achetpre := old.achetpre ;
-new.achetad := old.achetad ;
-new.batitype := old.batitype ;
-new.batiaut := old.batiaut ;
-new.eppublic := old.eppublic ;
-new.epaut := old.epaut ;
-new.rredptype := old.rredptype ;
-new.rrebrtype := old.rrebrtype ;
-new.rrechype := old.rrechype ;
-new.eupc := old.eupc ;
-new.euevent := old.euevent ;
-new.euregar := old.euregar ;
-new.euregardp := old.euregardp ;
-new.eusup := old.eusup ;
-new.eusuptype := old.eusuptype ;
-new.eusupdoc := old.eusupdoc ;
-new.euecoul := old.euecoul ;
-new.eufluo := old.eufluo ;
-new.eubrsch := old.eubrsch ;
-new.eurefl := old.eurefl ;
-new.euepsep := old.euepsep ;
-new.eudivers := old.eudivers ;
-new.euanomal := old.euanomal ;
-new.euobserv := old.euobserv ;
-new.eusiphon := old.eusiphon ;
-new.epdiagpc := old.epdiagpc ;
-new.epracpc := old.epracpc ;
-new.epregarcol := old.epregarcol ;
-new.epregarext := old.epregarext ;
-new.epracdp := old.epracdp ;
-new.eppar := old.eppar ;
-new.epparpre := old.epparpre ;
-new.epfum := old.epfum ;
-new.epecoul := old.epecoul ;
-new.epecoulobs := old.epecoulobs ;
-new.eprecup := old.eprecup ;
-new.eprecupcpt := old.eprecupcpt ;
-new.epautre := old.epautre ;
-new.epobserv := old.epobserv ;
-new.euepanomal := old.euepanomal ;
-new.euepanomalpre := old.euepanomalpre ;
-new.euepdivers := old.euepdivers ;
-new.date_sai := old.date_sai ;
-new.date_maj := old.date_maj ;
-new.op_sai := old.op_sai ;
-new.scr_geom := old.scr_geom ;
-new.nidccp := old.nidccp ;
-new.proprioadcp := old.proprioadcp ;
-
-ELSE
-
--- ne peut pas modifier le n° de dossier sauf si mauvaise référence de suivi
--- si référence différente alors
-IF (new.nidcc <> old.nidcc) THEN
-
--- si la référence saisie n'est toujours formatée ou n'est pas en base (contrôle originel)
-IF (new.nidcc not like '60%' AND new.nidcc not like '%cc%') OR (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
-
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Référence du dossier incorrecte ou dossier originel n''existe pas. <br>
-Votre contrôle ne sera pas soumis à validation.<br>
-Merci d''inscrire la référence exacte du dossier originel qui doit être sous cette forme <i>(60159cc569)</i>.',
-now()
-);
-new.nidcc := old.nidcc;
-
-ELSE
--- si la référence est normalisée et que le contrôle originel existe je prends la nouvelle référence sinon erreur
-IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (new.nidcc in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
-	IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (old.nidcc like '60%' AND old.nidcc like '%cc%') THEN
-	DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-	INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-	(
-	nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-	old.id_adresse,
-	old.nidcc,
-	'Vous ne pouvez pas modifier un n° de dossier avec une référence existante.<br>
-	Faites une demande au service assainissement de l''ARC en cas d''erreur.<br> Les autres informations modifiées ont été prises en compte.',
-	now()
-	);
-	new.nidcc := old.nidcc;
-	
-	ELSE
-	
-	new.nidcc := new.nidcc;
-	
-	END IF;
-
-ELSE
-
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier un n° de dossier.<br> Les autres informations modifiées ont été prises en compte.',
-now()
-);
-new.nidcc := old.nidcc;
-
-END IF;
-END IF;
-
-ELSE
-
--- ne peut pas modifier un suivi de dossier ou nouveau dossier
-IF new.tnidcc <> old.tnidcc THEN
---v_adresse := old.id_adresse;
-DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
-INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
-(
-nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
-old.id_adresse,
-old.nidcc,
-'Vous ne pouvez pas modifier le type de contrôle.<br> Les autres informations modifiées ont été prises en compte.',
-now()
-);
-new.tnidcc := old.tnidcc;
-ELSE
-
--- si le prestataire qui modifie est celui qui a saisi modifications possibles
-IF old.certtype = new.certtype THEN
-
--- si le contrôle n'est pas validé alors on peut modifier les valeurs si non pas de modification possible
-IF ((new.ccvalid = '20' or new.ccvalid = '30') and (old.ccvalid = '20' or old.ccvalid='30')) or (new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid='30')) THEN
-
-new.ccvalid := CASE 
-	  WHEN new.ccvalid = '20' and old.ccvalid = '20' THEN '20'
-	  WHEN new.ccvalid = '30' and old.ccvalid = '30' THEN '30'
-	  WHEN new.ccvalid = '30' and old.ccvalid = '20' THEN '30'
-	  WHEN new.ccvalid = '20' and old.ccvalid = '30' THEN '20'
-	  WHEN new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid = '30') THEN '10'
-	  WHEN new.ccvalid = '20' and old.ccvalid = '10' THEN '20'
-	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
-	  END;
-new.validobs := CASE WHEN new.ccvalid = '30' THEN new.validobs ELSE null END;
-new.rrechype := CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END;
-new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
-new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
-new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
-new.date_maj := now();
-
-RETURN NEW;
-
-END IF;
-END IF;
-END IF;
-END IF;
-END IF;
-END IF;
-END IF;
-END IF;
-
-RETURN NEW;
-
-END;
-$BODY$;
-
-ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
-    OWNER TO sig_create;
-
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO sig_create;
-
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO create_sig;
-
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO PUBLIC;
-
-COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
-    IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
-
-															 
-															 
 -- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_delete ##################################################################################
-
--- FUNCTION: m_reseau_humide.ft_m_an_euep_cc_delete()
 
 -- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete();
 
-CREATE FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF 
-AS $BODY$
+CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
 
 BEGIN
 
@@ -2638,29 +1942,24 @@ END IF;
 RETURN NEW;
 
 END;
-$BODY$;
+$function$
+;
 
-ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete()
-    OWNER TO sig_create;
+COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete() IS 'Fonction trigger pour supprimer un contrôle';
 
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete() TO sig_create;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete() TO create_sig;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete() TO PUBLIC;
+create trigger t_t2_an_euep_cc_delete after
+update
+    on
+    m_reseau_humide.an_euep_cc for each row execute procedure m_reseau_humide.ft_m_an_euep_cc_delete();
 
-COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_delete()
-    IS 'Fonction trigger pour supprimer un contrôle';
-
-															 
 -- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert ##################################################################################
-
-
--- Function: m_reseau_humide.ft_m_an_euep_cc_insert()
 
 -- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert();
 
 CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert()
-  RETURNS trigger AS
-$BODY$
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
 
 
 BEGIN
@@ -2698,30 +1997,815 @@ UPDATE m_reseau_humide.an_euep_cc SET euepdivers = null WHERE euepdivers = '';
 UPDATE m_reseau_humide.an_euep_cc SET nidccp = null WHERE nidccp = '';
 UPDATE m_reseau_humide.an_euep_cc SET proprioadcp = null WHERE proprioadcp = '';
 
-
 RETURN NEW;
 
 END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert()
-  OWNER TO sig_create;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert() TO public;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert() TO sig_create;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert() TO create_sig;
-															 
+$function$
+;
+
 COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert() IS 'Fonction trigger nettoyer les valeurs '' en null';
 
--- Trigger: t2_an_euep_cc_insert on m_reseau_humide.an_euep_cc
+create trigger t_t3_an_euep_cc_insert after
+insert
+    on
+    m_reseau_humide.an_euep_cc for each row execute procedure m_reseau_humide.ft_m_an_euep_cc_insert();
 
--- DROP TRIGGER t2_an_euep_cc_insert ON m_reseau_humide.an_euep_cc;
+-- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert_update ##################################################################################
+-- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update();
 
-CREATE TRIGGER t_t2_an_euep_cc_insert
-  AFTER INSERT
-  ON m_reseau_humide.an_euep_cc
+CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+DECLARE v_ccinit boolean;
+DECLARE v_nidcc character varying;
+DECLARE v_ccvalid boolean;
+--DECLARE v_adresse integer;
+DECLARE t1_nidcc integer;
+DECLARE t2_nidcc integer;
+
+BEGIN
+
+-- gestion automatique si ils'agit du contrôle initial à l'adresse
+v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_adresse=new.id_adresse)>= 1  THEN false ELSE true END;
+
+-- gestion des n° de dossier automatique et en cas de suivi
+v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN 
+	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc WHERE nidcc like '60%' AND nidcc like '%cc%' ) as nnidcc)
+		ELSE 
+		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
+	    END;
+
+	   
+-- vérification sur la saisie des n° de dossier : compte le nombre de dossier validé et conforme (si = 0 peut insérer si non ne fait rien)
+t1_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid='10' and rcc='10');
+-- vérification sur la saisie des n° de dossier : compte le nombre de dossier non validé (si >= 1 ne peut pas insérer un suivi de dossier sur un même dossier non validé)
+t2_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid <> '10');
+
+
+-- INSERT
+IF (TG_OP = 'INSERT') THEN
+
+-- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
+-- contrôle sur le n° de dossier en suivi : ne peut pas saisir un suivi si le n° de dossier saisi n'existe pas à l'adresse CONFORME et VALIDE
+-- ici pas possibilité de remontée de message dans le fiche GEO. L'enregistrement ne se fait pas.
+
+IF NEW.tnidcc = '20' AND new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc) THEN
+
+RAISE EXCEPTION 'Référence du dossier incorrecte. Veuillez inscrire la référence du dossier originel qui doit être sous cette forme "60159cc569".<br><br>';
+
+/*
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+new.id_adresse,
+new.nidcc,
+'Référence du dossier incorrecte. Votre contrôle ne sera pas soumis à validation.<br>
+Merci d''inscrire la référence du dossier originel qui doit être sous cette forme <i>(60159cc569)</i>.',
+now()
+);
+*/
+
+END IF;
+
+
+
+-- ###############################################################################
+-- NOUVEAU MESSAGE INDUIT PAR LA MISE A JOUR DES CONFORMITES GRAVE AU 01/01/2024
+if new.euanomal = '10' and (new.euobserv is null or new.euobserv ='') THEN
+RAISE EXCEPTION 'Vous devez saisir les anomalies constatées si vous indiquez des anomalies constatées dans la partie collecte des eaux usées<br><br>';
+end if;
+
+if new.epracdp = '10' and new.epracdpdom IN ('00', 'ZZ') THEN
+RAISE EXCEPTION 'Vous devez indiquer "Raccordement au réseau public" ou "Raccordement caniveau (gargouille)" si vous indiquez la présence d''un raccordement au réseau public d''évacuation des EP <br><br>';
+end if;
+
+if new.date_notif is null and new.date_rel is not null then 
+RAISE EXCEPTION 'Vous devez saisir une date de notification avant une date de relance<br><br>';
+end if;
+
+if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestamp = new.date_notif::timestamp then 
+RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
+end if;
+
+if new.eppar = '10' and (new.epparpre is null or new.epparpre = '') then 
+RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
+end if;
+
+if new.eurefl IN ('00','ZZ') and new.eubrsch = '10' then 
+RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" ou "Non concerné" pour la protection d''un système anti reflux si vous avez indiqué "OUI" pour la présence d''installations domestiques sous le niveau de la chaussée (dans la partie des EU)<br><br>';
+end if;
+
+if new.eprecupcpt IN ('00') and new.eprecup = '10' then 
+RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" en cas d''utilisation des eaux pluviales récupérées à usage domestique, présence impérative d''un compteur, si vous avez indiqué "OUI" pour la présence d''un système de récupération des eaux pluviales (dans la partie des EP)<br><br>';
+end if;
+
+if new.euepconstd is true and (new.euepdivers is null or new.euepdivers = '') then 
+RAISE EXCEPTION 'Vous devez préciser les constations diverses observées sur le réseau d''assainissement<br><br>';
+end if;
+
+-- ###############################################################################
+
+-- si le n° de dossier est nouveau
+IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
+
+--new.idcc :=  (select nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)) ;
+new.nidcc := v_nidcc;
+new.ccinit := v_ccinit;
+
+new.rrechype := CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END;
+new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
+new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
+new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
+new.epracdpdom := case when new.epracdp = '20' then 'ZZ' else new.epracdpdom end;
+new.rcc := case 
+			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
+			when new.euepanomal is null or new.euepanomal = '' then '10'
+			else '21' end;		   
+new.dbinsert := now();
+new.scr_geom := '61';
+
+END IF;
+
+-- si le n° de dossier est un suivi
+
+IF NEW.tnidcc = '20' AND new.nidcc in (select nidcc from m_reseau_humide.an_euep_cc) THEN
+
+new.rrechype := CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END;
+new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
+new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
+new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
+new.epracdpdom := case when new.epracdp = '20' then 'ZZ' else new.epracdpdom end;
+new.rcc := case 
+			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
+			when new.euepanomal is null or new.euepanomal = '' then '10'
+			else '21' end;			   
+new.dbinsert := now();
+new.scr_geom := '61';
+
+END IF;
+end if;
+
+--RETURN NEW;
+
+-- UPDATE
+
+IF (TG_OP = 'UPDATE') then
+
+--raise exception 'operateur --> %', new.op_maj;
+
+-- si contrôle toujours pas validé je peux modifier donc contrôle sur rcc
+
+if new.ccvalid = old.ccvalid and new.ccvalid <> '10' then
+
+new.rcc := case 
+			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
+			when new.euepanomal is null or new.euepanomal = '' then '10'
+			else '21' end;	
+/*
+-- si je modifie les anomalies et que je n'ai plus celles en grave ma conclusion ne peut pas être grave
+if (new.euepanomal not like '%2%' and new.euepanomal not like '%3%' and new.euepanomal not like '%11%' and new.euepanomal not like '%18%' or new.euepanomal like '%17%') and new.rcc = '22' and new.ccvalid <> '10' then 
+ raise exception 'Vous n''avez plus d''anomalies générant une conformité non grave, vous devez modifier le niveau de conformité de l''installation.<br><br>';
+end if;
+*/
+-- ###############################################################################
+-- NOUVEAU MESSAGE INDUIT PAR LA MISE A JOUR DES CONFORMITES GRAVE AU 01/01/2024
+if new.euanomal = '10' and (new.euobserv is null or new.euobserv ='') THEN
+RAISE EXCEPTION 'Vous devez saisir les anomalies constatées si vous indiquez des anomalies constatées dans la partie collecte des eaux usées<br><br>';
+end if;
+
+if new.epracdp = '10' and new.epracdpdom IN ('00', 'ZZ') THEN
+RAISE EXCEPTION 'Vous devez indiquer "Raccordement au réseau public" ou "Raccordement caniveau (gargouille)" si vous indiquez la présence d''un raccordement au réseau public d''évacuation des EP <br><br>';
+end if;
+
+if new.date_notif is null and new.date_rel is not null then 
+RAISE EXCEPTION 'Vous devez saisir une date de notification avant une date de relance<br><br>';
+end if;
+
+if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestamp = new.date_notif::timestamp then 
+RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
+end if;
+
+if new.eppar = '10' and (new.epparpre is null or new.epparpre = '') then 
+RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
+end if;
+
+if new.eurefl IN ('00','ZZ') and new.eubrsch = '10' then 
+RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" ou "Non concerné" pour la protection d''un système anti reflux si vous avez indiqué "OUI" pour la présence d''installations domestiques sous le niveau de la chaussée (dans la partie des EU)<br><br>';
+end if;
+
+if new.eprecupcpt IN ('00') and new.eprecup = '10' then 
+RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" en cas d''utilisation des eaux pluviales récupérées à usage domestique, présence impérative d''un compteur, si vous avez indiqué "OUI" pour la présence d''un système de récupération des eaux pluviales (dans la partie des EP)<br><br>';
+end if;
+
+if new.euepconstd is true and (new.euepdivers is null or new.euepdivers = '') then 
+RAISE EXCEPTION 'Vous devez préciser les constations diverses observées sur le réseau d''assainissement<br><br>';
+end if;
+
+-- ###############################################################################
+
+end if;
+
+-- gestion des contrôles non supprimés (les supprimés sont gérés dans un trigger after)
+-- (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
+-- gestion des contrôles (uniquement possible si valeur indiqué dans l'attribut cc_valid attaché à l'utilisateur dans GEO, accès à la valeur 50 de la liste de valeurs lt_euep_cc_valid)
+
+-- si le contrôle est à supprimer, passe en dehors des contrôles ci-dessous et passera dans le trigger after
+-- si le contrôle est à dévalider passe dans la première boucle
+IF (new.ccvalid = '50') THEN
+new.ccvalid := '30';
+new.ccinit := old.ccinit ;
+new.adapt := old.adapt ;
+new.adeta := old.adeta ;
+new.tnidcc := old.tnidcc ;
+new.nidcc := old.nidcc ;
+new.rcc := old.rcc ;
+new.ccdate := old.ccdate ;
+new.ccbien := old.ccbien ;
+new.certtype := old.certtype ;
+new.certnom := old.certnom ;
+new.certpre := old.certpre ;
+new.propriopat := old.propriopat ;
+new.propriopatp := old.propriopatp ;
+new.proprionom := old.proprionom ;
+new.propriopre := old.propriopre ;
+new.proprioad := old.proprioad ;
+new.dotype := old.dotype ;
+new.doaut := old.doaut ;
+new.donom := old.donom ;
+new.dopre := old.dopre ;
+new.doad := old.doad ;
+new.achetpat := old.achetpat ;
+new.achetpatp := old.achetpatp ;
+new.achetnom := old.achetnom ;
+new.achetpre := old.achetpre ;
+new.achetad := old.achetad ;
+new.batitype := old.batitype ;
+new.batiaut := old.batiaut ;
+new.eppublic := old.eppublic ;
+new.epaut := old.epaut ;
+new.rredptype := old.rredptype ;
+new.rrebrtype := old.rrebrtype ;
+new.rrechype := old.rrechype ;
+new.eupc := old.eupc ;
+new.euevent := old.euevent ;
+new.euregar := old.euregar ;
+new.euregardp := old.euregardp ;
+new.eusup := old.eusup ;
+new.eusuptype := old.eusuptype ;
+new.eusupdoc := old.eusupdoc ;
+new.euecoul := old.euecoul ;
+new.eufluo := old.eufluo ;
+new.eubrsch := old.eubrsch ;
+new.eurefl := old.eurefl ;
+new.euepsep := old.euepsep ;
+new.eudivers := old.eudivers ;
+new.euanomal := old.euanomal ;
+new.euobserv := old.euobserv ;
+new.eusiphon := old.eusiphon ;
+new.epdiagpc := old.epdiagpc ;
+new.epracpc := old.epracpc ;
+new.epregarcol := old.epregarcol ;
+new.epregarext := old.epregarext ;
+new.epracdp := old.epracdp ;
+new.eppar := old.eppar ;
+new.epparpre := old.epparpre ;
+new.epfum := old.epfum ;
+new.epecoul := old.epecoul ;
+new.epecoulobs := old.epecoulobs ;
+new.eprecup := old.eprecup ;
+new.eprecupcpt := old.eprecupcpt ;
+new.epautre := old.epautre ;
+new.epobserv := old.epobserv ;
+new.euepanomal := old.euepanomal ;
+new.euepanomalpre := old.euepanomalpre ;
+new.euepdivers := old.euepdivers ;
+new.dbinsert := old.dbinsert ;
+new.dbupdate := old.dbupdate ;
+new.op_sai := old.op_sai ;
+new.scr_geom := old.scr_geom ;
+new.nidccp := old.nidccp ;
+new.proprioadcp := old.proprioadcp ;
+new.date_notif := old.date_notif ;
+new.date_rel := old.date_rel ;
+new.epracdpdom := old.epracdpdom ;
+new.euepconstd := old.euepconstd ;
+
+-- ###############################################################################
+-- NOUVEAU MESSAGE INDUIT PAR LA MISE A JOUR DES CONFORMITES GRAVE AU 01/01/2024
+if new.euanomal = '10' and (new.euobserv is null or new.euobserv ='') THEN
+RAISE EXCEPTION 'Vous devez saisir les anomalies constatées si vous indiquez des anomalies constatées dans la partie collecte des eaux usées<br><br>';
+end if;
+
+if new.epracdp = '10' and new.epracdpdom IN ('00', 'ZZ') THEN
+RAISE EXCEPTION 'Vous devez indiquer "Raccordement au réseau public" ou "Raccordement caniveau (gargouille)" si vous indiquez la présence d''un raccordement au réseau public d''évacuation des EP <br><br>';
+end if;
+
+if new.date_notif is null and new.date_rel is not null then 
+RAISE EXCEPTION 'Vous devez saisir une date de notification avant une date de relance<br><br>';
+end if;
+
+if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestamp = new.date_notif::timestamp then 
+RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
+end if;
+
+if new.eppar = '10' and (new.epparpre is null or new.epparpre = '') then 
+RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
+end if;
+
+if new.eurefl IN ('00','ZZ') and new.eubrsch = '10' then 
+RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" ou "Non concerné" pour la protection d''un système anti reflux si vous avez indiqué "OUI" pour la présence d''installations domestiques sous le niveau de la chaussée (dans la partie des EU)<br><br>';
+end if;
+
+if new.eprecupcpt IN ('00') and new.eprecup = '10' then 
+RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" en cas d''utilisation des eaux pluviales récupérées à usage domestique, présence impérative d''un compteur, si vous avez indiqué "OUI" pour la présence d''un système de récupération des eaux pluviales (dans la partie des EP)<br><br>';
+end if;
+
+if new.euepconstd is true and (new.euepdivers is null or new.euepdivers = '') then 
+RAISE EXCEPTION 'Vous devez préciser les constations diverses observées sur le réseau d''assainissement<br><br>';
+end if;
+
+-- ###############################################################################
+
+ELSE
+
+IF (old.ccvalid = '10' AND new.ccvalid = '10') OR (old.ccvalid = '10' AND (new.ccvalid = '20' or new.ccvalid = '30')) THEN
+
+--v_adresse := old.id_adresse;
+/*
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un dossier validé.<br> Modifications non prises en compte.',
+now()
+);
+*/
+
+ -- si contrôle validé mais que je suis de l'ARC je peux modifier certains attributs si contrôle non conforme grave
+ if new.maj_nc is true and new.ccvalid = '10' then 
+
+    -- contrôle sur les dates
+    if new.date_notif is null and new.date_rel is not null then 
+		RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance sans avoir saisie uen date de notification<br><br>';
+	end if;
+    if new.date_rel::timestamp < new.date_notif::timestamp+'6 month' or new.date_rel::timestamp = new.date_notif::timestamp then 
+		RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieur à 6 mois par rapport à la date de notification<br><br>';
+	end if;
+ 
+    -- seuls les attributs modifiables peuvent l'être par les services de l'ARC si contrôle validé
+    if new.ccvalid <> old.ccvalid or new.validobs <> old.validobs or new.adapt <> old.adapt
+       or new.adeta <> old.adeta or new.tnidcc <> old.tnidcc or new.nidcc <> old.nidcc or new.ccdate <> old.ccdate 
+       or new.ccbien <> old.ccbien or new.certnom <> old.certnom or new.certpre <> old.certpre or new.propriopat <> old.propriopat 
+       or new.propriopatp <> old.propriopatp or new.propriopatp <> old.propriopatp or new.propriopre <> old.propriopre
+	   or new.proprioad <> old.proprioad or new.dotype <> old.dotype or new.doaut <> old.doaut or new.donom <> old.donom
+	   or new.dopre <> old.dopre or new.doad <> old.doad or new.batitype <> old.batitype or new.batiaut <> old.batiaut
+	   or new.eppublic <> old.eppublic or new.epaut <> old.epaut or new.rredptype <> old.rredptype or new.rrebrtype <> old.rrebrtype
+	   or new.rrechype <> old.rrechype or new.eupc <> old.eupc or new.euevent <> old.euevent or new.euregar <> old.euregar
+	   or new.euregardp <> old.euregardp or new.eusup <> old.eusup or new.eusuptype <> old.eusuptype or new.eusupdoc <> old.eusupdoc
+	   or new.euecoul <> old.euecoul or new.eufluo <> old.eufluo or new.eubrsch <> old.eubrsch or new.eurefl <> old.eurefl
+	   or new.euepsep <> old.euepsep or new.eudivers <> old.eudivers or new.euanomal <> old.euanomal or new.euobserv <> old.euobserv
+	   or new.eusiphon <> old.eusiphon or new.epdiagpc <> old.epdiagpc or new.epracpc <> old.epracpc or new.epregarcol <> old.epregarcol
+       or new.epregarext <> old.epregarext or new.epracdp <> old.epracdp or new.eppar <> old.eppar or new.epparpre <> old.epparpre
+	   or new.epfum <> old.epfum or new.epecoul <> old.epecoul or new.epecoulobs <> old.epecoulobs or new.eprecup <> old.eprecup
+	   or new.eprecupcpt <> old.eprecupcpt or new.epautre <> old.epautre or new.epobserv <> old.epobserv or new.euepanomal <> old.euepanomal
+	   or new.euepanomalpre <> old.euepanomalpre or new.euepdivers <> old.euepdivers or new.nidccp <> old.nidccp or new.proprioadcp <> old.proprioadcp
+	   or new.epracdpdom <> old.epracdpdom or new.euepconstd <> old.euepconstd
+	   then
+	RAISE EXCEPTION 'Vous pouvez modifier uniquement les attributs liés à l''acheteur et les dates de notification et de relance pour un dossier validé.<br><br>' ;
+    else 
+     new.maj_nc := false;
+    end if;
+    if new.date_notif is not null and (new.achetnom is null or new.achetnom = '' or new.achetad is null or new.achetad ='') THEN
+      RAISE EXCEPTION 'Vous pouvez saisir ou modifier une date de notification sans avoir renseigné au minimum un nom et une adresse pour l''acheteur<br><br>' ;
+    end if;
+     if new.date_rel is not null and (new.achetnom is null or new.achetnom = '' or new.achetad is null or new.achetad ='') THEN
+      RAISE EXCEPTION 'Vous pouvez saisir ou modifier une date de relance sans avoir renseigné au minimum un nom et une adresse pour l''acheteur<br><br>' ;
+    end if;
+   else 
+    
+     if new.maj_nc is false and new.ccvalid = '10' then 
+ 		RAISE EXCEPTION 'Vous ne pouvez pas modifier un contrôle validé ok<br><br>' ;
+	 end if;
+   
+    new.maj_nc := false;
+ end if;
+
+
+ 
+/*
+new.ccvalid := old.ccvalid ;
+new.validobs := old.validobs ;
+new.ccinit := old.ccinit ;
+new.adapt := old.adapt ;
+new.adeta := old.adeta ;
+new.tnidcc := old.tnidcc ;
+new.nidcc := old.nidcc ;
+new.rcc := old.rcc ;
+new.ccdate := old.ccdate ;
+new.ccbien := old.ccbien ;
+new.certtype := old.certtype ;
+new.certnom := old.certnom ;
+new.certpre := old.certpre ;
+new.propriopat := old.propriopat ;
+new.propriopatp := old.propriopatp ;
+new.proprionom := old.proprionom ;
+new.propriopre := old.propriopre ;
+new.proprioad := old.proprioad ;
+new.dotype := old.dotype ;
+new.doaut := old.doaut ;
+new.donom := old.donom ;
+new.dopre := old.dopre ;
+new.doad := old.doad ;
+new.achetpat := old.achetpat ;
+new.achetpatp := old.achetpatp ;
+new.achetnom := old.achetnom ;
+new.achetpre := old.achetpre ;
+new.achetad := old.achetad ;
+new.batitype := old.batitype ;
+new.batiaut := old.batiaut ;
+new.eppublic := old.eppublic ;
+new.epaut := old.epaut ;
+new.rredptype := old.rredptype ;
+new.rrebrtype := old.rrebrtype ;
+new.rrechype := old.rrechype ;
+new.eupc := old.eupc ;
+new.euevent := old.euevent ;
+new.euregar := old.euregar ;
+new.euregardp := old.euregardp ;
+new.eusup := old.eusup ;
+new.eusuptype := old.eusuptype ;
+new.eusupdoc := old.eusupdoc ;
+new.euecoul := old.euecoul ;
+new.eufluo := old.eufluo ;
+new.eubrsch := old.eubrsch ;
+new.eurefl := old.eurefl ;
+new.euepsep := old.euepsep ;
+new.eudivers := old.eudivers ;
+new.euanomal := old.euanomal ;
+new.euobserv := old.euobserv ;
+new.eusiphon := old.eusiphon ;
+new.epdiagpc := old.epdiagpc ;
+new.epracpc := old.epracpc ;
+new.epregarcol := old.epregarcol ;
+new.epregarext := old.epregarext ;
+new.epracdp := old.epracdp ;
+new.eppar := old.eppar ;
+new.epparpre := old.epparpre ;
+new.epfum := old.epfum ;
+new.epecoul := old.epecoul ;
+new.epecoulobs := old.epecoulobs ;
+new.eprecup := old.eprecup ;
+new.eprecupcpt := old.eprecupcpt ;
+new.epautre := old.epautre ;
+new.epobserv := old.epobserv ;
+new.euepanomal := old.euepanomal ;
+new.euepanomalpre := old.euepanomalpre ;
+new.euepdivers := old.euepdivers ;
+new.dbinsert := old.dbinsert ;
+new.dbupdate := old.dbupdate ;
+new.op_sai := old.op_sai ;
+new.scr_geom := old.scr_geom ;
+new.nidccp := old.nidccp ;
+new.proprioadcp := old.proprioadcp ;
+new.date_notif := old.date_notif ;
+new.date_rel := old.date_rel ;
+new.epracdpdom := old.epracdpdom ;
+new.euepconstd := old.euepconstd ;
+*/
+
+ELSE
+
+-- pas le bon prestataire
+IF old.certtype <> new.certtype  THEN
+--v_adresse := old.id_adresse;
+
+RAISE EXCEPTION 'Vous ne pouvez pas modifier un dossier que vous n''avez pas créé.<br><br>';
+/*
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un dossier que vous n''avez pas créé.<br>Modifications non prises en compte.',
+now()
+);
+
+new.ccvalid := old.ccvalid ;
+new.validobs := old.validobs ;
+new.ccinit := old.ccinit ;
+new.adapt := old.adapt ;
+new.adeta := old.adeta ;
+new.tnidcc := old.tnidcc ;
+new.nidcc := old.nidcc ;
+new.rcc := old.rcc ;
+new.ccdate := old.ccdate ;
+new.ccbien := old.ccbien ;
+new.certtype := old.certtype ;
+new.certnom := old.certnom ;
+new.certpre := old.certpre ;
+new.propriopat := old.propriopat ;
+new.propriopatp := old.propriopatp ;
+new.proprionom := old.proprionom ;
+new.propriopre := old.propriopre ;
+new.proprioad := old.proprioad ;
+new.dotype := old.dotype ;
+new.doaut := old.doaut ;
+new.donom := old.donom ;
+new.dopre := old.dopre ;
+new.doad := old.doad ;
+new.achetpat := old.achetpat ;
+new.achetpatp := old.achetpatp ;
+new.achetnom := old.achetnom ;
+new.achetpre := old.achetpre ;
+new.achetad := old.achetad ;
+new.batitype := old.batitype ;
+new.batiaut := old.batiaut ;
+new.eppublic := old.eppublic ;
+new.epaut := old.epaut ;
+new.rredptype := old.rredptype ;
+new.rrebrtype := old.rrebrtype ;
+new.rrechype := old.rrechype ;
+new.eupc := old.eupc ;
+new.euevent := old.euevent ;
+new.euregar := old.euregar ;
+new.euregardp := old.euregardp ;
+new.eusup := old.eusup ;
+new.eusuptype := old.eusuptype ;
+new.eusupdoc := old.eusupdoc ;
+new.euecoul := old.euecoul ;
+new.eufluo := old.eufluo ;
+new.eubrsch := old.eubrsch ;
+new.eurefl := old.eurefl ;
+new.euepsep := old.euepsep ;
+new.eudivers := old.eudivers ;
+new.euanomal := old.euanomal ;
+new.euobserv := old.euobserv ;
+new.eusiphon := old.eusiphon ;
+new.epdiagpc := old.epdiagpc ;
+new.epracpc := old.epracpc ;
+new.epregarcol := old.epregarcol ;
+new.epregarext := old.epregarext ;
+new.epracdp := old.epracdp ;
+new.eppar := old.eppar ;
+new.epparpre := old.epparpre ;
+new.epfum := old.epfum ;
+new.epecoul := old.epecoul ;
+new.epecoulobs := old.epecoulobs ;
+new.eprecup := old.eprecup ;
+new.eprecupcpt := old.eprecupcpt ;
+new.epautre := old.epautre ;
+new.epobserv := old.epobserv ;
+new.euepanomal := old.euepanomal ;
+new.euepanomalpre := old.euepanomalpre ;
+new.euepdivers := old.euepdivers ;
+new.dbinsert := old.dbinsert ;
+new.dbupdate := old.dbupdate ;
+new.op_sai := old.op_sai ;
+new.scr_geom := old.scr_geom ;
+new.nidccp := old.nidccp ;
+new.proprioadcp := old.proprioadcp ;
+new.date_notif := old.date_notif ;
+new.date_rel := old.date_rel ;
+new.epracdpdom := old.epracdpdom ;
+new.euepconstd := old.euepconstd ;
+*/
+ELSE
+
+-- ne peut pas modifier le n° de dossier sauf si mauvaise référence de suivi
+-- si référence différente alors
+IF (new.nidcc <> old.nidcc) THEN
+
+-- si la référence saisie n'est toujours formatée ou n'est pas en base (contrôle originel)
+IF (new.nidcc not like '60%' AND new.nidcc not like '%cc%') OR (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
+
+RAISE EXCEPTION 'Référence du dossier incorrecte ou dossier originel n''existe pas. Merci d''inscrire la référence exacte du dossier originel qui doit être sous cette forme "60159cc569".<br><br>';
+
+/*
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Référence du dossier incorrecte ou dossier originel n''existe pas. <br>
+Votre contrôle ne sera pas soumis à validation.<br>
+Merci d''inscrire la référence exacte du dossier originel qui doit être sous cette forme <i>(60159cc569)</i>.',
+now()
+);
+new.nidcc := old.nidcc;
+*/
+else
+
+-- si la référence est normalisée et que le contrôle originel existe je prends la nouvelle référence sinon erreur
+IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (new.nidcc in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
+	IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (old.nidcc like '60%' AND old.nidcc like '%cc%') then
+	
+	RAISE EXCEPTION 'Vous ne pouvez pas modifier un n° de dossier avec une référence existante. Faites une demande au service assainissement de l''ARC en cas d''erreur.<br><br>';
+
+	
+	/*
+	DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+	INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+	(
+	nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+	old.id_adresse,
+	old.nidcc,
+	'Vous ne pouvez pas modifier un n° de dossier avec une référence existante.<br>
+	Faites une demande au service assainissement de l''ARC en cas d''erreur.<br> Les autres informations modifiées ont été prises en compte.',
+	now()
+	);
+	new.nidcc := old.nidcc;
+	*/
+	
+	ELSE
+
+	new.nidcc := new.nidcc;
+	
+	END IF;
+
+ELSE
+
+	RAISE EXCEPTION 'Vous ne pouvez pas modifier un n° de dossier.<br><br>';
+
+
+/*
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier un n° de dossier.<br> Les autres informations modifiées ont été prises en compte.',
+now()
+);
+new.nidcc := old.nidcc;
+*/
+
+END IF;
+END IF;
+
+ELSE
+
+-- ne peut pas modifier un suivi de dossier ou nouveau dossier
+IF new.tnidcc <> old.tnidcc THEN
+
+RAISE EXCEPTION 'Vous ne pouvez pas modifier le type de contrôle.<br><br>';
+
+/*
+--v_adresse := old.id_adresse;
+DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
+INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
+(
+nextval('x_apps.xapps_an_v_euep_cc_erreur_gid_seq'::regclass),
+old.id_adresse,
+old.nidcc,
+'Vous ne pouvez pas modifier le type de contrôle.<br> Les autres informations modifiées ont été prises en compte.',
+now()
+);
+new.tnidcc := old.tnidcc;
+*/
+ELSE
+
+-- si le prestataire qui modifie est celui qui a saisi modifications possibles
+IF old.certtype = new.certtype THEN
+
+-- si le contrôle n'est pas validé alors on peut modifier les valeurs si non pas de modification possible
+IF ((new.ccvalid = '20' or new.ccvalid = '30') and (old.ccvalid = '20' or old.ccvalid='30')) or (new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid='30')) THEN
+
+new.ccvalid := CASE 
+	  WHEN new.ccvalid = '20' and old.ccvalid = '20' THEN '20'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '30' THEN '30'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '20' THEN '30'
+	  WHEN new.ccvalid = '20' and old.ccvalid = '30' THEN '20'
+	  WHEN new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid = '30') THEN '10'
+	  WHEN new.ccvalid = '20' and old.ccvalid = '10' THEN '20'
+	  WHEN new.ccvalid = '30' and old.ccvalid = '10' THEN '30'
+	  END;
+new.validobs := CASE WHEN new.ccvalid = '30' THEN new.validobs ELSE null END;
+new.rrechype := CASE WHEN new.rrebrtype = '10' or new.rrebrtype = 'ZZ' THEN 'ZZ' ELSE new.rrechype END;
+new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
+new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
+new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
+new.rcc := case 
+			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
+			when new.euepanomal is null or new.euepanomal = '' then '10'
+			else '21' end;	
+new.dbupdate := now();
+
+RETURN NEW;
+
+END IF;
+END IF;
+END IF;
+END IF;
+END IF;
+END IF;
+END IF;
+
+END IF;
+
+
+RETURN NEW;
+
+
+END;
+$function$
+;
+
+COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
+
+create trigger t_t1_an_euep_cc_update_insert before
+insert
+    or
+update
+    on;
+    m_reseau_humide.an_euep_cc for each row execute procedure m_reseau_humide.ft_m_an_euep_cc_insert_update();
+												 
+-- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_media ##################################################################################
+
+
+-- FUNCTION: m_reseau_humide.ft_m_an_v_euep_cc_media()
+
+-- DROP FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media();
+
+CREATE FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF 
+AS $BODY$
+
+DECLARE t_valid integer;
+
+BEGIN
+
+-- recherche si le contrôle est validé, dans ce cas 1 et pas possible d'insérer, de mettre à jour ou de supprimer un média
+--t_valid := (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10');
+
+-- si le controle n'est pas validé
+--IF t_valid = 0 THEN
+
+-- INSERT
+IF (TG_OP = 'INSERT') THEN
+
+INSERT INTO m_reseau_humide.an_euep_cc_media (gid,id,media,miniature,n_fichier,t_fichier,op_sai,date_sai,l_type,l_prec)
+SELECT nextval('m_reseau_humide.an_euep_cc_media_gid_seq'::regclass),new.id,new.media,new.miniature,new.n_fichier,new.t_fichier,new.op_sai,new.date_sai,new.l_type,new.l_prec
+WHERE (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10') = 0;
+
+-- UPDATE
+ELSIF (TG_OP = 'UPDATE') THEN
+UPDATE m_reseau_humide.an_euep_cc_media 
+SET
+op_sai = new.op_sai,
+date_sai = new.date_sai,
+l_type = new.l_type,
+l_prec = new.l_prec
+WHERE gid = new.gid AND (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10') = 0;
+
+-- DELETE
+ELSIF (TG_OP = 'DELETE') THEN
+
+DELETE FROM m_reseau_humide.an_euep_cc_media WHERE  gid = old.gid AND (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=old.id and ccvalid ='10') = 0;
+
+END IF;
+
+--END IF;
+
+RETURN NEW;
+
+-- si validé on fait rien
+
+END;
+$BODY$;
+
+ALTER FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
+    OWNER TO sig_create;
+
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO sig_create;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO create_sig;
+GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO PUBLIC;
+
+COMMENT ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
+    IS 'Fonction trigger pour la gestion de l''insertion des médias des dossiers de conformité';
+
+-- Trigger: t_t1_an_v_euep_cc_media on m_reseau_humide.ft_m_an_v_euep_cc_media
+
+-- DROP TRIGGER t_t1_an_v_euep_cc_media ON m_reseau_humide.ft_m_an_v_euep_cc_media;
+
+CREATE TRIGGER t_t1_an_v_euep_cc_media
+  INSTEAD OF INSERT OR UPDATE
+  ON m_reseau_humide.an_v_euep_cc_media
   FOR EACH ROW
-  EXECUTE PROCEDURE m_reseau_humide.ft_m_an_euep_cc_insert();
+  EXECUTE PROCEDURE m_reseau_humide.ft_m_an_v_euep_cc_media();
+
+
+
 
 
 -- ##################################### FONCTION TRIGGER - ft_m_log_an_euep_cc ##################################################################################
@@ -2838,82 +2922,4 @@ CREATE TRIGGER t_t2_log_an_euep_cc_insert_update
   FOR EACH ROW
   EXECUTE PROCEDURE m_reseau_humide.ft_m_log_an_euep_cc();															 
 															 
-															 
--- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_media ##################################################################################
-
-
--- FUNCTION: m_reseau_humide.ft_m_an_v_euep_cc_media()
-
--- DROP FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media();
-
-CREATE FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
-    RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF 
-AS $BODY$
-
-DECLARE t_valid integer;
-
-BEGIN
-
--- recherche si le contrôle est validé, dans ce cas 1 et pas possible d'insérer, de mettre à jour ou de supprimer un média
---t_valid := (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10');
-
--- si le controle n'est pas validé
---IF t_valid = 0 THEN
-
--- INSERT
-IF (TG_OP = 'INSERT') THEN
-
-INSERT INTO m_reseau_humide.an_euep_cc_media (gid,id,media,miniature,n_fichier,t_fichier,op_sai,date_sai,l_type,l_prec)
-SELECT nextval('m_reseau_humide.an_euep_cc_media_gid_seq'::regclass),new.id,new.media,new.miniature,new.n_fichier,new.t_fichier,new.op_sai,new.date_sai,new.l_type,new.l_prec
-WHERE (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10') = 0;
-
--- UPDATE
-ELSIF (TG_OP = 'UPDATE') THEN
-UPDATE m_reseau_humide.an_euep_cc_media 
-SET
-op_sai = new.op_sai,
-date_sai = new.date_sai,
-l_type = new.l_type,
-l_prec = new.l_prec
-WHERE gid = new.gid AND (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=new.id and ccvalid ='10') = 0;
-
--- DELETE
-ELSIF (TG_OP = 'DELETE') THEN
-
-DELETE FROM m_reseau_humide.an_euep_cc_media WHERE  gid = old.gid AND (SELECT count(*) from m_reseau_humide.an_euep_cc where idcc=old.id and ccvalid ='10') = 0;
-
-END IF;
-
---END IF;
-
-RETURN NEW;
-
--- si validé on fait rien
-
-END;
-$BODY$;
-
-ALTER FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
-    OWNER TO sig_create;
-
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO sig_create;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO create_sig;
-GRANT EXECUTE ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media() TO PUBLIC;
-
-COMMENT ON FUNCTION m_reseau_humide.ft_m_an_v_euep_cc_media()
-    IS 'Fonction trigger pour la gestion de l''insertion des médias des dossiers de conformité';
-
--- Trigger: t_t1_an_v_euep_cc_media on m_reseau_humide.ft_m_an_v_euep_cc_media
-
--- DROP TRIGGER t_t1_an_v_euep_cc_media ON m_reseau_humide.ft_m_an_v_euep_cc_media;
-
-CREATE TRIGGER t_t1_an_v_euep_cc_media
-  INSTEAD OF INSERT OR UPDATE
-  ON m_reseau_humide.an_v_euep_cc_media
-  FOR EACH ROW
-  EXECUTE PROCEDURE m_reseau_humide.ft_m_an_v_euep_cc_media();
-															 
-
+			
