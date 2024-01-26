@@ -121,10 +121,16 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |euepanomal|Liste des anomalies identifiées entrainant la non conformité|character varying(20)| |
 |euepanomalpre|Précisions sur les anomalies|character varying(5000)| |
 |euepdivers|Constatations diverses|character varying(1000)| |
-|date_sai|Date de saisie|timestamp without time zone| |
-|date_maj|Datede mise à jour|timestamp without time zone| |
+|dbinsert|Date de saisie|timestamp without time zone| |
+|dbupdate|Date de mise à jour|timestamp without time zone| |
 |op_sai|Opérateur de saisie|character varying(80)| |
 |scr_geom|Source du référentiel géographique de saisie|character varying(2)| |
+|date_notif|Date de notification|timestamp without time zone| |
+|date_rel|Date de relance|timestamp without time zone| |
+|epracdpdom|Précision du raccordement au réseau public d'évacuation des EP|character varying(2)| |
+|euepconstd|Constatations diverses observées sur le réseau d'assainissement|boolean| |
+|op_maj|Opérateur de mise à jour|character varying(80)| |
+|maj_nc||boolean| |
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ idcc avec une séquence d'incrémentation d'un numéro automatique ``an_euep_cc_idcc_seq``
