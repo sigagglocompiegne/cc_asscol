@@ -642,6 +642,41 @@ INSERT INTO m_reseau_humide.lt_euep_cc_anomal(
     (17,'Eaux pluviales raccordés sur le réseau SEPARATIF des eaux usées',16,1,'oui')	
     ;
 
+-- ################################################################# Domaine valeur - lt_euep_racdom #############################################
+
+-- Table: m_reseau_humide.lt_euep_cc_valid
+
+DROP TABLE IF EXISTS m_reseau_humide.lt_euep_racdom;
+
+CREATE TABLE m_reseau_humide.lt_euep_racdom
+(
+  code character(2) NOT NULL,
+  valeur character varying(80) NOT NULL,
+  CONSTRAINT lt_euep_racdom_pkey PRIMARY KEY (code)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE m_reseau_humide.lt_euep_racdom
+  OWNER TO sig_create;
+GRANT ALL ON TABLE m_reseau_humide.lt_euep_racdom TO sig_create;
+GRANT SELECT ON TABLE m_reseau_humide.lt_euep_racdom TO read_sig;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE m_reseau_humide.lt_euep_racdom TO edit_sig;
+
+COMMENT ON TABLE m_reseau_humide.lt_euep_racdom
+  IS 'Liste des types de précisions du raccordement au réseau public d''évacuation des EP';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_racdom.code IS 'code de précision du raccordement au réseau public d''évacuation des EP';
+COMMENT ON COLUMN m_reseau_humide.lt_euep_racdom.valeur IS 'Libellé des précisions du raccordement au réseau public d''évacuation des EP';
+
+INSERT INTO m_reseau_humide.lt_euep_racdom(
+            code, valeur)
+    VALUES
+    ('00','Non renseigné'),
+    ('10','Raccordement au réseau public'),
+    ('20','Raccordement caniveau (gargouille)')
+    ('ZZ','Non concerné'),
+    ;
+
 -- ####################################################################################################################################################
 -- ###                                                                                                                                              ###
 -- ###                                                  TABLES METIERS CONTROLE DE CONFORMITE                                                       ###
