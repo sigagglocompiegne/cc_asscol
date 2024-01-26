@@ -2,15 +2,5 @@
 
 # Documentation utilisateur de l'application #
 
-**Pour tous les utilisateurs** :
-- [Saisir un nouveau contrôle](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideutil1_saisie_controle.pdf)
-- [Modifier un contrôle](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideutil2_modifier_controle.pdf)
-- [Imprimer un contrôle](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideutil3_imprimer_controle.pdf)
-- [Modifier mes informations de prestataire](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideutil4_info_presta.pdf)
-- [Intégrer des pièces jointes](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideutil1_saisie_controle.pdf#page=6)
+- [Accès unique aux tutoriels et nouveautés 2024](https://geo.compiegnois.fr/portail/index.php/2019/05/01/les-controles-de-conformite-pour-lassainissement-collectif/)
 
-**Pour les administrateurs** :
-- [Edition des courriers](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideadmin1_edition_courrier.pdf)
-- [Recherche des dossiers depuis une date](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideadmin2_recherche_dossier.pdf)
-- [Supprimer un dossier](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideadmin3_suppression_dossier.pdf)
-- [Exporter une liste](http://geo.compiegnois.fr/documents/cms/fiche_aide/conformite_ac_guideadmin4_export_liste.pdf)
