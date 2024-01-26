@@ -757,7 +757,7 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   date_notif timestamp without time zone, -- date de notification
   date_rel timestamp without time zone, -- date de relance
   epracdpdom character varying(2), -- Précision du raccordement au réseau public d'évacuation des EP
-  euepconstd character varying(2), -- Constatations diverses observées sur le réseau d'assainissement
+  euepconstd boolean not null default false, -- Constatations diverses observées sur le réseau d'assainissement
   op_maj character varying(80),
   maj_nc boolean not null default false,	
   CONSTRAINT an_euep_cc_pkey PRIMARY KEY (idcc)
