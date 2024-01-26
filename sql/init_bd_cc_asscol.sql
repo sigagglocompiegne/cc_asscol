@@ -750,10 +750,14 @@ CREATE TABLE m_reseau_humide.an_euep_cc
   euepanomal character varying(20), -- Anomalies identifiées entrainant la non conformité (liste de valeur non liée pour ajout de plusieurs valeurs possible via GEO)
   euepanomalpre character varying(5000), -- Précision des anomalies
   euepdivers character varying(1000), -- Constatations diverses
-  date_sai timestamp without time zone,
-  date_maj timestamp without time zone,
+  dbinsert timestamp without time zone,
+  dbupdate timestamp without time zone,
   op_sai character varying(80),
   scr_geom character varying(2),
+  date_notif timestamp without time zone, -- date de notification
+  date_rel timestamp without time zone, -- date de relance
+  epracdpdom character varying(2), -- Précision du raccordement au réseau public d'évacuation des EP
+  euepconstd character varying(2), -- Constatations diverses observées sur le réseau d'assainissement
   op_maj character varying(80),
   maj_nc boolean not null default false,	
   CONSTRAINT an_euep_cc_pkey PRIMARY KEY (idcc)
@@ -850,6 +854,10 @@ COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_rel IS 'Date de la relance eff
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epracdpdom IS 'Précision du raccordement au réseau public d''évacuation des EP';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepconstd IS 'Constatations diverses observées sur le réseau d''assainissement';
 COMMENT ON COLUMN m_reseau_humide.an_euep_cc.op_maj IS 'Opérateur de mise à jour (pas utilisé dans les déclencheurs de GEO, incompatible avec la mise à jour d''un contrôle';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_notif IS 'Date de notification';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.date_rel IS 'Date de relance';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.epracdpdom IS 'Précision du raccordement au réseau public d''évacuation des EP';
+COMMENT ON COLUMN m_reseau_humide.an_euep_cc.euepconstd IS 'Constatations diverses observées sur le réseau d''assainissement';
 
 
 -- ########################################################################## table an_euep_cc_media #######################################################
