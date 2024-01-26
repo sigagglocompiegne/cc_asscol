@@ -17,6 +17,11 @@ Par conséquent, les calculs exploitant directement la base de données ne renvo
 
 ![schema_fonctionnel](img/schema_fonctionnel_v5.png)
 
+## Modèle conceptuel simplifié
+
+![mcd](img/MCD_v2.png)
+
+
 ## Dépendances
 
 La base de données des contrôles de conformité s'appuie sur des référentiels préexistants constituant autant de dépendances nécessaires pour l'implémentatation de cette base.
@@ -216,13 +221,20 @@ Particularité(s) à noter :
 ---
 
 ### classes d'objets applicatives :
-`xapps_an_euep_cc_nc` : vue attributaire listant l'ensemble des contrôles non conforme (unique) pour les recherches dans l'application métiers et permettre l'édition des courriers
+`xapps_an_euep_cc_nc` : vue attributaire listant l'ensemble des contrôles non conforme (grave) pour les recherches dans l'application métiers et permettre l'édition des courriers
 
 `xapps_geo_v_euep_cc` : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
 
-`xapps_an_v_euep_cc_erreur` : table alphanumérique contenant les messages d'erreurs temporaires renvoyés par le trigger de la vue éditable an_v_euep_cc dans le cas d'une erreur de modifications. Ces messages remontent temporairement dans la fiche du dossier de conformité.
-
 `an_v_euep_cc_media` : vue alphanumérique contenant les champs de la table an_euep_cc_media pour une gestion des droits selon la validation du dossier (cette table est intégrée dans GEO)
+
+`xapps_geo_v_euep_cc` : vue géographique calculant le nombre de dossier de conformité par adresse et affichant l'état du dernier contrôle (conforme ou non conforme) pour affichage dans l'applicatif métier au niveau de la cartographie et de la fiche d'information par adresse
+
+`xapps_an_v_euep_cc_tb1` : Vue applicative formattant le tableau de bord n°1 des contrôles de conformité AC pour affichage dans GEO
+
+`xapps_an_v_euep_cc_tb2` : Vue applicative formatant le tableau de bord n°2 des contrôles de conformité AC (nombre de contrôle par prestataire) pour affichage dans GEO
+
+`xapps_an_v_euep_cc_tb3` : Vue applicative formatant une table pour la réalisation des statistiques par certificateur dans GEO
+
 
 Particularité(s) à noter :
 * 1 trigger :
@@ -505,8 +517,45 @@ Valeurs possibles :
 
 |Nom attribut | Définition | Type  | Valeurs par défaut |
 |:---|:---|:---|:---|
-|code|Code interne des anomalies possibles lors d''un contrôle(2)| |
-|valeur|Libellé des anomalies possibles lors d''un contrôle(100)| |
+|code|Code interne des anomalies possibles lors d'un contrôle|integer|nextval('m_reseau_humide.lt_euep_cc_anomal_seq'::regclass)|
+|valeur|Libellé des anomalies possibles lors d'un contrôle|character varying(100)| |
+|tri|Ordre d'affichage dans l'application|integer| |
+|nc|Type de non conformité (0 : simple, 1 : grave)|character varying(1)| |
+|valid|Validité de l'anomalie|character varying(3)|'oui'::character varying|
+
+Particularité(s) à noter :
+* Une clé primaire existe sur le champ code
+
+Valeurs possibles :
+
+|Code|Valeur|
+|:---|:---|:---|:---|:---|
+|2|Maison ou immeuble ou local partiellement raccordé|2|1|oui|
+|5|Présence d'ancien ouvrage de décantation (fosse septique, bac dégraisseur, etc..)|3|0|oui|
+|11|Destination des eaux usées indéterminée|9|1|oui|
+|14|Absence de bac dégraisseur|11|0|oui|
+|3|Eaux usées raccordées sur le réseau d'eaux pluviales SEPARATIF ou au milieu naturel|13|1|oui|
+|17|Eaux pluviales raccordés sur le réseau SEPARATIF des eaux usées|16|1|oui|
+|18|Maison ou immeuble ou local non raccordé|1|1|oui|
+|15|Absence du document attestant une servitude de passage|17|0|oui|
+|6|Absence d'évent|4|0|oui|
+|7|Diamètre de l'évent insuffisant|5|0|oui|
+|8|Event non remonté au faîtage de la maison ou immeuble ou local|6|0|oui|
+|9|Absence de clapet anti-retour|7|0|oui|
+|10|Absence de siphon|8|0|oui|
+|12|Vidange de piscine raccordée sur le branchement eaux usées|10|0|oui|
+|16|Vidange de piscine raccordée sur réseau d'eaux pluviales|12|0|oui|
+|4|Eaux pluviales ou eaux usées raccordées sur le réseau d'eaux UNITAIRE (depuis la partie privée)|15|0|oui|
+|13|Eaux pluviales raccordées sur le réseau d'eaux usées (en partie publique)|14|0|non|
+
+---
+
+`lt_euep_racdom` : Liste des types de précisions du raccordement au réseau public d'évacuation des EP
+
+|Nom attribut | Définition | Type  | Valeurs par défaut |
+|:---|:---|
+|code|code de précision du raccordement au réseau public d'évacuation des EP|character varying(2)| |
+|valeur|Libellé des précisions du raccordement au réseau public d'évacuation des EPe|character varying(50)| |
 
 Particularité(s) à noter :
 * Une clé primaire existe sur le champ code
@@ -515,23 +564,10 @@ Valeurs possibles :
 
 |Code|Valeur|
 |:---|:---|
-|1|Maison ou immeuble ou local non raccordé|
-|2|Maison ou immeuble ou local partiellement raccordé|
-|3|Eaux usées raccordées sur le réseau d'eaux pluviales/ou au milieu naturel|
-|4|Eaux pluviales raccordées sur le réseau d'eaux usées (en partie privée)|
-|5|Présence d'ancien ouvrage de décantation (fosse septique, bac dégraisseur, etc..)|
-|6|Absence d'évent|
-|7|Diamètre de l'évent insuffisant|
-|8|Event non remonté au faîtage de la maison ou immeuble ou local|
-|9|Absence de clapet anti-retour|
-|10|Absence de siphon|
-|11|Destination des eaux usées indéterminée|
-|12|Vidange de piscine raccordée sur le branchement eaux usées|
-|13|Eaux pluviales raccordées sur le réseau d'eaux usées (en partie publique)|
-|14|Absence de bac dégraisseur|
-|15|Servitude sans documents|
-|16|Vidange de piscine raccordée sur réseau d'eaux pluviales|
-
+|00|Non renseigné|
+|ZZ|Non concerné|
+|10|Raccordement au réseau public|
+|20|Raccordement caniveau (gargouille)|
 
 ---
 
@@ -546,9 +582,6 @@ Sans objet
 
 ---
 
-## Modèle conceptuel simplifié
-
-![mcd](img/MCD_v2.png)
 
 
 
