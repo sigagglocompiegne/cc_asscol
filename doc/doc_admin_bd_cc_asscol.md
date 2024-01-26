@@ -61,7 +61,6 @@ L'ensemble des classes d'objets de gestion sont stockés dans le schéma m_resea
 |nidccp|N° interne au prestataire du contrôle|character varying(20)| |
 |rcc|Résultat du contrôle (true : conforme, false : non conforme)|character varying(3)| |
 |ccdate|Date du contrôle|timestamp without time zone| |
-|ccdated|Date de délivrance du contrôle|timestamp without time zone| |
 |ccbien|Code du type de bien contrôlé (neuf ou ancien) (clé étrangère sur la liste de valeur lt_euep_cc_bien)|character varying(2)|'00'::character varying|
 |certtype|Code de l'organisme certificateur agréé (clé étrangère sur la liste de valeur lt_euep_cc_certificateur)|integer| |
 |certnom|Nom de la personne appartenant à l'organisme certificateur agréé qui a fait le contrôle|character varying(80)| |
