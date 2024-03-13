@@ -2428,11 +2428,11 @@ now()
       RAISE EXCEPTION 'Vous pouvez saisir ou modifier une date de relance sans avoir renseigné au minimum un nom et une adresse pour l''acheteur<br><br>' ;
     end if;
    else 
-    
+    /*
      if new.maj_nc is false and new.ccvalid = '10' then 
- 		RAISE EXCEPTION 'Vous ne pouvez pas modifier un contrôle validé ok<br><br>' ;
+ 		RAISE EXCEPTION 'Vous ne pouvez pas modifier un contrôle validé.<br><br>' ;
 	 end if;
-   
+   */
     new.maj_nc := false;
  end if;
 
