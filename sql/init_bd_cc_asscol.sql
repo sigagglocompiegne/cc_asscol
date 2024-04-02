@@ -2195,11 +2195,36 @@ end if;
 
 IF (TG_OP = 'UPDATE') then
 
+
+-- gestion des contrôles à modifier, si diagnostiqueur envoi sa demande, ccvalid = 39
+-- je demande une modif du contrôle, je passe l'info au diagnostiqueur en attente validation
+if new.ccvalid IN ('30','31','32') and old.dem_modif = 'ZZ' then
+	new.dem_modif := '00';
+--raise exception 'ok1';
+end if;
+
+if new.ccvalid IN ('30','31','32') and old.dem_modif = '39' then
+	new.dem_modif := '00';
+--raise exception 'ok2';
+end if;
+
+-- le diagnostiqueur modifie et me le signale
+if new.dem_modif = '39' and new.ccvalid NOT IN ('10','20','50') then
+	new.ccvalid := '39';
+--raise exception 'ok3';
+end if;
+
+if new.ccvalid IN ('10','20','50') then
+--raise exception 'ok';
+	new.dem_modif := 'ZZ';
+end if;
+
+--select nidcc, ccvalid, dem_modif from m_reseau_humide.an_euep_cc where nidcc = '60070cc12340' 
 --raise exception 'operateur --> %', new.op_maj;
 
 -- si contrôle toujours pas validé je peux modifier donc contrôle sur rcc
 
-if new.ccvalid = old.ccvalid and new.ccvalid <> '10' then
+if new.ccvalid IN ('30','39') then
 
 new.rcc := case 
 			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
@@ -2430,7 +2455,9 @@ now()
    else 
     /*
      if new.maj_nc is false and new.ccvalid = '10' then 
- 		RAISE EXCEPTION 'Vous ne pouvez pas modifier un contrôle validé.<br><br>' ;
+-- 		RAISE EXCEPTION 'Vous ne pouvez pas modifier un contrôle validé. <br><br>' ;
+     
+     RAISE EXCEPTION 'valeur -->%',new.maj_nc || '-' || new.ccvalid ;
 	 end if;
    */
     new.maj_nc := false;
@@ -2741,6 +2768,10 @@ new.rcc := case
 			else '21' end;	
 new.dbupdate := now();
 
+
+
+
+
 RETURN NEW;
 
 END IF;
@@ -2752,7 +2783,6 @@ END IF;
 END IF;
 
 END IF;
-
 
 RETURN NEW;
 
@@ -2762,6 +2792,7 @@ $function$
 ;
 
 COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
+
 
 create trigger t_t1_an_euep_cc_update_insert before
 insert
