@@ -2056,6 +2056,7 @@ insert
 -- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert_update ##################################################################################
 -- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update();
 
+
 CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
  RETURNS trigger
  LANGUAGE plpgsql
@@ -2131,7 +2132,7 @@ if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestam
 RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
 end if;
 
-if new.eppar = '10' and (new.epparpre is null or new.epparpre = '') then 
+if new.eppar = '10' and (length(new.epparpre) = 0) then 
 RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
 end if;
 
@@ -2377,7 +2378,7 @@ if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestam
 RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
 end if;
 
-if new.eppar = '10' and (new.epparpre is null or new.epparpre = '') then 
+if new.eppar = '10' and (length(new.epparpre) = 0) then 
 RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
 end if;
 
@@ -2793,14 +2794,11 @@ $function$
 
 COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
 
+-- Permissions
 
-create trigger t_t1_an_euep_cc_update_insert before
-insert
-    or
-update
-    on;
-    m_reseau_humide.an_euep_cc for each row execute procedure m_reseau_humide.ft_m_an_euep_cc_insert_update();
-												 
+ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() OWNER TO create_sig;
+GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO create_sig;
+GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO public;											 
 -- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_media ##################################################################################
 
 
