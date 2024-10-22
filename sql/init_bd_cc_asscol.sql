@@ -2054,8 +2054,8 @@ insert
     m_reseau_humide.an_euep_cc for each row execute procedure m_reseau_humide.ft_m_an_euep_cc_insert();
 
 -- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert_update ##################################################################################
--- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update();
 
+-- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update();
 
 CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
  RETURNS trigger
@@ -2188,6 +2188,11 @@ new.dbinsert := now();
 new.scr_geom := '61';
 
 END IF;
+
+new.euobserv := case when new.euanomal = '20' then null else new.euobserv end;
+new.epparpre := case when new.eppar = '20' then null else new.epparpre end;
+new.euepdivers := case when new.euepconstd is false then null else new.euepdivers end;
+
 end if;
 
 --RETURN NEW;
@@ -2783,6 +2788,10 @@ END IF;
 END IF;
 END IF;
 
+new.euobserv := case when new.euanomal = '20' then null else new.euobserv end;
+new.epparpre := case when new.eppar = '20' then null else new.epparpre end;
+new.euepdivers := case when new.euepconstd is false then null else new.euepdivers end;
+
 END IF;
 
 RETURN NEW;
@@ -2794,11 +2803,7 @@ $function$
 
 COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
 
--- Permissions
 
-ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() OWNER TO create_sig;
-GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO create_sig;
-GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO public;											 
 -- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_media ##################################################################################
 
 
