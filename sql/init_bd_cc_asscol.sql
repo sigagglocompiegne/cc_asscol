@@ -2770,12 +2770,6 @@ $function$
 
 COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
 
--- Permissions
-
-ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() OWNER TO sig_create;
-GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO public;
-GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO sig_create;
-
 
 -- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_media ##################################################################################
 
