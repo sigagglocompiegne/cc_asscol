@@ -9,6 +9,7 @@
 /*
 #################################################################### SUIVI CODE SQL ####################################################################
 
+-- 2026/10/06 : GB / Correction fonction de contrôle concernant ma ventilation des non-conformités selon les anomalies (fonction ft_m_an_euep_cc_insert_update())
 -- 2024/01/02 : GB / mise à jour base de données et fonctionnel suite nouvelle réglementation au 1er janvier 2024. Suivi des contrôles non conforme grave
 -- 2018/02/01 : GB / initialisation du squelette de la structure dans la base de données pour gérer le suivi des contrôles de conformité
 --		          GB / la donnée métier s'appuie sur le référentiel de voies et adresses locales (BAL) de l'ARC pour la localisation des contrôles
