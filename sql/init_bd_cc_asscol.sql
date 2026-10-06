@@ -2054,7 +2054,6 @@ insert
     m_reseau_humide.an_euep_cc for each row execute procedure m_reseau_humide.ft_m_an_euep_cc_insert();
 
 -- ##################################### FONCTION TRIGGER - ft_m_an_euep_cc_insert_update ##################################################################################
-
 -- DROP FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update();
 
 CREATE OR REPLACE FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update()
@@ -2064,36 +2063,32 @@ AS $function$
 DECLARE v_ccinit boolean;
 DECLARE v_nidcc character varying;
 DECLARE v_ccvalid boolean;
---DECLARE v_adresse integer;
 DECLARE t1_nidcc integer;
 DECLARE t2_nidcc integer;
 
 BEGIN
 
--- gestion automatique si ils'agit du contrôle initial à l'adresse
 v_ccinit := CASE WHEN (select count(*) from m_reseau_humide.an_euep_cc where id_adresse=new.id_adresse)>= 1  THEN false ELSE true END;
 
--- gestion des n° de dossier automatique et en cas de suivi
 v_nidcc :=  CASE WHEN new.tnidcc = '10' THEN 
-	    (SELECT (SELECT insee FROM x_apps.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc WHERE nidcc like '60%' AND nidcc like '%cc%' ) as nnidcc)
+	    (SELECT (SELECT insee FROM r_adresse.xapps_geo_vmr_adresse WHERE id_adresse = new.id_adresse) || 'cc' || (SELECT (max(substring(nidcc from 8 for 5)::integer) +1)::character varying FROM m_reseau_humide.an_euep_cc WHERE nidcc like '60%' AND nidcc like '%cc%' ) as nnidcc)
 		ELSE 
-		CASE WHEN (new.nidcc is null or new.nidcc = '') or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
+		CASE WHEN (LENGTH(COALESCE(trim(new.nidcc::text), '')) = 0 ) or (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN 'zz' ELSE lower(new.nidcc) END
 	    END;
 
 	   
--- vérification sur la saisie des n° de dossier : compte le nombre de dossier validé et conforme (si = 0 peut insérer si non ne fait rien)
 t1_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid='10' and rcc='10');
--- vérification sur la saisie des n° de dossier : compte le nombre de dossier non validé (si >= 1 ne peut pas insérer un suivi de dossier sur un même dossier non validé)
 t2_nidcc := (select count(*) from m_reseau_humide.an_euep_cc where nidcc=new.nidcc and ccvalid <> '10');
 
 
--- INSERT
 IF (TG_OP = 'INSERT') THEN
-
--- gestion des messages d'erreur à la mise à jour (remonté dans GEO)
--- contrôle sur le n° de dossier en suivi : ne peut pas saisir un suivi si le n° de dossier saisi n'existe pas à l'adresse CONFORME et VALIDE
--- ici pas possibilité de remontée de message dans le fiche GEO. L'enregistrement ne se fait pas.
-
+/*
+raise exception '%',(select case 
+			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') 
+			then '22' 
+			when LENGTH(COALESCE(new.euepanomal, '')) = 0 then '10'
+			else '21' end);
+*/
 IF NEW.tnidcc = '20' AND new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc) THEN
 
 RAISE EXCEPTION 'Référence du dossier incorrecte. Veuillez inscrire la référence du dossier originel qui doit être sous cette forme "60159cc569".<br><br>';
@@ -2114,9 +2109,7 @@ END IF;
 
 
 
--- ###############################################################################
--- NOUVEAU MESSAGE INDUIT PAR LA MISE A JOUR DES CONFORMITES GRAVE AU 01/01/2024
-if new.euanomal = '10' and (new.euobserv is null or new.euobserv ='') THEN
+if new.euanomal = '10' and LENGTH(COALESCE(new.euobserv, '')) = 0 THEN
 RAISE EXCEPTION 'Vous devez saisir les anomalies constatées si vous indiquez des anomalies constatées dans la partie collecte des eaux usées<br><br>';
 end if;
 
@@ -2124,7 +2117,7 @@ if new.epracdp = '10' and new.epracdpdom IN ('00', 'ZZ') THEN
 RAISE EXCEPTION 'Vous devez indiquer "Raccordement au réseau public" ou "Raccordement caniveau (gargouille)" si vous indiquez la présence d''un raccordement au réseau public d''évacuation des EP <br><br>';
 end if;
 
-if new.date_notif is null and new.date_rel is not null then 
+if LENGTH(COALESCE(trim(new.date_notif::text), '')) = 0 and LENGTH(COALESCE(trim(new.date_rel::text), '')) <> 0 then 
 RAISE EXCEPTION 'Vous devez saisir une date de notification avant une date de relance<br><br>';
 end if;
 
@@ -2132,7 +2125,8 @@ if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestam
 RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
 end if;
 
-if new.eppar = '10' and (length(new.epparpre) = 0) then 
+if new.eppar = '10' and length(COALESCE(new.epparpre, '')) = 0 then 
+--RAISE EXCEPTION 'ok';
 RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
 end if;
 
@@ -2144,16 +2138,13 @@ if new.eprecupcpt IN ('00') and new.eprecup = '10' then
 RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" en cas d''utilisation des eaux pluviales récupérées à usage domestique, présence impérative d''un compteur, si vous avez indiqué "OUI" pour la présence d''un système de récupération des eaux pluviales (dans la partie des EP)<br><br>';
 end if;
 
-if new.euepconstd is true and (new.euepdivers is null or new.euepdivers = '') then 
+if new.euepconstd is true and length(COALESCE(new.euepdivers, '')) = 0 then 
 RAISE EXCEPTION 'Vous devez préciser les constations diverses observées sur le réseau d''assainissement<br><br>';
 end if;
 
--- ###############################################################################
 
--- si le n° de dossier est nouveau
 IF v_nidcc <> 'zz' AND t1_nidcc = 0 AND t2_nidcc = 0 THEN
 
---new.idcc :=  (select nextval('m_reseau_humide.an_euep_cc_idcc_seq'::regclass)) ;
 new.nidcc := v_nidcc;
 new.ccinit := v_ccinit;
 
@@ -2163,15 +2154,19 @@ new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
 new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
 new.epracdpdom := case when new.epracdp = '20' then 'ZZ' else new.epracdpdom end;
 new.rcc := case 
-			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
-			when new.euepanomal is null or new.euepanomal = '' then '10'
+			--when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal 
+			--like '%18%' or new.euepanomal like '%17%')
+			when '2'= ANY(string_to_array(new.euepanomal, ';')) or '3'= ANY(string_to_array(new.euepanomal, ';'))
+			or '11'= ANY(string_to_array(new.euepanomal, ';')) or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			then '22' 
+			when LENGTH(COALESCE(trim(new.euepanomal::text), '')) = 0 then '10'
 			else '21' end;		   
 new.dbinsert := now();
 new.scr_geom := '61';
 
 END IF;
 
--- si le n° de dossier est un suivi
 
 IF NEW.tnidcc = '20' AND new.nidcc in (select nidcc from m_reseau_humide.an_euep_cc) THEN
 
@@ -2181,70 +2176,62 @@ new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
 new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
 new.epracdpdom := case when new.epracdp = '20' then 'ZZ' else new.epracdpdom end;
 new.rcc := case 
-			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
-			when new.euepanomal is null or new.euepanomal = '' then '10'
-			else '21' end;			   
+			--when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal 
+			--like '%18%' or new.euepanomal like '%17%')
+			when '2'= ANY(string_to_array(new.euepanomal, ';')) or '3'= ANY(string_to_array(new.euepanomal, ';'))
+			or '11'= ANY(string_to_array(new.euepanomal, ';')) or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			then '22' 
+			when LENGTH(COALESCE(trim(new.euepanomal::text), '')) = 0 then '10'
+			else '21' end;				   
 new.dbinsert := now();
 new.scr_geom := '61';
 
 END IF;
-
+--RAISE EXCEPTION '%',new.euobserv;
 new.euobserv := case when new.euanomal = '20' then null else new.euobserv end;
 new.epparpre := case when new.eppar = '20' then null else new.epparpre end;
 new.euepdivers := case when new.euepconstd is false then null else new.euepdivers end;
 
 end if;
 
---RETURN NEW;
 
--- UPDATE
 
 IF (TG_OP = 'UPDATE') then
 
+--RAISE EXCEPTION '%',LENGTH(COALESCE(new.epparpre, ''));
+--if new.eppar = '10' then RAISE EXCEPTION 'erreur'; END IF;
 
--- gestion des contrôles à modifier, si diagnostiqueur envoi sa demande, ccvalid = 39
--- je demande une modif du contrôle, je passe l'info au diagnostiqueur en attente validation
 if new.ccvalid IN ('30','31','32') and old.dem_modif = 'ZZ' then
 	new.dem_modif := '00';
---raise exception 'ok1';
 end if;
+
 
 if new.ccvalid IN ('30','31','32') and old.dem_modif = '39' then
 	new.dem_modif := '00';
---raise exception 'ok2';
 end if;
 
--- le diagnostiqueur modifie et me le signale
 if new.dem_modif = '39' and new.ccvalid NOT IN ('10','20','50') then
 	new.ccvalid := '39';
---raise exception 'ok3';
 end if;
 
 if new.ccvalid IN ('10','20','50') then
---raise exception 'ok';
 	new.dem_modif := 'ZZ';
 end if;
-
---select nidcc, ccvalid, dem_modif from m_reseau_humide.an_euep_cc where nidcc = '60070cc12340' 
---raise exception 'operateur --> %', new.op_maj;
-
--- si contrôle toujours pas validé je peux modifier donc contrôle sur rcc
 
 if new.ccvalid IN ('30','39') then
 
 new.rcc := case 
-			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
-			when new.euepanomal is null or new.euepanomal = '' then '10'
+			--when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal 
+			--like '%18%' or new.euepanomal like '%17%')
+			when '2'= ANY(string_to_array(new.euepanomal, ';')) or '3'= ANY(string_to_array(new.euepanomal, ';'))
+			or '11'= ANY(string_to_array(new.euepanomal, ';')) or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			then '22' 
+			when LENGTH(COALESCE(trim(new.euepanomal::text), '')) = 0 then '10'
 			else '21' end;	
-/*
--- si je modifie les anomalies et que je n'ai plus celles en grave ma conclusion ne peut pas être grave
-if (new.euepanomal not like '%2%' and new.euepanomal not like '%3%' and new.euepanomal not like '%11%' and new.euepanomal not like '%18%' or new.euepanomal like '%17%') and new.rcc = '22' and new.ccvalid <> '10' then 
- raise exception 'Vous n''avez plus d''anomalies générant une conformité non grave, vous devez modifier le niveau de conformité de l''installation.<br><br>';
-end if;
-*/
--- ###############################################################################
--- NOUVEAU MESSAGE INDUIT PAR LA MISE A JOUR DES CONFORMITES GRAVE AU 01/01/2024
-if new.euanomal = '10' and (new.euobserv is null or new.euobserv ='') THEN
+
+if new.euanomal = '10' and LENGTH(COALESCE(new.euobserv, '')) = 0 THEN
 RAISE EXCEPTION 'Vous devez saisir les anomalies constatées si vous indiquez des anomalies constatées dans la partie collecte des eaux usées<br><br>';
 end if;
 
@@ -2252,7 +2239,7 @@ if new.epracdp = '10' and new.epracdpdom IN ('00', 'ZZ') THEN
 RAISE EXCEPTION 'Vous devez indiquer "Raccordement au réseau public" ou "Raccordement caniveau (gargouille)" si vous indiquez la présence d''un raccordement au réseau public d''évacuation des EP <br><br>';
 end if;
 
-if new.date_notif is null and new.date_rel is not null then 
+if LENGTH(COALESCE(trim(new.date_notif::text), '')) = 0 and LENGTH(COALESCE(trim(new.date_rel::text), '')) <> 0 then 
 RAISE EXCEPTION 'Vous devez saisir une date de notification avant une date de relance<br><br>';
 end if;
 
@@ -2260,7 +2247,8 @@ if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestam
 RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
 end if;
 
-if new.eppar = '10' and (new.epparpre is null or new.epparpre = '') then 
+if new.eppar = '10' and LENGTH(COALESCE(new.epparpre, '')) = 0 then 
+--RAISE EXCEPTION 'ok';
 RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
 end if;
 
@@ -2272,20 +2260,14 @@ if new.eprecupcpt IN ('00') and new.eprecup = '10' then
 RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" en cas d''utilisation des eaux pluviales récupérées à usage domestique, présence impérative d''un compteur, si vous avez indiqué "OUI" pour la présence d''un système de récupération des eaux pluviales (dans la partie des EP)<br><br>';
 end if;
 
-if new.euepconstd is true and (new.euepdivers is null or new.euepdivers = '') then 
+if new.euepconstd is true and LENGTH(COALESCE(new.euepdivers, '')) = 0  then 
 RAISE EXCEPTION 'Vous devez préciser les constations diverses observées sur le réseau d''assainissement<br><br>';
 end if;
 
--- ###############################################################################
 
 end if;
 
--- gestion des contrôles non supprimés (les supprimés sont gérés dans un trigger after)
--- (uniquement possible si admin dans GEO, accès à la valeur 40 de la liste de valeurs lt_euep_cc_valid
--- gestion des contrôles (uniquement possible si valeur indiqué dans l'attribut cc_valid attaché à l'utilisateur dans GEO, accès à la valeur 50 de la liste de valeurs lt_euep_cc_valid)
 
--- si le contrôle est à supprimer, passe en dehors des contrôles ci-dessous et passera dans le trigger after
--- si le contrôle est à dévalider passe dans la première boucle
 IF (new.ccvalid = '50') THEN
 new.ccvalid := '30';
 new.ccinit := old.ccinit ;
@@ -2365,9 +2347,7 @@ new.date_rel := old.date_rel ;
 new.epracdpdom := old.epracdpdom ;
 new.euepconstd := old.euepconstd ;
 
--- ###############################################################################
--- NOUVEAU MESSAGE INDUIT PAR LA MISE A JOUR DES CONFORMITES GRAVE AU 01/01/2024
-if new.euanomal = '10' and (new.euobserv is null or new.euobserv ='') THEN
+if new.euanomal = '10' and LENGTH(COALESCE(new.euobserv, '')) = 0 THEN
 RAISE EXCEPTION 'Vous devez saisir les anomalies constatées si vous indiquez des anomalies constatées dans la partie collecte des eaux usées<br><br>';
 end if;
 
@@ -2375,7 +2355,7 @@ if new.epracdp = '10' and new.epracdpdom IN ('00', 'ZZ') THEN
 RAISE EXCEPTION 'Vous devez indiquer "Raccordement au réseau public" ou "Raccordement caniveau (gargouille)" si vous indiquez la présence d''un raccordement au réseau public d''évacuation des EP <br><br>';
 end if;
 
-if new.date_notif is null and new.date_rel is not null then 
+if LENGTH(COALESCE(trim(new.date_notif::text), '')) = 0 and LENGTH(COALESCE(trim(new.date_rel::text), '')) <> 0 then 
 RAISE EXCEPTION 'Vous devez saisir une date de notification avant une date de relance<br><br>';
 end if;
 
@@ -2383,7 +2363,7 @@ if new.date_rel::timestamp < new.date_notif::timestamp or new.date_rel::timestam
 RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieure ou égale à la date de notification<br><br>';
 end if;
 
-if new.eppar = '10' and (length(new.epparpre) = 0) then 
+if new.eppar = '10' and LENGTH(COALESCE(new.epparpre, '')) = 0 then 
 RAISE EXCEPTION 'Vous avez indiqué "OUI" pour les EP traitées à la parcelle. Vous devez donc obligatoirement préciser le traitement<br><br>';
 end if;
 
@@ -2395,17 +2375,15 @@ if new.eprecupcpt IN ('00') and new.eprecup = '10' then
 RAISE EXCEPTION 'Vous ne pouvez pas indiquer "Non renseigné" en cas d''utilisation des eaux pluviales récupérées à usage domestique, présence impérative d''un compteur, si vous avez indiqué "OUI" pour la présence d''un système de récupération des eaux pluviales (dans la partie des EP)<br><br>';
 end if;
 
-if new.euepconstd is true and (new.euepdivers is null or new.euepdivers = '') then 
+if new.euepconstd is true and LENGTH(COALESCE(new.euepdivers, '')) = 0 then 
 RAISE EXCEPTION 'Vous devez préciser les constations diverses observées sur le réseau d''assainissement<br><br>';
 end if;
 
--- ###############################################################################
 
 ELSE
 
 IF (old.ccvalid = '10' AND new.ccvalid = '10') OR (old.ccvalid = '10' AND (new.ccvalid = '20' or new.ccvalid = '30')) THEN
 
---v_adresse := old.id_adresse;
 /*
 DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
 INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
@@ -2418,18 +2396,15 @@ now()
 );
 */
 
- -- si contrôle validé mais que je suis de l'ARC je peux modifier certains attributs si contrôle non conforme grave
  if new.maj_nc is true and new.ccvalid = '10' then 
 
-    -- contrôle sur les dates
-    if new.date_notif is null and new.date_rel is not null then 
+    if LENGTH(COALESCE(trim(new.date_notif::text), '')) = 0 and  LENGTH(COALESCE(trim(new.date_rel::text), '')) <> 0 then 
 		RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance sans avoir saisie uen date de notification<br><br>';
 	end if;
     if new.date_rel::timestamp < new.date_notif::timestamp+'6 month' or new.date_rel::timestamp = new.date_notif::timestamp then 
 		RAISE EXCEPTION 'Vous ne pouvez pas saisir une date de relance inférieur à 6 mois par rapport à la date de notification<br><br>';
 	end if;
  
-    -- seuls les attributs modifiables peuvent l'être par les services de l'ARC si contrôle validé
     if new.ccvalid <> old.ccvalid or new.validobs <> old.validobs or new.adapt <> old.adapt
        or new.adeta <> old.adeta or new.tnidcc <> old.tnidcc or new.nidcc <> old.nidcc or new.ccdate <> old.ccdate 
        or new.ccbien <> old.ccbien or new.certnom <> old.certnom or new.certpre <> old.certpre or new.propriopat <> old.propriopat 
@@ -2452,16 +2427,15 @@ now()
     else 
      new.maj_nc := false;
     end if;
-    if new.date_notif is not null and (new.achetnom is null or new.achetnom = '' or new.achetad is null or new.achetad ='') THEN
+    if LENGTH(COALESCE(trim(new.date_notif::text), '')) <> 0 and (LENGTH(COALESCE(new.achetnom, '')) = 0 or LENGTH(COALESCE(new.achetad, '')) = 0) THEN
       RAISE EXCEPTION 'Vous pouvez saisir ou modifier une date de notification sans avoir renseigné au minimum un nom et une adresse pour l''acheteur<br><br>' ;
     end if;
-     if new.date_rel is not null and (new.achetnom is null or new.achetnom = '' or new.achetad is null or new.achetad ='') THEN
+     if LENGTH(COALESCE(trim(new.date_rel::text), '')) <> 0 and (LENGTH(COALESCE(new.achetnom, '')) = 0 or LENGTH(COALESCE(new.achetad, '')) =  0) THEN
       RAISE EXCEPTION 'Vous pouvez saisir ou modifier une date de relance sans avoir renseigné au minimum un nom et une adresse pour l''acheteur<br><br>' ;
     end if;
    else 
     /*
      if new.maj_nc is false and new.ccvalid = '10' then 
--- 		RAISE EXCEPTION 'Vous ne pouvez pas modifier un contrôle validé. <br><br>' ;
      
      RAISE EXCEPTION 'valeur -->%',new.maj_nc || '-' || new.ccvalid ;
 	 end if;
@@ -2554,9 +2528,7 @@ new.euepconstd := old.euepconstd ;
 
 ELSE
 
--- pas le bon prestataire
 IF old.certtype <> new.certtype  THEN
---v_adresse := old.id_adresse;
 
 RAISE EXCEPTION 'Vous ne pouvez pas modifier un dossier que vous n''avez pas créé.<br><br>';
 /*
@@ -2651,17 +2623,13 @@ new.euepconstd := old.euepconstd ;
 */
 ELSE
 
--- ne peut pas modifier le n° de dossier sauf si mauvaise référence de suivi
--- si référence différente alors
 IF (new.nidcc <> old.nidcc) THEN
 
--- si la référence saisie n'est toujours formatée ou n'est pas en base (contrôle originel)
 IF (new.nidcc not like '60%' AND new.nidcc not like '%cc%') OR (new.nidcc not in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
 
 RAISE EXCEPTION 'Référence du dossier incorrecte ou dossier originel n''existe pas. Merci d''inscrire la référence exacte du dossier originel qui doit être sous cette forme "60159cc569".<br><br>';
 
 /*
---v_adresse := old.id_adresse;
 DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
 INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
 (
@@ -2677,7 +2645,6 @@ new.nidcc := old.nidcc;
 */
 else
 
--- si la référence est normalisée et que le contrôle originel existe je prends la nouvelle référence sinon erreur
 IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (new.nidcc in (select nidcc from m_reseau_humide.an_euep_cc)) THEN
 	IF (new.nidcc like '60%' AND new.nidcc like '%cc%') AND (old.nidcc like '60%' AND old.nidcc like '%cc%') then
 	
@@ -2710,7 +2677,6 @@ ELSE
 
 
 /*
---v_adresse := old.id_adresse;
 DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
 INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
 (
@@ -2728,13 +2694,11 @@ END IF;
 
 ELSE
 
--- ne peut pas modifier un suivi de dossier ou nouveau dossier
 IF new.tnidcc <> old.tnidcc THEN
 
 RAISE EXCEPTION 'Vous ne pouvez pas modifier le type de contrôle.<br><br>';
 
 /*
---v_adresse := old.id_adresse;
 DELETE FROM x_apps.xapps_an_v_euep_cc_erreur WHERE nidcc = old.nidcc;
 INSERT INTO x_apps.xapps_an_v_euep_cc_erreur VALUES
 (
@@ -2748,10 +2712,8 @@ new.tnidcc := old.tnidcc;
 */
 ELSE
 
--- si le prestataire qui modifie est celui qui a saisi modifications possibles
 IF old.certtype = new.certtype THEN
 
--- si le contrôle n'est pas validé alors on peut modifier les valeurs si non pas de modification possible
 IF ((new.ccvalid = '20' or new.ccvalid = '30') and (old.ccvalid = '20' or old.ccvalid='30')) or (new.ccvalid = '10' and (old.ccvalid = '20' or old.ccvalid='30')) THEN
 
 new.ccvalid := CASE 
@@ -2769,8 +2731,13 @@ new.eusuptype := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusuptype END;
 new.eusupdoc := CASE WHEN new.eusup = '20' THEN 'ZZ' ELSE new.eusupdoc END;
 new.eprecupcpt := CASE WHEN new.eprecup = '20' THEN 'ZZ' ELSE new.eprecupcpt END;
 new.rcc := case 
-			when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal like '%18%' or new.euepanomal like '%17%') then '22' 
-			when new.euepanomal is null or new.euepanomal = '' then '10'
+			--when (new.euepanomal like '%2%' or new.euepanomal like '%3%' or new.euepanomal like '%11%' or new.euepanomal 
+			--like '%18%' or new.euepanomal like '%17%')
+			when '2'= ANY(string_to_array(new.euepanomal, ';')) or '3'= ANY(string_to_array(new.euepanomal, ';'))
+			or '11'= ANY(string_to_array(new.euepanomal, ';')) or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			or '17'= ANY(string_to_array(new.euepanomal, ';'))
+			then '22' 
+			when LENGTH(COALESCE(trim(new.euepanomal::text), '')) = 0 then '10'
 			else '21' end;	
 new.dbupdate := now();
 
@@ -2802,6 +2769,12 @@ $function$
 ;
 
 COMMENT ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() IS 'Fonction trigger pour mise à jour des attributs des dossiers de conformité';
+
+-- Permissions
+
+ALTER FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() OWNER TO sig_create;
+GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO public;
+GRANT ALL ON FUNCTION m_reseau_humide.ft_m_an_euep_cc_insert_update() TO sig_create;
 
 
 -- ##################################### FONCTION TRIGGER - ft_m_an_v_euep_cc_media ##################################################################################
